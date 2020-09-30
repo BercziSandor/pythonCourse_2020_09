@@ -1,0 +1,35 @@
+python_install_run.html
+* Python és modulok installálása, futtatás
+
+python_literature.html
+* irodalomjegyzék
+
+mix.py
+* változók definiálása
+* feltételes utasítás
+* while cikus
+* range
+* for ciklus
+
+numeric_types_1.py
+* int típus
+* float típus
+* type()
+
+string_1.py
+* str típus
+
+list_1.py, list_2.py, list_3.py
+* list típus
+* id
+* del
+
+tuple_1.py
+* tuple típus
+
+Functions\func_params_1.py
+* függvények fix paraméterekkel
+* default paraméterek
+
+Functions\scope_1.py
+* lokális és globális változók

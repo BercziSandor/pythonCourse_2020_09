@@ -1,0 +1,314 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<title>Python letöltés, futtatás és online interpreterek</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px; }
+  h4  { color: blue; }
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .code_2 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  #t01 { width:70%; border: 1px solid black; border-collapse: collapse; margin-left:auto; margin-right:auto; font-family: arial, sans-serif; }
+  #t01 th { border: 1px solid black; padding: 5px 10px; }
+  #t01 td { border: 1px solid black; padding: 5px 10px; }
+  #t01 td:last-child { width:100%; }
+  #t01 tr:nth-child(even) { background-color: #f2f2f2; }
+  #t01 tr:nth-child(odd) { background-color: white; }
+  .c { text-align: center; }
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_4 { color: gray; font-family: courier new; letter-spacing: 0.1em; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.29 &mdash;</p>
+</div>
+
+<h2>Python telepítése és futtatása</h2>
+<ul class='contents'>
+<li><a style='color:red' href='#download_python'>Python letöltése</a></li>
+<li><a style='color:red' href='#online_python'>Online interpreterek</a></li>
+<li><a style='color:red' href='#run_python'>Python programok közvetlen futtatása</a>
+<ul>
+<li><a style='color:red' href='#find_exe'>python.exe helyének specifikálása</a></li>
+<li><a style='color:red' href='#run_interactively'>Parancsok interaktív futtatása</a></li>
+<li><a style='color:red' href='#run_script'>Szkript (program) futtatása</a></li>
+<li><a style='color:red' href='#run_script_interact'>Szkript futtatása interaktívan</a></li>
+<li><a style='color:red' href='#run_module'>Modul futtatása</a></li>
+<li><a style='color:red' href='#redirect'>Bemenet és kimenet átirányítása</a></li>
+</ul>
+</li>
+<li><a style='color:red' href='#run_notepad_plus_plus'>Futtatás Notepad++-ban</a></li>
+<li><a style='color:red' href='#tabs'>Tabulátorok kezelése</a>
+<ul>
+<li><a style='color:red' href='#tab_notepad_plus_plus'>Notepad++-ban</a></li>
+</ul>
+</li>
+<li><a style='color:red' href='#non_ascii'>Nem ASCII karakterek kezelése</a>
+<ul>
+<li><a style='color:red' href='#non_ascii_notepad_plus_plus'>Notepad++-ban</a></li>
+</ul>
+</li>
+<li><a style='color:red' href='#pip_usage'>Modulok installálása pip segítségével</a></li>
+<li><a style='color:red' href='#links'>Hivatkozások</a></li>
+</ul>
+
+<h3 id='download_python'>Python letöltése</h3>
+<p>
+A hivatalos Python oldalról tudjuk a kívánt Python verziót letölteni <sup><a href='#link-1'>[1]</a></sup>. A gépünkön
+lehet több verzió is egyidejűleg, amire például azért lehet szükség, mert egyik projektünkben használhatunk egy régebbi, egy másikban egy újabb verziót.
+</p>
+<p>
+A 3.X és a 2.X verziók között szándékoltan nagy és inkompatibilis különbségek vannak; a 2-es verzió hivatalos támogatása megszűnt, ennek ellenére persze
+sok helyen még használatban van.
+</p>
+<p>
+A 3-as verzión belül a 3.6-os az, amelybe az átlagosnál több (és hasznos) újdonság került be. Nyilván ha tehetjük, akkor a legfrissebb stabil verzióval érdemes
+dolgozni.
+</p>
+<h3 id='online_python'>Online interpreterek</h3>
+<p>
+Kisebb programok különböző Python verziókon való kipróbálásához hasznosak az online futtató környezetek, illetve olyankor is, amikor éppen a gépünkön nincs
+Python és mégis tanulni, gyakorolni akarunk.
+</p>
+<table id='t01'>
+<tr style='color:blueviolet;'><th></th><th>Python 3 verzió&nbsp;</th><th>Python 2 verzió</th><th>Egyéb<br>nyelvek</th><th>Megjegyzés<br>&nbsp;</th></tr>
+<tr><td><a href='https://repl.it/languages/python3' target='_blank'>repl.it</a></td><td class='c'>3.8.2</td><td class='c'></td><td class='c'>&#10004;</td><td></td></tr>
+<tr><td><a href='https://www.python.org/shell/' target='_blank'>python.org/shell</a></td><td class='c'>3.8.0</td><td class='c'></td><td class='c'></td> <td></td></tr>
+<tr><td><a href='https://www.pythonanywhere.com/try-ipython/' target='_blank'>pythonanywhere.com</a></td><td class='c'>3.8.0</td><td class='c'></td><td class='c'></td> <td></td></tr>
+<tr><td><a href='https://pythonprinciples.com/online-python-interpreter/' target='_blank'>pythonprinciples.com</a></td><td class='c'>3.7.6</td><td class='c'></td><td class='c'></td> <td></td></tr>
+<tr><td><a href='https://tio.run/' target='_blank'>tio.run</a></td><td class='c'>3.7.4</td><td class='c'>2.7.16</td><td class='c'>&#10004;</td><td>Cython, PyPy, Jython, IronPython, Stackless</td></tr>
+<tr><td><a href='https://ideone.com/' target='_blank'>ideone.com</a></td><td class='c'>3.7.3</td><td class='c'>2.7.13</td><td class='c'>&#10004;</td><td></td></tr>
+<tr><td><a href='https://rextester.com/' target='_blank'>rextester.com</a></td><td class='c'>3.6.9</td><td class='c'>2.7.17</td><td class='c'>&#10004;</td><td></td></tr>
+<tr><td><a href='https://www.w3resource.com/python-exercises/' target='_blank'>w3resource.com</a></td><td class='c'>3.6.6</td><td class='c'></td><td class='c'>&#10004;</td>
+<td>Bármelyik feladatot megnyitjuk és a <span style='color:royalblue;'>Go to editor</span>-t kiválasztjuk.</td></tr>
+<tr><td><a href='https://www.tutorialspoint.com/execute_python_online.php' target='_blank'>tutorialspoint.com</a></td><td class='c'>3.6.2</td><td class='c'>2.7.13</td><td class='c'>&#10004;</td><td></td></tr>
+<tr><td><a href='https://www.w3schools.com/python/python_compiler.asp' target='_blank'>w3schools.com</a></td><td class='c'>3.5.3</td><td class='c'></td><td class='c'>&#10004;</td><td></td></tr>
+<tr><td><a href='https://www.onlinegdb.com/online_python_interpreter' target='_blank'>onlinegdb.com</a></td><td class='c'>3.4.3</td><td class='c'></td><td class='c'>&#10004;</td><td></td></tr>
+<tr><td><a href='https://live.sympy.org/' target='_blank'>live.sympy.org</a></td><td class='c'></td><td class='c'>2.7.12</td><td class='c'></td> <td></td></tr>
+</table>
+<p>
+<span style='color: blueviolet; font-weight: bold;'>Egyéb nyelvek</span>: C++, Java, stb. támogatása.
+</p>
+<p>
+A verziók 2020.06.20-án voltak ilyenek; ugyanekkor a legújabb verzió a hivatalos Python letöltési
+oldalon <sup><a href='#link-1'>[1]</a></sup> 3.8.3 volt.
+</p>
+<h3 id='run_python'>Python programok közvetlen futtatása</h3>
+<p>
+A <i>közvetlen</i> szó itt azt jelenti, hogy nem valamilyen integrált fejlesztő környezetben (IDE, mint pl. a VS Code) végezzük a Python programunk futtatását,
+hanem parancssorból.
+</p>
+<h4 id='find_exe'>python.exe helyének specifikálása</h4>
+<p>
+Ha python.exe könyvtárát hozzáadjuk a PATH környezeti változóhoz, akkor a parancssorba elegendő annyit írnunk, hogy <span class='emph_4'>python</span>. Ha ezt nem
+tesszük meg, például azért, mert több verzió is van a gépünkön és pontosan specifikálni akarjuk, melyik fusson, akkor ki kell írnunk a teljes elérési útvolnalat, (ha
+az útvonalban szóközök is előfordulhatnak, akkor idézőjelek közé kell tennünk):
+</p>
+<pre>
+c:\Users\NMI\AppData\Local\Programs\Python\Python36-32\python.exe
+"c:\Users\NMI\AppData\Local\Program Files\Python\Python36-32\python.exe"
+                                   <span class='emph_1'>&uuarr;</span>
+</pre>
+A következőkben az egyszerűség kedvéért nem írom ki az elérési útvonalat.
+</p>
+<h4 id='run_interactively'>Parancsok interaktív futtatása <sup><a href='#link-2'>[2]</a> <a href='#link-4'>[4]</a></sup></h4>
+<p>
+Ha a parancssori terminált elindítottuk (Windows alatt: <span class='emph_4'>cmd</span>), akkor ebben felhívhatjuk a fentebb megadott módon a python programot;
+ekkor megjelenik az interaktív mód promptja (rendszerint három <b>></b> jel) és beírhatjuk a parancsokat, amelyek azonnal végrehajtódnak. A kifejezéseket leírhatjuk
+print() utasítás nélkül is, amikor ENTER-t ütünk, meg fogjuk kapni a kifejezés értékét.
+</p>
+<p>
+A Python interpreter leállítását quit() paranccsal, Ctrl-Z (Windows) vagy Ctrl-C (Linux) kombinációval érhetjük el.
+</p>
+<p>
+Ha beírtunk egy sort és ENTER-t nyomunk, kiértékelődik a sor. Olyan utasításoknál, amelyeknél folytatást vár az interpreter (pl. egy for ciklus feje), az ENTER
+hatására a következő sorra ugrik és a prompt megváltozik (rendszerint három pontra):
+Ilyenkor nem szabad megfeledkeznünk a megfelelő indentálásról; az utolsó sor után kitöröljük az indentálást és ENTER-t ütünk, ekkor végrehajtódik a kód.
+</p>
+<pre>
+python
+>>> for i in range(3):
+...   print(i)
+...   100 + i
+...
+0
+100
+1
+101
+2
+102
+</pre>
+<p>
+Ez a megoldás nyilván nehézkes, hiszen mindig újra be kell gépelnünk vagy másolnunk a parancsokat, ezért ritkán használjuk.
+</p>
+<h4 id='run_script'>Szkript (program) futtatása  <sup><a href='#link-3'>[3]</a> <a href='#link-4'>[4]</a></sup></h4>
+<p>
+Amikor az utasításokat egy <b>.py</b> kiterjesztésű fájlba írjuk abból a célból, hogy ezt majd végrehajtassuk a Python interpreterrel, akkor a fájlt szkriptnek
+szoktuk nevezni &ndash; van, aki szerint a megnevezés nem szerencsés, inkább a <span class='emph_4'>program</span> lenne precízebb név. Tegyük fel, hogy egy
+my_first.py nevű fájlba ezt írtuk:
+<pre>
+i = 10
+print('i:', i)
+i = 20
+</pre>
+Ekkor ezt így tudjuk végrehajtatni:
+<pre>
+python my_first.py
+</pre>
+Figyeljük meg, hogy a teljes fájlnevet ki kellett írnunk, kiterjesztéssel együtt. Persze használhajuk a standard bemenet átirányítását is:
+<pre>
+python <span class='emph_1'><</span> my_first.py
+</pre>
+
+</p>
+<h4 id='run_script_interact'>Szkript futtatása interaktívan <sup><a href='#link-4'>[4]</a></sup></h4>
+<p>
+Nem túl gyakran, de előfordul, hogy a szkript lefutása után még további parancsokat akarunk begépelni; azt szeretnénk szimulálni, mintha a fájl
+tartalmát közvetlenül írtuk volna be. Ilyenkor a -i kapcsolóval kell felhívnunk az interpretert:
+<pre>
+python <span class='emph_1'>-i</span> my_first.py
+</pre>
+A képernyőn az interaktív promptot (>>>) fogjuk látni és pl. kiírathatjuk az i változó tartalmát:
+<pre>
+i: 10   <i># ezt írta ki a szkript</i>
+>>> i   <i># ezt gépeltük be</i>
+20
+>>>
+</pre>
+Az interaktív mód hibakeresésnél lehet hasznos; globális változók tartalmát ki tudjuk íratni a szkript lefutása után.
+</p>
+<h4 id='run_module'>Modul futtatása <sup><a href='#link-4'>[4]</a> <a href='#link-5'>[5]</a> <a href='#link-6'>[6]</a></sup></h4>
+<p>
+A -m kapcsoló segítségével le tudunk futtatni egy Python modult, pl.:
+
+<pre>
+python -m pip numpy
+python -m cProfile my_first.py
+python -m trace -t my_first.py
+python -m filecmp dir_1 dir_2
+</pre>
+Figyeljük meg, hogy a modul nevéhez nem írunk semmilyen kiterjesztést.
+</p>
+<h4 id='redirect'>Bemenet és kimenet átirányítása</h4>
+<p>
+Ha a szkriptünk a standard bemenetről olvas és azt akarjuk, hogy fájlból jöjjön a bemenet, akkor így járunk el:
+
+<pre>
+python my_first.py <span class='emph_1'><</span> input.txt
+</pre>
+
+A standard kimenetre &ndash; tipikusan print() segítségével &ndash; írtakat így tudjuk egy fájlba átirányítani:
+<pre>
+python my_first.py <span class='emph_1'>></span> output.txt
+</pre>
+
+A standard hibakimenetre (stderr) írtakat, a hibajelzéseket pedig így:
+<pre>
+python my_first.py <span class='emph_1'>2></span> error.txt
+</pre>
+Windows alatt a <b>2</b> és a <b>></b> között nem lehet szóköz.
+</p>
+<h3 id='run_notepad_plus_plus'>Futtatás Notepad++-ban</h3>
+<p>
+A Run menü Run almenüjét választjuk ki (F5), a felugró ablakba ezt írjuk:
+
+<pre>
+python.exe <span class='emph_1'>-i</span> "$(FULL_CURRENT_PATH)"
+</pre>
+szükség esetén python.exe teljes elérési útvonalával, majd elmentjük ezt a parancsot pl. <span class='emph_4'>pyrun</span> néven. Mentéskor billentyűkombinációt
+is hozzá tudunk rendelni &ndash; vigyázzunk, hogy ez ne ütközzön már meglévővel. Pl. Ctrl-P szokott lenni a nyomtatás kombinációja, tehát ez már foglalt.
+A -i kapcsoló fontos, hogy ne záródjon be a parancs-ablak a szkript lefutása után.
+</p>
+<p>
+Ezután a Run menüből kiválasztjuk a <span class='emph_4'>pyrun</span> tételt, ekkor lefut interaktív módban az éppen megnyitott szkript.
+</p>
+<p>
+Az adott fájlban található függvények listájának mutatása:
+<pre>
+View &rarr; Function list
+</pre>
+</p>
+<p>
+A sorszámok mutatásának ki-bekapcsolása:
+<pre>
+Settings &rarr; Editing &rarr; <b style='color:black;'>&#9745;</b> Display line number
+</pre>
+</p>
+<h3 id='tabs'>Tabulátorok kezelése</h3>
+<p>
+Mivel a Pythonban a blokkokat indentálással kötelező ellátni, pl.:
+
+<pre>
+if x == y:
+    print('Hello')
+    print('world')
+</pre>
+a tabulátorok szóközzé alakításának <b>nagy</b> jelentősége van. Ugyanis az interpreter számára a tabulátor is csak egyetlen karakter, akárcsak a space, ha tehát
+a fenti példában az első print() előtt egy tabulátor áll, a második előtt pedig 4 szóköz, akkor hibajelzést fogunk kapni.
+</p>
+<h4 id='tab_notepad_plus_plus'>Notepad++-ban</h4>
+<p>
+A Notepad++-ban így tudjuk beállítani, hogy a tabulátorok szóközzé legyenek alakítva:
+
+<pre>
+Settings &rarr; Preferences &rarr; Language
+</pre>
+Itt a <span class='code_2'>Tab settings</span> részben van egy <span class='code_2'>Replace by space</span> kapcsoló. Fölötte pedig azt lehet beállítani,
+hogy hány szóköznek feleljen meg egy tabulátor (ajánlott: 4).
+</p>
+<p>
+A már meglévő tabulátorok lecserélése szóközökre:
+<pre>
+Edit &rarr; Blank operations &rarr; TAB to space
+</pre>
+Fehér karakterek mutatása:
+<pre>
+View &rarr; Show symbol &rarr; Show white space and TAB
+</pre>
+</p>
+<h3 id='non_ascii'>Nem ASCII karakterek kezelése</h3>
+<p>
+Célszerű a szkriptjeinket utf-8 kódolással elmenteni, ekkor nem okoznak gondot az ékezetes karakterek pl. sztringekben és megjegyzésekben:
+</p>
+<pre>
+print('hajrá') # megjegyzés
+</pre>
+Ha pl. ISO 8852-ben van a szkript elmentve, akkor az elején egy megjegyzésben specifikálnunk kell ezt:
+
+<pre>
+# coding: iso-8859-2
+</pre>
+különben az első nem ASCII karakternél hibajelzést kapunk.
+</p>
+<h4 id='non_ascii_notepad_plus_plus'>Notepad++-ban</h4>
+<p>
+A Notepad++-ban az <span class='code_2'>Encoding</span> menüpont alatt lehet beállítani, hogy milyen kódolással mentse el a tartalmat.
+</p>
+<h3 id='pip_usage'>Modulok installálása pip segítségével <sup><a href='#link-7'>[7]</a></sup></h3>
+<p>
+A pip installáló program a Python része &ndash; azaz nem kell telepíteni &ndash; segítségével nagyon könnyen lehet modulokat installálni és deinstallálni. Lehet
+közvetlenül is indítani, de indíthatjuk modulként is, pl.:
+
+<pre>
+python -m pip install pandas
+</pre>
+
+Ha az installálandó modulnak szüksége van más, szintén még nem installált modulokra, akkor azokat is automatikusan lehozza.
+</p>
+<h3 id='links'>Hivatkozások</h3>
+<p>
+<div id='link-1'>[1] <a href='https://www.python.org/downloads/' target='_blank'>Hivatalos Python letöltési oldal</a></div>
+<div id='link-2'>[2] <a href='https://www.python-course.eu/python3_interactive.php' target='_blank'>The Interpreter, an Interactive Shell</a> (python-course.eu/)</div>
+<div id='link-3'>[3] <a href='https://www.python-course.eu/python3_execute_script.php' target='_blank'>Execute a Python script</a> (python-course.eu/)</div>
+<div id='link-4'>[4] <a href='https://docs.python.org/3/using/cmdline.html' target='_blank'>Command line and environment</a> (docs.python.org/)</div>
+<div id='link-5'>[5] <a href='http://pythonwise.blogspot.com/2015/01/python-m.html' target='_blank'>python-m</a> (PythonWise)</div>
+<div id='link-6'>[6] <a href='https://stackoverflow.com/questions/7610001/what-is-the-purpose-of-the-m-switch' target='_blank'>What is the purpose of the
+-m switch?</a> (Stackoverflow)</div>
+<div id='link-7'>[7] <a href='https://realpython.com/what-is-pip/' target='_blank'>What Is Pip? A Guide for New Pythonistas</a> (RealPython)</div>
+</p>
+</body>
+</html>
