@@ -1,0 +1,33 @@
+Functions\func_objects_1.py
+ * függvény-objektumok
+ * dir()
+ * sys.getsizeof()
+ * __sizeof__(), __call__(), __name__, __class__
+
+Datastructures\dict_1.py
+ * dict típus
+ * tuple kibontása változókba
+ * zip függvény
+
+Functions\func_params_2.py
+ * opcionális pozícionális és kulcsszó paraméterek
+
+Functions\scope_2.py
+ * egymásba ágyazott függvények
+ * global, nonlocal
+
+Functions\lambda_1.py
+ * lambda függvénykifejezések
+ * sorted()
+
+Datastructures\set_1.py
+ * set típus
+
+Datastructures\index_1.py
+  * negatív indexek
+  * slicing
+
+python_intro.html
+
+exercises_2.py
+ * feladatok

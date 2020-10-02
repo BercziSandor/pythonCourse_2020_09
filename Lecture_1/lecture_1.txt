@@ -11,20 +11,21 @@ mix.py
 * range
 * for ciklus
 
-numeric_types_1.py
+Datastructures\numeric_types_1.py
 * int típus
 * float típus
 * type()
 
-string_1.py
+Datastructures\string_1.py
 * str típus
+* len(), rstrip(), lstrip()
 
-list_1.py, list_2.py, list_3.py
+Datastructures\list_1.py, list_2.py, list_3.py
 * list típus
 * id
 * del
 
-tuple_1.py
+Datastructures\tuple_1.py
 * tuple típus
 
 Functions\func_params_1.py

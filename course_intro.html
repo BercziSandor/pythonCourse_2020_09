@@ -1,0 +1,112 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<title>Fő tudnivalók</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p  { margin: 8px 0; }
+  .id_1 { text-align: center; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.27 &mdash;</p>
+</div>
+
+<div id='0' class='id_1' style='display:block;'>
+<h1>Mi a főszabály?</h1>
+</div>
+<div id='1' class='id_1' style='display:none;'>
+<h1>Órán kérdezni nem szabad.</h1>
+</div>
+<div id='2' class='id_1'  style='display:none;'>
+<h1>Hanem kötelező.</h1>
+</div>
+<div id='3' style='display:none;'>
+<p style='text-align: center; font-size: 200%; color:blueviolet;'>&#9880;</p>
+<p>
+<b>&odot; Ez komoly.</b> Fontos, hogy ne maradjon le senki &ndash; ha valaki nagyon szégyellné, hogy nem ért valamit, akkor
+
+<ol>
+<li>hagyja abba a szégyenkezést;</li>
+<li>ha az 1. feladat nem sikerül és nem szeretne a többiek előtt kérdezni, akkor írja meg emailben, mi a problémája;</li>
+<li>ha nem írja meg, akkor viszont már nyugodtan szégyellheti magát.</li>
+</ol>
+
+Nem egyforma a tudásszint, ezért fokozottan érvényes, hogy szükség van visszajelzésre. Legfeljebb ha olyan a helyzet, hogy tényleg csak egy valaki akadt el, akkor
+továbbhaladunk és utána az illetővel külön átbeszéljük a problémás részt.
+</p>
+<p>
+<b>&odot;</b> A témákra vissza-visszatérünk, fokozatosan bővítve az ismereteket; először a legegyszerűbb dolgokat vesszük elő, aztán egy következő alkalommal
+a bonyolultabbakat, stb.
+</p>
+<p>
+<b>&odot;</b> A nehéz témákat minél hamarabb elővesszük, hogy minél többször tudjuk ismételni.
+</p>
+<p>
+<b>&odot;</b> Fő célom az egyéni tanulás segítése, ezért minden témához összeszedek általam jónak tartott cikkeket, könyvfejezeteket.
+</p>
+<p>
+<b>&odot;</b> Fontos a visszajelzés; minden vélemény, benyomás érdekel, minél konkrétabban és részletesebben (mi volt túl gyors, túl lassú, túl akármilyen)
+&ndash; a kurzus folyamán és utána is nagyon számítok kritikára és ötletekre. Az udvariasság teljes mellőzésével, ha kérhetem.
+</p>
+<p>
+<b>&odot;</b> Konkrétan az ajánlott irodalmakról is kérek visszajelzést, hogy melyiket tapasztaltátok a legjobbnak és legrosszabbnak; ha találtok olyant, ami
+tetszett és a listámban nem szerepel, az is érdekel.
+</p>
+<p>
+<b>&odot;</b> Kötelező házi feladatot és számonkérést nem tervezek, mert nem biztos, hogy mindenkinek van erre a témára ideje azon túl, hogy az előadást meghallgatja.
+Fakultatív gyakorló feladatokat viszont szeretnék kiadni; egyrészt kisebb, gondolkodtató (és lehetőleg bosszantó) feladatokat, másrészt esetleg valami
+nagyobbat is.
+</p>
+<p>
+<b>&odot;</b> A nagyobb házi feladatra van egy ötletem &ndash; az egyetemen az adatbázisos tárgynál jól bevált. Akinek van programozási tapasztalata, az próbáljon
+meg találni olyan programot, amelyet más nyelven már megoldott és ennek valamilyen leegyszerűsített változatát írja meg Pythonban.
+</p>
+<p>
+Ez milyen? Ezen kívül van esetleg ötletetek nagyobb házi feladatra?
+</p>
+<p>
+Én még gondolkodom rajta; legszívesebben valami kis adattisztítási és feldolgozási
+problémát céloznék meg. (Excelből exportálni, megtisztítani, Excelbe vagy adatbázisba betölteni, szűrni, megjeleníteni...)
+</p>
+<p style='text-align: center; font-size: 200%; color:blueviolet;'>&#9884;</p>
+</div>
+<div style='text-align: center;'>
+<button id='step_button' style='border-radius: 4px;' onclick='step_phase()'><h3>Lássuk!</h3></button>
+</div>
+
+<script>
+var phase = 1, last = 3;
+function step_phase() {
+	if(phase > last) return;
+
+  var e = document.getElementById(phase),
+      e_prev = document.getElementById(phase - 1),
+      btn = document.getElementById('step_button');
+
+  e_prev.style.display = 'none';
+  e.style.display = 'block';
+
+  switch(phase){
+	  case 1:
+	    btn.innerHTML = '<h2>Mi van???</h2>';
+	    btn.style.color = 'red';
+	  break;
+	  case 2:
+	    btn.innerHTML = '<h3>Ja, az már más.<br>Van még valami?</h3>';
+	    btn.style.color = 'green';
+	  break;
+	  case 3:
+	    btn.style.display = 'none';
+	  break;
+  }
+
+  phase++;
+
+}
+</script>
+
+</body>
+</html>
