@@ -1,3 +1,6 @@
+#!/bin/python
+# -*- coding: UTF-8 -*-
+
 # Indexelés kiterjesztése
 # Negatív indexek, slicing
 

@@ -1,3 +1,6 @@
+#!/bin/python
+# -*- coding: UTF-8 -*-
+
 # Listák 3.
 
 # Tartalmazásvizsgálat: in operátor

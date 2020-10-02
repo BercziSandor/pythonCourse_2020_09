@@ -1,3 +1,6 @@
+#!/bin/python
+# -*- coding: UTF-8 -*-
+
 # Listák 2. (És egy kevés sztring.)
 
 # Konkatenálás
