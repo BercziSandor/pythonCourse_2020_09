@@ -1,31 +1,34 @@
 Functions\func_objects_1.py
- * fÃ¼ggvÃ©ny-objektumok
+ * függvény-objektumok
  * dir()
  * sys.getsizeof()
  * __sizeof__(), __call__(), __name__, __class__
 
 Datastructures\dict_1.py
- * dict tÃ­pus
- * tuple kibontÃ¡sa vÃ¡ltozÃ³kba
- * zip fÃ¼ggvÃ©ny
+ * dict típus
+ * tuple kibontása változókba
+ * zip függvény
 
 Functions\func_params_2.py
- * opcionÃ¡lis pozÃ­cionÃ¡lis Ã©s kulcsszÃ³ paramÃ©terek
+ * opcionális pozícionális és kulcsszó paraméterek
 
 Functions\scope_2.py
- * egymÃ¡sba Ã¡gyazott fÃ¼ggvÃ©nyek
+ * egymásba ágyazott függvények
  * global, nonlocal
 
 Functions\lambda_1.py
- * lambda fÃ¼ggvÃ©nykifejezÃ©sek
+ * lambda függvénykifejezések
  * sorted()
 
 Datastructures\set_1.py
- * set tÃ­pus
+ * set típus
 
 Datastructures\index_1.py
-  * negatÃ­v indexek
+  * negatív indexek
   * slicing
+
+files_1.py
+  * szöveges fájl megnyitása és sorok olvasása
 
 python_intro.html
 
