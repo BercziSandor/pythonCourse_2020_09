@@ -1,6 +1,3 @@
-#!/bin/python
-# -*- coding: UTF-8 -*-
-
 # Dictionary (szótár) 1.
 # Tuple kibontása változókba
 # zip függvény

@@ -1,6 +1,3 @@
-#!/bin/python
-# -*- coding: UTF-8 -*-
-
 # *** Egész számok (int)
 
 x = 100

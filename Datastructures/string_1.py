@@ -1,6 +1,3 @@
-#!/bin/python
-# -*- coding: UTF-8 -*-
-
 # Sztringek (str) 1.
 
 # ' és " egyenrangü

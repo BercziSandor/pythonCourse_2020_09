@@ -1,44 +1,44 @@
-# 1. Alkalmazottak neve és fizetése:
+# 1. Alkalmazottak neve Ã©s fizetÃ©se:
 
 employees = [("James", 285000), ("Cecilia", 120000), ("Zach", 48000), ("Ann", 1258000)]
 
-# Állítsunk elõ egy listát a fizetés szerint rendezve. Várt eredmény:
+# ÃllÃ­tsunk elÅ‘ egy listÃ¡t a fizetÃ©s szerint rendezve. VÃ¡rt eredmÃ©ny:
 
 # [('Zach', 48000), ('Cecilia', 120000), ('James', 285000), ('Ann', 1258000)]
 
 ###########################
 
-# 2. Állítsuk elõ a nevek listáját ábécé szerint csökkenõ sorrendben. Várt eredmény:
+# 2. ÃllÃ­tsuk elÅ‘ a nevek listÃ¡jÃ¡t Ã¡bÃ©cÃ© szerint csÃ¶kkenÅ‘ sorrendben. VÃ¡rt eredmÃ©ny:
 
 # ['Zach', 'James', 'Cecilia', 'Ann']
 
 ###########################
 
-# 3. Egy változó értéke legyen True, ha a listában minden fizetés különbözõ, illetve False,
-# ha van legalább két egyforma fizetés. Várt eredmény: True.
+# 3. Egy vÃ¡ltozÃ³ Ã©rtÃ©ke legyen True, ha a listÃ¡ban minden fizetÃ©s kÃ¼lÃ¶nbÃ¶zÅ‘, illetve False,
+# ha van legalÃ¡bb kÃ©t egyforma fizetÃ©s. VÃ¡rt eredmÃ©ny: True.
 
 ###########################
 
-# 4. Készítsünk egy listát azoknak a nevébõl, akiknek a fizetése < 150000. Várt eredmény:
+# 4. KÃ©szÃ­tsÃ¼nk egy listÃ¡t azoknak a nevÃ©bÅ‘l, akiknek a fizetÃ©se < 150000. VÃ¡rt eredmÃ©ny:
 
 # ['Cecilia', 'Zach']
 
 ###########################
 
-# 5. Adott egy lista és egy tuple:
+# 5. Adott egy lista Ã©s egy tuple:
 
 lst = [ 10, 11, 5, 6, 7, 4 ]
 tup = ( 10, 11, 7, 4 )
 
-# Állítsunk elõ egy tuple-t, amely lst azon elemeinek négyzetét tartalmazza, melyek nem fordulnak elõ tup-ban.
+# ÃllÃ­tsunk elÅ‘ egy tuple-t, amely lst azon elemeinek nÃ©gyzetÃ©t tartalmazza, melyek nem fordulnak elÅ‘ tup-ban.
 
-# Várt eremény: (25, 36)
+# VÃ¡rt eremÃ©ny: (25, 36)
 
 ###########################
 
-# 6. Adott az exercise_6.txt fájl. Tegyük bele egy listába mindazon sorok hosszát, amelyekben elõfordul
-# kisbetû-nagybetû függetlenül az 'aaa' sztring. A hosszban ne legyen benne a sorvégjel.
+# 6. Adott az exercise_6.txt fÃ¡jl. TegyÃ¼k bele egy listÃ¡ba mindazon sorok hosszÃ¡t, amelyekben elÅ‘fordul
+# kisbetÅ±-nagybetÅ± fÃ¼ggetlenÃ¼l az 'aaa' sztring. A hosszban ne legyen benne a sorvÃ©gjel.
 
-# Várt eredmény: [10, 22]
+# VÃ¡rt eredmÃ©ny: [10, 22]
 
 ###########################

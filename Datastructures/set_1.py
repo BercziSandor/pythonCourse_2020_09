@@ -1,6 +1,3 @@
-#!/bin/python
-# -*- coding: UTF-8 -*-
-
 # set (halmaz) 1.
 
 # Minden elemet csak egyszer tartalmaz; csak fix, immutábilis típusok lehetnek az elemei.

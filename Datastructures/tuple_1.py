@@ -1,6 +1,3 @@
-#!/bin/python
-# -*- coding: UTF-8 -*-
-
 # Tuple 1.
 
 # Olyan, mint a lista, csak fix, immutábilis.

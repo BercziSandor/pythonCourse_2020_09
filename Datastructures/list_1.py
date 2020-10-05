@@ -1,6 +1,3 @@
-#!/bin/python
-# -*- coding: UTF-8 -*-
-
 # Listák 1. És egy kevés sztring.
 
 x = [10, 20, 30]

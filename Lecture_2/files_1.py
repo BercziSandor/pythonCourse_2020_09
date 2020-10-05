@@ -1,6 +1,6 @@
-# Fájlok olvasása 1.
+# FÃ¡jlok olvasÃ¡sa 1.
 
-# Szöveges fájl megnyitása és a sorok beolvasása:
+# SzÃ¶veges fÃ¡jl megnyitÃ¡sa Ã©s a sorok beolvasÃ¡sa:
 
 f_obj = open('input.txt','r')
 
@@ -13,17 +13,17 @@ f_obj.close()
 #
 # line 2
 
-# A dupla soremelés azért van, mert beolvasásnál megmarad a sorvég-jel és a
-# print hozzáteszi a másikat. A sorvégjeleket így tudjuk eltávolítani:
+# A dupla soremelÃ©s azÃ©rt van, mert beolvasÃ¡snÃ¡l megmarad a sorvÃ©g-jel Ã©s a
+# print hozzÃ¡teszi a mÃ¡sikat. A sorvÃ©gjeleket Ã­gy tudjuk eltÃ¡volÃ­tani:
 
 for line in f_obj:
     line = line.rstrip('\n')
     print(line)
     
-# Elég '\n'-et megadni, mer beolvasáskor a sorvégjeleket a Python minden oprendszernél
-# egyetlen '\n' (line feed, LF, hexa A) karakterre konvertálja.
+# ElÃ©g '\n'-et megadni, mer beolvasÃ¡skor a sorvÃ©gjeleket a Python minden oprendszernÃ©l
+# egyetlen '\n' (line feed, LF, hexa A) karakterre konvertÃ¡lja.
 
-# Ha az összes sorvégi fehér karaktert le akarjuk vágni, akkor az rstrip() metódusnak
-# nem adunk semmilyen paramétert.
+# Ha az Ã¶sszes sorvÃ©gi fehÃ©r karaktert le akarjuk vÃ¡gni, akkor az rstrip() metÃ³dusnak
+# nem adunk semmilyen paramÃ©tert.
 
-# Mindig zárjuk be a fájlt használat után!
+# Mindig zÃ¡rjuk be a fÃ¡jlt hasznÃ¡lat utÃ¡n!
