@@ -22,6 +22,8 @@ print("['Zach', 'James', 'Cecilia', 'Ann']")
 print("Megoldás:")
 print(list(dict(sorted(employees, key=lambda x: x[0], reverse=True)).keys()))
 
+#NMI A dict-be alakítás felesleges, sőt, gonosz hibát is tud csinálni: a dict-ből kiolvasásnál nincs definiálva a sorrend.
+
 print("\n###########################")
 print("# 3. Egy változó értéke legyen True, ha a listában minden fizetés különböző, illetve False, ha van legalább két egyforma fizetés.")
 print("Várt eredmény: True.")
@@ -32,6 +34,7 @@ def cal3(emp):
     salaries_set = set(dict(emp).values())
     return len(salaries_set) == len(salaries_list)
 
+#NMI Az elgondolás tökéletes; a dict-be alakítás itt is felesleges.
 
 print("Megoldás:")
 print(cal3(employees))
@@ -70,16 +73,16 @@ def cal5_1(lst, tup):
         res.append(e*e)
     return tuple(res)
 
+#NMI Jó, csak az ismétlődéseket agyonvágja.
 
 print("Megoldás:")
 print(cal5_1(lst, tup))
 
 # Nem fejből. ;)
-
+# NMI Igazi programozó nem dolgozik fejből...
 
 def cal5_2(lst, tup):
     return tuple(filter(None, [element ** 2 if element not in tup else None for element in lst]))
-
 
 print("Megoldás2:")
 print(cal5_2(lst, tup))
@@ -108,3 +111,5 @@ import sys
 print(cal6(os.path.dirname(sys.argv[0]) + '/exercise_6.txt'))
 
 print("\n###########################")
+
+
