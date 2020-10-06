@@ -1,4 +1,6 @@
 # http://www.trytoprogram.com/python-programming/python-function-arguments/
+# https://www.python-course.eu/python3_functions.php
+# https://www.python-course.eu/python3_passing_arguments.php
 # https://note.nkmk.me/en/python-args-kwargs-usage/
 # https://data-flair.training/blogs/python-function-arguments/
 # https://www.w3resource.com/python/python-user-defined-functions.php

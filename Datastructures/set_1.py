@@ -1,5 +1,7 @@
 # set (halmaz) 1.
 
+# https://www.python-course.eu/python3_sets_frozensets.php
+
 # Minden elemet csak egyszer tartalmaz; csak fix, immutábilis típusok lehetnek az elemei.
 
 set_1 = { 1, 2, 3 }

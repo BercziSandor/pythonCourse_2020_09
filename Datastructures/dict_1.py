@@ -2,8 +2,10 @@
 # Tuple kibontása változókba
 # zip függvény
 
+# https://www.python-course.eu/python3_dictionaries.php
 # https://realpython.com/python-dicts/
 # https://realpython.com/iterate-through-dictionary-python/
+# https://www.python-course.eu/python3_zip_tutorial.php
 
 # Kulcs-érték párokból áll. Üres szótár létrehozása:
 

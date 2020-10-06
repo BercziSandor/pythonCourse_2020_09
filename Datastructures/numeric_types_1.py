@@ -1,3 +1,6 @@
+# https://www.python-course.eu/python3_variables.php
+# https://www.python-course.eu/python3_operators.php
+
 # *** Egész számok (int)
 
 x = 100

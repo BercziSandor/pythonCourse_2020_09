@@ -34,6 +34,16 @@ tup = ( 10, 11, 7, 4 )
 
 # Várt eremény: (25, 36)
 
+# Listcomp nélkül:
+
+tmp_lst = []
+for e in lst:
+    if e not in tup:
+        tmp_lst.append(e * e)
+
+tup_2 = tuple(tmp_lst)
+print(tup_2)
+
 ###########################
 
 # 6. Adott az exercise_6.txt fájl. Tegyük bele egy listába mindazon sorok hosszát, amelyekben előfordul

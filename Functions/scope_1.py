@@ -1,5 +1,7 @@
 # Változók hatásköre 1.
 
+# https://www.python-course.eu/python3_global_vs_local_variables.php
+
 def func():
     print(x)
 

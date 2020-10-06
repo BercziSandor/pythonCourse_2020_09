@@ -1,0 +1,135 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<title>Generátor kifejezések</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  .result { color: olivedrab; margin-top: -10px; margin-bottom: -10px; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.08.25 &mdash;</p>
+</div>
+<h1>Generátor kifejezések bemutatása</h1>
+<ul class='contents'>
+<li><a style='color: red' href='#definition'>Definíció</a></li>
+<li><a style='color: red' href='#equi_function'>Ekvivalens generátor függvény</a></li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='definition'>Definíció</h2>
+<p>
+Generátor kifejezés (generator expression, generator comprehension): Olyan kifejezés, mint amit a list comprehension-ben használunk. A különbség
+
+<ul>
+<li>szintaktikailag: szögletes zárójel helyett kereket használunk</li>
+<li>tartalmilag: egy iterátort kapunk, nem egy listát.</li>
+</ul>
+</p>
+<p>
+List comprehension:
+<pre>
+lst = [i * i for i in range(5)]
+print(lst)
+<div class='result'>
+# [0, 1, 4, 9, 16]
+</div>
+</pre>
+Generátor kifejezés:
+<pre>
+g = (i * i for i in range(5))
+print(g)
+<div class='result'>
+# &lt;generator object <genexpr> at 0x020293C0>
+</div>
+</pre>
+Egy olyan iterátor keletkezett, ami egyenként FOGJA előállítani nekünk a megadott szabály szerint az elemeket, amikor kérjük.
+
+<pre>
+g = (i * i for i in range(5))
+x = next(g); print(x)
+x = next(g); print(x)
+<div class='result'>
+# 0
+# 1
+</div>
+</pre>
+A maradék elemeket egy for ciklussal olvassuk ki az iterátorból:
+
+<pre>
+for x in g:
+    print(x)
+<div class='result'>
+# 4
+# 9
+# 16
+</div>
+</pre>
+Persze aggregátor függvény segítségével is kiolvashatjuk a generátor tartalmát:
+<pre>
+from statistics import mean
+
+g = (i * i for i in range(5))
+print(mean(g))
+<div class='result'>
+# 6
+</div>
+</pre>
+A mean() függvény ugyanúgy "bejárja" a generátort, mint egy listát &ndash; sorban kiolvassa az elemeit.
+</p>
+<h2 id='equi_function'>Ekvivalens generátor függvény</h2>
+<p>
+Ez a kifejezés:
+<pre>
+g = (i * i for i in range(5))
+</pre>
+ugyanúgy szolgáltatja az elemeket, mint az alábbi megoldás:
+
+<pre>
+def squares():
+    for i in range(5):
+        yield i * i
+
+g = squares()
+print(g)
+<div class='result'>
+# &lt;generator object squares at 0x029646C0>
+</div>
+for x in g:
+    print(x, end=' ')
+print()
+<div class='result'>
+# 0 1 4 9 16
+</div>
+</pre>
+Ha elég egyszerű függvényről van szó, akkor rendszerint a generátor kifejezés jobban olvasható.
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://realpython.com/introduction-to-python-generators/#building-generators-with-generator-expressions' target='_blank'>How to Use
+Generators and yield in Python</a> Real Python<br>
+<a href='http://www.trytoprogram.com/python-programming/python-generators/#expressions' target='_blank'>Python Generators</a> trytoprogram.com
+</p>
+<p>
+<b>Könyvek</b>
+</p>
+<p>
+Dan Bader: Python Tricks - The Book<br>
+<i>&nbsp;&nbsp;Generator Expressions</i>
+</p>
+<p>
+Mark Lutz: Learning Python<br>
+<i>&nbsp;&nbsp;Generator Expressions: Iterators Meet Comprehensions</i>
+</p>
+</p>
+<p>
+</body>
+</html>

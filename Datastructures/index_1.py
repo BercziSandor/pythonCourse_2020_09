@@ -1,6 +1,8 @@
 # Indexelés kiterjesztése
 # Negatív indexek, slicing
 
+# https://www.python-course.eu/python3_sequential_data_types.php
+
 lst = [10, 20, 30, 40, 50]
 
 print(lst[len(lst) - 1]) # 50

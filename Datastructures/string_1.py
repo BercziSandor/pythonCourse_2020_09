@@ -1,5 +1,7 @@
 # Sztringek (str) 1.
 
+# https://www.python-course.eu/python3_sequential_data_types.php
+
 # ' és " egyenrangü
 
 x = 'abc'

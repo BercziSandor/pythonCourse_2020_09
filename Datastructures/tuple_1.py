@@ -1,5 +1,7 @@
 # Tuple 1.
 
+# https://www.python-course.eu/python3_sequential_data_types.php
+
 # Olyan, mint a lista, csak fix, immutábilis.
 # Magyar nevét nem találtam. (tupli?)
 

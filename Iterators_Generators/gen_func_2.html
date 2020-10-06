@@ -1,0 +1,586 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<title>Generátor  függvények 2.rész</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  .pale { color: gray; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+  .data { color:green; }
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }
+  .deleted { text-decoration: line-through; color: blue; }
+  .question  { font-family:Cooper Black; color:indigo; }
+  .sol_button { color:indigo; font-size: 110%; }
+  .solution { display:none; border: 1px groove black; border-radius: 5px; margin: 10px 20px 5px 20px; padding: 5px; background-color: palegoldenrod; }
+  .emph_box_1 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; text-align: center; font-size: 120%; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.20 &mdash;</p>
+</div>
+<h1>Generátor  függvények 2.rész<br>
+<span style='font-size:70%; color:gray;'>&bull; GeneratorExit, close, send, raise, throw &bull;</span></h1>
+<ul class='contents'>
+<li><a style='color: red' href='#gen_exit'>GeneratorExit kivétel</a></li>
+<li><a style='color: red' href='#close'>close() metódus</a></li>
+<li><a style='color: red' href='#send'>send() metódus</a></li>
+<li><a style='color: red' href='#consumer'>Nyelő típusú generátorok</a></li>
+<li><a style='color: red' href='#raise_in_gen'>A generátor kivételt dob</a></li>
+<li><a style='color: red' href='#throw_into'>throw() metódus</a></li>
+<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNYEK</a></li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='gen_exit'>GeneratorExit kivétel</h2>
+<p>
+Amikor egy generátor nem tud több elemet szolgáltatni, akkor a hívó StopIteration kivételt kap. Az ellentétes irányú kommunikáció is létezik: a
+generátor is értesül arról, amikor már nincs rá mutató változó, tehát befeződik az életciklusa &ndash; mégpedig úgy, hogy egy GeneratorExit kivételt kap.
+Ha ezt nem próbálja meg elkapni, akkor a futtató rendszer kapja el és nem csinál vele semmit. Könnyen be lehet mutatni, hogy ezt a kivételt valóban megkapja
+a generátor:
+<pre>
+def gen_1():
+  try:
+      yield(10)
+      yield(20)
+      yield(30)
+  except GeneratorExit:
+      print('Generator: Received GeneratorExit')
+
+def my_func():
+    it = gen_1()
+    x = next(it)
+    print('x:',x)
+    print('my_func: Good-bye!')
+
+my_func()
+print('after my_func')
+<div class='result'>
+# x: 10
+# my_func: Good-bye!
+# Generator: Received GeneratorExit
+# after my_func
+</div>
+</pre>
+Amikor a my_func() függvény befejeződik, minden lokális változója, így it is megszűnik, ekkor kapja meg gen_1 a kivételt. Ha már a függvény vége előtt
+létrejön az a helyzet, hogy egyetlen változó sem mutat gen_1-re, akkor ezen a ponton kapja meg a GeneratorExit kivételt:
+
+<pre class='pale'>
+def my_func():
+    it = gen_1()
+    x = next(it)
+    print('x:',x)
+    <span style='color: blue;'>it = 999  # or: del it</span>
+    print('my_func: Good-bye!')
+
+my_func()
+print('after my_func')
+<div class='result'>
+# x: 10
+<span style='color: red;'># Generator: Received GeneratorExit
+# my_func: Good-bye!</span>
+# after my_func
+</div>
+</pre>
+A kivételt már akkor megkapja a generátor, mielőtt kilépnénk a függvényből.
+</p>
+<p>
+A GeneratorExit kivételnek az a célja, hogy a generátor elvégezhessen szükség esetén lezáró műveleteket (fájlok, adatbáziskapcsolatok, socket-ek lezárása).
+</p>
+<h2 id='close'>close() metódus</h2>
+<p>
+A hívó oldal a close() metódus segítségével tudja értesíteni a generátort arról, hogy a továbbiakban nem tart igényt a szolgálataira. Ennek hatására a generátor
+GeneratorExit kivételt kap.
+
+<pre>
+def gen_1():
+  try:
+      yield(10)
+      yield(20)
+      yield(30)
+  except GeneratorExit:
+      print('Generator: Received GeneratorExit')
+
+it = gen_1()
+x = next(it)
+print('x:',x)
+<span style='color: red;'>it.close()    # ==> GeneratorExit</span>
+print('after close')
+<div class='result'>
+# x: 10
+# Generator: Received GeneratorExit
+# after close
+</div>
+</pre>
+Természetesen most is igaz, hogy ha a generátor nem kapja el ezt a kivételt, akkor elkapja a futtató rendszer és nem csinál vele semmit. A close() metódus
+másik hatása, ahogy a nevéből is sejthető: a generátor lezárt állapotba kerül, a további next() hívásokra StopIteration kivételt dob.
+</p>
+<h2 id='send'>send() metódus</h2>
+<p>
+A generátor olyan különleges függvény, amely mindig ott folytatja a végrehajtást, ahol az előző yield-nél abbahagyta, tehát több belépési pontja van. Ezen kívül
+még arra is van lehetősége a hívónak, hogy a folytatáskor adatot adjon át a generátornak, mintegy új hívási paramétereket küldjön minden alkalommal. Erre a
+célra szolgál a send() metódus. Ennek a szintaktikája egyszerű, mégsem nagyon könnyű megszokni, mert a yield kétirányú adatforgalom lebonyolítására képes, ami
+eleinte kissé zavaró.
+</p>
+<p>Amit a send() metódussal elküldünk a generátornak, azt ő az előző yield visszatérő értékeként megkapja. A send() ugyanúgy továbbindítja a generátort,
+mint a next().
+
+<pre>
+def gen_1():
+    print('GENERATOR: STARTED')
+    received = yield(<b style='color:red;'>10</b>)
+    print(f'-- 1 -- generator: received {received}')  # None
+    received = yield(20)
+    print(f'-- 2 -- generator: received {received}')  # <b style='color:green;'>999</b>
+    yield(30)
+
+it = gen_1()
+print('** GENERATOR CREATED')
+received = next(it)
+print(f'* 1 * caller: received {received}')  # <b style='color:red;'>10</b>
+received = next(it)
+print(f'* 2 * caller: received {received}')  # 20
+received = it.send(<b style='color:green;'>999</b>)
+print(f'* 3 * caller: received {received}')  # 30
+
+<div class='result'>
+# ** GENERATOR CREATED
+# GENERATOR: STARTED
+# * 1 * caller: received <b style='color:red;'>10</b>
+# -- 1 -- generator: received None
+# * 2 * caller: received 20
+# -- 2 -- generator: received <b style='color:green;'>999</b>
+# * 3 * caller: received 30
+</div>
+</pre>
+A next() hívás megfelel egy send(None)-nak. Megpróbáltam sematikusan ábrázolni az adatforgalmat:
+
+<pre>
+
+   <b style='color: black;'>HÍVÓ                           GENERÁTOR</b>
+
+                 <span style='color: red;'>&lArr; 20 ==</span>       received = yield(20)
+                                    <span style='color: green;'>&uarr;
+                                    |
+                                    |</span>
+ it.send(999) <span style='color: green;'>--&rarr;-- 999 ----&rarr;-------+</span>
+
+</pre>
+<div class='emph_box_1' style='width:60%;'>
+Érdemes legalább egyszer egy ilyen egyszerű programon debugger segítségével végiglépkedni, segít a megértésben.
+</div>
+
+A send() által beküldött érték lehet valami olyasmi, ami megváltoztatja a generátor működését. Lehet ez egy parancs, aminek a hatására a generátor másképp
+kezd el működni. Az alábbi kis szemléltető példában a generátor egyesével számol felfelé vagy lefelé egy vezérlő paraméter értékének függvényében. A vezérlő
+paraméter kezdeti értékét a generátor-függvény argumentuma szolgáltatja.
+<pre>
+def gen_1(startValue, direction):
+    print('GENERATOR: STARTED')
+    value = startValue
+    if direction.lower() == 'up':
+        delta = 1
+    else:
+        delta = -1
+    while True:
+        command = yield(value)
+
+        if command is not None:
+            if command.lower() == 'up':
+                delta = 1
+            else:
+                delta = -1
+
+        value += delta
+
+x = 10
+print('CALLER STARTED, x = ', x)
+it = gen_1(x, 'UP')
+while x < 12:
+    x = next(it)
+    print('x =',x)
+
+x = it.send('down')
+print('after send x =',x)
+while x > 8:
+    x = next(it)
+    print('x =',x)
+<div class='result'>
+# CALLER STARTED, x =  10
+# GENERATOR: STARTED
+# x = 10
+# x = 11
+# x = 12
+# after send x = 11
+# x = 10
+# x = 9
+# x = 8
+</div>
+</pre>
+</p>
+<p>
+<div style='text-align:center; font-size:200%'>&#9827;</div>
+</p>
+A fel-le számolásnak nyilván nincs sok értelme; de lehet pl. az a feladat, hogy egy fájlban egy értéket keresünk, amikor valamelyik sorban megtaláltuk, akkor
+egy másik értéket kezdünk keresni. Mondjuk a fájl egy logfájl, amiben egy adott időpontot keresünk, amikor megvan, akkor kiolvassuk, kinek a tevékenységéhez
+tartozik az illető sor és onnan kezdve azt keressük, hogy hol fordul elő az ő azonosítója ismét.
+</p>
+<p>
+A send() metódust intenzíven használják a korutinok.
+</p>
+<h2 id='consumer'>Nyelő típusú generátorok</h2>
+<p>
+Az eddig vizsgált esetekben mindig a yield játszotta a főszerepet, az volt lényeges, hogy milyen értéket ad vissza a hívónak a generátor. Van olyan eset is, amikor
+a yield csak arra szolgál, hogy értesítse a hívót: elvégezte a feladatát, várja, hogy a hívó send segítségével elküldje neki a következő adatot.
+</p>
+<p>
+Legyen például az a feladata a generátor-függvénynek, hogy a kapott adatot beleírja egy fájlba.
+<pre>
+def g_file_writer(path):
+    with open(path,'w') as file_obj:
+        while True:
+            msg = yield    # waits for next msg
+            file_obj.write(msg + '\n')
+</pre>
+
+A hívó oldal az egyszerűség kedvéért most csak számokat küld neki:
+<pre>
+writer = g_file_writer('logfile.txt')
+next(writer)  # start the generator
+for i in range(3):
+    writer.send(str(i))
+<div class='result'>
+# logfile.txt tartalma:
+# 0
+# 1
+# 2
+</div>
+</pre>
+Amikor egy üzenet fájlba írása megtörtént, akkor yield segítségével értesítés megy a hívónak, hogy jöhet a következő. Annak megérkezéséig várakozik a generátor.
+Ha nem létezne yield és send utasítás, akkor egy segéd-osztályt kellene írnunk, amely megőrzi a megnyitott fájl-objektumot és van egy write metódusa; ráadásul
+külön kellene gondoskodni a fájl lezárásáról.
+</p>
+<h2 id='raise_in_gen'>A generátor kivételt dob</h2>
+<p>
+Ha egy generátor kivételt dob, ezt a hívó persze elkaphatja, ha akarja &ndash; de a generátor működése befejeződik ugyanúgy, mint amikor egy return utasításhoz
+érkezik. Minden további next() hívás StopIteration kivételt eredményez.
+
+<pre>
+def g_func():
+    yield(10)
+    raise ValueError('Exception message from g_func')
+    yield(20)    # never reach this
+
+g = g_func()
+
+try:
+    for x in g:
+        print(x)
+except ValueError as e:
+    print(e)
+<div class='result'>
+# 10
+# Exception message from g_func
+</div>
+</pre>
+Tehát a generátor által dobott kivételt csak egy utolsó jelzésre tudjuk használni.
+</p>
+<p>
+Érdemes megjegyezni, hogy a for ciklus belsejében nem tudjuk elkapni a kivételt:
+
+<pre>
+g = g_func()
+
+for x in g:
+    try:
+        print(x)
+    except ValueError as e:
+       print(e)
+       break
+
+print('after for loop')  # never reach this
+<div class='result'>
+# 10
+# [hibajelzés]
+</div>
+</pre>
+</p>
+<h2 id='throw_into'>throw() metódus</h2>
+<p>
+Ha a hívó a generátor throw metódusát hívja fel, annak a hatása olyan, mintha a yield utasítás dobott volna kivételt. A következő példában az adatokat a
+generátor állítja elő, ő az adatforrás.
+<pre>
+class MyException(Exception): pass
+
+def g_func():
+    for i in (10,20,30,40):
+        try:
+            yield(i)
+        except MyException as e:
+            print('caller says:', e)
+
+g = g_func()
+
+for x in g:
+    print(x)
+    if x == 20:
+        g.throw(MyException('I hate 30'))
+<div class='result'>
+# 10
+# 20
+# caller says: I hate 30
+# 40
+</div>
+</pre>
+Amikor a generátor visszaadta a 20-as értéket és várja, hogy adhassa a 30-at, akkor a throw hatására a yield(30) nem hajtódik végre, hanem egy kivétel keletkezik,
+amelyet a generátor el tud kapni és mint egy üzenetet, értelmezni tud. Látszik ennek a módszernek a problémája: ha a generátor adatot szolgáltat a hívónak,
+akkor a throw egy ilyen adat-üzenetet agyoncsap, hiszen a yield nem hajtódik végre.
+</p>
+<div style='text-align:center; font-size:200%'>&#9827;</div>
+<p id='throw_db_example'>
+Egy valóságosabb példa: A generátor "nyelő" típusú, az a feladata, hogy a kapott adatokat egy adatbázisba írja. A hívó kivételek dobásával jelzi, amikor
+commit vagy rollback műveletet kell végrehajtani.
+
+<pre>
+class CommitException(Exception): pass
+class RollbackException(Exception): pass
+
+def g_db_writer():
+    print('   generator: I am connecting to the database\n------------')
+    while True:
+        try:
+            row = yield
+            print(f'   generator: I write into the db: {row}')
+        except CommitException:
+            print('\n   generator: I commit the changes\n------------')
+        except RollbackException:
+            print('\n   generator: I roll back the changes\n------------')
+        except GeneratorExit:
+            print('\n   generator: I roll back and close down the db')
+            return
+
+g_db = g_db_writer()
+print('** caller: I start the db writer')
+next(g_db)
+
+row = 'first row'
+print(f'** caller: send to the db writer: {row}')
+g_db.send(row)
+
+g_db.throw(CommitException)
+
+row = 'second row'
+print(f'** caller: send to the db writer: {row}')
+g_db.send(row)
+
+g_db.throw(RollbackException)
+g_db.close()
+print('** caller: I closed down the db writer')
+
+<div class='result'>
+** caller: I start the db writer
+   generator: I am connecting to the database
+------------
+** caller: send to the db writer: first row
+   generator: I write into the db: first row
+
+   generator: I commit the changes
+------------
+** caller: send to the db writer: second row
+   generator: I write into the db: second row
+
+   generator: I roll back the changes
+------------
+
+   generator: I roll back and close down the db
+** caller: I closed down the db writer
+</div>
+</pre>
+A nyelő típusú generátoroknál problémamentesen tudjuk használni a throw() metódust, nem vész el üzenet, hiszen a yield nem is tartalmaz üzenetet, hanem csak
+annak jelzését, hogy a generátor várja a következő adatot.
+</p>
+<h2 id='q_1' class='question'>REJTVÉNYEK</h2>
+<h2 class='question'>&#9312;</h2>
+<p>
+Készítünk egy számláló generátort, amely nullától számol olyan lépésekben, amekkorát a generátor-függvény paramétereként megadtunk. send() segítségével tudunk
+neki küldeni újabb lépésközt.
+<pre>
+def gen_1(delta):
+    value = 0
+    while True:
+        received = yield(value)
+        if received is not None:
+            delta = received
+
+        value += delta
+</pre>
+Szeretnénk kettesével számolni, aztán amikor 4-et elértünk, onnan tizesével egészen 34-ig. A lépések sorszámát is ki akarjuk írni. A várt eredmény:
+<pre>
+<div class='result'>
+# 0 0
+# 1 2
+# 2 4
+# 3 14
+# 4 24
+# 5 34
+</div>
+</pre>
+Az első megoldásunk és az eredménye:
+
+<pre>
+it = gen_1(2)
+for i, x in enumerate(it):
+    print(i, x)
+
+    if i == 2:
+        it.send(10)
+
+    if i == 5:
+        break
+<div class='result'>
+# 0 0
+# 1 2
+# 2 4
+# 3 <span class='emph_1'>24</span>
+# 4 <span class='emph_1'>34</span>
+# 5 <span class='emph_1'>44</span>
+</div>
+</pre>
+<span class='question'>Miért ez az eredmény?</span>
+<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">Megoldás</button>
+<div id='sol_1' class='solution'>
+A send() metódus tovább indítja a generátort (csakúgy, mint a next() függvény). Ennek az eredményét nem használjuk fel, a 14-es értéket gyakorlatilag kidobjuk.
+</div>
+</p>
+<p>
+<span class='question'>Mi a jó megoldás?</span>
+<button id='b_sol_2' class='sol_button' onclick="toggle_from_none('sol_2')">Megoldás</button>
+<div id='sol_2' class='solution'>
+Nekünk kell kezelnünk a ciklusváltozót, ezt nem tudjuk a for ciklusra bízni.
+
+<pre>
+it = gen_1(2)
+i = 0
+while True:
+    if i > 5:
+        break
+
+    x = next(it)
+    print(i,x)
+
+    if i == 2:
+        x = it.send(10)
+        i += 1
+        print(i,x)
+
+    i += 1
+</pre>
+</div>
+</p>
+<h2 class='question'>&#9313;</h2>
+<p>
+Nagyon egyszerű kis program &ndash; mégsem működik.
+
+<pre>
+def gen_1():
+    received = yield(10)
+    yield(20)
+
+it = gen_1()
+received = it.send(100)
+<div class='result'>
+# Traceback (most recent call last):
+#   File "c:\Users\NMI\AppData\Local\Programs\Python\Python36-32\lib\runpy.py", line 183, in _run_module_as_main
+#     mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+#   File "c:\Users\NMI\AppData\Local\Programs\Python\Python36-32\lib\runpy.py", line 109, in _get_module_details
+#     __import__(pkg_name)
+#   File "c:\Own\NmiSw\Python\test.py", line 21, in <module>
+#     received = it.send(100)
+# TypeError: can't send non-None value to a just-started generator
+</div>
+</pre>
+<span class='question'>Miért?</span>
+<button id='b_sol_3' class='sol_button' onclick="toggle_from_none('sol_3')">Megoldás</button>
+<div id='sol_3' class='solution'>
+Amíg a generátor nem kezdte meg a működését, addig None-on kívül nem küldhetünk mást neki &ndash; hiszen nincs <b>előző</b> yield, ami megkaphatná ezt az értéket.
+Az első művelet csak next() vagy send(None) lehet (ezek ekvivalensek). Helyesen tehát:
+
+<pre class='pale'>
+def gen_1():
+    received = yield(10)
+    yield(20)
+
+it = gen_1()
+<span style='color: blue;'>received = next(it)</span>
+received = it.send(100)
+</pre>
+</div>
+</p>
+<h2 class='question'>&#9314;</h2>
+<p>
+Ez működik, de StopIteration-t dob:
+
+<pre>
+def gen_1():
+    received = yield(10)
+    yield(20)
+
+it = gen_1()
+next(it)
+received = it.send(100)
+received = it.send(200)
+<div class='result'>
+Traceback (most recent call last):
+  File "c:\Users\NMI\AppData\Local\Programs\Python\Python36-32\lib\runpy.py", line 183, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "c:\Users\NMI\AppData\Local\Programs\Python\Python36-32\lib\runpy.py", line 109, in _get_module_details
+    __import__(pkg_name)
+  File "c:\Own\NmiSw\Python\test.py", line 23, in <module>
+    received = it.send(200)
+StopIteration
+</div>
+</pre>
+<span class='question'>Miért?</span>
+<button id='b_sol_4' class='sol_button' onclick="toggle_from_none('sol_4')">Megoldás</button>
+<div id='sol_4' class='solution'>
+Összesen háromszor indítottuk tovább a generátort, a másodikkal már elértük a függvény végét, a következő továbbindítás nem lehetséges, kimerült az iterátorunk.
+</div>
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://realpython.com/introduction-to-python-generators/' target='_blank'>How to Use Generators and yield in Python</a> Real Python<br>
+<i>&nbsp;&nbsp;Using Advanced Generator Methods</i><br>
+<a href='https://www.python-course.eu/python3_generators.php' target='_blank'>Generators and Iterators</a>  python-course.eu<br>
+<i>&nbsp;&nbsp;send Method /Coroutines</i><br>
+<a href='https://jeffknupp.com/blog/2013/04/07/improve-your-python-yield-and-generators-explained/' target='_blank'>Improve Your Python: 'yield' and Generators
+Explained</a> jeffknupp.com<br>
+<a href='https://stackoverflow.com/questions/19302530/python-generator-send-function-purpose' target='_blank'>python generator “send” function purpose?</a>
+Stackoverflow<br>
+<a href='https://stackabuse.com/python-generators/' target='_blank'>Python Generators</a> stackabuse.com<br>
+<i>&nbsp;&nbsp;Sending Values to Generators</i><br>
+<a href='https://stackoverflow.com/questions/11366064/handle-an-exception-thrown-in-a-generator' target='_blank'>Handle an exception thrown in a generator</a>
+Stackoverflow<br>
+<a href='https://stackoverflow.com/questions/35245590/raising-exception-in-a-generator-handle-it-elsewhere-and-vice-versa-in-python' target='_blank'>Raising
+exception in a generator, handle it elsewhere and vice versa in python</a> Stackoverflow<br>
+<a href='https://stackoverflow.com/questions/11485591/what-is-generator-throw-good-for' target='_blank'>What is generator.throw() good for?</a> Stackoverflow<br>
+<a href='https://amir.rachum.com/blog/2017/03/03/generator-cleanup/' target='_blank'>Cleaning Up in a Python Generator Can Be Dangerous</a> amir.rachum.com
+</p>
+
+<script>
+function toggle_from_none(ID) {
+  var e = document.getElementById(ID), no_block = e.style.display !== 'block',
+      b = document.getElementById('b_' + ID);
+
+  e.style.display = no_block ? 'block' : 'none';
+  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+}
+</script>
+</body>
+</html>

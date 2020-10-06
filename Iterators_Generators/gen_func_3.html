@@ -1,0 +1,374 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<title>Generátor  függvények 3.rész</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  .pale { color: gray; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+  .data { color:green; }
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }
+  .deleted { text-decoration: line-through; color: blue; }
+  .question  { font-family:Cooper Black; color:indigo; }
+  .sol_button { color:indigo; font-size: 110%; }
+  .solution { display:none; border: 1px groove black; border-radius: 5px; margin: 10px 20px 5px 20px; padding: 5px; background-color: palegoldenrod; }
+  .emph_box_1 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; text-align: center; font-size: 120%; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.20 &mdash;</p>
+</div>
+<h1>Generátor  függvények 3.rész<br>
+<span style='font-size:70%; color:gray;'>&bull; Adat és parancs átvitele &bull;</span></h1>
+<ul class='contents'>
+<li><a style='color: red' href='#data_and_status_yielded'>A generátor adatot ÉS státuszt ad vissza yield-del</a></li>
+<li><a style='color: red' href='#command_sent'>A generátor parancsot kap send()-del</a></li>
+<li><a style='color: red' href='#command_and_data_sent'>A generátor adatot ÉS parancsot kap send()-del</a></li>
+<li><a style='color: red' href='#summary'>Összefoglalás</a></li>
+<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNYEK</a></li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='data_and_status_yielded'>A generátor adatot ÉS státuszt ad vissza yield-del</h2>
+<p>
+Mit tudunk tenni, ha a generátor valami nem végzetes hibát érzékel, amiről értesíteni akarja a hívót? Kivételt nem dobhat a generátor, mert azzal be is
+fejeződne a működése. A megoldás az, hogy valamilyen adatstruktúrát ad vissza, amelyben a státuszjelzést is el tudja helyezni a tényleges adat mellett. Nekem
+erre a célra nagyon bevált a dictionary; nézzünk meg egy példát, ahol ezt alkalmazzuk.
+</p>
+<p>
+A generátorfüggvényünknek az a feladata, hogy a hívótól kapott számhoz adjon hozzá 100-at; ha nem megfelelő típusú adatot kapott, akkor ezt jelezze vissza és
+várja a következő adatot.
+
+<pre>
+def g_func():
+    ret_dict = { 'status': 'ok', 'value': None}
+
+    while True:
+        received_from_caller = yield(ret_dict)
+        if received_from_caller is None:   # was just a next()
+            ret_dict = { 'status': 'ok', 'value': None}
+            continue
+
+        try:
+            ret_val = received_from_caller + 100
+            ret_dict = { 'status': 'ok', 'value': ret_val}
+        except TypeError:
+            details = 'False parameter: ' + str(received_from_caller)
+            ret_dict = { 'status': 'error', 'details': details, 'value': None}
+
+g = g_func()
+
+print('CALLER: I start the generator')
+
+ret_dict = next(g)
+print('CALLER received:',ret_dict)
+
+ret_dict = g.send(10)
+print('CALLER received:',ret_dict)
+
+ret_dict = g.send('ABCD')
+print('CALLER received:', ret_dict)
+<div class='result'>
+# CALLER: I start the generator
+# CALLER received: {'status': 'ok', 'value': None}
+# CALLER received: {'status': 'ok', 'value': 110}
+# CALLER received: {'status': 'error', 'details': 'False parameter: ABCD', 'value': None}
+</div>
+</pre>
+</p>
+<h2 id='command_sent'>A generátor parancsot kap send()-del</h2>
+<p>
+Láttuk <a href='#throw_into' target='_blank'>fentebb</a>, hogy amikor a generátor az adatforrás, akkor problémás neki throw() segítségével parancsot küldeni,
+mert ekkor egy yield mintegy eltűnik. Az adatforrás típusú generátornak viszont könnyen tudunk parancsokat küldeni a send() metódussal. A következő példában
+a generátor állítja elő az értékeket és a vezérlő paraméter függvényében ezeket vagy változatlanul, vagy duplázva adja át a hívónak.
+
+<pre>
+def g_func(startCommand):
+    command = startCommand
+    print('  GENERATOR command at start:',command)
+    for i in (10,20,30,40,50):
+        if command == 'send doubles please':
+            value = 2 * i
+        else:
+            value = i
+        command = yield(value)
+        print('  GENERATOR received:',command)
+
+g = g_func(None)
+send_val = None
+while True:
+    try:
+        received_from_gen = g.send(send_val)
+        print('CALLER received:',received_from_gen)
+        if received_from_gen == 20:
+            send_val = 'send doubles please'
+        if received_from_gen == 80:
+            send_val = None
+    except StopIteration:
+        break
+<div class='result'>
+#   GENERATOR command at start: None
+# CALLER received: 10
+#   GENERATOR received: None
+# CALLER received: 20
+#   GENERATOR received: send doubles please
+# CALLER received: 60
+#   GENERATOR received: send doubles please
+# CALLER received: 80
+#   GENERATOR received: None
+# CALLER received: 50
+#   GENERATOR received: None
+</div>
+</pre>
+</p>
+<h2 id='command_and_data_sent'>A generátor adatot ÉS parancsot kap send()-del</h2>
+<p>
+A nyelő típusú generátor az adat mellett kaphat a hívótól parancsokat is; <a href='#throw_db_example' target='_blank'>fentebb</a> láttunk példát arra, hogy
+a parancsokat lehet throw() segítségével továbbítani a generátornak. Nézzünk most meg egy olyan megoldást ugyanarra a feladatra, ahol a send() szolgál a parancs
+továbbítására is.
+
+<pre>
+def g_db_writer():
+    print('   generator: I am connecting to the database\n------------')
+    while True:
+        try:
+            msg_dict = yield
+            if msg_dict is None: # was just a next()
+                continue
+
+            msg_type = msg_dict['msg_type']
+            if msg_type == 'message':
+                msg = msg_dict['msg']
+                print(f'   generator: I write into the db: {msg}')
+                continue
+
+            if msg_type == 'commit':
+                print(f'   generator: I commit the changes')
+                continue
+
+            if msg_type == 'rollback':
+                print(f'   generator: I roll back the changes')
+                continue
+        except GeneratorExit:
+            print('\n   generator: I roll back and close down the db')
+            return
+
+g_db = g_db_writer()
+print('** caller: I start the db writer')
+next(g_db)
+
+msg_dict = { 'msg_type': 'message', 'msg': 'first row' }
+print(f'** caller: send to the db writer: {msg_dict}')
+g_db.send(msg_dict)
+
+msg_dict = { 'msg_type': 'message', 'msg': 'second row' }
+print(f'** caller: send to the db writer: {msg_dict}')
+g_db.send(msg_dict)
+
+msg_dict = { 'msg_type': 'commit' }
+print(f'** caller: send to the db writer: {msg_dict}')
+g_db.send(msg_dict)
+
+msg_dict = { 'msg_type': 'message', 'msg': 'third row' }
+print(f'** caller: send to the db writer: {msg_dict}')
+g_db.send(msg_dict)
+
+msg_dict = { 'msg_type': 'rollback' }
+print(f'** caller: send to the db writer: {msg_dict}')
+g_db.send(msg_dict)
+
+g_db.close()
+print('** caller: I closed down the db writer')
+<div class='result'>
+# ** caller: I start the db writer
+#    generator: I am connecting to the database
+# ------------
+# ** caller: send to the db writer: {'msg_type': 'message', 'msg': 'first row'}
+#    generator: I write into the db: first row
+# ** caller: send to the db writer: {'msg_type': 'message', 'msg': 'second row'}
+#    generator: I write into the db: second row
+# ** caller: send to the db writer: {'msg_type': 'commit'}
+#    generator: I commit the changes
+# ** caller: send to the db writer: {'msg_type': 'message', 'msg': 'third row'}
+#    generator: I write into the db: third row
+# ** caller: send to the db writer: {'msg_type': 'rollback'}
+#    generator: I roll back the changes
+#
+#    generator: I roll back and close down the db
+# ** caller: I closed down the db writer
+</div>
+</pre>
+Természetesen a generátor vissza tudja jelezni a hívónak, hogy ha nem sikerült a művelet, akkor milyen hibajelzést kapott az adatbáziskezelőtől; erre a célra
+itt is jól alkalmazható egy dictionary, ahogy <a href='#data_and_status_yielded' target='_blank'>ebben</a> a példában láttuk.
+</p>
+<h2 id='summary'>Összefoglalás</h2>
+<p>
+A két oldal közötti kommunikáció eszközei:
+<pre>
+                                  <b style='color: black;'>HÍVÓ                                 GENERÁTOR</b>
+   <span style='color:green;font-style:italic;'>továbbléptet</span>                   next()                   ----->
+   <span style='color:green;font-style:italic;'>továbbléptet és <b>ADATOT</b> küld</span>    send()                   ----->
+   <span style='color:green;font-style:italic;'>lezár</span>                          GeneratorExit, close()   <span class='emph_1'>=====></span>
+   <span style='color:green;font-style:italic;'>üzenetet küld</span>                  throw()                  <span class='emph_1'>=====></span>
+                                                                                      <span style='color:green;font-style:italic;'>Az ADAT persze jelenthet vezérlő adatot is (parancsot, státuszjelzést).</span>
+   <span style='color:green;font-style:italic;'><b>ADATOT</b> küld, készenlétet jelez</span>                          <-----      yield
+   <span style='color:green;font-style:italic;'>lezárás-üzenetet küld</span>                                   <span class='emph_1'><=====</span>      StopIteration
+   <span style='color:green;font-style:italic;'>lezárás-üzenetet küld</span>                                   <span class='emph_1'><=====</span>      return
+   <span style='color:green;font-style:italic;'>üzenetet küld (csak egyszer)</span>                            <span class='emph_1'><=====</span>      raise
+</pre>
+Az "adat" persze jelenthet vezérlő adatot is (parancsot, státuszjelzést).
+</p>
+<p>
+Fontos tudatosítani:
+
+<div class='emph_box_1' style='width:70%;'>
+A yield nem csak arra szolgál, hogy adatot adjon át a hívónak, hanem jelzi is, hogy a generátor készen áll a következő üzenet fogadására.
+</div>
+A generátorok kategorizálhatók a tényleges <span class='emph_1'>adat</span>forgalom iránya szerint (hiba- és státuszjelzések persze mindkét irányban mehetnek):
+
+<ul>
+<li>Nyelő típusú: a hívótól kapott adattal valamit csinál, tipikusan fájlban, adatbázisban eltárolja, hálózati kapcsolaton kiküldi.</li>
+<li>Forrás típusú: ő állítja elő az adatot, pl. egy adatbázisból kiolvasva és átadja a hívónak.</li>
+<li>Kétirányú: a hívótól kapja az adatot és valamilyen műveletek után vissza is küldi neki.</li>
+</ul>
+</p>
+<h2 id='q_1' class='question'>REJTVÉNYEK</h2>
+<h2 class='question'>&#9312;</h2>
+<p>
+Adott a következő állítás.
+</p>
+<p>
+Egy generátorban felesleges az  utolsó yield értékét lekérdezni, pl.:
+
+<pre>
+def gen_1():
+    received = yield(10)
+    <span class='emph_1'>received = </span>yield(20)
+    x = 10
+    return
+</pre>
+<span class='question'>Igaz ez?</span>
+<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">Megoldás</button>
+<div id='sol_1' class='solution'>
+Nem egészen. Ezt az értéket a következő next() vagy send() hívásnál kapja meg a generátor. Ekkor még csinálhat különböző lezáró műveleteket, de a visszatérő
+értéket már csak a StopIteration paramétereként kapja meg a hívó. Példa:
+
+<pre>
+def gen_1():
+    received = yield(10)
+    received = yield(20)
+    print(f'generator closing down, received: {received}')
+    return 'Good-bye, world'
+
+it = gen_1()
+received = next(it)
+received = it.send(100)
+
+try:
+    received = it.send(200)
+except StopIteration as e:
+    print('StopIteration:', e)
+<div class='result'>
+# generator closing down, received: 200
+# StopIteration: Good-bye, world
+</div>
+</pre>
+A lezáró műveleteket tehát elhelyezhetjük a generátorban az utolsó yield után, de ez nem célszerű megoldás. Azért nem, mert ha a hívó hamarabb abbahagyja a
+generátor lekérdezését, akkor a lezáró műveletek nem hajtódnak végre. <b>Mindig</b> a GeneratorExit kivétel lekezelésével végezzük a lezárást!
+
+<pre>
+def gen_1():
+    try:
+        received = yield(10)
+        <span class='emph_1'>received = </span>yield(20)
+    except GeneratorExit:
+        print('generator closing down')
+</pre>
+Ha így járunk el, akkor viszont tényleg felesleges az utolsó yield értékét lekérdezni.
+</div>
+</p>
+<h2 class='question'>&#9313;</h2>
+<p>
+Ha lefuttatjuk ezt a programot:
+
+<pre>
+def g_func():
+    while True:
+        try:
+            received = yield
+            print('received:', received)
+        except GeneratorExit:
+            print('generator: closing down')
+
+g = g_func()
+next(g)
+g.send('ABC')
+g.close()
+</pre>
+ez lesz a kimenet:
+<pre>
+<div class='result'>
+# received: ABC
+# generator: closing down
+# Traceback (most recent call last):
+#   File "c:\Users\NMI\AppData\Local\Programs\Python\Python36-32\lib\runpy.py", line 183, in _run_module_as_main
+#     mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+#   File "c:\Users\NMI\AppData\Local\Programs\Python\Python36-32\lib\runpy.py", line 109, in _get_module_details
+#     __import__(pkg_name)
+#   File "c:\Own\NmiSw\Python\test.py", line 26, in <module>
+#     g.close()
+# RuntimeError: generator ignored GeneratorExit
+# Exception ignored in: &lt;generator object g_func at 0x028A6900>
+</div>
+</pre>
+<span class='question'>Miért?</span>
+<button id='b_sol_2' class='sol_button' onclick="toggle_from_none('sol_2')">Megoldás</button>
+<div id='sol_2' class='solution'>
+Miután a generátor elkapta a GeneratorExit kivételt, folytatja a működést és ismét kiad egy yield-et. Helyesen:
+
+<pre>
+def g_func():
+    while True:
+        try:
+            received = yield
+            print('received:', received)
+        except GeneratorExit:
+            print('generator: closing down')
+            <span class='emph_1'>return</span>
+</pre>
+</div>
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://realpython.com/introduction-to-python-generators/' target='_blank'>How to Use Generators and yield in Python</a> Real Python<br>
+<i>&nbsp;&nbsp;Using Advanced Generator Methods</i><br>
+<a href='https://www.python-course.eu/python3_generators.php' target='_blank'>Generators and Iterators</a>  python-course.eu<br>
+<i>&nbsp;&nbsp;send Method /Coroutines</i><br>
+<a href='https://jeffknupp.com/blog/2013/04/07/improve-your-python-yield-and-generators-explained/' target='_blank'>Improve Your Python: 'yield' and Generators
+Explained</a> jeffknupp.com<br>
+<a href='https://stackoverflow.com/questions/19302530/python-generator-send-function-purpose' target='_blank'>python generator “send” function purpose?</a>
+Stackoverflow<br>
+<a href='https://stackabuse.com/python-generators/' target='_blank'>Python Generators</a> stackabuse.com<br>
+<i>&nbsp;&nbsp;Sending Values to Generators</i>
+</p>
+
+<script>
+function toggle_from_none(ID) {
+  var e = document.getElementById(ID), no_block = e.style.display !== 'block',
+      b = document.getElementById('b_' + ID);
+
+  e.style.display = no_block ? 'block' : 'none';
+  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+}
+</script>
+</body>
+</html>

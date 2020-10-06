@@ -1,0 +1,25 @@
+[7]  Iterators and Generators fejezet; 
+     Transforming and Reducing Data at the Same Time; Stripping Unwanted Characters from Strings;
+     
+[11] Alex Martelli, Anna Ravenscroft, Steve Holden: Python in a Nutshell
+     Functions/Generators, Recursion  
+
+[3]  http://www.trytoprogram.com/python-programming/python-generators/
+     rekurzió, yield from használata
+
+[5]  David Beazley: Generators - The Final Frontier
+[7]  David Beazley, Brian K. Jones: Python Cookbook
+[10] Christian Mayer: Python one-liners
+
+recursive, yield from:
+https://stackoverflow.com/questions/38254304/can-generators-be-recursive
+fabejárás
+trükkös hiba
+
+http://pythonfiddle.com/a-recursive-generator/
+https://nedbatchelder.com/blog/201812/a_thing_i_learned_about_python_recursion.html
+http://www.unixuser.org/~euske/doc/python/recursion.html
+
+https://www.python-course.eu/python3_generators.php  (close, recursive)
+https://www.peterbe.com/plog/generatorexit
+https://stackoverflow.com/questions/27755989/generatorexit-in-while-loop

@@ -1,3 +1,5 @@
+# https://www.python-course.eu/python3_sequential_data_types.php
+
 # Listák 1. És egy kevés sztring.
 
 x = [10, 20, 30]

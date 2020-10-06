@@ -1,0 +1,34 @@
+Comprehensions\listcomp_1.py, set_dict_comp_1.py
+ * list comprehension
+ * set comprehension
+ * dict comprehension
+
+solutions_2.py
+ * Lecture_2\exercises_2.py megoldásai
+
+Datastructures\set_2.py
+ * halmazokon végzett beépített műveletek
+
+break_continue_1.py
+ * break és continue utasítás
+
+Datastructures\is_1.py
+ * is operátor
+
+ternary_1.py
+ * feltételes kifejezések
+
+Iterators_Generators\iterator_1.py
+ * iterálható sorozatok, iterátorok működése
+
+Classes\classes_1.py
+ * osztályok, objektumok
+
+Datastructures\unpacking_1.py
+ * tuple és lista elemeinek kibontása változókba
+
+Datastructures\delim_strings_1.py
+ * delimitált sztringek kezelése; join() és split()
+
+Datastructures\conversions_1.py
+ * alap adatszerkezetek átalakítása egymásba
