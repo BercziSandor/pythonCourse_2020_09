@@ -192,7 +192,7 @@ print(key_lst,val_lst)
 # Végighalad az iterálható elemen és elhelyezi a kapott egységeket
 # egy list-ben vagy egy tuple-ban.
 
-# A list és a tuple olyan iterálható elemek, amelyek önmagul iterátorai is.
+# A list és a tuple olyan iterálható elemek, amelyek önmaguk iterátorai is.
 
 # python_intro.html-ben van ez a kis iterálható osztály,
 # ami egyben az iterátor is:
@@ -202,6 +202,7 @@ class StupidCounter:
         self.count = 0
 
     def __iter__(self):
+        self.count = 0
         return self
 
     def __next__(self):

@@ -1,0 +1,11 @@
+-- Nem lesznek kötelezőek a feladatok; mindenkinek lehet annyi munkahelyi és egyéb elfoglaltsága, hogy nem jut
+   idő és energia ezekre.
+-- Viszont feltétlenül szükségem van visszajelzésre arról, hogy hol tart a társaság, ezért egy dolog kötelező lesz:
+   Minden alkalommal legkésőbb 1 órával az előadás megkezdése előtt el kell küldeni egy jelentést arról, hogy az előző
+   alkalommal feladott gyakorló példákból hányat sikerült megoldani. Például: az első három sikerült, a negyedikkel nem
+   boldogultam, az ötödikre nem maradt időm. Lehet azt is írni, hogy egyet sem, nem volt időm, nem fogok szemrehányást
+   tenni érte, viszont tudni akarom, hol tartunk. Ha például kiderül egy témáról, hogy szinte senkinek nem megy,
+   akkor visszatérünk rá.
+   Azt is kérem leírni, hogy kábé mennyi időt vett igénybe a megoldás.
+-- Akinek kérdése van a megoldásaival kapcsolatban, küldje el nekem, szívesen átnézem.
+-- Akinek kérdése vagy megjegyzése van az anyaggal kapcssolatban, írja meg és email-ben vagy telefonon megbeszéljük.

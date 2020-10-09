@@ -1,0 +1,34 @@
+repeat_4.py
+ * ismétlés
+
+Functions\func_params_3.py
+ * változtatható paraméterek
+
+solutions_3.py
+ * Lecture_3\exercises_3.py megoldásai
+
+Functions\func_params_4.py
+ * státuszjelzés
+
+import_1.py, import_2.py
+ * modulok importálása
+
+import_3.py
+ * __name__ használata
+
+mix_4.py
+ * * mint ismétlés-operátor
+ * sztring-formázás 1. f-sztringek
+ * isinstance
+ * enumerate
+
+Classes\classes_2.py
+ * metódusok
+ * docstring
+
+Ismétlés
+ * Iterators_Generators\iterator_1.py
+
+Iterators_Generators\iterator_2.py
+ * saját iterlható osztály készítése
+ 

@@ -57,4 +57,11 @@ print(myfunc(in_str))  # 3615556677
 # Ha egy listát sem kap bemenetként akkor adjon vissza üres listát.
 # A bemeneti sorozatok biztosan nem üresek.
 
+lst_1 = [1, 2, 3]
+tup_2 = [10, 20, 30]
+set_3 = {100, 200, 300}
+
+print(listofmax(lst_1, tup_2, set_3)) # [3, 30, 300]
+print(listofmax())  # []
+
 #############################

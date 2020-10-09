@@ -1,3 +1,9 @@
+# https://www.python-course.eu/python3_blocks.php
+# https://www.python-course.eu/python3_conditional_statements.php
+# https://www.python-course.eu/python3_loops.php
+# https://www.python-course.eu/python3_for_loop.php
+# https://www.python-course.eu/python3_print.php
+
 # Deklaráció nincs (elég baj az), a változó ott definiálódik, ahol
 # először értéket kap
 

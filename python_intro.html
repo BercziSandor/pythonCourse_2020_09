@@ -32,7 +32,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.01 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.09 &mdash;</p>
 </div>
 
 <h1 style='text-align:center;'>Python kóstoló</h1>
@@ -180,6 +180,7 @@ class StupidCounter:
         self.count = 0
 
     def <span class='emph_1'>__iter__</span>(self):
+        self.count = 0
         return self
 
     def <span class='emph_1'>__next__</span>(self):
