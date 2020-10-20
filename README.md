@@ -78,7 +78,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 * irodalomjegyzék
 
 ## 1.3. mix.py
-[mix.py](mix.py)
+[mix.py](Lecture 1/mix.py)
 * változók definiálása
 * feltételes utasítás
 * while cikus
@@ -156,14 +156,14 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
   * slicing
 
 ## 2.8. files_1.py
-[files_1.py](files_1.py)
+[files_1.py](Lecture 2/files_1.py)
   * szöveges fájl megnyitása és sorok olvasása
 
 ## 2.9. python_intro.html
 [python_intro.html](python_intro.html)
 
 ## 2.10. exercises_2.py
-[exercises_2.py](exercises_2.py)
+[exercises_2.py](Lecture 2/exercises_2.py)
  * feladatok
 
 # 3. Lection 3
@@ -175,7 +175,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * dict comprehension
 
 ## 3.2. solutions_2.py
-[solutions_2.py](solutions_2.py)
+[solutions_2.py](Lecture 3/solutions_2.py)
  * Lecture_2/exercises_2.py megoldásai
 
 ## 3.3. Datastructures/set_2.py
@@ -183,7 +183,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * halmazokon végzett beépített műveletek
 
 ## 3.4. break_continue_1.py
-[break_continue_1.py](break_continue_1.py)
+[break_continue_1.py](Lecture 3/break_continue_1.py)
  * break és continue utasítás
 
 ## 3.5. Datastructures/is_1.py
@@ -191,7 +191,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * is operátor
 
 ## 3.6. ternary_1.py
-[ternary_1.py](ternary_1.py)
+[ternary_1.py](Lecture 3/ternary_1.py)
  * feltételes kifejezések
 
 ## 3.7. Iterators_Generators/iterator_1.py
@@ -216,7 +216,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 
 # 4. Lection 4
 ## 4.1. repeat_4.py
-[repeat_4.py](repeat_4.py)
+[repeat_4.py](Lecture 4/repeat_4.py)
  * ismétlés
 
 ## 4.2. Functions/func_params_3.py
@@ -224,7 +224,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * változtatható paraméterek
 
 ## 4.3. solutions_3.py
-[solutions_3.py](solutions_3.py)
+[solutions_3.py](Lecture 4/solutions_3.py)
  * Lecture_3/exercises_3.py megoldásai
 
 ## 4.4. Functions/func_params_4.py
@@ -232,15 +232,16 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * státuszjelzés
 
 ## 4.5. import_1.py, import_2.py
-[import_1.py, import_2.py](import_1.py, import_2.py)
+[import_1.py](Lecture 4/import_1.py)
+[import_2.py](Lecture 4/import_2.py)
  * modulok importálása
 
 ## 4.6. import_3.py
-[import_3.py](import_3.py)
+[import_3.py](Lecture 4/import_3.py)
  * __name__ használata
 
 ## 4.7. mix_4.py
-[mix_4.py](mix_4.py)
+[mix_4.py]Lecture 4/(mix_4.py)
  * /* mint ismétlés-operátor
  * sztring-formázás 1. f-sztringek
  * isinstance
@@ -252,7 +253,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * docstring
 
 ## 4.9. Ismétlés
-[Ismétlés](Ismétlés)
+[Iterators_Generators/iterator_1.py](Iterators_Generators/iterator_1.py)
  * Iterators_Generators/iterator_1.py
 
 ## 4.10. Iterators_Generators/iterator_2.py
@@ -261,7 +262,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 
 # 5. Lection 5
 ## 5.1. repeat_5.py
-[repeat_5.py](repeat_5.py)
+[repeat_5.py](Lecture 5/repeat_5.py)
  * ismétlés
 
 ## 5.2. Classes/classes_3.py
@@ -269,13 +270,13 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * private adattagok kezelése 1. (getter-setter)
 
 ## 5.3. mix_5.py
-[mix_5.py](mix_5.py)
+[mix_5.py](Lecture 5/mix_5.py)
  * Feltételvizsgálat eredménye --> logikai változó
  * Elemek logikai értelmezése
  * Logikai kifejezések kiértékelésének sorrendje, rövidre zárás
 
 ## 5.4. solutions_4.py
-[solutions_4.py](solutions_4.py)
+[solutions_4.py](Lecture 5/solutions_4.py)
  * Lecture_4/exercises_4.py megoldásai
 
 ## 5.5. Classes/classes_4.py
@@ -317,11 +318,11 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
  * öröklés, leszármaztatás
 
 ## 6.4. repeat_6.py
-[repeat_6.py](repeat_6.py)
+[repeat_6.py](Lecture 6/repeat_6.py)
  * ismétlés
 
 ## 6.5. exception_1.py
-[exception_1.py](exception_1.py)
+[exception_1.py](Lecture 6/exception_1.py)
  * kivételkezelés
 
 ## 6.6. Functions/closures_1.py
@@ -334,15 +335,15 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
    connect, commit, autotransact, fetchone, fetchall, fetchmany
 
 ## 6.8. solutions_5.py
-[solutions_5.py](solutions_5.py)
+[solutions_5.py](Lecture 6/solutions_5.py)
  * Lecture_5/exercises_5.py megoldásai
 
 ## 6.9. requests_1.py
-[requests_1.py](requests_1.py)
+[requests_1.py](Lecture 6/requests_1.py)
  * ismerkedés a requests modullal
 
 ## 6.10. any_all_1.py
-[any_all_1.py](any_all_1.py)
+[any_all_1.py](Lecture 6/any_all_1.py)
  * any() és all() függvények
 
 ## 6.11. Functions/func_objects.html
