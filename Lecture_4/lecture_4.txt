@@ -25,10 +25,11 @@ mix_4.py
 Classes\classes_2.py
  * metódusok
  * docstring
+ * private adattagok
 
 Ismétlés
  * Iterators_Generators\iterator_1.py
 
 Iterators_Generators\iterator_2.py
- * saját iterlható osztály készítése
+ * saját iterálható osztály készítése
  

@@ -9,6 +9,11 @@ print(x) # (1, 2, 1, 2, 1, 2, 1, 2)
 x = [3, 4] * 3
 print(x) # [3, 4, 3, 4, 3, 4]
 
+# Ha a szorzó negatív, akkor üres sorozat lesz az eredmény:
+
+x = (1, 2) * -4
+print(x) # ()
+
 ####################################
 
 # Sztring-formázás 1. f-sztringek

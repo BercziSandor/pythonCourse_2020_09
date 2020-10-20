@@ -166,11 +166,12 @@ data_creator(plotter_2)
 #############################
 
 # Egy függvény paraméterként nem csak adatot tud kapni, hanem eljárást, működést, algoritmust is.
-# Persze ugyanezt meg lehet valósítani "hagyományos" objektumokkal is: a plotter függvényt egy objektum
-# hívja fel, az objektumot adjuk át paramézerként pl. a data_creator függvénynek. Ez egy
+# Persze ugyanezt meg lehet valósítani "hagyományos" objektumokkal is: a plotter függvény egy objektum
+# metódusa, az objektumot adjuk át paraméterként pl. a data_creator függvénynek. Ez egy
 # kicsit bonyolultabb, az objektum csak segédváltozó, pusztán arra szolgál, hogy felhívja
 # a kívánt függvényt. Amikor egy objektumnak egyetlen szolgáltatása (metódusa) van, akkor
-# világosabb és egyszerűbb helyette egy függvényt alkalmazni.
+# világosabb és egyszerűbb helyette egy függvényt alkalmazni; vagy hívhatóvá tenni az
+# osztályt (ami tulajdonképpen ugyanaz).
 
 #############################
 

@@ -1,6 +1,6 @@
 # Objektum-metódusok
 
-# Az objektumok általában rendelkeznek olyan függvényekkel, melyek hozáférnek
+# Az objektumok általában rendelkeznek olyan függvényekkel, melyek hozzáférnek
 # az objektum adattagjaihoz és függvényeihez; ezeket metódusoknak hívjuk.
 
 class MyClass():
@@ -13,6 +13,10 @@ class MyClass():
 my_obj = MyClass(10)
 x = my_obj.multiply(3)
 print(x) # 30
+
+my_obj.factor = 100
+x = my_obj.multiply(3)
+print(x) # 300
 
 #######################################
 

@@ -2,7 +2,12 @@
 
 # 1.
 
-# diff_1_2 = tuple(sorted(set(lst_1) - set(lst_2)))
+diff_1_2 = tuple(sorted(set(lst_1) - set(lst_2)))
+
+# Lehet, hogy valakinek így olvashatóbb:
+
+set_diff = set(lst_1) - set(lst_2)
+diff_1_2 = tuple(set_diff)
 
 #############################
 
@@ -40,6 +45,12 @@ print(contains)
 
 def myfunc(inStr):
     return ''.join([ e for e in inStr if e >= '0' and e <='9'])
+
+# Lehet, hogy valakinek így olvashatóbb:
+
+def myfunc(inStr):
+    lst = [ e for e in inStr if e >= '0' and e <='9' ]
+    return ''.join(lst)
 
 in_str = '  + 36 1/555\t6677\n'
 print(myfunc(in_str)) # 3615556677

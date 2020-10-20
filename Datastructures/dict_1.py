@@ -69,6 +69,9 @@ for item in dic.items():
 # ('A',1)
 # ('B',2)
 
+# A dict fontos tulajdonsága a listákkal összehasonlítva, hogy sokkal gyorsabb benne
+# a keresés.
+
 ###############################
 
 # Kitérő: tuple kibontása változókba.

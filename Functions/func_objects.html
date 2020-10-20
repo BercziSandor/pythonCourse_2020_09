@@ -1,0 +1,557 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<title>Függvény-objektumok</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .code_2 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .pale { color: gray; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+  .data { color:green; }
+  .emph_1 { color: red; font-weight: bold; }
+  .big_red { color:red; font-size:120%; font-weight:bold; margin-top:-5px; margin-bottom:-17px; } /* for div in text */
+  .emph_2 { color: green; font-weight: bold; }
+  .emph_4 { color: gray; font-family: courier new; letter-spacing: 0.1em; }
+  .deleted { text-decoration: line-through; color: blue; }
+  .question  { font-family:Cooper Black; color:indigo; }
+  .sol_button { color:indigo; font-size: 110%; }
+  .solution { display:none; border: 1px groove black; border-radius: 5px; margin: 10px 20px 5px 20px; padding: 5px; background-color: palegoldenrod; }
+  .emph_box_1 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; text-align: center; font-size: 120%; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.30 &mdash;</p>
+</div>
+
+<h1>Függvény-objektumok</h1>
+<ul class='contents'>
+<li><a style='color: red' href='#introduction'>A függvények igazi objektumok</a></li>
+<li><a style='color: red' href='#several_references'>Változók hozzárendelése függvényhez</a></li>
+<li><a style='color: red' href='#func_as_arg'>Függvény, mint hívási paraméter (callback)</a></li>
+<li><a style='color: red' href='#func_returned'>Függvény mint visszatérő érték (gyár-függvények)</a></li>
+<li><a style='color: red' href='#func_in_data'>Függvények adatstruktúrákban</a></li>
+<li><a style='color: red' href='#attributes'>Függvények attribútumai</a></li>
+<li><a style='color: red' href='#methods'>Függvények metódusai</a></li>
+<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNY</a></li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='introduction'>A függvények igazi objektumok</h2>
+<p>
+Pythonban a függvény "teljes jogú" objektum (first class citizen), azaz úgy viselkedik, mint bármilyen más objektum, pl. egy egész szám vagy egy sztring. Egy
+függvény-objektum
+
+<ul style='list-style-type: square;'>
+<li>hozzárendelhető változókhoz,</li>
+<li>lehet egy függvény paramétere,</li>
+<li>visszatérő értéke,</li>
+<li>elhelyezhető adatstruktúrákban, mint pl. egy list vagy dict,</li>
+<li>lehetnek attribútumai és metódusai.</li>
+</ul>
+
+A függvény-objektum konstruktora a függvény definíciója, ez akkor fut le, amikor a futtató rendszer a def utasításhoz ér. A függvény definíciója olyan
+különleges konstruktor, ami azonnal le is fut, amikor a futtató rendszer erre a pontra érkezik (tehát nem kell külön felhívni) és mindjárt hozzá is rendel egy
+változónevet az így keletkező objektumhoz.
+
+<pre>
+def func():
+    pass
+
+print(func, id(func))
+<div class='result'>
+# &lt;function func at 0x007A8FA8> 8032168
+</div>
+</pre>
+Keletkezett egy objektum a 0x007A8FA8 memóriacímen, amelynek van azonosítója is, mint minden rendes, becsületes objektumnak (8032168) és egy func nevű
+változó mutat rá. Az azonosító egyébként a memóriacím decimális formában, amiről könnyen meggyőződhetünk:
+
+<pre>
+print(func, hex(id(func)))
+<div class='result'>
+# &lt;function func at <span class='emph_1'>0X007A8FA8</span>> <span class='emph_1'>0x007a8fa8</span>
+</div>
+</pre>
+</p>
+<h2 id='several_references'>Változók hozzárendelése függvényhez</h2>
+<p>
+Ha több változóhoz hozzárendeljük a függvényobjektumot, ezek mind ugyanarra az egyetlen objektumra fognak mutatni:
+<pre>
+def func():
+    print('Hi, I am func')
+
+<span class='emph_1'>f = func</span> # NEM történik függvényhívás!
+print(func, id(func))
+print(f, id(f))
+func()
+f()
+<div class='result'>
+# &lt;function func at 0x01E98FA8> 32083880
+# &lt;function func at 0x01E98FA8> 32083880
+# Hi, I am func
+# Hi, I am func
+</div>
+</pre>
+Itt az f és a func változók ugyanarra a függvény-objektumra mutatnak; f() és func() hatására ugyanaz a kód fut le. Ami meg szokta lepni az embereket: a
+függvényre mutató változók egyenrangúak, bármelyiket, akár a definícióban szereplőt is meg lehet semmisíteni, az objektum maga és a többi rá mutató változók
+továbbra is élnek.
+
+<pre>
+def func():
+    print('Hi, I am func')
+
+f = func
+<span class='emph_1'>del func</span>
+f()
+<div class='result'>
+# Hi, I am func
+</div>
+</pre>
+Más modulok függvényeire is ráállíthatunk persze változókat, sőt, az eredetit meg is semmisíthetjük (ami nyilván nagyon rossz ötlet):
+
+<pre>
+import math
+
+my_sq = math.sqrt
+print(my_sq(16))
+<div class='big_red'>del math.sqrt   # &#9940; &#9760; &#9888; &#9762; &#9763;</div>
+print(my_sq(100))
+<div class='result'>
+# 4.0
+# 10.0
+</div>
+</pre>
+</p>
+<h2 id='func_as_arg'>Függvény, mint hívási paraméter (callback)</h2>
+<p>
+Egy függvény-objektumot átadhatunk egy másik függvénynek paraméterként:
+<pre>
+def func(funcParam):
+    print('I am func, I call the function I received as parameter')
+    funcParam()
+
+def func_2():
+    print('*** I am func_2')
+
+func(func_2)
+<div class='result'>
+# I am func, I call the function I received as parameter
+# *** I am func_2
+</div>
+</pre>
+Ezt a mechanizmust használjuk, amikor eseménykezelőket rendelünk hozzá a felhasználói felület elemeihez. Szimuláljuk nagyon leegyszerűsítve:
+
+<pre>
+def ui(<span class='emph_1'>click_func</span>,<span class='emph_2'>double_click_func</span>):
+    while True:
+        answer = input('what do you want? ')
+        answer = answer.strip().lower()
+        if answer == '':
+            break
+
+        if answer == 'c':
+            <span class='emph_1'>click_func()</span>
+        if answer == 'd':
+            <span class='emph_2'>double_click_func()</span>
+
+def cl():
+    print('CLICK!')
+
+def d_cl():
+    print('DOUBLE CLICK!')
+
+ui(cl,d_cl)
+
+def cl_2():
+    print('click 2')
+
+def d_cl_2():
+    print('double click 2')
+
+ui(cl_2,d_cl_2)
+</pre>
+Ha a felhasználó c-t gépel be, akkor a click_func hívódik fel, jelen esetben cl; ha d-t, akkor double_click_func, ha bármi mást, akkor nem történik semmi.
+</p>
+<div style='text-align:center; font-size:200%'>&#9827;</div>
+<p>
+Egy másik példát szolgáltat a standard könyvtár sorted függvénye, aminek megadhatunk <span class='emph_4'>key</span> kulcsszóval egy függvényt, amelyet az
+összehasonlításban fog használni. A példában sztringeket rendezünk a hosszuk szerint:
+
+<pre>
+lst = ['Z','FFF','AA']
+
+lst_2 = sorted(lst)         # "normal" sorting
+print(lst_2)
+lst_3 = sorted(lst,key=<span class='emph_1'>len</span>) # sort by string length
+print(lst_3)
+<div class='result'>
+# [ 'AA', 'FFF', 'Z']
+# [ 'Z', 'AA', 'FFF']
+</div>
+</pre>
+
+Gyakran előforduló eset, hogy egy tuple vagy list elemekből álló listát kell valahányadik elem szerint rendezni:
+
+<pre>
+lst = [('Z','A'),('A','K'),('B','Y')]
+
+lst_2 = sorted(lst)   # "normal" sorting
+print(lst_2)
+
+lst_3 = sorted(lst,key=lambda elem: elem[1]) # sort by second item
+print(lst_3)
+
+def key_func(elem):
+    return elem[1]
+
+lst_3 = sorted(lst,key=key_func)
+print(lst_3)
+<div class='result'>
+# [(<span class='emph_1'>'A'</span>, 'K'), (<span class='emph_1'>'B'</span>, 'Y'), (<span class='emph_1'>'Z'</span>, 'A')]
+# [('Z', <span class='emph_1'>'A'</span>), ('A', <span class='emph_1'>'K'</span>), ('B', <span class='emph_1'>'Y'</span>)]
+# [('Z', <span class='emph_1'>'A'</span>), ('A', <span class='emph_1'>'K'</span>), ('B', <span class='emph_1'>'Y'</span>)]
+</div>
+</pre>
+A harmadik változat ekvivalens a másodikkal &ndash; azok kedvéért tettem bele, akik még idegenkednek a lambda függvényektől.
+</p>
+<h2 id='func_returned'>Függvény mint visszatérő érték (gyár-függvények)</h2>
+<p>
+Egy függvény-objektum lehet egy másik függvény visszatérő értéke. Az alábbi kis példában <code>func_factory</code> minden alkalommal visszaad egy belső függvényére
+mutató változót:
+<pre>
+def func_factory():
+    def func():
+        print('I am func')
+
+    return func
+
+f1 = func_factory()
+f2 = func_factory()
+
+print(f1,id(f1))
+print(f2,id(f2))
+
+f1()
+f2()
+<div class='result'>
+# &lt;function func_factory.&lt;locals>.func at 0x02128F<span class='emph_2'>60</span>> 347707<span class='emph_2'>84</span>
+# &lt;function func_factory.&lt;locals>.func at 0x02128F<span class='emph_2'>18</span>> 347707<span class='emph_2'>12</span>
+I am func
+I am func
+</div>
+</pre>
+Látható, hogy f1 és f2 <b>nem</b> ugyanaz az objektum, hanem egy függvénynek két külön példánya. Ez például akkor lehet hasznos, amikor attribútummal ruházzuk
+fel a függvényt és ennek példányonként más értéket akarunk adni (ld. lentebb).
+</p>
+<p>
+Természetesen nem csak belső függvény lehet visszatérő érték, de ez kiemelten fontos eset, mert ez a closure és ezáltal a dekorátorok alapja.
+
+<div class='emph_box_1' style='width:60%;'>
+Az, hogy egy függvény lehet függvényparaméter vagy visszatérő érték, nem bonyolult fogalom.<br>
+Viszont szokatlan.<br>
+És a szokatlan dolgok legalább annyi galibát okoznak, mint a bonyolultak.
+</div>
+</p>
+<h2 id='func_in_data'>Függvények adatstruktúrákban</h2>
+<p>
+A következő példában elhelyezünk (különösebb cél nélkül) két függvényt egy szótárban, aztán meghívjuk őket kétféle módon: közvetlenül, illetve
+egy segédváltozót ráállítva a függvényre.
+<pre>
+import math
+
+d = { 'square_root': math.sqrt, 'log_10': math.log10 }
+
+x = d['square_root'](100)
+print(x)
+f = d['square_root']
+x = f(100)
+print(x)
+
+y = d['log_10'](100)
+print(y)
+f = d['log_10']
+y = f(100)
+print(y)
+<div class='result'>
+# 10.0
+# 10.0
+# 2.0
+# 2.0
+</div>
+</pre>
+Elhelyezhetjük a függvény-objektumokat egy listában vagy egy halmazban is:
+
+<pre>
+import math
+
+lst = [ math.sqrt, math.log10 ]
+<span style='color: olivedrab;'># lst = <span class='emph_1'>{</span> math.sqrt, math.log10 <span class='emph_1'>}</span></span>
+for f in lst:
+    print(f(100))
+<div class='result'>
+# 10.0
+# 2.0
+</div>
+</pre>
+A függvény-listát nyilván használhatjuk egy list comprehension-ben is:
+
+<pre>
+import math
+
+lst = [ math.sqrt, math.log10 ]
+
+x = [ f(100) for f in lst ]
+print(x)
+<div class='result'>
+# [10.0, 2.0]
+</div>
+</pre>
+<div style='text-align:center; font-size:200%'>&#9827;</div>
+A fentebbi, felhasználói felületet szimuláló kis programban használhatunk például szótárat a callback függvények eltárolására.
+
+<pre class='pale'>
+def ui(click_func,double_click_func):
+    <span style='color:blue;'>def no_op(): pass
+
+    func_dict = { 'c': click_func, 'd': double_click_func }</span>
+    while True:
+        answer = input('what do you want? ')
+        answer = answer.strip().lower()
+        if answer == '':
+            break
+
+        <span style='color:blue;'>f = func_dict.get(answer,no_op)
+        f()</span>
+
+def cl():
+    print('CLICK!')
+
+def d_cl():
+    print('DOUBLE CLICK!')
+
+ui(cl,d_cl)
+</pre>
+Itt definiáltunk egy kis belső segédfüggvényt, ami semmit nem csinál, ezt hajtjuk végre minden olyan esetben, amikor nem <b>c</b> vagy <b>d</b> a beadott kód.
+Kitérőként érdemes megjegyezni, hogy szebb megoldás, ha ehelyett egy lambda függvényt alkalmazunk:
+
+<pre class='pale'>
+def ui(click_func,double_click_func):
+    <span style='color:blue;text-decoration: line-through;'>def no_op(): pass</span>
+    func_dict = { 'c': click_func, 'd': double_click_func }
+    while True:
+        answer = input('what do you want? ')
+        answer = answer.strip().lower()
+        if answer == '':
+            break
+
+        f = func_dict.get(answer,<span style='color:blue;'>lambda: None</span>)
+        f()</span>
+
+def cl():
+    print('CLICK!')
+
+def d_cl():
+    print('DOUBLE CLICK!')
+
+ui(cl,d_cl)
+</pre>
+</p>
+<h2 id='attributes'>Függvények attribútumai</h2>
+<p>
+A függvény-objektumnak ugyanúgy adhatunk attribútumokat, mint bármely más objektumnak, akár a függvényen belül, akár rajta kívül.
+
+<pre>
+def func():
+    print('In func; func.x =',func.x)
+    <span class='emph_1'>func.y = 'BBB'</span>
+
+<span class='emph_1'>func.x = 'AAA'</span>
+func()
+print('In main; func.y =',func.y)
+<div class='result'>
+# In func; func.x = AAA
+# In main; func.y = BBB
+</div>
+</pre>
+Az attribútum megmarad a hívások között, szolgálhat például arra, hogy számoljuk a függvényhívások számát.
+
+<pre>
+def func():
+    func.num_calls += 1
+    print(f'in func number of calls: {func.num_calls}')
+
+func.num_calls = 0
+func()
+func()
+print('total:',func.num_calls)
+<div class='result'>
+# in func number of calls: 1
+# in func number of calls: 2
+# total: 2
+</div>
+</pre>
+
+Elegánsabb persze ebben az esetben, ha a függvényen belül inicializáljuk az attribútumot:
+
+<pre class='pale'>
+def func():
+    <span style='color:blue;'>if not hasattr(func,'num_calls'):
+        func.num_calls = 0</span>
+
+    func.num_calls += 1
+    print(f'in func number of calls: {func.num_calls}')
+
+<span style='color:blue;text-decoration: line-through;'>func.num_calls = 0</span>
+func()
+func()
+print('total:',func.num_calls)
+<div class='result'>
+# in func number of calls: 1
+# in func number of calls: 2
+# total: 2
+</div>
+</pre>
+Fontos megjegyezni, hogy akárhány változó mutat a func függvényre, az objektum egy és ugyanaz &ndash; és ezen belül az attribútum értéke is. Ha több
+objektum-példányra van szükségünk, amelyekben különbözhetnek ugyanazon attribútum értékei, akkor a <a href='#func_returned' target='_blank'>fentebb</a>
+bemutatott gyár-függvényt tudjuk használni:
+
+<pre>
+def func_factory():
+    def func():
+        if not hasattr(func,'num_calls'):
+            func.num_calls = 0
+
+        func.num_calls += 1
+        print(f'in func number of calls: {func.num_calls}')
+
+    return func
+
+f1 = func_factory()
+f2 = func_factory()
+f1()
+f1()
+f2()
+print('total:',f1.num_calls + f2.num_calls)
+<div class='result'>
+# in func number of calls: 1
+# in func number of calls: 2
+# in func number of calls: 1
+# total: 3
+</div>
+</pre>
+Az attribútumok helyett általában closure használható, amelyről külön fejezet szól.
+</p>
+<h2 id='methods'>Függvények metódusai</h2>
+<p>
+A függvény-objektumot felruházhatjuk metódusokkal is.
+
+<pre>
+def func():
+    print('I am func, I call my method')
+    func.method()
+
+def func_2():
+    print('*** I am func_2')
+
+def func_3():
+    print('--- I am func_3!')
+
+func.method = func_2
+func()
+func.method = func_3
+func()
+<div class='result'>
+# I am func, I call my method
+# *** I am func_2
+# I am func, I call my method
+# --- I am func_3
+</div>
+</pre>
+Így alkalmazni tudjuk a Strategy tervezési mintát; a változtatható metódus lehet pl. egy útvonaltervező algoritmus. Más-más algoritmust akarunk használni
+autós, gyalogos, kerékpáros, tömegközlekedési útvonaltervezéshez; mindegyik algoritmust más-más függvényben valósítunk meg, ami által mindegyik külön
+fejleszthető lesz és nem keverednek a különböző megoldások áttekinthetetlen kuszasággá.
+</p>
+<h2 id='q_1' class='question'>REJTVÉNY</h2>
+<p>
+<pre>
+def f2():
+    print('*** I am f2!')
+    return f1
+
+def f1():
+    print('*** I am f1!')
+    return 100
+
+print(f1 == f2())
+print('----')
+print(f1 == f2)
+</pre>
+<span class='question'>Mi lesz a kimenet?</span>
+<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">Megoldás</button>
+<div id='sol_1' class='solution'>
+<pre>
+<div class='result'>
+# *** I am f2!
+# True
+# ----
+# False
+</div>
+</pre>
+<p>
+A tanulság: nagyon figyelni kell, hogy egy függvényre mutató változó neve után van-e zárójel (tehát felhívódik a függvény), vagy nincs (tehát csak
+ráállítottunk egy újabb változót a függvényre). Ez csak egy apróság...
+<span style='font-size:70%;float: right;padding-top:5px;'>
+...nak tűnik mindaddig, míg egyszer el nem kerüli a figyelmünket...
+</span>
+</div>
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://refactoring.guru/design-patterns/strategy/' target='_blank'>Strategy</a> refactoring.guru<br>
+<a href='https://refactoring.guru/design-patterns/strategy/python/example' target='_blank'>Strategy in Python (example)</a> refactoring.guru
+</p>
+<p>
+<b>Könyvek</b>
+</p>
+<p>
+Dan Bader: Python Tricks - The Book<br>
+<i>&nbsp;&nbsp;Python’s Functions Are First-Class</i>
+</p>
+<p>
+Mark Lutz: Learning Python<br>
+<i>&nbsp;&nbsp;Function Objects: Attributes and Annotations</i>
+</p>
+<p>
+Luciano Ramalho: Fluent Python<br>
+<i>&nbsp;&nbsp;Functions as Objects</i>
+</p>
+<p>
+David Beazley, Brian K. Jones: Python Cookbook<br>
+<i>&nbsp;&nbsp;Replacing Single Method Classes with Function</i>
+<i>&nbsp;&nbsp;Carrying Extra State with Callback Functions</i>
+</p>
+<p>
+<b>Videó</b>
+</p>
+<p>
+<a href='https://www.youtube.com/watch?v=kr0mpwqttM0' target='_blank'>Programming Terms: First-Class Functions</a> Corey sSchaefer<br>
+</p>
+<script>
+function toggle_from_none(ID) {
+  var e = document.getElementById(ID), no_block = e.style.display !== 'block',
+      b = document.getElementById('b_' + ID);
+
+  e.style.display = no_block ? 'block' : 'none';
+  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+}
+</script>
+</body>
+</html>

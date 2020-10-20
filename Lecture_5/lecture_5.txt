@@ -1,0 +1,51 @@
+repeat_5.py
+ * ismétlés
+
+Classes\classes_3.py
+ * private adattagok kezelése 1. (getter-setter)
+
+mix_5.py
+ * Feltételvizsgálat eredménye --> logikai változó
+ * Elemek logikai értelmezése
+ * Logikai kifejezések kiértékelésének sorrendje, rövidre zárás
+
+solutions_4.py
+ * Lecture_4\exercises_4.py megoldásai
+
+Classes\classes_4.py
+ * hívható osztály, __call__() metódus, __class__ attribútum
+
+Functions\func_objects_2.py
+ * függvény attribútuma
+ * hasattr()
+
+Classes\classes_5.py
+ * private adattagok kezelése: a property dekorátoros megoldás
+
+########################
+
+Installálni kellene a numpy modult.
+
+python -m pip install numpy
+
+Sajnos ez VPN-ről nem megy, valószínűleg LAN-ról, az irodából sem.
+Le kell tölteni az illető modult innen:
+
+https://www.lfd.uci.edu/~gohlke/pythonlibs/
+
+és utána installálni:
+
+python -m pip install [fájlnév]
+
+A 3.8-as Pythonhoz a numpy-1.19.2+mkl-cp38-cp38-win32.whl passzol, én már letöltöttem,
+ott van a OneDrive-on.
+
+########################
+
+Installálni (letölteni) kellene a VS Code-ot is:
+
+https://code.visualstudio.com/download
+
+Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
+
+########################
