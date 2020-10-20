@@ -92,6 +92,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 * len(), rstrip(), lstrip()
 
 ## 1.6. Datastructures\list_1.py, list_2.py, list_3.py
+[Datastructures\list_1.py](Datastructures\list_1.py)
 * list típus
 * id
 * del
