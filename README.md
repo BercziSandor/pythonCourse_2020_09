@@ -1,83 +1,83 @@
 pythonCourse_2020_09
 Python course on 09.2020 by Mihály Nemes
 
-- [Lection 1](#lection-1)
-  - [python_install_run.html](#python_install_runhtml)
-  - [python_literature.html](#python_literaturehtml)
-  - [mix.py](#mixpy)
-  - [Datastructures/numeric_types_1.py](#datastructuresnumeric_types_1py)
-  - [Datastructures/string_1.py](#datastructuresstring_1py)
-  - [Datastructures/list_1.py, list_2.py, list_3.py](#datastructureslist_1py-list_2py-list_3py)
-  - [Datastructures/tuple_1.py](#datastructurestuple_1py)
-  - [Functions/func_params_1.py](#functionsfunc_params_1py)
-  - [Functions/scope_1.py](#functionsscope_1py)
-- [Lection 2](#lection-2)
-  - [Functions/func_objects_1.py](#functionsfunc_objects_1py)
-  - [Datastructures/dict_1.py](#datastructuresdict_1py)
-  - [Functions/func_params_2.py](#functionsfunc_params_2py)
-  - [Functions/scope_2.py](#functionsscope_2py)
-  - [Functions/lambda_1.py](#functionslambda_1py)
-  - [Datastructures/set_1.py](#datastructuresset_1py)
-  - [Datastructures/index_1.py](#datastructuresindex_1py)
-  - [files_1.py](#files_1py)
-  - [python_intro.html](#python_introhtml)
-  - [exercises_2.py](#exercises_2py)
-- [Lection 3](#lection-3)
-  - [Comprehensions/listcomp_1.py, set_dict_comp_1.py](#comprehensionslistcomp_1py-set_dict_comp_1py)
-  - [solutions_2.py](#solutions_2py)
-  - [Datastructures/set_2.py](#datastructuresset_2py)
-  - [break_continue_1.py](#break_continue_1py)
-  - [Datastructures/is_1.py](#datastructuresis_1py)
-  - [ternary_1.py](#ternary_1py)
-  - [Iterators_Generators/iterator_1.py](#iterators_generatorsiterator_1py)
-  - [Classes/classes_1.py](#classesclasses_1py)
-  - [Datastructures/unpacking_1.py](#datastructuresunpacking_1py)
-  - [Datastructures/delim_strings_1.py](#datastructuresdelim_strings_1py)
-  - [Datastructures/conversions_1.py](#datastructuresconversions_1py)
-- [Lection 4](#lection-4)
-  - [repeat_4.py](#repeat_4py)
-  - [Functions/func_params_3.py](#functionsfunc_params_3py)
-  - [solutions_3.py](#solutions_3py)
-  - [Functions/func_params_4.py](#functionsfunc_params_4py)
-  - [import_1.py, import_2.py](#import_1py-import_2py)
-  - [import_3.py](#import_3py)
-  - [mix_4.py](#mix_4py)
-  - [Classes/classes_2.py](#classesclasses_2py)
-  - [Ismétlés](#ismétlés)
-  - [Iterators_Generators/iterator_2.py](#iterators_generatorsiterator_2py)
-- [Lection 5](#lection-5)
-  - [repeat_5.py](#repeat_5py)
-  - [Classes/classes_3.py](#classesclasses_3py)
-  - [mix_5.py](#mix_5py)
-  - [solutions_4.py](#solutions_4py)
-  - [Classes/classes_4.py](#classesclasses_4py)
-  - [Functions/func_objects_2.py](#functionsfunc_objects_2py)
-  - [Classes/classes_5.py](#classesclasses_5py)
-- [Lection 6](#lection-6)
-  - [Datastructures/index_2.py](#datastructuresindex_2py)
-  - [Iterators_Generators/generator_1.py](#iterators_generatorsgenerator_1py)
-  - [Classes/inheritance_1](#classesinheritance_1)
-  - [repeat_6.py](#repeat_6py)
-  - [exception_1.py](#exception_1py)
-  - [Functions/closures_1.py](#functionsclosures_1py)
-  - [Databases/sqlite3_1.py](#databasessqlite3_1py)
-  - [solutions_5.py](#solutions_5py)
-  - [requests_1.py](#requests_1py)
-  - [any_all_1.py](#any_all_1py)
-  - [Functions/func_objects.html](#functionsfunc_objectshtml)
+- [1. Lection 1](#1-lection-1)
+  - [1.1. python_install_run.html](#11-python_install_runhtml)
+  - [1.2. python_literature.html](#12-python_literaturehtml)
+  - [1.3. mix.py](#13-mixpy)
+  - [1.4. Datastructures/numeric_types_1.py](#14-datastructuresnumeric_types_1py)
+  - [1.5. Datastructures/string_1.py](#15-datastructuresstring_1py)
+  - [1.6. Datastructures/list_1.py, list_2.py, list_3.py](#16-datastructureslist_1py-list_2py-list_3py)
+  - [1.7. Datastructures/tuple_1.py](#17-datastructurestuple_1py)
+  - [1.8. Functions/func_params_1.py](#18-functionsfunc_params_1py)
+  - [1.9. Functions/scope_1.py](#19-functionsscope_1py)
+- [2. Lection 2](#2-lection-2)
+  - [2.1. Functions/func_objects_1.py](#21-functionsfunc_objects_1py)
+  - [2.2. Datastructures/dict_1.py](#22-datastructuresdict_1py)
+  - [2.3. Functions/func_params_2.py](#23-functionsfunc_params_2py)
+  - [2.4. Functions/scope_2.py](#24-functionsscope_2py)
+  - [2.5. Functions/lambda_1.py](#25-functionslambda_1py)
+  - [2.6. Datastructures/set_1.py](#26-datastructuresset_1py)
+  - [2.7. Datastructures/index_1.py](#27-datastructuresindex_1py)
+  - [2.8. files_1.py](#28-files_1py)
+  - [2.9. python_intro.html](#29-python_introhtml)
+  - [2.10. exercises_2.py](#210-exercises_2py)
+- [3. Lection 3](#3-lection-3)
+  - [3.1. Comprehensions/listcomp_1.py, set_dict_comp_1.py](#31-comprehensionslistcomp_1py-set_dict_comp_1py)
+  - [3.2. solutions_2.py](#32-solutions_2py)
+  - [3.3. Datastructures/set_2.py](#33-datastructuresset_2py)
+  - [3.4. break_continue_1.py](#34-break_continue_1py)
+  - [3.5. Datastructures/is_1.py](#35-datastructuresis_1py)
+  - [3.6. ternary_1.py](#36-ternary_1py)
+  - [3.7. Iterators_Generators/iterator_1.py](#37-iterators_generatorsiterator_1py)
+  - [3.8. Classes/classes_1.py](#38-classesclasses_1py)
+  - [3.9. Datastructures/unpacking_1.py](#39-datastructuresunpacking_1py)
+  - [3.10. Datastructures/delim_strings_1.py](#310-datastructuresdelim_strings_1py)
+  - [3.11. Datastructures/conversions_1.py](#311-datastructuresconversions_1py)
+- [4. Lection 4](#4-lection-4)
+  - [4.1. repeat_4.py](#41-repeat_4py)
+  - [4.2. Functions/func_params_3.py](#42-functionsfunc_params_3py)
+  - [4.3. solutions_3.py](#43-solutions_3py)
+  - [4.4. Functions/func_params_4.py](#44-functionsfunc_params_4py)
+  - [4.5. import_1.py, import_2.py](#45-import_1py-import_2py)
+  - [4.6. import_3.py](#46-import_3py)
+  - [4.7. mix_4.py](#47-mix_4py)
+  - [4.8. Classes/classes_2.py](#48-classesclasses_2py)
+  - [4.9. Ismétlés](#49-ismétlés)
+  - [4.10. Iterators_Generators/iterator_2.py](#410-iterators_generatorsiterator_2py)
+- [5. Lection 5](#5-lection-5)
+  - [5.1. repeat_5.py](#51-repeat_5py)
+  - [5.2. Classes/classes_3.py](#52-classesclasses_3py)
+  - [5.3. mix_5.py](#53-mix_5py)
+  - [5.4. solutions_4.py](#54-solutions_4py)
+  - [5.5. Classes/classes_4.py](#55-classesclasses_4py)
+  - [5.6. Functions/func_objects_2.py](#56-functionsfunc_objects_2py)
+  - [5.7. Classes/classes_5.py](#57-classesclasses_5py)
+- [6. Lection 6](#6-lection-6)
+  - [6.1. Datastructures/index_2.py](#61-datastructuresindex_2py)
+  - [6.2. Iterators_Generators/generator_1.py](#62-iterators_generatorsgenerator_1py)
+  - [6.3. Classes/inheritance_1](#63-classesinheritance_1)
+  - [6.4. repeat_6.py](#64-repeat_6py)
+  - [6.5. exception_1.py](#65-exception_1py)
+  - [6.6. Functions/closures_1.py](#66-functionsclosures_1py)
+  - [6.7. Databases/sqlite3_1.py](#67-databasessqlite3_1py)
+  - [6.8. solutions_5.py](#68-solutions_5py)
+  - [6.9. requests_1.py](#69-requests_1py)
+  - [6.10. any_all_1.py](#610-any_all_1py)
+  - [6.11. Functions/func_objects.html](#611-functionsfunc_objectshtml)
 
 Home: http://szoftvermli.biz/PYTHON_2020_1/
 
-# Lection 1
-## python_install_run.html
+# 1. Lection 1
+## 1.1. python_install_run.html
 [python_install_run.html](python_install_run.html)
 * Python és modulok installálása, futtatás
 
-## python_literature.html
+## 1.2. python_literature.html
 [python_literature.html](python_literature.html)
 * irodalomjegyzék
 
-## mix.py
+## 1.3. mix.py
 [mix.py](mix.py)
 * változók definiálása
 * feltételes utasítás
@@ -85,19 +85,19 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 * range
 * for ciklus
 
-## Datastructures/numeric_types_1.py
+## 1.4. Datastructures/numeric_types_1.py
 [Datastructures/numeric_types_1.py](Datastructures/numeric_types_1.py)
 * int típus
 * float típus
 * type()
 
-## Datastructures/string_1.py
+## 1.5. Datastructures/string_1.py
 [Datastructures/string_1.py](Datastructures/string_1.py)
 [Datastructures/string_1.py](Datastructures/string_1.py)
 * str típus
 * len(), rstrip(), lstrip()
 
-## Datastructures/list_1.py, list_2.py, list_3.py
+## 1.6. Datastructures/list_1.py, list_2.py, list_3.py
 [Datastructures/list_1.py](Datastructures/list_1.py)
 [Datastructures/list_2.py](Datastructures/list_2.py)
 [Datastructures/list_3.py](Datastructures/list_3.py)
@@ -105,189 +105,189 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 * id
 * del
 
-## Datastructures/tuple_1.py
+## 1.7. Datastructures/tuple_1.py
 [Datastructures/tuple_1.py](Datastructures/tuple_1.py)
 * tuple típus
 
-## Functions/func_params_1.py
+## 1.8. Functions/func_params_1.py
 [Functions/func_params_1.py](Functions/func_params_1.py)
 * függvények fix paraméterekkel
 * default paraméterek
 
-## Functions/scope_1.py
+## 1.9. Functions/scope_1.py
 [Functions/scope_1.py](Functions/scope_1.py)
 * lokális és globális változók
 
-# Lection 2
-## Functions/func_objects_1.py
+# 2. Lection 2
+## 2.1. Functions/func_objects_1.py
 [Functions/func_objects_1.py](Functions/func_objects_1.py)
  * függvény-objektumok
  * dir()
  * sys.getsizeof()
  * __sizeof__(), __call__(), __name__, __class__
 
-## Datastructures/dict_1.py
+## 2.2. Datastructures/dict_1.py
 [Datastructures/dict_1.py](Datastructures/dict_1.py)
  * dict típus
  * tuple kibontása változókba
  * zip függvény
 
-## Functions/func_params_2.py
+## 2.3. Functions/func_params_2.py
 [Functions/func_params_2.py](Functions/func_params_2.py)
  * opcionális pozícionális és kulcsszó paraméterek
 
-## Functions/scope_2.py
+## 2.4. Functions/scope_2.py
 [Functions/scope_2.py](Functions/scope_2.py)
  * egymásba ágyazott függvények
  * global, nonlocal
 
-## Functions/lambda_1.py
+## 2.5. Functions/lambda_1.py
 [Functions/lambda_1.py](Functions/lambda_1.py)
  * lambda függvénykifejezések
  * sorted()
 
-## Datastructures/set_1.py
+## 2.6. Datastructures/set_1.py
 [Datastructures/set_1.py](Datastructures/set_1.py)
  * set típus
 
-## Datastructures/index_1.py
+## 2.7. Datastructures/index_1.py
 [Datastructures/index_1.py](Datastructures/index_1.py)
   * negatív indexek
   * slicing
 
-## files_1.py
+## 2.8. files_1.py
 [files_1.py](files_1.py)
   * szöveges fájl megnyitása és sorok olvasása
 
-## python_intro.html
+## 2.9. python_intro.html
 [python_intro.html](python_intro.html)
 
-## exercises_2.py
+## 2.10. exercises_2.py
 [exercises_2.py](exercises_2.py)
  * feladatok
 
-# Lection 3
-## Comprehensions/listcomp_1.py, set_dict_comp_1.py
+# 3. Lection 3
+## 3.1. Comprehensions/listcomp_1.py, set_dict_comp_1.py
 [Comprehensions/listcomp_1.py](Comprehensions/listcomp_1.py)
 [Comprehensions/set_dict_comp_1.py](Comprehensions/set_dict_comp_1.py)
  * list comprehension
  * set comprehension
  * dict comprehension
 
-## solutions_2.py
+## 3.2. solutions_2.py
 [solutions_2.py](solutions_2.py)
  * Lecture_2/exercises_2.py megoldásai
 
-## Datastructures/set_2.py
+## 3.3. Datastructures/set_2.py
 [Datastructures/set_2.py](Datastructures/set_2.py)
  * halmazokon végzett beépített műveletek
 
-## break_continue_1.py
+## 3.4. break_continue_1.py
 [break_continue_1.py](break_continue_1.py)
  * break és continue utasítás
 
-## Datastructures/is_1.py
+## 3.5. Datastructures/is_1.py
 [Datastructures/is_1.py](Datastructures/is_1.py)
  * is operátor
 
-## ternary_1.py
+## 3.6. ternary_1.py
 [ternary_1.py](ternary_1.py)
  * feltételes kifejezések
 
-## Iterators_Generators/iterator_1.py
+## 3.7. Iterators_Generators/iterator_1.py
 [Iterators_Generators/iterator_1.py](Iterators_Generators/iterator_1.py)
  * iterálható sorozatok, iterátorok működése
 
-## Classes/classes_1.py
+## 3.8. Classes/classes_1.py
 [Classes/classes_1.py](Classes/classes_1.py)
  * osztályok, objektumok
 
-## Datastructures/unpacking_1.py
+## 3.9. Datastructures/unpacking_1.py
 [Datastructures/unpacking_1.py](Datastructures/unpacking_1.py)
  * tuple és lista elemeinek kibontása változókba
 
-## Datastructures/delim_strings_1.py
+## 3.10. Datastructures/delim_strings_1.py
 [Datastructures/delim_strings_1.py](Datastructures/delim_strings_1.py)
  * delimitált sztringek kezelése; join() és split()
 
-## Datastructures/conversions_1.py
+## 3.11. Datastructures/conversions_1.py
 [Datastructures/conversions_1.py](Datastructures/conversions_1.py)
  * alap adatszerkezetek átalakítása egymásba
 
-# Lection 4
-## repeat_4.py
+# 4. Lection 4
+## 4.1. repeat_4.py
 [repeat_4.py](repeat_4.py)
  * ismétlés
 
-## Functions/func_params_3.py
+## 4.2. Functions/func_params_3.py
 [Functions/func_params_3.py](Functions/func_params_3.py)
  * változtatható paraméterek
 
-## solutions_3.py
+## 4.3. solutions_3.py
 [solutions_3.py](solutions_3.py)
  * Lecture_3/exercises_3.py megoldásai
 
-## Functions/func_params_4.py
+## 4.4. Functions/func_params_4.py
 [Functions/func_params_4.py](Functions/func_params_4.py)
  * státuszjelzés
 
-## import_1.py, import_2.py
+## 4.5. import_1.py, import_2.py
 [import_1.py, import_2.py](import_1.py, import_2.py)
  * modulok importálása
 
-## import_3.py
+## 4.6. import_3.py
 [import_3.py](import_3.py)
  * __name__ használata
 
-## mix_4.py
+## 4.7. mix_4.py
 [mix_4.py](mix_4.py)
  * /* mint ismétlés-operátor
  * sztring-formázás 1. f-sztringek
  * isinstance
  * enumerate
 
-## Classes/classes_2.py
+## 4.8. Classes/classes_2.py
 [Classes/classes_2.py](Classes/classes_2.py)
  * metódusok
  * docstring
 
-## Ismétlés
+## 4.9. Ismétlés
 [Ismétlés](Ismétlés)
  * Iterators_Generators/iterator_1.py
 
-## Iterators_Generators/iterator_2.py
+## 4.10. Iterators_Generators/iterator_2.py
 [Iterators_Generators/iterator_2.py](Iterators_Generators/iterator_2.py)
  * saját iterlható osztály készítése
 
-# Lection 5
-## repeat_5.py
+# 5. Lection 5
+## 5.1. repeat_5.py
 [repeat_5.py](repeat_5.py)
  * ismétlés
 
-## Classes/classes_3.py
+## 5.2. Classes/classes_3.py
 [Classes/classes_3.py](Classes/classes_3.py)
  * private adattagok kezelése 1. (getter-setter)
 
-## mix_5.py
+## 5.3. mix_5.py
 [mix_5.py](mix_5.py)
  * Feltételvizsgálat eredménye --> logikai változó
  * Elemek logikai értelmezése
  * Logikai kifejezések kiértékelésének sorrendje, rövidre zárás
 
-## solutions_4.py
+## 5.4. solutions_4.py
 [solutions_4.py](solutions_4.py)
  * Lecture_4/exercises_4.py megoldásai
 
-## Classes/classes_4.py
+## 5.5. Classes/classes_4.py
 [Classes/classes_4.py](Classes/classes_4.py)
  * hívható osztály, __call__() metódus, __class__ attribútum
 
-## Functions/func_objects_2.py
+## 5.6. Functions/func_objects_2.py
 [Functions/func_objects_2.py](Functions/func_objects_2.py)
  * függvény attribútuma
  * hasattr()
 
-## Classes/classes_5.py
+## 5.7. Classes/classes_5.py
 [Classes/classes_5.py](Classes/classes_5.py)
  * private adattagok kezelése: a property dekorátoros megoldás
 
@@ -303,48 +303,48 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 
 ########################
 
-# Lection 6
-## Datastructures/index_2.py
+# 6. Lection 6
+## 6.1. Datastructures/index_2.py
 [Datastructures/index_2.py](Datastructures/index_2.py)
  * Lista részének módosítása és törlése slicing-gal
 
-## Iterators_Generators/generator_1.py
+## 6.2. Iterators_Generators/generator_1.py
 [Iterators_Generators/generator_1.py](Iterators_Generators/generator_1.py)
  * ismerkedés a generátor függvényekkel
 
-## Classes/inheritance_1
+## 6.3. Classes/inheritance_1
 [Classes/inheritance_1](Classes/inheritance_1)
  * öröklés, leszármaztatás
 
-## repeat_6.py
+## 6.4. repeat_6.py
 [repeat_6.py](repeat_6.py)
  * ismétlés
 
-## exception_1.py
+## 6.5. exception_1.py
 [exception_1.py](exception_1.py)
  * kivételkezelés
 
-## Functions/closures_1.py
+## 6.6. Functions/closures_1.py
 [Functions/closures_1.py](Functions/closures_1.py)
  * closure bemutatása
 
-## Databases/sqlite3_1.py
+## 6.7. Databases/sqlite3_1.py
 [Databases/sqlite3_1.py](Databases/sqlite3_1.py)
  * sqlite3 adatbázis:
    connect, commit, autotransact, fetchone, fetchall, fetchmany
 
-## solutions_5.py
+## 6.8. solutions_5.py
 [solutions_5.py](solutions_5.py)
  * Lecture_5/exercises_5.py megoldásai
 
-## requests_1.py
+## 6.9. requests_1.py
 [requests_1.py](requests_1.py)
  * ismerkedés a requests modullal
 
-## any_all_1.py
+## 6.10. any_all_1.py
 [any_all_1.py](any_all_1.py)
  * any() és all() függvények
 
-## Functions/func_objects.html
+## 6.11. Functions/func_objects.html
 [Functions/func_objects.html](Functions/func_objects.html)
  * a függvény-objektumról tanultak összefoglalása
