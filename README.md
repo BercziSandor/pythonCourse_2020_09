@@ -45,6 +45,26 @@ Python course on 09.2020 by Mihály Nemes
   - [4.8. Classes\classes_2.py](#48-classesclasses_2py)
   - [4.9. Ismétlés](#49-ismétlés)
   - [4.10. Iterators_Generators\iterator_2.py](#410-iterators_generatorsiterator_2py)
+- [5. Lection 5](#5-lection-5)
+  - [5.1. repeat_5.py](#51-repeat_5py)
+  - [5.2. Classes\classes_3.py](#52-classesclasses_3py)
+  - [5.3. mix_5.py](#53-mix_5py)
+  - [5.4. solutions_4.py](#54-solutions_4py)
+  - [5.5. Classes\classes_4.py](#55-classesclasses_4py)
+  - [5.6. Functions\func_objects_2.py](#56-functionsfunc_objects_2py)
+  - [5.7. Classes\classes_5.py](#57-classesclasses_5py)
+- [6. Lection 6](#6-lection-6)
+  - [6.1. Datastructures\index_2.py](#61-datastructuresindex_2py)
+  - [6.2. Iterators_Generators\generator_1.py](#62-iterators_generatorsgenerator_1py)
+  - [6.3. Classes\inheritance_1](#63-classesinheritance_1)
+  - [6.4. repeat_6.py](#64-repeat_6py)
+  - [6.5. exception_1.py](#65-exception_1py)
+  - [6.6. Functions\closures_1.py](#66-functionsclosures_1py)
+  - [6.7. Databases\sqlite3_1.py](#67-databasessqlite3_1py)
+  - [6.8. solutions_5.py](#68-solutions_5py)
+  - [6.9. requests_1.py](#69-requests_1py)
+  - [6.10. any_all_1.py](#610-any_all_1py)
+  - [6.11. Functions\func_objects.html](#611-functionsfunc_objectshtml)
 
 Home: http://szoftvermli.biz/PYTHON_2020_1/
 
@@ -195,3 +215,74 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 ## 4.10. Iterators_Generators\iterator_2.py
  * saját iterlható osztály készítése
 
+# 5. Lection 5
+## 5.1. repeat_5.py
+ * ismétlés
+
+## 5.2. Classes\classes_3.py
+ * private adattagok kezelése 1. (getter-setter)
+
+## 5.3. mix_5.py
+ * Feltételvizsgálat eredménye --> logikai változó
+ * Elemek logikai értelmezése
+ * Logikai kifejezések kiértékelésének sorrendje, rövidre zárás
+
+## 5.4. solutions_4.py
+ * Lecture_4\exercises_4.py megoldásai
+
+## 5.5. Classes\classes_4.py
+ * hívható osztály, __call__() metódus, __class__ attribútum
+
+## 5.6. Functions\func_objects_2.py
+ * függvény attribútuma
+ * hasattr()
+
+## 5.7. Classes\classes_5.py
+ * private adattagok kezelése: a property dekorátoros megoldás
+
+########################
+Installálni kellene a numpy modult.
+```bash
+python -m pip install numpy
+```
+
+Installálni (letölteni) kellene a VS Code-ot is:
+https://code.visualstudio.com/download
+Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
+
+########################
+
+# 6. Lection 6
+## 6.1. Datastructures\index_2.py
+ * Lista részének módosítása és törlése slicing-gal
+
+## 6.2. Iterators_Generators\generator_1.py
+ * ismerkedés a generátor függvényekkel
+
+## 6.3. Classes\inheritance_1
+ * öröklés, leszármaztatás
+
+## 6.4. repeat_6.py
+ * ismétlés
+
+## 6.5. exception_1.py
+ * kivételkezelés
+
+## 6.6. Functions\closures_1.py
+ * closure bemutatása
+
+## 6.7. Databases\sqlite3_1.py
+ * sqlite3 adatbázis:
+   connect, commit, autotransact, fetchone, fetchall, fetchmany
+
+## 6.8. solutions_5.py
+ * Lecture_5\exercises_5.py megoldásai
+
+## 6.9. requests_1.py
+ * ismerkedés a requests modullal
+
+## 6.10. any_all_1.py
+ * any() és all() függvények
+
+## 6.11. Functions\func_objects.html
+ * a függvény-objektumról tanultak összefoglalása
