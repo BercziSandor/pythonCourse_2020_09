@@ -88,6 +88,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 * type()
 
 ## 1.5. Datastructures\string_1.py
+[Datastructures\string_1.py](Datastructures\string_1.py)
 * str típus
 * len(), rstrip(), lstrip()
 
