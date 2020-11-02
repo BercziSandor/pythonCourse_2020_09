@@ -1,0 +1,27 @@
+Num_py\numpy_3.py
+ * array tuple-ból, dict-ből, delimitált sztringből
+ * reshape, size
+
+Num_py\numpy_4.py
+ * logikai mátrixműveletek, maszkolás, np.average, where
+
+Num_py\numpy_5.py
+ * műveletek vektorizálásának gyorsító hatása
+
+Iterators_Generators\gen_func_2.html
+ * GeneratorExit, close, send, raise, throw
+
+Classes\inheritance_2.py
+ * öröklés, absztrakt osztályok
+
+Functions\closures.html
+ * closure részletesebb bemutatása
+
+repeat_8.py
+ * ismétlés
+
+Functions\decorators_intro.html
+ * dekorátorok
+
+solutions_7.py
+ * Lecture_7\exercises_7.py megoldásai

@@ -10,24 +10,11 @@ Classes\inheritance_1
 repeat_6.py
  * ismétlés
 
-exception_1.py
+exceptions_1.py
  * kivételkezelés
 
 Functions\closures_1.py
  * closure bemutatása
-
-Databases\sqlite3_1.py
- * sqlite3 adatbázis:
-   connect, commit, autotransact, fetchone, fetchall, fetchmany
-
-solutions_5.py
- * Lecture_5\exercises_5.py megoldásai
-
-requests_1.py
- * ismerkedés a requests modullal
-
-any_all_1.py
- * any() és all() függvények
 
 Functions\func_objects.html
  * a függvény-objektumról tanultak összefoglalása

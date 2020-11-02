@@ -6,7 +6,7 @@
 
 import sqlite3
 
-database = r"C:\Users\107191088\Oktat\pythonsqlite.db"
+database = r"C:\Users\A107191088\Oktat\pythonsqlite.db"
 conn = sqlite3.connect(database)
 c = conn.cursor()
 

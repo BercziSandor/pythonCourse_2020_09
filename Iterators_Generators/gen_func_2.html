@@ -22,7 +22,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.20 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.30 &mdash;</p>
 </div>
 <h1>Generátor  függvények 2.rész<br>
 <span style='font-size:70%; color:gray;'>&bull; GeneratorExit, close, send, raise, throw &bull;</span></h1>
@@ -30,7 +30,7 @@
 <li><a style='color: red' href='#gen_exit'>GeneratorExit kivétel</a></li>
 <li><a style='color: red' href='#close'>close() metódus</a></li>
 <li><a style='color: red' href='#send'>send() metódus</a></li>
-<li><a style='color: red' href='#consumer'>Nyelõ típusú generátorok</a></li>
+<li><a style='color: red' href='#consumer'>Nyelõ típusú generátorok (korutinok)</a></li>
 <li><a style='color: red' href='#raise_in_gen'>A generátor kivételt dob</a></li>
 <li><a style='color: red' href='#throw_into'>throw() metódus</a></li>
 <li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNYEK</a></li>
@@ -232,7 +232,7 @@ tartozik az illetõ sor és onnan kezdve azt keressük, hogy hol fordul elõ az õ az
 <p>
 A send() metódust intenzíven használják a korutinok.
 </p>
-<h2 id='consumer'>Nyelõ típusú generátorok</h2>
+<h2 id='consumer'>Nyelõ típusú generátorok  (korutinok)</h2>
 <p>
 Az eddig vizsgált esetekben mindig a yield játszotta a fõszerepet, az volt lényeges, hogy milyen értéket ad vissza a hívónak a generátor. Van olyan eset is, amikor
 a yield csak arra szolgál, hogy értesítse a hívót: elvégezte a feladatát, várja, hogy a hívó send segítségével elküldje neki a következõ adatot.
@@ -240,11 +240,15 @@ a yield csak arra szolgál, hogy értesítse a hívót: elvégezte a feladatát, várja,
 <p>
 Legyen például az a feladata a generátor-függvénynek, hogy a kapott adatot beleírja egy fájlba.
 <pre>
+import os
+
 def g_file_writer(path):
     with open(path,'w') as file_obj:
         while True:
             msg = yield    # waits for next msg
             file_obj.write(msg + '\n')
+            file_obj.flush()   # not always needed (opsys dependent)
+            os.fsync(file_obj)
 </pre>
 
 A hívó oldal az egyszerûség kedvéért most csak számokat küld neki:
@@ -558,7 +562,8 @@ StopIteration
 <a href='https://realpython.com/introduction-to-python-generators/' target='_blank'>How to Use Generators and yield in Python</a> Real Python<br>
 <i>&nbsp;&nbsp;Using Advanced Generator Methods</i><br>
 <a href='https://www.python-course.eu/python3_generators.php' target='_blank'>Generators and Iterators</a>  python-course.eu<br>
-<i>&nbsp;&nbsp;send Method /Coroutines</i><br>
+<i>&nbsp;&nbsp;send Method/Coroutines</i><br>
+<a href='https://stackabuse.com/coroutines-in-python/' target='_blank'>Coroutines in Python</a> Stack Abuse<br>
 <a href='https://jeffknupp.com/blog/2013/04/07/improve-your-python-yield-and-generators-explained/' target='_blank'>Improve Your Python: 'yield' and Generators
 Explained</a> jeffknupp.com<br>
 <a href='https://stackoverflow.com/questions/19302530/python-generator-send-function-purpose' target='_blank'>python generator “send” function purpose?</a>

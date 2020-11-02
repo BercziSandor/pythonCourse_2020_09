@@ -1,0 +1,30 @@
+exceptions_2.py
+ * else, finally, továbbdobás
+
+copy_1.py
+ * copy, deepcopy
+
+Num_py\numpy_1.py
+ * shape, ndim, dtype, slicing
+
+Num_py\numpy_2.py
+ * Mátrix alapműveletek, broadcasting, astype, táblaforgatás
+
+repeat_7.py
+ * ismétlés
+
+Iterators_Generators\gen_func_intro.html
+  * generátor-függvények
+
+Databases\sqlite3_1.py
+ * sqlite3 adatbázis:
+   connect, commit, autotransact, fetchone, fetchall, fetchmany
+
+solutions_6.py
+ * Lecture_6\exercises_6.py megoldásai
+
+requests_1.py
+ * ismerkedés a requests modullal
+
+any_all_1.py
+ * any() és all() függvények

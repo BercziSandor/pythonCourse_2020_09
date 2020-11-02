@@ -1,0 +1,335 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<title>Closure (lexical closure)</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .pale { color: gray; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+  .data { color:green; }
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }
+  .emph_4 { color: gray; font-family: courier new; letter-spacing: 0.1em; }
+  .deleted { text-decoration: line-through; color: blue; }
+  .question  { font-family:Cooper Black; color:indigo; }
+  .sol_button { color:indigo; font-size: 110%; }
+  .solution { display:none; border: 1px groove black; border-radius: 5px; margin: 10px 20px 5px 20px; padding: 5px; background-color: palegoldenrod; }
+  .emph_box_1 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; text-align: center; font-size: 120%; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.29 &mdash;</p>
+</div>
+<h1>Closure</h1>
+<ul class='contents'>
+<li><a style='color: red' href='#definition'>Definíció</a></li>
+<li><a style='color: red' href='#with_class'>...és ugyanez objektummal</a></li>
+<li><a style='color: red' href='#with_callable_class'>...vagy hívható objektummal</a></li>
+<li><a style='color: red' href='#applications'>Alkalmazások</a>
+<ul>
+<li><a style='color: red' href='#default_pars'>Default paraméterek beállítása</a></li>
+<li><a style='color: red' href='#single_method_classes'>Egyetlen metódusú osztályok kiváltása</a></li>
+<li><a style='color: red' href='#constant_attributes'>Kifelé rejtett attribútumok</a></li>
+<li><a style='color: red' href='#several_func_objects'>Egyedi függvény-objektumok gyártása</a></li>
+<li><a style='color: red' href='#decorators'>Dekorátorok</a></li>
+</ul>
+</li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='definition'>Definíció</h2>
+<p>
+<span class='emph_4'>CLOSURE, LEXICAL CLOSURE:</span> Olyan függvény, amin belül definiálunk egy másik függvényt; a külső (factory) függvény a belsőt adja
+vissza, amely megőrzi a keletkezésekor fennálló belső állapotot (hívási paraméterek és lokális változók értékét).
+</p>
+<p>
+(Igen, jól érzékeli az olvasó: ez így egyszerre hat tudományoskodónak, érthetetlennek és feleslegesnek. Valójában egyik sem.)
+</p>
+<p>
+Ismerkedésként nézzünk meg egy nagyon egyszerű closure-t:
+<pre>
+def outer_func(<span class='emph_1'>outerParam</span>):
+    def inner_func(innerParam):
+        print('inner_func says: outerParam was',outerParam)
+        print('inner_func says: local_var was:',local_var)
+        print('inner_func says: innerParam is:',innerParam)
+
+    <span class='emph_1'>local_var = '*LOCAL VARIABLE*'</span>
+
+    return inner_func    # returns the inner function object
+
+f = outer_func(<span class='emph_1'>'OUTER'</span>)  # a new function (inner_func) is created
+print(f)
+f('inner func parameter')
+<div class='result'>
+# &lt;function outer_func.&lt;locals>.inner_func at 0x0232CB70>
+# inner_func says: outerParam was <span class='emph_1'>'OUTER'</span>
+# inner_func says: local_var was: <span class='emph_1'>*LOCAL VARIABLE*</span>
+# inner_func says: innerParam is: inner func parameter
+</div>
+</pre>
+A külső függvény csak gyárként (factory) szolgál, amikor felhívjuk, akkor visszaadja a belső függvényt. Az új, <code>f</code> függvény tulajdonképpen a
+belső függvényre mutató referencia; amikor őt felhívjuk, <code>inner_func</code> fog lefutni. És amikor lefut, láthatjuk, hogy megjegyezte a külső függvénynek
+azt az állapotát (lokális változóit és bemenő paramétereit), ami az ő elkészítésekor érvényes volt.
+</p>
+<h2 id='with_class'>...és ugyanez objektummal</h2>
+<p>
+Nagyon tanulságos megnézni egy másik módszert a closure által megjegyzett információk tárolására. Ha valamilyen adatot meg kell jegyeznie a programnak, akkor az
+első gondolatunk nyilván egy "hagyományos" objektum lesz (és ezentúl a második gondolatunk egy closure függvény, amint megszoktuk ezt az új fogalmat).
+
+<pre>
+class ClosureClass:
+    def __init__(self,<span class='emph_1'>outerParam</span>):
+        self.outer_param = outerParam
+        <span class='emph_1'>self.local_var = '*LOCAL VARIABLE*'</span>
+
+    def _inner_func(self,innerParam):
+        print('inner_func says: outerParam was',self.outer_param)
+        print('inner_func says: local_var was:',self.local_var)
+        print('inner_func says: innerParam is:',innerParam)
+
+clos_obj = ClosureClass('OUTER')
+f = clos_obj._inner_func
+f('inner func parameter')
+<div class='result'>
+# inner_func says: outerParam was <span class='emph_1'>'OUTER'</span>
+# inner_func says: local_var was: <span class='emph_1'>*LOCAL VARIABLE*</span>
+# inner_func says: innerParam is: inner func parameter
+</div>
+</pre>
+Azt hiszem, jól látszik, mennyivel több segéd-kódot kellett írnunk a két sztring megjegyzéséhez &ndash; ez remélhetőleg felkelti a szimpátiát a closure
+irányában.
+</p>
+<h2 id='with_callable_class'>...vagy hívható objektummal</h2>
+<p>
+Meg lehet oldani a feladatot egy kicsit direktebb, egyszerűbb módon is, ha a segédobjektumunkat hívhatóvá tesszük (tehát ilyen módon gyakorlatilag egy függvényt
+állítunk elő).
+<pre>
+class CallableClosureClass:
+    def __init__(self,<span class='emph_1'>outerParam</span>):
+        self.outer_param = outerParam
+        <span class='emph_1'>self.local_var = '*LOCAL VARIABLE*'</span>
+
+    def __call__(self,innerParam):
+        print('inner_func says: outerParam was',self.outer_param)
+        print('inner_func says: local_var was:',self.local_var)
+        print('inner_func says: innerParam is:',innerParam)
+
+f = CallableClosureClass('OUTER')  # __init__
+f('inner func parameter')          # __call__
+<div class='result'>
+# inner_func says: outerParam was <span class='emph_1'>OUTER</span></span>
+# inner_func says: local_var was: <span class='emph_1'>*LOCAL VARIABLE*</span>
+# inner_func says: innerParam is: inner func parameter
+</div>
+</pre>
+A "hagyományos" objektummal való megoldás akkor lehet előnyösebb (olvashatóbb) a closure függvény-objektumnál, amikor többféle funkcionalitásra, azaz nem csak
+egyetlen metódusra van szükségünk.
+
+<div class='emph_box_1' style='width: 50%'>
+A closure függvénynél a bemenő pataméterek játsszák azt a szerepet, mint az objektumoknál a konstruktor paraméterei.
+</div>
+</p>
+<h2 id='applications'>Alkalmazások</h2>
+<h3 id='default_pars' style='color:green;'>Default paraméterek beállítása</h3>
+<p>
+A closure-t használhatjuk arra, hogy egy sokparaméteres függvény valahány paraméterének default értéket adjunk, ezáltal olvashatóbbá téve a programunkat.
+Legyen pl. egy négy paraméteres függvényünk, amelyet egy programrészben sokszor használunk úgy, hogy két paraméter értéke mindig 1000, ill. 100:
+<pre>
+def f_many_pars(a,b,c,d):
+    return a + b + c + d
+          <b style='color: black; font-size:150%;'>&dArr;</b>
+def reduce_pars(<span class='emph_1'>a,b</span>):
+    def f_inner(c,d):
+        return f_many_pars(<span class='emph_1'>a,b</span>,<span class='emph_2'>c,d</span>)
+
+    return f_inner
+
+f_less_pars = reduce_pars(<span class='emph_1'>1000,100</span>)
+x = f_less_pars(<span class='emph_2'>10,1</span>)
+print(x)
+x = f_less_pars(<span class='emph_2'>20,2</span>)
+print(x)
+<div class='result'>
+# <span class='emph_1'>11</span><span class='emph_2'>11</span>
+# <span class='emph_1'>11</span><span class='emph_2'>22</span>
+</div>
+</pre>
+</p>
+<h3 id='single_method_classes' style='color:green;'>Egyetlen metódusú osztályok kiváltása</h3>
+<p>
+Tegyük fel, hogy egy programban számos helyen használnunk kell egy videotömörítő függvényt, amely különböző videókat tömörít, de állandó paraméterekkel (felbontás,
+formátum...). Ezeket a paramétereket csak egyszer állítjuk be, de sokszor hívjuk a függvényünket. A paraméterek megjegyzésére a legcsúnyább megoldás globális
+változók alkalmazása; ehelyett jobb, ha egy segdosztályt definiálunk, de ennél is tömörebb és elegánsabb closure alkalmazása.
+
+<pre>
+                                    <span style='color:black;'>osztály            <b style='font-size:150%;'>&rArr;</b>            függvény</span>
+class CompressClass:                                                  def outer_compress(resolution, format):
+    def __init__(self, resolution, format):                               def inner_compress(inputVideo):
+        self._resolution = resolution                                          # ... uses resolution, format
+        self._format = format                                             return inner_compress
+
+    def compress(inputVideo):
+        # ... uses self._resolution, self._format
+
+comp_obj_1 = CompressClass('1080p','mp4')                              comp_func_1 = outer_compress('1080p','mp4')
+comp_obj_1.compress(input_video)                                       comp_func_1(input_video)
+comp_obj_2 = CompressClass('1080p','mp3')                              comp_func_2 = outer_compress('1080p','mp3')
+comp_obj_2.compress(input_video)                                       comp_func_2(input_video)
+</pre>
+</p>
+<h3 id='constant_attributes' style='color:green;'>Kifelé rejtett attribútumok</h3>
+<p>
+A gyártó függvény paraméterei és lokális változói láthatóak a legyártott függvény számára, de kívülről ezek nem hozzáférhetőek.
+<pre>
+def func_factory(startParam):
+    def func():
+        print('I am func, my start parameter:',startParam)
+
+    return func
+
+f1 = func_factory(10)
+f2 = func_factory(999)
+
+f1()
+f2()
+<div class='result'>
+# I am func, my start parameter: 10
+# I am func, my start parameter: 999
+</div>
+</pre>
+Ha függvényattribútumot használnánk, az kívülről is változtatható lenne:
+
+<pre>
+def func_factory():
+    def func():
+        print('I am func, my start parameter:',func_factory.startParam)
+
+    return func
+
+f1 = func_factory()
+<span class='emph_1'>func_factory.startParam = 10</span>
+f1()
+<span class='emph_1'>func_factory.startParam = 999</span>
+f1()
+<div class='result'>
+# I am func, my start parameter: 10
+# I am func, my start parameter: 999
+</div>
+</pre>
+Az első megoldásnál el tudjuk rejteni a startParam változót a külvilág elől, így a programot olvasva világos, hogy ezt a kezdeti beállítás után
+kívülről nem szabad módosítani. (A legyártott, belső függvény számára persze hozzáférhető marad.)
+</p>
+<h3 id='several_func_objects' style='color:green;'>Egyedi függvény-objektumok gyártása</h3>
+<p>
+Olyankor lehet szükség arra, hogy egy függvényből ne csak egyetlen példány létezzen, amikor valamilyen statikus attribútummal ruházzuk fel a függvényt,
+amely a hívások között megőrzi az értékét, viszont a program különböző helyein más és más attribútum értékre van szükség. Legyen például egy függvényünk,
+amelyik valamilyen paramétereket kiértékel és ezeknek a függvényében jelzéseket ad ki; mondjuk figyelmeztet, hogy le kell olvasztani a hűtőt. A figyelmeztetés
+nyelvét be lehet állítani angolra vagy németre. Ha több helyen is szükség van erre a funkcióra és nem mindig mindenhol ugyanazt a nyelvet akarjuk
+használni, akkor több függvény-objektum példányra van szükségünk.
+
+<pre>
+def warn_factory():
+    def f_warning():
+        if f_warning.lang == 'en':
+            print('I warn you!')
+        elif f_warning.lang == 'de':
+            print('Donnerwetter!')
+
+    return f_warning
+
+f_warn_1 = warn_factory()
+f_warn_1.lang = 'en'
+f_warn_2 = warn_factory()
+f_warn_2.lang = 'de'
+
+f_warn_1()
+f_warn_2()
+<div class='result'>
+# I warn you!
+# Donnerwetter!
+</div>
+</pre>
+A gyár függvény persze elvégezheti az attribútum kezdeti beállítását:
+
+<pre class='pale'>
+def warn_factory(<span style='color:blue;'>language</span>):
+    def f_warning():
+        if f_warning.lang == 'en':
+            print('I warn you!')
+        elif f_warning.lang == 'de':
+            print('Donnerwetter!')
+
+    <span style='color:blue;'>f_warning.lang = language</span>
+
+    return f_warning
+
+f_warn_1 = warn_factory(<span style='color:blue;'>'en'</span>)
+<span class='deleted'>f_warn_1.lang = 'en'</span>
+f_warn_2 = warn_factory(<span style='color:blue;'>'de'</span>)
+<span class='deleted'>f_warn_2.lang = 'de'</span>
+
+f_warn_1()
+f_warn_2()
+</pre>
+
+</p>
+<h3 id='decorators' style='color:green;'>Dekorátorok</h3>
+<p>
+A dekorátoroknál a külső függvénynek legalább egy paramétere maga is függvény; ez egy nagyobb (és fontos) téma, külön fejezetben fogunk foglalkozni vele.
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://www.programiz.com/python-programming/closure' target='_blank'>Python Closures</a> programiz.com<br>
+<a href='http://www.trytoprogram.com/python-programming/python-closures/' target='_blank'>Python closures</a> trytoprogram.com
+</p>
+<p>
+<b>Könyvek</b>
+</p>
+<p>
+Dan Bader: Python Tricks - The Book<br>
+<i>&nbsp;&nbsp;Functions Can Capture Local State</i><br>
+<i>&nbsp;&nbsp;Lambdas Are Single-Expression Functions</i>
+</p>
+<p>
+Mark Lutz: Learning Python<br>
+<i>&nbsp;&nbsp;Nested Scope Examples</i>
+</p>
+<p>
+David Beazley, Brian K. Jones: Python Cookbook<br>
+<i>&nbsp;&nbsp;Replacing Single Method Classes with Function</i><br>
+<i>&nbsp;&nbsp;Carrying Extra State with Callback Functions</i><br>
+<i>&nbsp;&nbsp;Accessing Variables Defined Inside a Closure</i><br>
+<i>&nbsp;&nbsp;Avoiding Repetitive Property Methods</i><br>
+</p>
+<p>
+Alex Martelli, Anna Ravenscroft, Steve Holden: Python in a Nutshell<br>
+<i>&nbsp;&nbsp;Nested functions and nested scopes</i>
+</p>
+<p>
+Luciano Ramalho: Fluent Python<br>
+<i>&nbsp;&nbsp;Variable Scope Rules</i><br>
+<i>&nbsp;&nbsp;Closures</i>
+</p>
+<p>
+Brett Slatkin: Effective Python<br>
+<i>&nbsp;&nbsp;Know How Closures Interact with Variable Scope</i><br>
+<i>&nbsp;&nbsp;Accept Functions for Simple Interfaces Instead of Classes</i>
+</p>
+<p>
+<b>Videók</b>
+</p>
+<p>
+<a href='https://www.youtube.com/watch?v=swU3c34d2NQ' target='_blank'>Programming Terms: Closures - How to Use Them and Why They Are Useful</a> Corey Schaefer<br>
+</p>
+</body>
+</html>

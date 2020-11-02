@@ -18,7 +18,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.20 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.09 &mdash;</p>
 </div>
 <h1>Generátor függvények bemutatása</h1>
 <ul class='contents'>
@@ -137,6 +137,7 @@ class my_first_gen_class():
         self.value = 100
 
     def __iter__(self):
+        self.value = 100
         return self
 
     def __next__(self):

@@ -1,0 +1,618 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<title>Függvény-dekorátorok bemutatása</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  code { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .pale { color: gray; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+  .data { color:green; }
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }
+  .emph_4 { color: gray; font-family: courier new; letter-spacing: 0.1em; }
+  .big_red { color:red; font-size:120%; font-weight:bold; margin-top:-5px; margin-bottom:-17px; } /* for div in text */
+  .deleted { text-decoration: line-through; color: blue; }
+  .question  { font-family:Cooper Black; color:indigo; }
+  .sol_button { color:indigo; font-size: 110%; }
+  .solution { display:none; border: 1px groove black; border-radius: 5px; margin: 10px 20px 5px 20px; padding: 5px; background-color: palegoldenrod; }
+  .emph_box_1 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; text-align: center; font-size: 120%; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.29 &mdash;</p>
+</div>
+<h1>Függvény-dekorátorok bemutatása</h1>
+<ul class='contents'>
+<li><a style='color: red' href='#definition'>Definíció, "klasszikus" dekorátor</a></li>
+<li><a style='color: red' href='#pythonic_first'>Első ügyetlenkedés függvényobjektumokkal</a></li>
+<li><a style='color: red' href='#pythonic_second'>Második béna kísérlet</a></li>
+<li><a style='color: red' href='#closure'>Színre lép a closure</a>
+<ul>
+<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNY</a></li>
+</ul>
+</li>
+<li><a style='color: red' href='#multiple_decorators'>Többszörös dekorálás</a></li>
+<li><a style='color: red' href='#return_value'>Visszatérő érték</a></li>
+<li><a style='color: red' href='#func_args'>Függvényparaméterek kezelése</a></li>
+<li><a style='color: red' href='#pie'>Pie (kukacos) dekorátor szintaktika</a></li>
+<li><a style='color: red' href='#class_methods'>Objektum-metódusok dekorálása</a></li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='definition'>Definíció, "klasszikus" dekorátor</h2>
+<p>
+A Dekorátor tervezési minta arra szolgál, hogy egy függvény működését elő- és utómunkálatokkal lássa el, méghozzá úgy, hogy az eredeti függvény változatlan marad.
+Az elő- és utómunkálatok például azt jelentik, hogy
+
+<ul>
+<li>a hívás előtt és/vagy után logfájlba vagy a képernyőre írunk információkat hibakeresés céljából,</li>
+<li>időmérést végzünk,</li>
+<li>fixen beállítunk egyes paramétereket, hogy ne kelljen minden hívásnál ezeket megadni,</li>
+<li>a bemeneti paramétereket ellenőrizzük,</li>
+<li>hozzáférési jogosultságokat kezelünk,</li>
+<li>eltárolunk eredményeket gyorsítás céljából,</li>
+<li>regisztráljuk a függvényt,</li>
+<li>lelassítjuk a függvényt, mert adott környezethez így illeszkedik jobban,</li>
+<li>szimuláció: helyettesítünk átmenetileg egy függvényt egy másikkal a környezet tesztelése érdekében:
+<ul>
+<li>lassú függvényt egy gyorssal</li>
+<li>nehezen hozzáférhetőt egy lokálisan kézbentarthatóval</li>
+</ul>
+</li>
+</ul>
+
+A "klasszikus" megoldás csak osztálymetódusokat tud kiterjeszteni öröklés segítségével, erről máshol lesz szó.
+</p>
+<p>
+A dekorátor lényegéhez tartozik, hogy a többletfunkció könnyen hozzátehető és könnyen eltávolítható legyen.
+</p>
+<h2 id='pythonic_first'>Első ügyetlenkedés függvényobjektumokkal</h2>
+<p>
+A következőkben függvényobjektumok dekorálásáról lesz szó, "igazi" objektumok és öröklés nélkül. Erre legrosszabb megoldás az lenne, ha az elő- és utóműveleteket
+magába a függvénybe írnánk bele, mert ez bonyolult (több kilépési pont is lehet) és sokszor nem maradandó változtatásokról van szó, hanem egy idő után ezeket
+a járulékos utasításokat el kell távolítani.
+</p>
+<p>
+A másik rossz megoldás az lenne, ha a függvény felhívásának helyein építenénk be a járulékos műveleteket &ndash; sok helyen kellene változtatni és később ezeket
+a változásokat visszacsinálni.
+</p>
+<p>
+Vagyis a függvény definícióját kellene úgy megváltoztatni, hogy ne kelljen belenyúlni. Első megoldás:
+
+<pre>
+def func():
+    print('*** I am func!')
+
+orig_func = func
+
+def func():
+    print('I am decorated, I do something BEFORE I call the real function')
+    orig_func()
+    print('I am decorated, I do something AFTER I called the real function')
+
+func()
+<div class='result'>
+# I am decorated, I do something BEFORE I call the real function
+# *** I am func!
+# I am decorated, I do something AFTER I called the real function
+</div>
+</pre>
+Az eredeti függvény-objektumra ráállítottunk egy változót (orig_func):
+<pre>
+
+                  +-------------------------+
+       func ----&rtrif; |                         |
+                  | print('*** I am func!') |
+  orig_func ----&rtrif; |                         |
+                  +-------------------------+  
+
+</pre>
+aztán func néven készítettünk egy olyan függvényt, amely elvégzi az elő- és utómunkálatokat, továbbá felhívja az eredeti függvényt:
+
+<pre>
+
+                  +-------------------------+
+  orig_func ----&rtrif; |                         |
+                  | print('*** I am func!') |
+          +-----&rtrif; |                         |
+          |       +-------------------------+  
+          |
+          |       +--------------------------------------------------------------------------+
+          |       | print('I am decorated, I do something BEFORE I call the real function')  |
+          |       |                                                                          |
+          +------&mdash;&hercon;&mdash;orig_func()                                                              |
+                  |                                                                          |
+       func ----&rtrif; | print('I am decorated, I do something AFTER I called the real function') |
+                  |                                                                          |
+                  +--------------------------------------------------------------------------+
+                  
+                  
+</pre>
+
+Visszacsinálni így lehet:
+
+<pre>
+func = orig_func
+</pre>
+Ez egész jónak látszik első ránézésre. Másodikra viszont feltűnik egy súlyos hiányosság: ha ugyanezzel a dekorátorral akarunk ellátni egy másik függvényt
+is, akkor az egészet duplikálnunk kell egy kevés változtatással:
+
+<pre>
+def func_2():
+    print('*** I am func_2!')
+
+orig_func_2 = func_2
+
+def func_2():
+    print('I am decorated, I do something BEFORE I call the real function')
+    orig_func_2()
+    print('I am decorated, I do something AFTER I called the real function')
+
+func_2()
+</pre>
+Ez azért van így, mert a dekoráló függvénybe fixen belekódoltuk, hogy melyik függvényt dekorálja. Ezenkívül az is körülményes lesz, amikor
+több dekorátort is alkalmaznunk kell, pl. logolni is akarunk és időt is szeretnénk mérni. Az ilyen szituáció nagyon gyakran előfordul
+a gyakorlatban.
+</p>
+<h2 id='pythonic_second'>Második béna kísérlet</h2>
+<p>
+Ha nem akarjuk fixen belekódolni a dekorátorba az illető függvényt, akkor paraméterként kell neki átadni.
+
+<pre>
+def func():
+    print('*** I am func!')
+
+def decorator(funcToBeDecorated):
+    print('I am decorated, I do something BEFORE I call the real function')
+    funcToBeDecorated()
+    print('I am decorated, I do something AFTER I called the real function')
+
+decorator(func)
+</pre>
+Ha a decorator függvényt felhívjuk, akkor a kívánt működést kapjuk, de ez nem felel meg nekünk, hiszen a func <b>összes</b> hívásának helyén át kellene
+írnunk a nevét decorator-ra. A func nevet pedig nem tudjuk hozzárendelni a decorator függvényhez, mert annak van egy olyan paramétere, ami func-nak nincs.
+</p>
+<p>
+Zsákutca.  Ezen a ponton kellene a történetbe egy megmentő...
+</p>
+<h2 id='closure'>Színre lép a closure</h2>
+<p>
+...aki fel is bukkan rögtön Closure felügyelő személyében.
+</p>
+<p>
+Olyan closure-t fogunk használni a probléma megoldására, amely a becsomagolandó függvényt kapja bemenő paraméterként. Az általa visszaadott belső függvény
+mindig emlékszik az elkészülésekori környezetére, tehát a becsomagolandó függvényre is. A dekorátortól visszakapott függvénynek adhatjuk ugyanazt a nevet,
+mint az eredetinek, így ugyanazon függvényhívás most már az új működést fogja produkálni.
+<pre>
+def func():
+    print('*** I am func!')
+
+def decorator(funcToBeDecorated):
+    def decorated():
+        print('I am decorated, I do something BEFORE I call the real function')
+        funcToBeDecorated()
+        print('I am decorated, I do something AFTER I called the real function')
+
+    return decorated
+
+func = decorator(func)
+func()
+<div class='result'>
+# I am decorator 1 BEFORE I call the real func
+# *** I am func!
+# I am decorator 1 AFTER I called the real func
+</div>
+</pre>
+Ha vissza akarunk térni az eredeti függvényhez, akkor csak ezt a sort kell törölni:
+
+<pre>
+func = decorator(func)
+</pre>
+</p>
+<h4 id='q_1' class='question'>REJTVÉNY</h4>
+<p>
+A dekorálás előtt ráállítunk egy változót az eredeti függvényre, aztán a dekorálás után végrehajtjuk (felhívjuk) ezt a változót:
+
+<pre class='pale'>
+def func():
+    print('*** I am func!')
+
+def decorator(funcToBeDecorated):
+    def decorated():
+        print('I am decorated, I do something BEFORE I call the real function')
+        funcToBeDecorated()
+        print('I am decorated, I do something AFTER I called the real function')
+
+    return decorated
+
+<span style='color:blue;'>f = func</span>
+func = decorator(func)
+
+<span style='color:blue;'>f()  # ???</span>
+</pre>
+<span style='color:indigo;'>Mi fog végrehajtódni?</span> <span class='question'>Az eredeti, vagy a dekorált függvény?</span>
+<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">Megoldás</button>
+<div id='sol_1' class='solution'>
+Az eredeti. A dekoráló függvény által visszaadott változó egy másik memóriacímen lévő másik objektumra mutat, mint az eredeti:
+
+<pre>
+...
+f = func
+func = decorator(func)
+
+print(func)
+print(f)
+<div class='result'>
+# &lt;function decorator.&lt;locals>.decorated at 0x02888E<span class='emph_1'>40</span>>
+# &lt;function func at 0x02888E<span class='emph_1'>D0</span>>
+</div>
+</pre>
+
+</div>
+</p>
+<h2 id='multiple_decorators'>Többszörös dekorálás</h2>
+<p>
+</p>
+Nagyon könnyen tudunk többszörös dekorálást létrehozni tetszőleges sorrendben:
+
+<pre>
+<span class='pale'>
+def func():
+    print('*** I am func!')
+
+def decorator_1(funcToBeDecorated):
+    def decorated():
+        print('I am decorator 1 BEFORE I call the real func')
+        funcToBeDecorated()
+        print('I am decorator 1 AFTER I called the real func')
+
+    return decorated
+
+func = decorator_1(func)
+</span>
+def decorator_2(funcToBeDecorated):
+    def decorated():
+        print('I am decorator 2 BEFORE I call the real func')
+        funcToBeDecorated()
+        print('I am decorator 2 AFTER I called the real func')
+
+    return decorated
+
+func = decorator_2(func) # double decoration
+func()
+<div class='result'>
+# I am decorator 2 BEFORE I call the real func
+# I am decorator 1 BEFORE I call the real func
+# *** I am func!
+# I am decorator 1 AFTER I called the real func
+# I am decorator 2 AFTER I called the real func
+</div>
+</pre>
+Ha fordított sorrendben akarjuk alkalmazni a dekorátorokat, akkor csak ennyit kell tenni:
+
+<pre>
+...
+func = decorator_<span class='emph_1'>2</span>(func)
+func = decorator_<span class='emph_1'>1</span>(func)
+
+func()
+<div class='result'>
+# I am decorator <span class='emph_1'>1</span> BEFORE I call the real func
+# I am decorator <span class='emph_1'>2</span> BEFORE I call the real func
+# *** I am func!
+# I am decorator <span class='emph_1'>2</span> AFTER I called the real func
+# I am decorator <span class='emph_1'>1</span> AFTER I called the real func
+</div>
+</pre>
+Ha valamelyiket el akarjuk hagyni:
+<pre>
+...
+# func = decorator_1(func)
+func = decorator_2(func)
+</pre>
+</p>
+<h2 id='return_value'>Visszatérő érték</h2>
+<p>
+Az eddigi példákban az áttekinthetőség érdekében a becsomagolt függvénynek nem volt visszatérő értéke &ndash; kezeljük most le azt is:
+
+<pre>
+<span class='pale'>def func():
+    print('*** I am func!')
+    return 999
+
+def decorator(funcToBeDecorated):
+    def decorated():
+        print('I am decorated, I do something BEFORE I call the real function')</span>
+        ret_val = <span class='pale'>funcToBeDecorated()</span>
+        <span class='pale'>print('I am decorated, I do something AFTER I called the real function')</span>
+
+        return ret_val
+
+    <span class='pale'>return decorated
+
+func = decorator(func)
+
+</span>ret_val = <span class='pale'>func()</span>
+print('func returned:',ret_val)
+<div class='result'>
+# I am decorated, I do something BEFORE I call the real function
+# *** I am func!
+# I am decorated, I do something AFTER I called the real function
+# <b style='color:green;'>func returned: 999</b>
+</div>
+</pre>
+</p>
+<h2 id='func_args'>Függvényparaméterek kezelése</h2>
+<p>
+Az eddigiekben &ndash; a példák egyszerűsége kedvéért &ndash; csak olyan függvényeket dekoráltunk, amelyeknek nem volt egyetlen paramétere sem. Nem okoz gondot
+az sem, ha tetszőleges függvényt szeretnénk dekorálni. A belső függvényben meg kell engednünk tetszőleges számú pozícionális és kulcsszavas paramétert:
+
+<pre>
+def func_1():
+    print('*** I am func_1!')
+
+def func_2(posParam, kwParam1 = 'default'):
+    print('*** I am func_2, aParam =',posParam,'kwParam1 =',kwParam1)
+
+def decorator_1(funcToBeDecorated):
+    def decorated(<span class='emph_1'>*args, **kwargs</span>):
+        print('I am decorator 1 BEFORE I call',funcToBeDecorated.__name__)
+        ret_val = funcToBeDecorated(<span class='emph_1'>*args, **kwargs</span>)
+        print('I am decorator 1 AFTER I called',funcToBeDecorated.__name__)
+
+        return ret_val
+
+    return decorated
+
+func_1 = decorator_1(func_1)
+func_2 = decorator_1(func_2)
+
+func_1()
+print()
+func_2(100)
+print()
+func_2(200, kwParam1 = 'HI THERE')
+<div class='result'>
+# I am decorator 1 BEFORE I call func_1
+# *** I am func_1!
+# I am decorator 1 AFTER I called func_1
+#
+# I am decorator 1 BEFORE I call func_2
+# *** I am func_2, aParam = 100 kwParam1 = default
+# I am decorator 1 AFTER I called func_2
+#
+# I am decorator 1 BEFORE I call func_2
+# *** I am func_2, aParam = 200 kwParam1 = HI THERE
+# I am decorator 1 AFTER I called func_2
+</div>
+</pre>
+</p>
+<h2 id='pie'>Pie (kukacos) dekorátor szintaktika</h2>
+<p>
+A függvénydekorátor receptje:
+
+<ol>
+<li>végy egy függvényt, amely egy másik függvényt kap paraméterül</li>
+<li>tartalmaz egy belső függvényt, amely a paraméterül kapott függvényt általában felhívja</li>
+<li>és a belső függvényt szolgáltatja visszatérő értékként;</li>
+<br>
+<li style='color:blue; font-style: italic;'>a dekorátor függvényt hívd fel, paraméterként add oda neki a dekorálandó függvényt és</li>
+<li style='color:blue; font-style: italic;'>rendeld hozzá a dekorálandó függvény nevét a dekorátor által visszaadott függvényhez.</li>
+</ol>
+
+Az utolsó két lépésre:
+
+<pre>
+func = decorator(func)
+</pre>
+bevezettek egy rövidített írásmódot:
+<pre>
+<span class='pale'>def decorator_1(funcToBeDecorated):
+    def decorated():
+        print('I am decorator 1 BEFORE I call the real func')
+        ret_val = funcToBeDecorated()
+        print('I am decorator 1 AFTER I called the real func')
+
+        return ret_val
+
+    return decorated</span>
+
+<span class='emph_1'>@decorator_1</span>
+def func():
+    print('*** I am func!')
+    return 999
+
+<span class='pale' style='text-decoration: line-through;'>func = decorator(func)</span>
+
+func()
+<div class='result'>
+# I am decorator 1 BEFORE I call the real func
+# *** I am func!
+# I am decorator 1 AFTER I called the real func
+</div>
+</pre>
+
+A <span class='emph_4'>@decorator_1</span> jelölés azt eredményezi, hogy amikor a futtató rendszer ehhez a ponthoz ér, akkor a háttérben elkészíti a függvény dekorált
+változatát. Az angol elnevezése ennek a szintaktikának <span class='emph_4'>pie&nbsp;decorator</span>, a "kukacos" elnevezés csak tőlem származik, tudós emberek
+jelenlétében ne használja az olvasó, vagy ha mégis, ne hivatkozzon rám.
+</p>
+<p>
+Első ránézésre ez csak egy kis szintaktikai egyszerűsítésnek tűnik &ndash; syntactic sugar &ndash; ami arra jó, hogy egy kicsit kevesebbet kelljen gépelnünk.
+Valójában az egyszerűsítés olyan nagymértékű, hogy minőségi ugrást jelent a program olvashatóságában &ndash; ezért aztán Python programokban rengeteg helyen
+felbukkan. Érdemes alaposan megérteni!
+</p>
+<p>
+Természetesen több dekorátort is alkalmazhatunk:
+
+<pre>
+<span class='pale'>
+def decorator_1(funcToBeDecorated):
+    def decorated():
+        print('I am decorator 1 BEFORE I call the real func')
+        ret_val = funcToBeDecorated()
+        print('I am decorator 1 AFTER I called the real func')
+
+        return ret_val
+
+    return decorated
+</span>
+def decorator_2(funcToBeDecorated):
+    def decorated():
+        print('I am decorator 2 BEFORE I call the real func')
+        ret_val = funcToBeDecorated()
+        print('I am decorator 2 AFTER I called the real func')
+
+        return ret_val
+
+    return decorated
+
+@decorator_2
+<span class='pale'>@decorator_1
+def func():
+    print('*** I am func!')
+    return 999
+
+func()</span>
+<div class='result'>
+# I am decorator 2 BEFORE I call the real func
+# I am decorator 1 BEFORE I call the real func
+# *** I am func!
+# I am decorator 1 AFTER I called the real func
+# I am decorator 2 AFTER I called the real func
+</div>
+</pre>
+Ha fordított sorrendben akarjuk a dekorátorokat alkalmazni, nyilván így kell eljárnunk:
+
+<pre>
+...
+@decorator_<span class='emph_1'>1</span>
+@decorator_<span class='emph_1'>2</span>
+func()
+<div class='result'>
+# I am decorator <span class='emph_1'>1</span> BEFORE I call the real func
+# I am decorator <span class='emph_1'>2</span> BEFORE I call the real func
+# *** I am func!
+# I am decorator <span class='emph_1'>2</span> AFTER I called the real func
+# I am decorator <span class='emph_1'>1</span> AFTER I called the real func
+</div>
+</pre>
+</p>
+<h2 id='class_methods'>Objektum-metódusok dekorálása</h2>
+<p>
+Természetesen semmi akadálya nincs annak, hogy nemcsak szabad függvényekre, hanem osztályok metódusaira is alkalmazzuk a megismert mechanizmust.
+
+<pre>
+def decorator_1(funcToBeDecorated):
+    def decorated(*args, **kwargs):
+        print('I am decorator 1 BEFORE I call',funcToBeDecorated.__qualname__)
+        ret_val = funcToBeDecorated(*args, **kwargs)
+        print('I am decorator 1 AFTER I called',funcToBeDecorated.__qualname__)
+
+        return ret_val
+
+    return decorated
+
+class MyClass():
+    def method_1(self):
+        print('*** I am method_1!')
+        return 999
+
+MyClass.method_1 = decorator_1(MyClass.method_1)
+
+my_obj = MyClass()
+my_obj.method_1()
+<div class='result'>
+# I am decorator 1 BEFORE I call MyClass.method_1
+# *** I am func_1!
+# I am decorator 1 AFTER I called MyClass.method_1
+</div>
+</pre>
+Ugyanez kukacosan:
+
+<pre>
+<span class='pale'>
+def decorator_1(funcToBeDecorated):
+    def decorated(*args, **kwargs):
+        print('I am decorator 1 BEFORE I call',funcToBeDecorated.__qualname__)
+        ret_val = funcToBeDecorated(*args, **kwargs)
+        print('I am decorator 1 AFTER I called',funcToBeDecorated.__qualname__)
+
+        return ret_val
+
+    return decorated
+
+class MyClass():</span>
+    @decorator_1
+    <span class='pale'>def method_1(self):
+        print('*** I am method_1!')
+        return 999
+
+<span style='text-decoration: line-through;'>MyClass.method_1 = decorator_1(MyClass.method_1)</span>
+
+<span class='pale'>my_obj = MyClass()
+my_obj.method_1()</span>
+</pre>
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://realpython.com/primer-on-python-decorators/' target='_blank'>Primer on Python Decorators</a> RealPython<br>
+<a href='https://www.python-course.eu/python3_decorators.php' target='_blank'>Decorators</a> python-course.eu<br>
+<a href='https://www.thecodeship.com/patterns/guide-to-python-function-decorators/' target='_blank'>A guide to Python's function decorators</a> thecodeship.com<br>
+<a href='https://www.geeksforgeeks.org/function-decorators-in-python-set-1-introduction/' target='_blank'>Function Decorators in Python | Set 1 (Introduction)</a> geeksforgeeks.org<br>
+<a href='https://www.geeksforgeeks.org/decorators-in-python/' target='_blank'>Decorators in Python</a> geeksforgeeks.org<br>
+<a href='https://refactoring.guru/design-patterns/decorator' target='_blank'>Decorator</a> refactoring.guru<br>
+<a href='https://refactoring.guru/design-patterns/decorator/python/example' target='_blank'>Decorator in Python</a> refactoring.guru<br>
+</p>
+<p>
+<b>Könyvek</b>
+</p>
+<p>
+Dan Bader: Python Tricks - The Book<br>
+<i>&nbsp;&nbsp;The Power of Decorators</i>
+</p>
+<p>
+Mark Lutz: Learning Python<br>
+<i>&nbsp;&nbsp;Decorators and Metaclasses: Part 1</i><br>
+<i>&nbsp;&nbsp;Decorators</i>
+</p>
+<p>
+David Beazley, Brian K. Jones: Python Cookbook<br>
+<i>&nbsp;&nbsp;Metaprogramming fejezet</i><br>
+</p>
+<p>
+Alex Martelli, Anna Ravenscroft, Steve Holden: Python in a Nutshell<br>
+<i>&nbsp;&nbsp;Decorators</i>
+</p>
+<p>
+Luciano Ramalho: Fluent Python<br>
+<i>&nbsp;&nbsp;Function Decorators and Closures</i><br>
+</p>
+<p>
+<b>Videók</b>
+</p>
+<p>
+<a href='https://www.youtube.com/watch?v=FsAPt_9Bf3U' target='_blank'>Python Tutorial: Decorators - Dynamically Alter The Functionality Of Your Functions</a>
+Corey Schaefer<br>
+</p>
+</div>
+
+<script>
+function toggle_from_none(ID) {
+  var e = document.getElementById(ID), no_block = e.style.display !== 'block',
+      b = document.getElementById('b_' + ID);
+
+  e.style.display = no_block ? 'block' : 'none';
+  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+}
+</script>
+</body>
+</html>
