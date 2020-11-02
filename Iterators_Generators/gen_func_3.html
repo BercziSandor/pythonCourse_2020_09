@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-<title>Generátor  függvények 3.rész</title>
+<title>GenerĂˇtor  fĂĽggvĂ©nyek 3.rĂ©sz</title>
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
@@ -21,29 +21,29 @@
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
-<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.20 &mdash;</p>
+<span style='float:right;font-style:italic;'>Nemes MihĂˇly &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; UtolsĂł mĂłdosĂ­tĂˇs: 2020.09.20 &mdash;</p>
 </div>
-<h1>Generátor  függvények 3.rész<br>
-<span style='font-size:70%; color:gray;'>&bull; Adat és parancs átvitele &bull;</span></h1>
+<h1>GenerĂˇtor  fĂĽggvĂ©nyek 3.rĂ©sz<br>
+<span style='font-size:70%; color:gray;'>&bull; Adat Ă©s parancs Ăˇtvitele &bull;</span></h1>
 <ul class='contents'>
-<li><a style='color: red' href='#data_and_status_yielded'>A generátor adatot ÉS státuszt ad vissza yield-del</a></li>
-<li><a style='color: red' href='#command_sent'>A generátor parancsot kap send()-del</a></li>
-<li><a style='color: red' href='#command_and_data_sent'>A generátor adatot ÉS parancsot kap send()-del</a></li>
-<li><a style='color: red' href='#summary'>Összefoglalás</a></li>
-<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNYEK</a></li>
+<li><a style='color: red' href='#data_and_status_yielded'>A generĂˇtor adatot Ă‰S stĂˇtuszt ad vissza yield-del</a></li>
+<li><a style='color: red' href='#command_sent'>A generĂˇtor parancsot kap send()-del</a></li>
+<li><a style='color: red' href='#command_and_data_sent'>A generĂˇtor adatot Ă‰S parancsot kap send()-del</a></li>
+<li><a style='color: red' href='#summary'>Ă–sszefoglalĂˇs</a></li>
+<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVĂ‰NYEK</a></li>
 <li><a style='color: red' href='#literature'>Irodalom</a></li>
 </ul>
 
-<h2 id='data_and_status_yielded'>A generátor adatot ÉS státuszt ad vissza yield-del</h2>
+<h2 id='data_and_status_yielded'>A generĂˇtor adatot Ă‰S stĂˇtuszt ad vissza yield-del</h2>
 <p>
-Mit tudunk tenni, ha a generátor valami nem végzetes hibát érzékel, amiről értesíteni akarja a hívót? Kivételt nem dobhat a generátor, mert azzal be is
-fejeződne a működése. A megoldás az, hogy valamilyen adatstruktúrát ad vissza, amelyben a státuszjelzést is el tudja helyezni a tényleges adat mellett. Nekem
-erre a célra nagyon bevált a dictionary; nézzünk meg egy példát, ahol ezt alkalmazzuk.
+Mit tudunk tenni, ha a generĂˇtor valami nem vĂ©gzetes hibĂˇt Ă©rzĂ©kel, amirĹ‘l Ă©rtesĂ­teni akarja a hĂ­vĂłt? KivĂ©telt nem dobhat a generĂˇtor, mert azzal be is
+fejezĹ‘dne a mĹ±kĂ¶dĂ©se. A megoldĂˇs az, hogy valamilyen adatstruktĂşrĂˇt ad vissza, amelyben a stĂˇtuszjelzĂ©st is el tudja helyezni a tĂ©nyleges adat mellett. Nekem
+erre a cĂ©lra nagyon bevĂˇlt a dictionary; nĂ©zzĂĽnk meg egy pĂ©ldĂˇt, ahol ezt alkalmazzuk.
 </p>
 <p>
-A generátorfüggvényünknek az a feladata, hogy a hívótól kapott számhoz adjon hozzá 100-at; ha nem megfelelő típusú adatot kapott, akkor ezt jelezze vissza és
-várja a következő adatot.
+A generĂˇtorfĂĽggvĂ©nyĂĽnknek az a feladata, hogy a hĂ­vĂłtĂłl kapott szĂˇmhoz adjon hozzĂˇ 100-at; ha nem megfelelĹ‘ tĂ­pusĂş adatot kapott, akkor ezt jelezze vissza Ă©s
+vĂˇrja a kĂ¶vetkezĹ‘ adatot.
 
 <pre>
 def g_func():
@@ -82,11 +82,11 @@ print('CALLER received:', ret_dict)
 </div>
 </pre>
 </p>
-<h2 id='command_sent'>A generátor parancsot kap send()-del</h2>
+<h2 id='command_sent'>A generĂˇtor parancsot kap send()-del</h2>
 <p>
-Láttuk <a href='#throw_into' target='_blank'>fentebb</a>, hogy amikor a generátor az adatforrás, akkor problémás neki throw() segítségével parancsot küldeni,
-mert ekkor egy yield mintegy eltűnik. Az adatforrás típusú generátornak viszont könnyen tudunk parancsokat küldeni a send() metódussal. A következő példában
-a generátor állítja elő az értékeket és a vezérlő paraméter függvényében ezeket vagy változatlanul, vagy duplázva adja át a hívónak.
+LĂˇttuk <a href='#throw_into' target='_blank'>fentebb</a>, hogy amikor a generĂˇtor az adatforrĂˇs, akkor problĂ©mĂˇs neki throw() segĂ­tsĂ©gĂ©vel parancsot kĂĽldeni,
+mert ekkor egy yield mintegy eltĹ±nik. Az adatforrĂˇs tĂ­pusĂş generĂˇtornak viszont kĂ¶nnyen tudunk parancsokat kĂĽldeni a send() metĂłdussal. A kĂ¶vetkezĹ‘ pĂ©ldĂˇban
+a generĂˇtor ĂˇllĂ­tja elĹ‘ az Ă©rtĂ©keket Ă©s a vezĂ©rlĹ‘ paramĂ©ter fĂĽggvĂ©nyĂ©ben ezeket vagy vĂˇltozatlanul, vagy duplĂˇzva adja Ăˇt a hĂ­vĂłnak.
 
 <pre>
 def g_func(startCommand):
@@ -127,11 +127,11 @@ while True:
 </div>
 </pre>
 </p>
-<h2 id='command_and_data_sent'>A generátor adatot ÉS parancsot kap send()-del</h2>
+<h2 id='command_and_data_sent'>A generĂˇtor adatot Ă‰S parancsot kap send()-del</h2>
 <p>
-A nyelő típusú generátor az adat mellett kaphat a hívótól parancsokat is; <a href='#throw_db_example' target='_blank'>fentebb</a> láttunk példát arra, hogy
-a parancsokat lehet throw() segítségével továbbítani a generátornak. Nézzünk most meg egy olyan megoldást ugyanarra a feladatra, ahol a send() szolgál a parancs
-továbbítására is.
+A nyelĹ‘ tĂ­pusĂş generĂˇtor az adat mellett kaphat a hĂ­vĂłtĂłl parancsokat is; <a href='#throw_db_example' target='_blank'>fentebb</a> lĂˇttunk pĂ©ldĂˇt arra, hogy
+a parancsokat lehet throw() segĂ­tsĂ©gĂ©vel tovĂˇbbĂ­tani a generĂˇtornak. NĂ©zzĂĽnk most meg egy olyan megoldĂˇst ugyanarra a feladatra, ahol a send() szolgĂˇl a parancs
+tovĂˇbbĂ­tĂˇsĂˇra is.
 
 <pre>
 def g_db_writer():
@@ -204,47 +204,47 @@ print('** caller: I closed down the db writer')
 # ** caller: I closed down the db writer
 </div>
 </pre>
-Természetesen a generátor vissza tudja jelezni a hívónak, hogy ha nem sikerült a művelet, akkor milyen hibajelzést kapott az adatbáziskezelőtől; erre a célra
-itt is jól alkalmazható egy dictionary, ahogy <a href='#data_and_status_yielded' target='_blank'>ebben</a> a példában láttuk.
+TermĂ©szetesen a generĂˇtor vissza tudja jelezni a hĂ­vĂłnak, hogy ha nem sikerĂĽlt a mĹ±velet, akkor milyen hibajelzĂ©st kapott az adatbĂˇziskezelĹ‘tĹ‘l; erre a cĂ©lra
+itt is jĂłl alkalmazhatĂł egy dictionary, ahogy <a href='#data_and_status_yielded' target='_blank'>ebben</a> a pĂ©ldĂˇban lĂˇttuk.
 </p>
-<h2 id='summary'>Összefoglalás</h2>
+<h2 id='summary'>Ă–sszefoglalĂˇs</h2>
 <p>
-A két oldal közötti kommunikáció eszközei:
+A kĂ©t oldal kĂ¶zĂ¶tti kommunikĂˇciĂł eszkĂ¶zei:
 <pre>
-                                  <b style='color: black;'>HÍVÓ                                 GENERÁTOR</b>
-   <span style='color:green;font-style:italic;'>továbbléptet</span>                   next()                   ----->
-   <span style='color:green;font-style:italic;'>továbbléptet és <b>ADATOT</b> küld</span>    send()                   ----->
-   <span style='color:green;font-style:italic;'>lezár</span>                          GeneratorExit, close()   <span class='emph_1'>=====></span>
-   <span style='color:green;font-style:italic;'>üzenetet küld</span>                  throw()                  <span class='emph_1'>=====></span>
-                                                                                      <span style='color:green;font-style:italic;'>Az ADAT persze jelenthet vezérlő adatot is (parancsot, státuszjelzést).</span>
-   <span style='color:green;font-style:italic;'><b>ADATOT</b> küld, készenlétet jelez</span>                          <-----      yield
-   <span style='color:green;font-style:italic;'>lezárás-üzenetet küld</span>                                   <span class='emph_1'><=====</span>      StopIteration
-   <span style='color:green;font-style:italic;'>lezárás-üzenetet küld</span>                                   <span class='emph_1'><=====</span>      return
-   <span style='color:green;font-style:italic;'>üzenetet küld (csak egyszer)</span>                            <span class='emph_1'><=====</span>      raise
+                                  <b style='color: black;'>HĂŤVĂ“                                 GENERĂTOR</b>
+   <span style='color:green;font-style:italic;'>tovĂˇbblĂ©ptet</span>                   next()                   ----->
+   <span style='color:green;font-style:italic;'>tovĂˇbblĂ©ptet Ă©s <b>ADATOT</b> kĂĽld</span>    send()                   ----->
+   <span style='color:green;font-style:italic;'>lezĂˇr</span>                          GeneratorExit, close()   <span class='emph_1'>=====></span>
+   <span style='color:green;font-style:italic;'>ĂĽzenetet kĂĽld</span>                  throw()                  <span class='emph_1'>=====></span>
+                                                                                      <span style='color:green;font-style:italic;'>Az ADAT persze jelenthet vezĂ©rlĹ‘ adatot is (parancsot, stĂˇtuszjelzĂ©st).</span>
+   <span style='color:green;font-style:italic;'><b>ADATOT</b> kĂĽld, kĂ©szenlĂ©tet jelez</span>                          <-----      yield
+   <span style='color:green;font-style:italic;'>lezĂˇrĂˇs-ĂĽzenetet kĂĽld</span>                                   <span class='emph_1'><=====</span>      StopIteration
+   <span style='color:green;font-style:italic;'>lezĂˇrĂˇs-ĂĽzenetet kĂĽld</span>                                   <span class='emph_1'><=====</span>      return
+   <span style='color:green;font-style:italic;'>ĂĽzenetet kĂĽld (csak egyszer)</span>                            <span class='emph_1'><=====</span>      raise
 </pre>
-Az "adat" persze jelenthet vezérlő adatot is (parancsot, státuszjelzést).
+Az "adat" persze jelenthet vezĂ©rlĹ‘ adatot is (parancsot, stĂˇtuszjelzĂ©st).
 </p>
 <p>
-Fontos tudatosítani:
+Fontos tudatosĂ­tani:
 
 <div class='emph_box_1' style='width:70%;'>
-A yield nem csak arra szolgál, hogy adatot adjon át a hívónak, hanem jelzi is, hogy a generátor készen áll a következő üzenet fogadására.
+A yield nem csak arra szolgĂˇl, hogy adatot adjon Ăˇt a hĂ­vĂłnak, hanem jelzi is, hogy a generĂˇtor kĂ©szen Ăˇll a kĂ¶vetkezĹ‘ ĂĽzenet fogadĂˇsĂˇra.
 </div>
-A generátorok kategorizálhatók a tényleges <span class='emph_1'>adat</span>forgalom iránya szerint (hiba- és státuszjelzések persze mindkét irányban mehetnek):
+A generĂˇtorok kategorizĂˇlhatĂłk a tĂ©nyleges <span class='emph_1'>adat</span>forgalom irĂˇnya szerint (hiba- Ă©s stĂˇtuszjelzĂ©sek persze mindkĂ©t irĂˇnyban mehetnek):
 
 <ul>
-<li>Nyelő típusú: a hívótól kapott adattal valamit csinál, tipikusan fájlban, adatbázisban eltárolja, hálózati kapcsolaton kiküldi.</li>
-<li>Forrás típusú: ő állítja elő az adatot, pl. egy adatbázisból kiolvasva és átadja a hívónak.</li>
-<li>Kétirányú: a hívótól kapja az adatot és valamilyen műveletek után vissza is küldi neki.</li>
+<li>NyelĹ‘ tĂ­pusĂş: a hĂ­vĂłtĂłl kapott adattal valamit csinĂˇl, tipikusan fĂˇjlban, adatbĂˇzisban eltĂˇrolja, hĂˇlĂłzati kapcsolaton kikĂĽldi.</li>
+<li>ForrĂˇs tĂ­pusĂş: Ĺ‘ ĂˇllĂ­tja elĹ‘ az adatot, pl. egy adatbĂˇzisbĂłl kiolvasva Ă©s Ăˇtadja a hĂ­vĂłnak.</li>
+<li>KĂ©tirĂˇnyĂş: a hĂ­vĂłtĂłl kapja az adatot Ă©s valamilyen mĹ±veletek utĂˇn vissza is kĂĽldi neki.</li>
 </ul>
 </p>
-<h2 id='q_1' class='question'>REJTVÉNYEK</h2>
+<h2 id='q_1' class='question'>REJTVĂ‰NYEK</h2>
 <h2 class='question'>&#9312;</h2>
 <p>
-Adott a következő állítás.
+Adott a kĂ¶vetkezĹ‘ ĂˇllĂ­tĂˇs.
 </p>
 <p>
-Egy generátorban felesleges az  utolsó yield értékét lekérdezni, pl.:
+Egy generĂˇtorban felesleges az  utolsĂł yield Ă©rtĂ©kĂ©t lekĂ©rdezni, pl.:
 
 <pre>
 def gen_1():
@@ -254,10 +254,10 @@ def gen_1():
     return
 </pre>
 <span class='question'>Igaz ez?</span>
-<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">Megoldás</button>
+<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">MegoldĂˇs</button>
 <div id='sol_1' class='solution'>
-Nem egészen. Ezt az értéket a következő next() vagy send() hívásnál kapja meg a generátor. Ekkor még csinálhat különböző lezáró műveleteket, de a visszatérő
-értéket már csak a StopIteration paramétereként kapja meg a hívó. Példa:
+Nem egĂ©szen. Ezt az Ă©rtĂ©ket a kĂ¶vetkezĹ‘ next() vagy send() hĂ­vĂˇsnĂˇl kapja meg a generĂˇtor. Ekkor mĂ©g csinĂˇlhat kĂĽlĂ¶nbĂ¶zĹ‘ lezĂˇrĂł mĹ±veleteket, de a visszatĂ©rĹ‘
+Ă©rtĂ©ket mĂˇr csak a StopIteration paramĂ©terekĂ©nt kapja meg a hĂ­vĂł. PĂ©lda:
 
 <pre>
 def gen_1():
@@ -279,8 +279,8 @@ except StopIteration as e:
 # StopIteration: Good-bye, world
 </div>
 </pre>
-A lezáró műveleteket tehát elhelyezhetjük a generátorban az utolsó yield után, de ez nem célszerű megoldás. Azért nem, mert ha a hívó hamarabb abbahagyja a
-generátor lekérdezését, akkor a lezáró műveletek nem hajtódnak végre. <b>Mindig</b> a GeneratorExit kivétel lekezelésével végezzük a lezárást!
+A lezĂˇrĂł mĹ±veleteket tehĂˇt elhelyezhetjĂĽk a generĂˇtorban az utolsĂł yield utĂˇn, de ez nem cĂ©lszerĹ± megoldĂˇs. AzĂ©rt nem, mert ha a hĂ­vĂł hamarabb abbahagyja a
+generĂˇtor lekĂ©rdezĂ©sĂ©t, akkor a lezĂˇrĂł mĹ±veletek nem hajtĂłdnak vĂ©gre. <b>Mindig</b> a GeneratorExit kivĂ©tel lekezelĂ©sĂ©vel vĂ©gezzĂĽk a lezĂˇrĂˇst!
 
 <pre>
 def gen_1():
@@ -290,7 +290,7 @@ def gen_1():
     except GeneratorExit:
         print('generator closing down')
 </pre>
-Ha így járunk el, akkor viszont tényleg felesleges az utolsó yield értékét lekérdezni.
+Ha Ă­gy jĂˇrunk el, akkor viszont tĂ©nyleg felesleges az utolsĂł yield Ă©rtĂ©kĂ©t lekĂ©rdezni.
 </div>
 </p>
 <h2 class='question'>&#9313;</h2>
@@ -327,10 +327,10 @@ ez lesz a kimenet:
 # Exception ignored in: &lt;generator object g_func at 0x028A6900>
 </div>
 </pre>
-<span class='question'>Miért?</span>
-<button id='b_sol_2' class='sol_button' onclick="toggle_from_none('sol_2')">Megoldás</button>
+<span class='question'>MiĂ©rt?</span>
+<button id='b_sol_2' class='sol_button' onclick="toggle_from_none('sol_2')">MegoldĂˇs</button>
 <div id='sol_2' class='solution'>
-Miután a generátor elkapta a GeneratorExit kivételt, folytatja a működést és ismét kiad egy yield-et. Helyesen:
+MiutĂˇn a generĂˇtor elkapta a GeneratorExit kivĂ©telt, folytatja a mĹ±kĂ¶dĂ©st Ă©s ismĂ©t kiad egy yield-et. Helyesen:
 
 <pre>
 def g_func():
@@ -355,7 +355,7 @@ def g_func():
 <i>&nbsp;&nbsp;send Method /Coroutines</i><br>
 <a href='https://jeffknupp.com/blog/2013/04/07/improve-your-python-yield-and-generators-explained/' target='_blank'>Improve Your Python: 'yield' and Generators
 Explained</a> jeffknupp.com<br>
-<a href='https://stackoverflow.com/questions/19302530/python-generator-send-function-purpose' target='_blank'>python generator “send” function purpose?</a>
+<a href='https://stackoverflow.com/questions/19302530/python-generator-send-function-purpose' target='_blank'>python generator â€śsendâ€ť function purpose?</a>
 Stackoverflow<br>
 <a href='https://stackabuse.com/python-generators/' target='_blank'>Python Generators</a> stackabuse.com<br>
 <i>&nbsp;&nbsp;Sending Values to Generators</i>
@@ -367,7 +367,7 @@ function toggle_from_none(ID) {
       b = document.getElementById('b_' + ID);
 
   e.style.display = no_block ? 'block' : 'none';
-  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+  b.textContent  = no_block ? 'MegoldĂˇs elrejtĂ©se' : 'MegoldĂˇs';
 }
 </script>
 </body>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-<title>Generátorok előnyei</title>
+<title>GenerĂˇtorok elĹ‘nyei</title>
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
@@ -19,29 +19,29 @@
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
-<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.03 &mdash;</p>
+<span style='float:right;font-style:italic;'>Nemes MihĂˇly &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; UtolsĂł mĂłdosĂ­tĂˇs: 2020.09.03 &mdash;</p>
 </div>
-<h1>Generátorok előnyei</h1>
+<h1>GenerĂˇtorok elĹ‘nyei</h1>
 <ul class='contents'>
-<li><a style='color: red' href='#simplicity'>Egyszerűség</a></li>
-<li><a style='color: red' href='#combinations'>Kombinálhatóság, újrafelhasználhatóság</a></li>
-<li><a style='color: red' href='#shrink_dimensions'>Többdimenziós struktúrák bejárása</a></li>
-<li><a style='color: red' href='#testability'>Tesztelhetőség</a></li>
-<li><a style='color: red' href='#infinite_lists'>Ismeretlen hosszúságú (végtelen) sorozatok kezelése</a></li>
-<li><a style='color: red' href='#memory_saving'>Memória-takarékosság</a></li>
-<li><a style='color: red' href='#time_saving'>Idő-takarékosság</a>
+<li><a style='color: red' href='#simplicity'>EgyszerĹ±sĂ©g</a></li>
+<li><a style='color: red' href='#combinations'>KombinĂˇlhatĂłsĂˇg, ĂşjrafelhasznĂˇlhatĂłsĂˇg</a></li>
+<li><a style='color: red' href='#shrink_dimensions'>TĂ¶bbdimenziĂłs struktĂşrĂˇk bejĂˇrĂˇsa</a></li>
+<li><a style='color: red' href='#testability'>TesztelhetĹ‘sĂ©g</a></li>
+<li><a style='color: red' href='#infinite_lists'>Ismeretlen hosszĂşsĂˇgĂş (vĂ©gtelen) sorozatok kezelĂ©se</a></li>
+<li><a style='color: red' href='#memory_saving'>MemĂłria-takarĂ©kossĂˇg</a></li>
+<li><a style='color: red' href='#time_saving'>IdĹ‘-takarĂ©kossĂˇg</a>
 <ul>
-<li><a style='color: red' href='#speed_problems'>...de néha lassítás</a></li>
+<li><a style='color: red' href='#speed_problems'>...de nĂ©ha lassĂ­tĂˇs</a></li>
 </ul>
 </li>
 <li><a style='color: red' href='#literature'>Irodalom</a></li>
 </ul>
-<h2 id='simplicity'>Egyszerűség</h2>
+<h2 id='simplicity'>EgyszerĹ±sĂ©g</h2>
 <p>
-Nagyon sok olyan feladat (vagy részfeladat) van, amikor elemek sorozatát nem kell eltárolnunk, hanem csak végig kell olvasnunk és sorban minden elemmel
-valamilyen műveletet kell végeznünk. Az első, szándékosan nagyon egyszerű példa legyen az, hogy egy adott tartományban lévő számok négyzetének összegét kell
-előállítanunk. Első megoldásunk az, hogy írunk egy függvényt, ami előállítja a számok négyzetének listáját, majd a lista elemeit összeadjuk.
+Nagyon sok olyan feladat (vagy rĂ©szfeladat) van, amikor elemek sorozatĂˇt nem kell eltĂˇrolnunk, hanem csak vĂ©gig kell olvasnunk Ă©s sorban minden elemmel
+valamilyen mĹ±veletet kell vĂ©geznĂĽnk. Az elsĹ‘, szĂˇndĂ©kosan nagyon egyszerĹ± pĂ©lda legyen az, hogy egy adott tartomĂˇnyban lĂ©vĹ‘ szĂˇmok nĂ©gyzetĂ©nek Ă¶sszegĂ©t kell
+elĹ‘ĂˇllĂ­tanunk. ElsĹ‘ megoldĂˇsunk az, hogy Ă­runk egy fĂĽggvĂ©nyt, ami elĹ‘ĂˇllĂ­tja a szĂˇmok nĂ©gyzetĂ©nek listĂˇjĂˇt, majd a lista elemeit Ă¶sszeadjuk.
 
 <pre>
 def squares(lowerLimit, upperLimit):
@@ -58,7 +58,7 @@ print(r)
 </div>
 </pre>
 
-Könnyen rájöhetünk arra, hogy a listára nincs szükség, csak a négyzetszámok sorozatára:
+KĂ¶nnyen rĂˇjĂ¶hetĂĽnk arra, hogy a listĂˇra nincs szĂĽksĂ©g, csak a nĂ©gyzetszĂˇmok sorozatĂˇra:
 <pre>
 def squares_gen(lowerLimit, upperLimit):
     for i in range(lowerLimit, upperLimit):
@@ -70,22 +70,22 @@ print(r)
 # 15
 </div>
 </pre>
-A függvény jelentősen lerövidült és a felépítéséből sokkal könnyebben kiolvasható, hogy mi a célja, nincsenek benne a figyelmet elvonó segédműveletek.
-Tisztább, pontosabb absztrakciókra leszünk képesek, ha az eszközeink jobban kifejezik a szándékot, kevesebb segédművelet ballasztját kell magunkkal cipelnünk.
+A fĂĽggvĂ©ny jelentĹ‘sen lerĂ¶vidĂĽlt Ă©s a felĂ©pĂ­tĂ©sĂ©bĹ‘l sokkal kĂ¶nnyebben kiolvashatĂł, hogy mi a cĂ©lja, nincsenek benne a figyelmet elvonĂł segĂ©dmĹ±veletek.
+TisztĂˇbb, pontosabb absztrakciĂłkra leszĂĽnk kĂ©pesek, ha az eszkĂ¶zeink jobban kifejezik a szĂˇndĂ©kot, kevesebb segĂ©dmĹ±velet ballasztjĂˇt kell magunkkal cipelnĂĽnk.
 </p>
 <p>
-Az ilyen jellegű átalakítások akkor is lehetségesek, amikor a feldolgozás első lépései valamilyen szűrést és/vagy transzformációt valósítanak meg; pl.
+Az ilyen jellegĹ± ĂˇtalakĂ­tĂˇsok akkor is lehetsĂ©gesek, amikor a feldolgozĂˇs elsĹ‘ lĂ©pĂ©sei valamilyen szĹ±rĂ©st Ă©s/vagy transzformĂˇciĂłt valĂłsĂ­tanak meg; pl.
 
 <ul>
-<li>végigolvasunk egy fájlt</li>
-<li>bizonyos sorokat kiszűrünk és</li>
-<li>a megtartott sorok egyes részeit is kiszűrjük.</li>
+<li>vĂ©gigolvasunk egy fĂˇjlt</li>
+<li>bizonyos sorokat kiszĹ±rĂĽnk Ă©s</li>
+<li>a megtartott sorok egyes rĂ©szeit is kiszĹ±rjĂĽk.</li>
 </ul>
 
-Mindkét szűrést célszerű lehet generátorban elhelyezni, mivel az eredeti elemekhez soha nem akarunk visszatérni, azokat elegendő egyszer kézbevennünk.
+MindkĂ©t szĹ±rĂ©st cĂ©lszerĹ± lehet generĂˇtorban elhelyezni, mivel az eredeti elemekhez soha nem akarunk visszatĂ©rni, azokat elegendĹ‘ egyszer kĂ©zbevennĂĽnk.
 </p>
 <p>
-Ha az elemsorozat rendezett, akkor a csoportosításához is elegendő egyszer végigolvasni őket, itt is alkalmazható generátor:
+Ha az elemsorozat rendezett, akkor a csoportosĂ­tĂˇsĂˇhoz is elegendĹ‘ egyszer vĂ©gigolvasni Ĺ‘ket, itt is alkalmazhatĂł generĂˇtor:
 
 <pre>
 
@@ -95,30 +95,30 @@ BBB 100    ==>   BBB 300
 BBB 200          ...
 ...
 </pre>
-A program megtervezésekor tehát mindig érdemes minden lépésnél feltenni a kérdést: A végrehajtáshoz egyszer vagy többször kell elővenni az elemeket?
+A program megtervezĂ©sekor tehĂˇt mindig Ă©rdemes minden lĂ©pĂ©snĂ©l feltenni a kĂ©rdĂ©st: A vĂ©grehajtĂˇshoz egyszer vagy tĂ¶bbszĂ¶r kell elĹ‘venni az elemeket?
 </p>
 <p>
-EGY MEGJEGYZÉS A LIST COMPREHENSION-RŐL: Ha a fenti négyzetszámos feladatot list comprehension, illetve generátor kifejezés segítségével oldjuk meg:
+EGY MEGJEGYZĂ‰S A LIST COMPREHENSION-RĹL: Ha a fenti nĂ©gyzetszĂˇmos feladatot list comprehension, illetve generĂˇtor kifejezĂ©s segĂ­tsĂ©gĂ©vel oldjuk meg:
 
 <pre>
 r = sum( <span class='emph_1'>[</span> i * i for i in range(-1,4) <span class='emph_1'>]</span> )
 r = sum( i * i for i in range(-1,4) )
 </pre>
-akkor eltűnik a bonyolultságbeli különbség, de a második megoldás mégis szebb: jobban kifejezi az algoritmus lényegét, azt, hogy az elemeket csak egyszer
-kell végigolvasni. A list comprehension ebben az esetben olyan listát hoz létre, amit soha többé nem fogunk felhasználni, ami abból is látszik, hogy nevet
+akkor eltĹ±nik a bonyolultsĂˇgbeli kĂĽlĂ¶nbsĂ©g, de a mĂˇsodik megoldĂˇs mĂ©gis szebb: jobban kifejezi az algoritmus lĂ©nyegĂ©t, azt, hogy az elemeket csak egyszer
+kell vĂ©gigolvasni. A list comprehension ebben az esetben olyan listĂˇt hoz lĂ©tre, amit soha tĂ¶bbĂ© nem fogunk felhasznĂˇlni, ami abbĂłl is lĂˇtszik, hogy nevet
 sem kapott.
 </p>
-<h2 id='combinations'>Kombinálhatóság, újrafelhasználhatóság</h2>
+<h2 id='combinations'>KombinĂˇlhatĂłsĂˇg, ĂşjrafelhasznĂˇlhatĂłsĂˇg</h2>
 <p>
-Rengeteg olyan feladat van, ahol az egyes lépések eredményét egy következő programésznek adjuk át, majd ennek az eredményét megint egy következőnek &ndash;
-minden, a fentebb említett sémának megfelelő feladat ilyen:
+Rengeteg olyan feladat van, ahol az egyes lĂ©pĂ©sek eredmĂ©nyĂ©t egy kĂ¶vetkezĹ‘ programĂ©sznek adjuk Ăˇt, majd ennek az eredmĂ©nyĂ©t megint egy kĂ¶vetkezĹ‘nek &ndash;
+minden, a fentebb emlĂ­tett sĂ©mĂˇnak megfelelĹ‘ feladat ilyen:
 <pre>
-beolvasás --> 1. szűrés --> 2. szűrés... --> n. szűrés --> csoportosítás és/vagy aggregáció
+beolvasĂˇs --> 1. szĹ±rĂ©s --> 2. szĹ±rĂ©s... --> n. szĹ±rĂ©s --> csoportosĂ­tĂˇs Ă©s/vagy aggregĂˇciĂł
 </pre>
-Az aggregáció lehet pl. összegképzés vagy átlagképzés.
+Az aggregĂˇciĂł lehet pl. Ă¶sszegkĂ©pzĂ©s vagy ĂˇtlagkĂ©pzĂ©s.
 </p>
 <p>
-Az ilyen feladatok mindig egymásba ágyazott ciklusokkal oldhatók meg.
+Az ilyen feladatok mindig egymĂˇsba Ăˇgyazott ciklusokkal oldhatĂłk meg.
 
 <pre>
 for e_1 in input_series:
@@ -128,7 +128,7 @@ for e_1 in input_series:
                     do_something(e_n)
 </pre>
 
-Például vesszük a pozitív számokat a bemeneti sorozatban és azokkal csinálunk valamit:
+PĂ©ldĂˇul vesszĂĽk a pozitĂ­v szĂˇmokat a bemeneti sorozatban Ă©s azokkal csinĂˇlunk valamit:
 
 <pre>
 numbers = [10, -5, 20, -6, 30, -200]
@@ -137,8 +137,8 @@ for num in numbers:
     if num >= 0:
         do_something(num)
 </pre>
-Akár a szűrést akarjuk megváltoztatni, pl. úgy, hogy most a negatív számokra van szükségünk, akár a végén elvégzendő műveletet, mindenképpen a teljes
-egymásbaágyazott ciklust újra kell írnunk:
+AkĂˇr a szĹ±rĂ©st akarjuk megvĂˇltoztatni, pl. Ăşgy, hogy most a negatĂ­v szĂˇmokra van szĂĽksĂ©gĂĽnk, akĂˇr a vĂ©gĂ©n elvĂ©gzendĹ‘ mĹ±veletet, mindenkĂ©ppen a teljes
+egymĂˇsbaĂˇgyazott ciklust Ăşjra kell Ă­rnunk:
 
 <pre>
 for num in numbers:                      for num in numbers:
@@ -146,8 +146,8 @@ for num in numbers:                      for num in numbers:
         do_something(num)                        <span class='emph_1'>do_something_else</span>(num)
 </pre>
 
-Ha az egyes lépéseket újrafelhasználhatóvá akarjuk tenni, akkor kénytelenek vagyunk minden lépésben a teljes sorozatot előállítani és ezt átadni a következő
-műveletet végző függvénynek.
+Ha az egyes lĂ©pĂ©seket ĂşjrafelhasznĂˇlhatĂłvĂˇ akarjuk tenni, akkor kĂ©nytelenek vagyunk minden lĂ©pĂ©sben a teljes sorozatot elĹ‘ĂˇllĂ­tani Ă©s ezt Ăˇtadni a kĂ¶vetkezĹ‘
+mĹ±veletet vĂ©gzĹ‘ fĂĽggvĂ©nynek.
 
 <pre>
 def positives(number_series):
@@ -161,9 +161,9 @@ numbers = [10, -5, 20, -6, 30, -200]
 for num in positives(numbers):
     do_something(num)
 </pre>
-Így szétválasztottuk ugyan a műveleteket, de minden ponton a teljes adatsorozatot létre kell hoznunk.
+ĂŤgy szĂ©tvĂˇlasztottuk ugyan a mĹ±veleteket, de minden ponton a teljes adatsorozatot lĂ©tre kell hoznunk.
 <p>
-A probléma megszűnik, ha generátorokat alkalmazunk.
+A problĂ©ma megszĹ±nik, ha generĂˇtorokat alkalmazunk.
 
 <pre>
 def g_positives(number_series):
@@ -176,17 +176,17 @@ numbers = [10, -5, 20, -6, 30, -200]
 for num in g_positives(numbers):
     do_something(num)
 </pre>
-Az egyes műveleteket így ki tudjuk tenni függvényekbe és mégis minden lépésben csak egy-egy elemmel kell foglalkoznunk, ráadásul a program olvashatósága is nő
-(feltéve, hogy már összebarátkoztunk a generátorokkal).
+Az egyes mĹ±veleteket Ă­gy ki tudjuk tenni fĂĽggvĂ©nyekbe Ă©s mĂ©gis minden lĂ©pĂ©sben csak egy-egy elemmel kell foglalkoznunk, rĂˇadĂˇsul a program olvashatĂłsĂˇga is nĹ‘
+(feltĂ©ve, hogy mĂˇr Ă¶sszebarĂˇtkoztunk a generĂˇtorokkal).
 </p>
 <p>
-Ezt persze csak konkrét, nagyobb példákon lehet igazán jól megérteni &ndash; ld. a "Generátorok kaszkádba kötése" című fejezetet.
+Ezt persze csak konkrĂ©t, nagyobb pĂ©ldĂˇkon lehet igazĂˇn jĂłl megĂ©rteni &ndash; ld. a "GenerĂˇtorok kaszkĂˇdba kĂ¶tĂ©se" cĂ­mĹ± fejezetet.
 </p>
-<h2 id='shrink_dimensions'>Többdimenziós struktúrák bejárása</h2>
+<h2 id='shrink_dimensions'>TĂ¶bbdimenziĂłs struktĂşrĂˇk bejĂˇrĂˇsa</h2>
 <p>
-Amikor egy mátrix-szerű struktúrát, pl. egy Excel táblázatot kell bejárnunk, ezt úgy tudjuk megtenni, hogy végigjárjuk a sorokat és minden sorban az oszlopokat.
-Ha bizonyos érték megtalálásakor abba akarjuk hagyni a keresést, akkor ezt csak viszonylag bonyolultan tudjuk megtenni, mert a break utasítás segítségével
-csak a legbelső ciklusból tudunk kiugrani. Persze egy állapotváltozó segítségével megoldható a dolog:
+Amikor egy mĂˇtrix-szerĹ± struktĂşrĂˇt, pl. egy Excel tĂˇblĂˇzatot kell bejĂˇrnunk, ezt Ăşgy tudjuk megtenni, hogy vĂ©gigjĂˇrjuk a sorokat Ă©s minden sorban az oszlopokat.
+Ha bizonyos Ă©rtĂ©k megtalĂˇlĂˇsakor abba akarjuk hagyni a keresĂ©st, akkor ezt csak viszonylag bonyolultan tudjuk megtenni, mert a break utasĂ­tĂˇs segĂ­tsĂ©gĂ©vel
+csak a legbelsĹ‘ ciklusbĂłl tudunk kiugrani. Persze egy ĂˇllapotvĂˇltozĂł segĂ­tsĂ©gĂ©vel megoldhatĂł a dolog:
 
 <pre>
 ready = False
@@ -201,8 +201,8 @@ for row in range(height):
             ready = True
             break
 </pre>
-de ez elbonyolítja a programot; nehezebben megérthetővé válik. Sokkal elegánsabb, ha készítünk egy kétdimenziós iterátort, amely egyenként szolgáltatja a
-koordináta-párokat:
+de ez elbonyolĂ­tja a programot; nehezebben megĂ©rthetĹ‘vĂ© vĂˇlik. Sokkal elegĂˇnsabb, ha kĂ©szĂ­tĂĽnk egy kĂ©tdimenziĂłs iterĂˇtort, amely egyenkĂ©nt szolgĂˇltatja a
+koordinĂˇta-pĂˇrokat:
 
 <pre>
 def g_range_2(height, width):
@@ -217,15 +217,15 @@ for row, col in g_range_2(height, width):
     if this_is_my_value(value):
         break
 </pre>
-Ez a felépítés bár szokatlan, jobban, tömörebben kifejezi azt a szándékot, hogy be akarjuk járni a mátrix elemeit. Előfordulhat persze (ritkán), hogy az
-elemenkénti függvényhívás időszükséglete zavaróvá válik, ilyenkor vissza kell térnünk a szokásos megoldáshoz.
+Ez a felĂ©pĂ­tĂ©s bĂˇr szokatlan, jobban, tĂ¶mĂ¶rebben kifejezi azt a szĂˇndĂ©kot, hogy be akarjuk jĂˇrni a mĂˇtrix elemeit. ElĹ‘fordulhat persze (ritkĂˇn), hogy az
+elemenkĂ©nti fĂĽggvĂ©nyhĂ­vĂˇs idĹ‘szĂĽksĂ©glete zavarĂłvĂˇ vĂˇlik, ilyenkor vissza kell tĂ©rnĂĽnk a szokĂˇsos megoldĂˇshoz.
 </p>
-<h2 id='testability'>Tesztelhetőség</h2>
+<h2 id='testability'>TesztelhetĹ‘sĂ©g</h2>
 <p>
-Ez tulajdonképpen nem a generátorok, hanem általában az iterátorok tulajdonsága, de azért érdemes itt megemlíteni. Ha egy függvény bemeneti paramétere
-egy iterálható sorozat, akkor a függvényt tetszőleges iterátorral tesztelni tudjuk. Adott például egy függvényünk, melynek az a feladata, hogy egy megnyitott
-fájlból beolvassa a sorokat és valamilyen szűrést hajtsoon végre rajtuk. A teszteléshez  nem kell fájlt megnyitnunk, egy listát is alkalmazhatunk
-bemenetként:
+Ez tulajdonkĂ©ppen nem a generĂˇtorok, hanem ĂˇltalĂˇban az iterĂˇtorok tulajdonsĂˇga, de azĂ©rt Ă©rdemes itt megemlĂ­teni. Ha egy fĂĽggvĂ©ny bemeneti paramĂ©tere
+egy iterĂˇlhatĂł sorozat, akkor a fĂĽggvĂ©nyt tetszĹ‘leges iterĂˇtorral tesztelni tudjuk. Adott pĂ©ldĂˇul egy fĂĽggvĂ©nyĂĽnk, melynek az a feladata, hogy egy megnyitott
+fĂˇjlbĂłl beolvassa a sorokat Ă©s valamilyen szĹ±rĂ©st hajtsoon vĂ©gre rajtuk. A tesztelĂ©shez  nem kell fĂˇjlt megnyitnunk, egy listĂˇt is alkalmazhatunk
+bemenetkĂ©nt:
 
 <pre>
 def filter_lines(f):
@@ -236,28 +236,28 @@ lines = ['line 1', 'line2']
 filter_lines(lines)
 </pre>
 </p>
-<h2 id='infinite_lists'>Ismeretlen hosszúságú (végtelen) sorozatok kezelése</h2>
+<h2 id='infinite_lists'>Ismeretlen hosszĂşsĂˇgĂş (vĂ©gtelen) sorozatok kezelĂ©se</h2>
 <p>
-Előfordul, hogy számok vagy sztringek sorozatát állítjuk elő mindaddig, míg egy adott tulajdonságú elemet el nem érünk. A lényeg: nem tudjuk, hányadik lesz ez
-a bizonyos elem. "Hagyományos" módon ezt úgy tudjuk megoldani, hogy megtippeljük, legfeljebb hány elemet kell vizsgálnunk, ennyit elő is állítunk egy listában,
-ha valóban benne van a listában a keresett, akkor befejezhetjük, ha nem, akkor nagyobb számmal, hosszabb listával próbálkozunk.
+ElĹ‘fordul, hogy szĂˇmok vagy sztringek sorozatĂˇt ĂˇllĂ­tjuk elĹ‘ mindaddig, mĂ­g egy adott tulajdonsĂˇgĂş elemet el nem Ă©rĂĽnk. A lĂ©nyeg: nem tudjuk, hĂˇnyadik lesz ez
+a bizonyos elem. "HagyomĂˇnyos" mĂłdon ezt Ăşgy tudjuk megoldani, hogy megtippeljĂĽk, legfeljebb hĂˇny elemet kell vizsgĂˇlnunk, ennyit elĹ‘ is ĂˇllĂ­tunk egy listĂˇban,
+ha valĂłban benne van a listĂˇban a keresett, akkor befejezhetjĂĽk, ha nem, akkor nagyobb szĂˇmmal, hosszabb listĂˇval prĂłbĂˇlkozunk.
 </p>
 <p>
-A másik, szintén nem szép megoldás: a sorozat előállítását végző ciklusba beépítjük a feltételvizsgálatot. Ha egy másik feltételt akarunk használni, másik
-ciklust kell írnunk.
+A mĂˇsik, szintĂ©n nem szĂ©p megoldĂˇs: a sorozat elĹ‘ĂˇllĂ­tĂˇsĂˇt vĂ©gzĹ‘ ciklusba beĂ©pĂ­tjĂĽk a feltĂ©telvizsgĂˇlatot. Ha egy mĂˇsik feltĂ©telt akarunk hasznĂˇlni, mĂˇsik
+ciklust kell Ă­rnunk.
 </p>
 <p>
-Generátorral sokkal egyszerűbb a dolog. A generátor elő tudja állítani a végtelen sorozatot, aztán egy ciklusban mindaddig kérjük tőle az elemeket, míg a
-keresettet el nem értük.
+GenerĂˇtorral sokkal egyszerĹ±bb a dolog. A generĂˇtor elĹ‘ tudja ĂˇllĂ­tani a vĂ©gtelen sorozatot, aztĂˇn egy ciklusban mindaddig kĂ©rjĂĽk tĹ‘le az elemeket, mĂ­g a
+keresettet el nem Ă©rtĂĽk.
 </p>
-<h2 id='memory_saving'>Memória-takarékosság</h2>
+<h2 id='memory_saving'>MemĂłria-takarĂ©kossĂˇg</h2>
 <p>
-Amikor nagyon sok elemet tartalmazó sorozatot vizsgálunk, nyilvánvalóan sokkal kevesebb memóriára van szükség, ha mindig csak az aktuális elemet vesszük elő
-és nem egyszerre az összeset tároljuk el pl. egy listában. Ha mondjuk egy 2 GB-os fájlban soronként egy szám található más információk kíséretében és nekünk
-ezeket a számokat kell összegeznünk, akkor nem az a legjobb megoldás, hogy beolvassuk memóriába a teljes fájlt, majd minden sorból kiszedjük a számot és utána
-összegzünk.
+Amikor nagyon sok elemet tartalmazĂł sorozatot vizsgĂˇlunk, nyilvĂˇnvalĂłan sokkal kevesebb memĂłriĂˇra van szĂĽksĂ©g, ha mindig csak az aktuĂˇlis elemet vesszĂĽk elĹ‘
+Ă©s nem egyszerre az Ă¶sszeset tĂˇroljuk el pl. egy listĂˇban. Ha mondjuk egy 2 GB-os fĂˇjlban soronkĂ©nt egy szĂˇm talĂˇlhatĂł mĂˇs informĂˇciĂłk kĂ­sĂ©retĂ©ben Ă©s nekĂĽnk
+ezeket a szĂˇmokat kell Ă¶sszegeznĂĽnk, akkor nem az a legjobb megoldĂˇs, hogy beolvassuk memĂłriĂˇba a teljes fĂˇjlt, majd minden sorbĂłl kiszedjĂĽk a szĂˇmot Ă©s utĂˇna
+Ă¶sszegzĂĽnk.
 <p>
-Szemléltetésként meg is mérhetjük a memóriafelhasználást egy egyszerű példában.
+SzemlĂ©ltetĂ©skĂ©nt meg is mĂ©rhetjĂĽk a memĂłriafelhasznĂˇlĂˇst egy egyszerĹ± pĂ©ldĂˇban.
 
 <pre>
 import os
@@ -272,8 +272,8 @@ print('m:',m,'memory diff:',x2 - x1)
 # m: 9999 memory diff: 1015808
 </div>
 </pre>
-Végigolvastunk 100.000 számot úgy, hogy ezeket elhelyeztük egy listában és megkerestük a legnagyobbat; kb. 1 MB-ra volt szükségünk ehhez. Ha viszont generátort
-használunk a számok végigolvasására, persze egészen más lesz a helyzet:
+VĂ©gigolvastunk 100.000 szĂˇmot Ăşgy, hogy ezeket elhelyeztĂĽk egy listĂˇban Ă©s megkerestĂĽk a legnagyobbat; kb. 1 MB-ra volt szĂĽksĂ©gĂĽnk ehhez. Ha viszont generĂˇtort
+hasznĂˇlunk a szĂˇmok vĂ©gigolvasĂˇsĂˇra, persze egĂ©szen mĂˇs lesz a helyzet:
 
 <pre class='pale'>
 import os
@@ -288,27 +288,27 @@ print('m:',m,'memory diff:',x2 - x1)
 # m: 9999 memory diff: <span style='color: blue;'>0</span>
 </div>
 </pre>
-Minden lépésben csak egyetlen számot kellett eltárolnunk &ndash; a memória-különbség olyan kicsi, hogy memory_info nem is mutatja ki.
+Minden lĂ©pĂ©sben csak egyetlen szĂˇmot kellett eltĂˇrolnunk &ndash; a memĂłria-kĂĽlĂ¶nbsĂ©g olyan kicsi, hogy memory_info nem is mutatja ki.
 </p>
-<h2 id='time_saving'>Idő-takarékosság</h2>
+<h2 id='time_saving'>IdĹ‘-takarĂ©kossĂˇg</h2>
 <p>
-Egyes esetekben fel lehet gyorsítani műveleteket generátorok alkalmazásával. Amikor a sorozat elemeit lassú művelettel állíjuk elő és
-adjuk tovább egy következő fokozatnak, kétféleképp járhatunk el:
+Egyes esetekben fel lehet gyorsĂ­tani mĹ±veleteket generĂˇtorok alkalmazĂˇsĂˇval. Amikor a sorozat elemeit lassĂş mĹ±velettel ĂˇllĂ­juk elĹ‘ Ă©s
+adjuk tovĂˇbb egy kĂ¶vetkezĹ‘ fokozatnak, kĂ©tfĂ©lekĂ©pp jĂˇrhatunk el:
 
 <ul>
-<li>az összes bemenő adatot összevárjuk, mielőtt a második műveletnek nekifogunk, vagy</li>
-<li>amint egy elemet megkaptunk, azonnal továbbadjuk.</li>
+<li>az Ă¶sszes bemenĹ‘ adatot Ă¶sszevĂˇrjuk, mielĹ‘tt a mĂˇsodik mĹ±veletnek nekifogunk, vagy</li>
+<li>amint egy elemet megkaptunk, azonnal tovĂˇbbadjuk.</li>
 </ul>
 
-Képzeljük el például, hogy lassú hálózati kapcsolaton keresztül olvasunk be adatcsomagokat, amelyeket aztán
-megjelenítünk valamilyen felületen keresztül &ndash; ha az első csmag beérkezésekor azonnal továbbküldjük azt, akkor a felhasználó hamarabb fog látni valamit,
-kisebb lesz a látencia. Ezért mondják, hogy a generátor a szegény ember szál-kezelése, mert műveletek időbeli átlapolására is szolgálhat.
+KĂ©pzeljĂĽk el pĂ©ldĂˇul, hogy lassĂş hĂˇlĂłzati kapcsolaton keresztĂĽl olvasunk be adatcsomagokat, amelyeket aztĂˇn
+megjelenĂ­tĂĽnk valamilyen felĂĽleten keresztĂĽl &ndash; ha az elsĹ‘ csmag beĂ©rkezĂ©sekor azonnal tovĂˇbbkĂĽldjĂĽk azt, akkor a felhasznĂˇlĂł hamarabb fog lĂˇtni valamit,
+kisebb lesz a lĂˇtencia. EzĂ©rt mondjĂˇk, hogy a generĂˇtor a szegĂ©ny ember szĂˇl-kezelĂ©se, mert mĹ±veletek idĹ‘beli ĂˇtlapolĂˇsĂˇra is szolgĂˇlhat.
 </p>
 <p>
-<u>Szemléltető példa</u>
+<u>SzemlĂ©ltetĹ‘ pĂ©lda</u>
 <p>
-Egy f_second nevű függvény a második fokozata a feldolgozásnak; az f_first_return nevű az első fokozatnak az "összevárós" változata, f_first_yield pedig
-a "rögtön továbbadós" változat. A lassú műveletet sleep(3) segítségével szimuláljuk. Nézzük először az összevárós módszert:
+Egy f_second nevĹ± fĂĽggvĂ©ny a mĂˇsodik fokozata a feldolgozĂˇsnak; az f_first_return nevĹ± az elsĹ‘ fokozatnak az "Ă¶sszevĂˇrĂłs" vĂˇltozata, f_first_yield pedig
+a "rĂ¶gtĂ¶n tovĂˇbbadĂłs" vĂˇltozat. A lassĂş mĹ±veletet sleep(3) segĂ­tsĂ©gĂ©vel szimulĂˇljuk. NĂ©zzĂĽk elĹ‘szĂ¶r az Ă¶sszevĂˇrĂłs mĂłdszert:
 </p>
 <pre>
 import time
@@ -343,10 +343,10 @@ f_second(3)
 # Second: ready at 12.0 seconds
 </div>
 </pre>
-10 másodpercig semmi nem történik, ekkor jelenik meg az első eredmény a kimeneten.
+10 mĂˇsodpercig semmi nem tĂ¶rtĂ©nik, ekkor jelenik meg az elsĹ‘ eredmĂ©ny a kimeneten.
 </p>
 <p>
-Ha a másik módszert választjuk:
+Ha a mĂˇsik mĂłdszert vĂˇlasztjuk:
 
 <pre class='pale'>
 def f_second(n):
@@ -366,13 +366,13 @@ f_second(3)
 # Second: ready at 12.0 seconds
 </div>
 </pre>
-Ezúttal már 4 másodperc után elkezdi kiadni a második fokozat az eredményt.
+EzĂşttal mĂˇr 4 mĂˇsodperc utĂˇn elkezdi kiadni a mĂˇsodik fokozat az eredmĂ©nyt.
 </p>
-<h3 id='speed_problems' style='color:green;'>...de néha lassítás</h3>
+<h3 id='speed_problems' style='color:green;'>...de nĂ©ha lassĂ­tĂˇs</h3>
 <p>
-Egyes, nagyon ritka esetekben a generátoros megoldás lassúbb lehet. Ez persze csak akkor érdekes, ha a sebesség-különbség valami kritikus helyen, egy
-sokszor végrehajtott ciklus belsejében lép fel. A generátor minden egyes újraindítása egy függvényhívásnak felel meg, ami nyilván időt igényel &ndash; ez persze
-csak akkor válik érzékelhetővé, amikor a függvényen belül nagyon kevés, rövid művelet történik. Nézzünk meg egy példát:
+Egyes, nagyon ritka esetekben a generĂˇtoros megoldĂˇs lassĂşbb lehet. Ez persze csak akkor Ă©rdekes, ha a sebessĂ©g-kĂĽlĂ¶nbsĂ©g valami kritikus helyen, egy
+sokszor vĂ©grehajtott ciklus belsejĂ©ben lĂ©p fel. A generĂˇtor minden egyes ĂşjraindĂ­tĂˇsa egy fĂĽggvĂ©nyhĂ­vĂˇsnak felel meg, ami nyilvĂˇn idĹ‘t igĂ©nyel &ndash; ez persze
+csak akkor vĂˇlik Ă©rzĂ©kelhetĹ‘vĂ©, amikor a fĂĽggvĂ©nyen belĂĽl nagyon kevĂ©s, rĂ¶vid mĹ±velet tĂ¶rtĂ©nik. NĂ©zzĂĽnk meg egy pĂ©ldĂˇt:
 
 <pre>
 import cProfile
@@ -408,11 +408,11 @@ cProfile.run('sum(<span class='emph_1'>[</span>i * 2 for i in range(10_000)<span
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 </div>
 </pre>
-Ha ezt a műveletet sokszor végrehajtjuk, akkor érzehetővé válhat a sebesség-különbség, ilyenkor esetleg érdemes lecserélni a generátorkifejezést
-list compprehension-re (amennyiben van elegendő memória).
+Ha ezt a mĹ±veletet sokszor vĂ©grehajtjuk, akkor Ă©rzehetĹ‘vĂ© vĂˇlhat a sebessĂ©g-kĂĽlĂ¶nbsĂ©g, ilyenkor esetleg Ă©rdemes lecserĂ©lni a generĂˇtorkifejezĂ©st
+list compprehension-re (amennyiben van elegendĹ‘ memĂłria).
 </p>
 <p>
-Érdemes megnézni, hogyan változik a végrehajtási idők aránya, ha 10.000-ről 100.000-re növeljük a ciklus hosszát:
+Ă‰rdemes megnĂ©zni, hogyan vĂˇltozik a vĂ©grehajtĂˇsi idĹ‘k arĂˇnya, ha 10.000-rĹ‘l 100.000-re nĂ¶veljĂĽk a ciklus hosszĂˇt:
 
 <pre>
 <div class='result'>
@@ -423,7 +423,7 @@ list compprehension-re (amennyiben van elegendő memória).
          5 function calls in <span class='emph_1'>0.018</span> seconds
 </div>
 </pre>
-1.000.000-nál:
+1.000.000-nĂˇl:
 <pre>
 <div class='result'>
 *** GENERATOR COMPREHENSION
@@ -433,8 +433,8 @@ list compprehension-re (amennyiben van elegendő memória).
          5 function calls in <span class='emph_1'>0.217</span> seconds
 </div>
 </pre>
-Valószínűleg azért csökken az idők aránya, mert a memória lefoglalása és felszabadítása is időt vesz igénybe. Érdemes megnézni, mi történik, ha a ciklusban
-nem i&nbsp;*&nbsp;2 a művelet, hanem i&nbsp;**&nbsp;2:
+ValĂłszĂ­nĹ±leg azĂ©rt csĂ¶kken az idĹ‘k arĂˇnya, mert a memĂłria lefoglalĂˇsa Ă©s felszabadĂ­tĂˇsa is idĹ‘t vesz igĂ©nybe. Ă‰rdemes megnĂ©zni, mi tĂ¶rtĂ©nik, ha a ciklusban
+nem i&nbsp;*&nbsp;2 a mĹ±velet, hanem i&nbsp;**&nbsp;2:
 
 <pre>
 <div class='result'>
@@ -444,7 +444,7 @@ nem i&nbsp;*&nbsp;2 a művelet, hanem i&nbsp;**&nbsp;2:
 1.000.000     0.656     0.548
 </div>
 </pre>
-A végrehajtási idők aránya lecsökkent &ndash; amiből az a tanulság, hogy ez a sebesség-különbség csak ritkán játszik szerepet a gyakorlatban.
+A vĂ©grehajtĂˇsi idĹ‘k arĂˇnya lecsĂ¶kkent &ndash; amibĹ‘l az a tanulsĂˇg, hogy ez a sebessĂ©g-kĂĽlĂ¶nbsĂ©g csak ritkĂˇn jĂˇtszik szerepet a gyakorlatban.
 </p>
 <h2 id='literature'>Irodalom</h2>
 <p>
@@ -452,23 +452,23 @@ A végrehajtási idők aránya lecsökkent &ndash; amiből az a tanulság, hogy ez a se
 </p>
 <p>
 <a href='https://nedbatchelder.com/text/iter.html' target='_blank'>Loop like a native: while, for, iterators, generators</a> Ned Batchelder;
-Python 2-ben vannak a példák, de ez nem lényeges és nem zavaró.<br>
+Python 2-ben vannak a pĂ©ldĂˇk, de ez nem lĂ©nyeges Ă©s nem zavarĂł.<br>
 </p>
 <p>
-<b>Könyvek</b>
+<b>KĂ¶nyvek</b>
 </p>
 <p>
 Mark Lutz: Learning Python<br>
 <i>&nbsp;&nbsp;Generator functions in action</i>
 </p>
 <p>
-<b>Videók:</b>
+<b>VideĂłk:</b>
 </p>
 <p>
 Ned Batchelder: <a href='https://www.youtube.com/watch?v=EnSu9hHGq5o' target='_blank'>Loop like a native: while, for, iterators, generators</a>
-Python 2-ben vannak a példák, de ez nem lényeges és nem zavaró.<br>
+Python 2-ben vannak a pĂ©ldĂˇk, de ez nem lĂ©nyeges Ă©s nem zavarĂł.<br>
 Corey Schaefer: <a href='https://www.youtube.com/watch?v=bD05uGo_sVI' target='_blank'>Python Tutorial: Generators - How to use them and the benefits you
-receive</a> Python 2-ben vannak a példák, de ez nem lényeges és nem zavaró.<br>
+receive</a> Python 2-ben vannak a pĂ©ldĂˇk, de ez nem lĂ©nyeges Ă©s nem zavarĂł.<br>
 Michael Kennedy: <a href='https://www.youtube.com/watch?v=KoH6FgVjnmg' target='_blank'>Pythonic code: Tip 4 Processing large data sets with yield and generators</a>
 </p>
 

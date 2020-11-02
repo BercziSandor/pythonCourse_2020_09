@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-<title>Generátorok kaszkádba kötése</title>
+<title>GenerĂˇtorok kaszkĂˇdba kĂ¶tĂ©se</title>
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
@@ -19,37 +19,37 @@
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
-<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.03 &mdash;</p>
+<span style='float:right;font-style:italic;'>Nemes MihĂˇly &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; UtolsĂł mĂłdosĂ­tĂˇs: 2020.09.03 &mdash;</p>
 </div>
-<h1>Generátorok kaszkádba kötése</h1>
+<h1>GenerĂˇtorok kaszkĂˇdba kĂ¶tĂ©se</h1>
 <ul class='contents'>
-<li><a style='color: red' href='#definition'>Mit jelent a kaszkádba kapcsolás?</a></li>
-<li><a style='color: red' href='#simple_example'>Egy értelmetlen, de cserébe egyszerű kis példa</a></li>
-<li><a style='color: red' href='#real_example'>Egy valóságosabb példa</a></li>
-<li><a style='color: red' href='#extend_at_start'>A generátor-lánc elejét bővítjük</a></li>
+<li><a style='color: red' href='#definition'>Mit jelent a kaszkĂˇdba kapcsolĂˇs?</a></li>
+<li><a style='color: red' href='#simple_example'>Egy Ă©rtelmetlen, de cserĂ©be egyszerĹ± kis pĂ©lda</a></li>
+<li><a style='color: red' href='#real_example'>Egy valĂłsĂˇgosabb pĂ©lda</a></li>
+<li><a style='color: red' href='#extend_at_start'>A generĂˇtor-lĂˇnc elejĂ©t bĹ‘vĂ­tjĂĽk</a></li>
 <li><a style='color: red' href='#no_yield'>Amikor return kell yield helyett</a>
 <ul>
-<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNY</a></li>
+<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVĂ‰NY</a></li>
 </ul>
 </li>
-<li><a style='color: red' href='#different_files'>Különféle fájlok megnyitása</a>
+<li><a style='color: red' href='#different_files'>KĂĽlĂ¶nfĂ©le fĂˇjlok megnyitĂˇsa</a>
 <ul>
-<li><a style='color: indigo; font-size: 70%;' href='#q_2'>REJTVÉNYEK</a></li>
+<li><a style='color: indigo; font-size: 70%;' href='#q_2'>REJTVĂ‰NYEK</a></li>
 </ul>
 </li>
 <li><a style='color: red' href='#literature'>Irodalom</a></li>
 </ul>
-<h2 id='definition'>Mit jelent a kaszkádba kapcsolás?</h2>
+<h2 id='definition'>Mit jelent a kaszkĂˇdba kapcsolĂˇs?</h2>
 <p>
-A generátoroknak nagy előnye, hogy könnyen összekapcsolhatók egymással. Ha egy generátort paraméterként átadunk egy másiknak, akkor a hívó egyenként ki
-tudja olvasni az értékeit és feldolgozás után yield-ek segítségével tovább tudja adni egy következőnek. Amely aztán ugyanígy járhat el...
+A generĂˇtoroknak nagy elĹ‘nye, hogy kĂ¶nnyen Ă¶sszekapcsolhatĂłk egymĂˇssal. Ha egy generĂˇtort paramĂ©terkĂ©nt Ăˇtadunk egy mĂˇsiknak, akkor a hĂ­vĂł egyenkĂ©nt ki
+tudja olvasni az Ă©rtĂ©keit Ă©s feldolgozĂˇs utĂˇn yield-ek segĂ­tsĂ©gĂ©vel tovĂˇbb tudja adni egy kĂ¶vetkezĹ‘nek. Amely aztĂˇn ugyanĂ­gy jĂˇrhat el...
 </p>
 <p>
-Ilyen módon egymással nagyon könnyen kombinálható és újrafelhasználható elemek jönnek létre, a program áttekinthető lesz. A "hagyományos" megoldásnál
-az egyes függvények eredményeit közbülső tárolókban kell elhelyeznünk, a következő függvény innen olvassa ki azokat.
+Ilyen mĂłdon egymĂˇssal nagyon kĂ¶nnyen kombinĂˇlhatĂł Ă©s ĂşjrafelhasznĂˇlhatĂł elemek jĂ¶nnek lĂ©tre, a program ĂˇttekinthetĹ‘ lesz. A "hagyomĂˇnyos" megoldĂˇsnĂˇl
+az egyes fĂĽggvĂ©nyek eredmĂ©nyeit kĂ¶zbĂĽlsĹ‘ tĂˇrolĂłkban kell elhelyeznĂĽnk, a kĂ¶vetkezĹ‘ fĂĽggvĂ©ny innen olvassa ki azokat.
 </p>
-<h2 id='simple_example'>Egy értelmetlen, de cserébe egyszerű kis példa</h2>
+<h2 id='simple_example'>Egy Ă©rtelmetlen, de cserĂ©be egyszerĹ± kis pĂ©lda</h2>
 <p>
 <pre>
 def gen_1(numbers):  # numbers: an iterator producing numbers
@@ -71,39 +71,39 @@ print()
 # 102 104 106 108
 </div>
 </pre>
-Figyeljük meg, hogy a végrehajtás a lánc végéről kezdődik! A g2 iterátor kap egy next() hívást a for ciklustól,
-erre ő kiad egy next() hívást a paraméterként kapott g1 iterátornak, mire az kiad egy next() hívást a paraméterként
-kapott range iterátornak.
+FigyeljĂĽk meg, hogy a vĂ©grehajtĂˇs a lĂˇnc vĂ©gĂ©rĹ‘l kezdĹ‘dik! A g2 iterĂˇtor kap egy next() hĂ­vĂˇst a for ciklustĂłl,
+erre Ĺ‘ kiad egy next() hĂ­vĂˇst a paramĂ©terkĂ©nt kapott g1 iterĂˇtornak, mire az kiad egy next() hĂ­vĂˇst a paramĂ©terkĂ©nt
+kapott range iterĂˇtornak.
 </p>
 <p>
-Sehol nem állítunk elő közben listát, minden iterátor csak egyenként foglalkozik az elemekkel.
+Sehol nem ĂˇllĂ­tunk elĹ‘ kĂ¶zben listĂˇt, minden iterĂˇtor csak egyenkĂ©nt foglalkozik az elemekkel.
 </p>
 <p>
-Az egész nagyon hasonlít az eredetileg a UNIX-ban bevezetett pipeline elrendezéshez: amikor programok a standard bemenetről olvasnak és az eredményt a
-standard kimenetre írják, akkor könnyen kaszkádba köthetők.
+Az egĂ©sz nagyon hasonlĂ­t az eredetileg a UNIX-ban bevezetett pipeline elrendezĂ©shez: amikor programok a standard bemenetrĹ‘l olvasnak Ă©s az eredmĂ©nyt a
+standard kimenetre Ă­rjĂˇk, akkor kĂ¶nnyen kaszkĂˇdba kĂ¶thetĹ‘k.
 </p>
-<h2 id='real_example'>Egy valóságosabb példa</h2>
+<h2 id='real_example'>Egy valĂłsĂˇgosabb pĂ©lda</h2>
 <p>
-Egy szövegfájlban mérési adatok vannak, a sorok pontosvesszővel elválasztott mezőket tartalmaznak. Vannak üres (csak fehér karaktereket tartalmazó) sorok
-és megjegyzés-sorok, amelyekben az első látható karakter egy <b>#</b> &ndash; mindkét fajta sort ki kell szűrni. Az első mező egy azonosító, a második egy
-numerikus érték. Vannak hibás sorok:
+Egy szĂ¶vegfĂˇjlban mĂ©rĂ©si adatok vannak, a sorok pontosvesszĹ‘vel elvĂˇlasztott mezĹ‘ket tartalmaznak. Vannak ĂĽres (csak fehĂ©r karaktereket tartalmazĂł) sorok
+Ă©s megjegyzĂ©s-sorok, amelyekben az elsĹ‘ lĂˇthatĂł karakter egy <b>#</b> &ndash; mindkĂ©t fajta sort ki kell szĹ±rni. Az elsĹ‘ mezĹ‘ egy azonosĂ­tĂł, a mĂˇsodik egy
+numerikus Ă©rtĂ©k. Vannak hibĂˇs sorok:
 
 <ul>
-<li>csak egy mező van</li>
-<li>a második mezőben nem szám van</li>
+<li>csak egy mezĹ‘ van</li>
+<li>a mĂˇsodik mezĹ‘ben nem szĂˇm van</li>
 </ul>
-és az azonosítók is lehetnek kisbetűvel vagy nagybetűvel írva - azt akarjuk, hogy írásmódtól függetlenül mindig ugyanazt azonosítson minden sztring. Vannak olyan
-sorok is, amelyekben kettőnél több mező van, itt a többlet-mezőket egyszerűen figyelmen kívül kell hagyni.
+Ă©s az azonosĂ­tĂłk is lehetnek kisbetĹ±vel vagy nagybetĹ±vel Ă­rva - azt akarjuk, hogy Ă­rĂˇsmĂłdtĂłl fĂĽggetlenĂĽl mindig ugyanazt azonosĂ­tson minden sztring. Vannak olyan
+sorok is, amelyekben kettĹ‘nĂ©l tĂ¶bb mezĹ‘ van, itt a tĂ¶bblet-mezĹ‘ket egyszerĹ±en figyelmen kĂ­vĂĽl kell hagyni.
 </p>
 <p>
-Előfordulhatnak olyan sorok, ahol a szám nem tizedespontot, hanem tizedesvesszőt tartalmaz.
+ElĹ‘fordulhatnak olyan sorok, ahol a szĂˇm nem tizedespontot, hanem tizedesvesszĹ‘t tartalmaz.
 </p>
 <p>
-Az üres és hibás sorokat ki kell hagyni, a többiben egyforma formátumúra kell hozni az azonosítókat és képezni kell egy azonosító - szám párokból álló listát.
-A feladat tehát tulajdonképpen adattisztítás.
+Az ĂĽres Ă©s hibĂˇs sorokat ki kell hagyni, a tĂ¶bbiben egyforma formĂˇtumĂşra kell hozni az azonosĂ­tĂłkat Ă©s kĂ©pezni kell egy azonosĂ­tĂł - szĂˇm pĂˇrokbĂłl ĂˇllĂł listĂˇt.
+A feladat tehĂˇt tulajdonkĂ©ppen adattisztĂ­tĂˇs.
 </p>
 <p>
-A bemeneti fájl pl. ilyen:
+A bemeneti fĂˇjl pl. ilyen:
 <pre class='data'>
 # comment
 
@@ -121,7 +121,7 @@ aaa; 45
 ccc; 22;
 Aaa; 9;
 </pre>
-Először előállítunk egy olyan generátort, amely eltávolítja az üres és a megjegyzés-sorokat.
+ElĹ‘szĂ¶r elĹ‘ĂˇllĂ­tunk egy olyan generĂˇtort, amely eltĂˇvolĂ­tja az ĂĽres Ă©s a megjegyzĂ©s-sorokat.
 
 <pre>
 def nonempty_lines(inputLines):
@@ -135,7 +135,7 @@ def nonempty_lines(inputLines):
 
         yield(line)
 </pre>
-Első teszt: egy egyszerű listával próbáljuk ki.
+ElsĹ‘ teszt: egy egyszerĹ± listĂˇval prĂłbĂˇljuk ki.
 <pre>
 test_lines = [' aaa','   ','  # bbb','ccc ']
 g_lines = nonempty_lines(test_lines)
@@ -146,10 +146,10 @@ for line in g_lines:
 # ccc
 </div>
 </pre>
-A g_lines névben a <b>g</b> arra emlékeztet, hogy ez egy generátor.
+A g_lines nĂ©vben a <b>g</b> arra emlĂ©keztet, hogy ez egy generĂˇtor.
 </p>
 <p>
-Most olvassuk be a fenti tesztfájlt, legyen az a forrás.
+Most olvassuk be a fenti tesztfĂˇjlt, legyen az a forrĂˇs.
 <pre>
 with open('infile.txt','r') as f:
     g_lines = nonempty_lines(f)
@@ -168,8 +168,8 @@ with open('infile.txt','r') as f:
 # Aaa; 9;
 </div>
 </pre>
-Most megírjuk az a generátort, amely számmá alakítja a második mezőt (ha van), nagybetűssé az elsőt és ahol ez sikerült,
-ott kiadja az első két mezőt.
+Most megĂ­rjuk az a generĂˇtort, amely szĂˇmmĂˇ alakĂ­tja a mĂˇsodik mezĹ‘t (ha van), nagybetĹ±ssĂ© az elsĹ‘t Ă©s ahol ez sikerĂĽlt,
+ott kiadja az elsĹ‘ kĂ©t mezĹ‘t.
 <pre>
 def lines_with_number(inputLines):
     '''Converts 2nd field to number, discards false lines, turns names to uppercase'''
@@ -200,7 +200,7 @@ def lines_with_number(inputLines):
             lst[1] = num                    # yes, it was
             yield lst
 </pre>
-Az előbbi tesztprogramot csak egyetlen sorral kell kiegészítenünk.
+Az elĹ‘bbi tesztprogramot csak egyetlen sorral kell kiegĂ©szĂ­tenĂĽnk.
 <pre class='pale'>
 with open('infile.txt','r') as f:
     g_lines = nonempty_lines(f)
@@ -217,15 +217,15 @@ with open('infile.txt','r') as f:
 # ['AAA', 9.0]
 </div>
 </pre>
-Vegyük észre azt is, hogy ha csak annyit teszünk, hogy a for ciklusba g_filtered helyett g_lines-t írunk, akkor ismét az első lépést tudjuk tesztelni.
-g_filtered ilyenkor csak készen áll, de nem működik.
+VegyĂĽk Ă©szre azt is, hogy ha csak annyit teszĂĽnk, hogy a for ciklusba g_filtered helyett g_lines-t Ă­runk, akkor ismĂ©t az elsĹ‘ lĂ©pĂ©st tudjuk tesztelni.
+g_filtered ilyenkor csak kĂ©szen Ăˇll, de nem mĹ±kĂ¶dik.
 </p>
 <p>
-Most már van egy megtisztított és egységes formára hozott adatsorozatunk, amivel sokmindent tudunk kezdeni. Tegyük fel, hogy még mindig nem akarjuk az adatokat
-egy listában elhelyezni, ragaszkodunk a generátorokhoz.
+Most mĂˇr van egy megtisztĂ­tott Ă©s egysĂ©ges formĂˇra hozott adatsorozatunk, amivel sokmindent tudunk kezdeni. TegyĂĽk fel, hogy mĂ©g mindig nem akarjuk az adatokat
+egy listĂˇban elhelyezni, ragaszkodunk a generĂˇtorokhoz.
 </p>
 <p>
-&mdash; Vehetjük a második oszlop összegét.
+&mdash; VehetjĂĽk a mĂˇsodik oszlop Ă¶sszegĂ©t.
 <pre class='pale'>
 with open('infile.txt','r') as f:
     g_lines = nonempty_lines(f)
@@ -236,24 +236,24 @@ with open('infile.txt','r') as f:
 # 181.5
 </div>
 </pre>
-A second_column is egy generátor (generátorkifejezés)!
+A second_column is egy generĂˇtor (generĂˇtorkifejezĂ©s)!
 </p>
 <p>
-Figyelem: még mindig nem kellett semelyik lépésben sem a teljes adatsorozatot tárolni! A sum() függvény is egyenként kapja meg az iterátortól az értékeket.
+Figyelem: mĂ©g mindig nem kellett semelyik lĂ©pĂ©sben sem a teljes adatsorozatot tĂˇrolni! A sum() fĂĽggvĂ©ny is egyenkĂ©nt kapja meg az iterĂˇtortĂłl az Ă©rtĂ©keket.
 
 <pre style='text-align: center;'>
 
 <b>sum()</b> --> <i>next()</i> --> <b>second_column</b> --> <i>next()</i> --> <b>g_filtered</b> --> <i>next()</i> --> <b>g_lines</b> --> <i>next()</i> --> <b>f</b>
 
 </pre>
-Ha a sum() függvény helyére max()-ot írunk, akkor megkapjuk a második oszlop maximumát; vagy képezhetjük például az oszlop átlagát:
+Ha a sum() fĂĽggvĂ©ny helyĂ©re max()-ot Ă­runk, akkor megkapjuk a mĂˇsodik oszlop maximumĂˇt; vagy kĂ©pezhetjĂĽk pĂ©ldĂˇul az oszlop ĂˇtlagĂˇt:
 <pre>
 from statistics import mean
 ...
     print(mean(second_column))
 </pre>
 
-&mdash; Most iktassunk be egy szűrőt, ami csak az olyan sorokat engedi át, amelyek nagyobbak egy bizonyos értéknél:
+&mdash; Most iktassunk be egy szĹ±rĹ‘t, ami csak az olyan sorokat engedi Ăˇt, amelyek nagyobbak egy bizonyos Ă©rtĂ©knĂ©l:
 <pre>
 def filter_greater(matrix, threshold):
     for row in matrix:
@@ -275,8 +275,8 @@ with open('infile.txt','r') as f:
 # ['AAA', 45.0]
 </div>
 </pre>
-&mdash; Sok esetben egy adott ponton át akarjuk alakítani a megszűrt és formázott adatainkat valamilyen "állandó" formára; elhagyjuk a generátorok világát és
-készítünk egy listát, dict-et, set-et az adatsorozatból.
+&mdash; Sok esetben egy adott ponton Ăˇt akarjuk alakĂ­tani a megszĹ±rt Ă©s formĂˇzott adatainkat valamilyen "ĂˇllandĂł" formĂˇra; elhagyjuk a generĂˇtorok vilĂˇgĂˇt Ă©s
+kĂ©szĂ­tĂĽnk egy listĂˇt, dict-et, set-et az adatsorozatbĂłl.
 
 <pre class='pale'>
 with open('infile.txt','r') as f:
@@ -300,7 +300,7 @@ print(result)
 # (['CCC', 33.0], ['FFF', 32.3], ['AAA', 45.0])
 </div>
 </pre>
-&mdash; Készíthetünk egy dict-et, amely az egyforma azonosítójú elemekhez tartozó számok összegét tartalmazza:
+&mdash; KĂ©szĂ­thetĂĽnk egy dict-et, amely az egyforma azonosĂ­tĂłjĂş elemekhez tartozĂł szĂˇmok Ă¶sszegĂ©t tartalmazza:
 <pre>
 def sum_dict(matrix):
     d = {}
@@ -322,7 +322,7 @@ print(result_d)</span>
 # {'AAA': 69.0, 'BBB': 25.2, 'CCC': 55.0, 'FFF': 32.3}
 </div>
 </pre>
-&mdash; Lehet, hogy csak az összes azonosító halmazára vagyunk kíváncsiak:
+&mdash; Lehet, hogy csak az Ă¶sszes azonosĂ­tĂł halmazĂˇra vagyunk kĂ­vĂˇncsiak:
 <pre class='pale'>
 with open('infile.txt','r') as f:
     g_lines = nonempty_lines(f)
@@ -336,8 +336,8 @@ print(all_names)</span>
 # {'CCC', 'FFF', 'AAA', 'BBB'}
 </div>
 </pre>
-&mdash; Fentebb szó volt arról, hogy miként hívják egymást "belülről kifelé" a generátorok. Ezt nagyon jól lehet szemléltetni úgy, hogy szándékosan elkövetünk egy hibát:
-az all_names előállítását kivesszük a with blokkból:
+&mdash; Fentebb szĂł volt arrĂłl, hogy mikĂ©nt hĂ­vjĂˇk egymĂˇst "belĂĽlrĹ‘l kifelĂ©" a generĂˇtorok. Ezt nagyon jĂłl lehet szemlĂ©ltetni Ăşgy, hogy szĂˇndĂ©kosan elkĂ¶vetĂĽnk egy hibĂˇt:
+az all_names elĹ‘ĂˇllĂ­tĂˇsĂˇt kivesszĂĽk a with blokkbĂłl:
 
 <pre class='pale'>
 with open('infile.txt','r') as f:
@@ -361,18 +361,18 @@ with open('infile.txt','r') as f:
 # ValueError: I/O operation on closed file.
 </div>
 </pre>
-set() elindította g_names-t, az g_filtered-et, az lines_with_number-t, az nonempty_lines-t, amely megpróbált volna szegény olvasni a fájlból, de nem sikerült
-neki, mert az zárva volt, hiszen már elhagytuk a with blokkot.
+set() elindĂ­totta g_names-t, az g_filtered-et, az lines_with_number-t, az nonempty_lines-t, amely megprĂłbĂˇlt volna szegĂ©ny olvasni a fĂˇjlbĂłl, de nem sikerĂĽlt
+neki, mert az zĂˇrva volt, hiszen mĂˇr elhagytuk a with blokkot.
 </p>
-<h2 id='extend_at_start'>A generátor-lánc elejét bővítjük</h2>
+<h2 id='extend_at_start'>A generĂˇtor-lĂˇnc elejĂ©t bĹ‘vĂ­tjĂĽk</h2>
 <p>
-Eddig egyetlen fájllal dolgoztunk, annak a feldolgozásába kapcsoltunk be újabb és újabb szűrő-generátorokat. Nézzük meg, mit tehetünk, ha több fájlunk van,
-amelyeknek a tartalmából egyetlen listát szeretnénk készíteni. Legyen pl. a másik fájl neve other_file.txt és a tartalma:
+Eddig egyetlen fĂˇjllal dolgoztunk, annak a feldolgozĂˇsĂˇba kapcsoltunk be Ăşjabb Ă©s Ăşjabb szĹ±rĹ‘-generĂˇtorokat. NĂ©zzĂĽk meg, mit tehetĂĽnk, ha tĂ¶bb fĂˇjlunk van,
+amelyeknek a tartalmĂˇbĂłl egyetlen listĂˇt szeretnĂ©nk kĂ©szĂ­teni. Legyen pl. a mĂˇsik fĂˇjl neve other_file.txt Ă©s a tartalma:
 <pre class='data'>
 XXX_OTHER_FILE;2000
 YYY_OTHER_FILE;3000
 </pre>
-Ezt a kimeneti listát szeretnénk előállítani a két fájlból:
+Ezt a kimeneti listĂˇt szeretnĂ©nk elĹ‘ĂˇllĂ­tani a kĂ©t fĂˇjlbĂłl:
 
 <pre>
 <div class='result'>
@@ -387,7 +387,7 @@ Ezt a kimeneti listát szeretnénk előállítani a két fájlból:
 # ['YYY_OTHER_FILE', 3000.0]</span>
 </div>
 </pre>
-Először is tegyük bele az egyetlen fájlhoz tartozó szűrő-funkciókat egy generátor függvénybe.
+ElĹ‘szĂ¶r is tegyĂĽk bele az egyetlen fĂˇjlhoz tartozĂł szĹ±rĹ‘-funkciĂłkat egy generĂˇtor fĂĽggvĂ©nybe.
 
 <pre>
 def format_file(fileObj):
@@ -397,8 +397,8 @@ def format_file(fileObj):
         for line in g_filtered:
             yield(line)
 </pre>
-A fájl elérési útvonalakat most egy listából fogjuk kiolvasni, ebből előállítunk fájl-objektumok sorozatát (megnyitjuk a fájlokat), majd mindegyiken végrehajtjuk
-a szűrést.
+A fĂˇjl elĂ©rĂ©si Ăştvonalakat most egy listĂˇbĂłl fogjuk kiolvasni, ebbĹ‘l elĹ‘ĂˇllĂ­tunk fĂˇjl-objektumok sorozatĂˇt (megnyitjuk a fĂˇjlokat), majd mindegyiken vĂ©grehajtjuk
+a szĹ±rĂ©st.
 
 <pre>
 filepaths = ['infile.txt','other_file.txt']
@@ -408,7 +408,7 @@ for fmt in g_formatters:
     for line in fmt:
         print(line)
 </pre>
-A kettős ciklust persze elhelyezhetjük ízlés szerint egy generátor-kifejezésben is:
+A kettĹ‘s ciklust persze elhelyezhetjĂĽk Ă­zlĂ©s szerint egy generĂˇtor-kifejezĂ©sben is:
 <pre class='pale'>
 filepaths = ['infile.txt','other_file.txt']
 g_f_objs = (open(f,'r') for f in filepaths)
@@ -417,7 +417,7 @@ g_formatters = (format_file(f_obj) for f_obj in g_f_objs)
 for line in g_lines:
     print(line)</span>
 </pre>
-Ha valakinek olvashatóbb így, akkor persze írhatja több sorba is:
+Ha valakinek olvashatĂłbb Ă­gy, akkor persze Ă­rhatja tĂ¶bb sorba is:
 <pre>
 g_lines = (line
            for fmt in g_formatters
@@ -425,11 +425,11 @@ g_lines = (line
 </pre>
 </p>
 <h2 id='no_yield'>Amikor return kell yield helyett</h2>
-<h4 id='q_1' class='question'>REJTVÉNY</h4>
+<h4 id='q_1' class='question'>REJTVĂ‰NY</h4>
 <p>
-Tegyük fel, hogy a fájl megnyitását bele akarjuk tenni egy függvénybe (hamarosan látni fogjuk, hogy ez miért lehet célszerű). Logikusnak látszik,
-hogy a megnyitott fájlobjektumot yield segítségével adjuk vissza, hiszen annyira szeretjük a generátorfüggvényeket. Próbáljuk is ki mindjárt az új
-függvényünket, olvassunk egy sort a fájlból:
+TegyĂĽk fel, hogy a fĂˇjl megnyitĂˇsĂˇt bele akarjuk tenni egy fĂĽggvĂ©nybe (hamarosan lĂˇtni fogjuk, hogy ez miĂ©rt lehet cĂ©lszerĹ±). Logikusnak lĂˇtszik,
+hogy a megnyitott fĂˇjlobjektumot yield segĂ­tsĂ©gĂ©vel adjuk vissza, hiszen annyira szeretjĂĽk a generĂˇtorfĂĽggvĂ©nyeket. PrĂłbĂˇljuk is ki mindjĂˇrt az Ăşj
+fĂĽggvĂ©nyĂĽnket, olvassunk egy sort a fĂˇjlbĂłl:
 
 <pre>
 def open_file(filePath):
@@ -445,27 +445,27 @@ f.readline()
 # AttributeError: 'generator' object has no attribute 'readline'
 </div>
 </pre>
-Ha a yield helyett return-t használunk:
+Ha a yield helyett return-t hasznĂˇlunk:
 <pre>
 def open_file(filePath):
     f_obj = open(filePath,'r')
     <span style='color:green;'>return</span> f_obj
 </pre>
-akkor jól működik.
+akkor jĂłl mĹ±kĂ¶dik.
 </p>
 <p>
-<span class='question'>Vajon miért?</span>
-<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">Megoldás</button>
+<span class='question'>Vajon miĂ©rt?</span>
+<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">MegoldĂˇs</button>
 <div id='sol_1' class='solution'>
-Amikor egy generátor függvényt lefuttatunk, akkor csak egy generátort kapunk, a benne lévő kód még nem aktiválódik! Ez a sor:
+Amikor egy generĂˇtor fĂĽggvĂ©nyt lefuttatunk, akkor csak egy generĂˇtort kapunk, a benne lĂ©vĹ‘ kĂłd mĂ©g nem aktivĂˇlĂłdik! Ez a sor:
 <pre>
 f_obj = open_file('infile.txt')
 </pre>
-<b>csak létrehozza</b> azt a generátort, ami aztán szolgáltat egy fájlobjektumot, <b>amikor majd egy next()-et végrehajtunk rajta</b>. Mivel erre nem számítottunk,
-a változónév is félrevezető, g_f_obj jobb lenne, hogy jelezze: itt nem egy fájlobjektumról, hanem egy generátorról van szó.
+<b>csak lĂ©trehozza</b> azt a generĂˇtort, ami aztĂˇn szolgĂˇltat egy fĂˇjlobjektumot, <b>amikor majd egy next()-et vĂ©grehajtunk rajta</b>. Mivel erre nem szĂˇmĂ­tottunk,
+a vĂˇltozĂłnĂ©v is fĂ©lrevezetĹ‘, g_f_obj jobb lenne, hogy jelezze: itt nem egy fĂˇjlobjektumrĂłl, hanem egy generĂˇtorrĂłl van szĂł.
 </div>
 
-A függvényünket így használjuk a generátor-láncban:
+A fĂĽggvĂ©nyĂĽnket Ă­gy hasznĂˇljuk a generĂˇtor-lĂˇncban:
 <pre class='pale'>
 filepaths = ['infile.txt','other_file.txt']
 g_f_objs = (<span style='color:blue'>open_file(f)</span> for f in filepaths)
@@ -475,10 +475,10 @@ for line in g_lines:
     print(line)
 </pre>
 </p>
-<h2 id='different_files'>Különféle fájlok megnyitása</h2>
+<h2 id='different_files'>KĂĽlĂ¶nfĂ©le fĂˇjlok megnyitĂˇsa</h2>
 <p>
-Tegyük fel, hogy nemcsak egyszerű szövegfájlokat akarunk feldolgozni, hanem gzip-pel tömörített szövegfájlokat is. Ehhez csak az open_file() függvényt kell
-megváltoztatnunk; attól függően használunk más-más módszert, hogy a fájl .gz kiterjesztésű-e.
+TegyĂĽk fel, hogy nemcsak egyszerĹ± szĂ¶vegfĂˇjlokat akarunk feldolgozni, hanem gzip-pel tĂ¶mĂ¶rĂ­tett szĂ¶vegfĂˇjlokat is. Ehhez csak az open_file() fĂĽggvĂ©nyt kell
+megvĂˇltoztatnunk; attĂłl fĂĽggĹ‘en hasznĂˇlunk mĂˇs-mĂˇs mĂłdszert, hogy a fĂˇjl .gz kiterjesztĂ©sĹ±-e.
 
 <pre>
 import gzip
@@ -491,16 +491,16 @@ def open_file(filePath):
 
     return(f_obj)
 </pre>
-A gzip esetében a nyitási paraméterből nem szabad lehagyni r mellől a <span class='emph_1'>t</span>-t, különben bináris módban nyílik meg a fájl, azaz
-bájtsorozatot és nem karaktersorozatot kapunk. A szövegfájlok megnyitásánál elhagyhatjuk ezt a kapcsolót, mert ott a text módus az alapértelmezett.
+A gzip esetĂ©ben a nyitĂˇsi paramĂ©terbĹ‘l nem szabad lehagyni r mellĹ‘l a <span class='emph_1'>t</span>-t, kĂĽlĂ¶nben binĂˇris mĂłdban nyĂ­lik meg a fĂˇjl, azaz
+bĂˇjtsorozatot Ă©s nem karaktersorozatot kapunk. A szĂ¶vegfĂˇjlok megnyitĂˇsĂˇnĂˇl elhagyhatjuk ezt a kapcsolĂłt, mert ott a text mĂłdus az alapĂ©rtelmezett.
 </p>
 <p>
-Tegyük fel, hogy van egy third_file.txt bemeneti fájlunk is, amelyet egy third_file.gz-be tömörítettünk össze; a tartalma:
+TegyĂĽk fel, hogy van egy third_file.txt bemeneti fĂˇjlunk is, amelyet egy third_file.gz-be tĂ¶mĂ¶rĂ­tettĂĽnk Ă¶ssze; a tartalma:
 <pre class='data'>
 WWW_THIRD_FILE;11
 ZZZ_THIRD_FILE;21
 </pre>
-Ezt a fájlt is beletesszük a fájl-listába, egyébként nem változik semmi.
+Ezt a fĂˇjlt is beletesszĂĽk a fĂˇjl-listĂˇba, egyĂ©bkĂ©nt nem vĂˇltozik semmi.
 <pre class='pale'>
 filepaths = ['infile.txt','other_file.txt',<span style='color:blue'>'third_file.gz'</span>]
 g_f_objs = (open_file(f) for f in filepaths)
@@ -522,7 +522,7 @@ for line in g_lines:
 # ['ZZZ_THIRD_FILE', 21.0]</span>
 </div>
 </pre>
-Persze most is bármit tudunk kezdeni a kapott elemsorozattal, pl. meg tudjuk határozni a számok maximumát:
+Persze most is bĂˇrmit tudunk kezdeni a kapott elemsorozattal, pl. meg tudjuk hatĂˇrozni a szĂˇmok maximumĂˇt:
 <pre class='pale'>
 filepaths = ['infile.txt','other_file.txt','third_file.gz']
 g_f_objs = (open_file(f) for f in filepaths)
@@ -535,14 +535,14 @@ print(max(second_column))</span>
 </div>
 </pre>
 </p>
-<h4 id='q_2' class='question'>REJTVÉNYEK</h4>
+<h4 id='q_2' class='question'>REJTVĂ‰NYEK</h4>
 <p>
-A fenti programban az utolsó sorban a maximumot és a minimumot is ki akarjuk íratni:
+A fenti programban az utolsĂł sorban a maximumot Ă©s a minimumot is ki akarjuk Ă­ratni:
 
 <pre>
 print(max(second_column), min(second_column))
 </pre>
-Hibajelzést kapunk:
+HibajelzĂ©st kapunk:
 <pre>
 <div class='result'>
 # Traceback (most recent call last):
@@ -551,15 +551,15 @@ Hibajelzést kapunk:
 # ValueError: min() arg is an empty sequence
 </div>
 </pre>
-<span class='question'>Miért?</span>
-<button id='b_sol_2' class='sol_button' onclick="toggle_from_none('sol_2')">Megoldás</button>
+<span class='question'>MiĂ©rt?</span>
+<button id='b_sol_2' class='sol_button' onclick="toggle_from_none('sol_2')">MegoldĂˇs</button>
 <div id='sol_2' class='solution'>
-A max() függvény "kimeríti" a teljes iterátor-szekvenciát, kiolvas belőle minden elemet. Mire a min() függvény sorra kerül, az iterátor üres, a min()
-függvény pedig nulla darab elemmel nem tud mit kezdeni.
+A max() fĂĽggvĂ©ny "kimerĂ­ti" a teljes iterĂˇtor-szekvenciĂˇt, kiolvas belĹ‘le minden elemet. Mire a min() fĂĽggvĂ©ny sorra kerĂĽl, az iterĂˇtor ĂĽres, a min()
+fĂĽggvĂ©ny pedig nulla darab elemmel nem tud mit kezdeni.
 </div>
 </p>
 <p>
-Úgy próbálunk segíteni a problémán, hogy két darab iterátort hozunk létre a második oszlop előállítására:
+Ăšgy prĂłbĂˇlunk segĂ­teni a problĂ©mĂˇn, hogy kĂ©t darab iterĂˇtort hozunk lĂ©tre a mĂˇsodik oszlop elĹ‘ĂˇllĂ­tĂˇsĂˇra:
 
 <pre class='pale'>
 filepaths = ['infile.txt','other_file.txt','third_file.gz']
@@ -570,13 +570,13 @@ second_column = (row[1] for row in g_lines)
 <span style='color:blue;'>second_col_2 = (row[1] for row in g_lines)</span>
 print(max(second_column), min(<span style='color:blue;'>second_col_2</span>))
 </pre>
-A hibajelzés változatlan marad.
+A hibajelzĂ©s vĂˇltozatlan marad.
 </p>
 <p>
-<span class='question'>Miért?</span>
-<button id='b_sol_3' class='sol_button' onclick="toggle_from_none('sol_3')">Megoldás</button>
+<span class='question'>MiĂ©rt?</span>
+<button id='b_sol_3' class='sol_button' onclick="toggle_from_none('sol_3')">MegoldĂˇs</button>
 <div id='sol_3' class='solution'>
-Hiába készítünk két iterátort a lánc végére, a láncban a többi iterátor változatlanul ugyanaz &ndash; amiket a max() függvény már kiovasott.
+HiĂˇba kĂ©szĂ­tĂĽnk kĂ©t iterĂˇtort a lĂˇnc vĂ©gĂ©re, a lĂˇncban a tĂ¶bbi iterĂˇtor vĂˇltozatlanul ugyanaz &ndash; amiket a max() fĂĽggvĂ©ny mĂˇr kiovasott.
 
 <pre style='margin-left: 200px;'>
 min -- second_col_2  --+
@@ -587,14 +587,14 @@ max -- <span class='deleted'>second_column</span> --+
 
 </pre>
 </div>
-Ha az egész iterátor-láncot megdupláznánk, akkor persze működne a dolog, de ez nem volna sem szép, sem gyors megoldás &ndash; a fájl beolvasásától kezdve
-mindent kétszer végig kellene csinálni. És ha még az átlagra is kíváncsiak vagyunk, akkor háromszor...
+Ha az egĂ©sz iterĂˇtor-lĂˇncot megduplĂˇznĂˇnk, akkor persze mĹ±kĂ¶dne a dolog, de ez nem volna sem szĂ©p, sem gyors megoldĂˇs &ndash; a fĂˇjl beolvasĂˇsĂˇtĂłl kezdve
+mindent kĂ©tszer vĂ©gig kellene csinĂˇlni. Ă‰s ha mĂ©g az Ăˇtlagra is kĂ­vĂˇncsiak vagyunk, akkor hĂˇromszor...
 </p>
 <p>
-Kétféle módon tudjuk megoldani a problémát.
+KĂ©tfĂ©le mĂłdon tudjuk megoldani a problĂ©mĂˇt.
 </p>
 <p>
-<b>&#9312;</b> Az egyik módszer, hogy valamelyik ponton listává vagy tuple-lá alakítjuk a sorozatunkat:
+<b>&#9312;</b> Az egyik mĂłdszer, hogy valamelyik ponton listĂˇvĂˇ vagy tuple-lĂˇ alakĂ­tjuk a sorozatunkat:
 
 <pre class='pale'>
 filepaths = ['infile.txt','other_file.txt','third_file.txt.gz']
@@ -611,10 +611,10 @@ print(max(second_column), min(second_column))
 # 3000.0 9.0
 </div>
 </pre>
-Ha nagy mennyiségű adatunk van, akkor ez az a pont, ahonnan sok memóriára van szükség.
+Ha nagy mennyisĂ©gĹ± adatunk van, akkor ez az a pont, ahonnan sok memĂłriĂˇra van szĂĽksĂ©g.
 </p>
 <p>
-<b>&#9313;</b> Megmaradunk a generátoroknál és írunk egy kis függvényt, ami kiszámítja a maximumot és a minimumot.
+<b>&#9313;</b> Megmaradunk a generĂˇtoroknĂˇl Ă©s Ă­runk egy kis fĂĽggvĂ©nyt, ami kiszĂˇmĂ­tja a maximumot Ă©s a minimumot.
 
 <pre>
 def min_max(numbers):
@@ -660,7 +660,7 @@ Python</a> Real Python<br>
 </i>
 </p>
 <p>
-<b>Könyvek</b>
+<b>KĂ¶nyvek</b>
 </p>
 <p>
 Dan Bader: Python Tricks - The Book<br>
@@ -677,7 +677,7 @@ function toggle_from_none(ID) {
       b = document.getElementById('b_' + ID);
 
   e.style.display = no_block ? 'block' : 'none';
-  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+  b.textContent  = no_block ? 'MegoldĂˇs elrejtĂ©se' : 'MegoldĂˇs';
 }
 </script>
 </body>

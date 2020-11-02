@@ -23,36 +23,36 @@
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
-<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.29 &mdash;</p>
+<span style='float:right;font-style:italic;'>Nemes MihÃ¡ly &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; UtolsÃ³ mÃ³dosÃ­tÃ¡s: 2020.10.29 &mdash;</p>
 </div>
 <h1>Closure</h1>
 <ul class='contents'>
-<li><a style='color: red' href='#definition'>Definíció</a></li>
-<li><a style='color: red' href='#with_class'>...és ugyanez objektummal</a></li>
-<li><a style='color: red' href='#with_callable_class'>...vagy hívható objektummal</a></li>
-<li><a style='color: red' href='#applications'>Alkalmazások</a>
+<li><a style='color: red' href='#definition'>DefinÃ­ciÃ³</a></li>
+<li><a style='color: red' href='#with_class'>...Ã©s ugyanez objektummal</a></li>
+<li><a style='color: red' href='#with_callable_class'>...vagy hÃ­vhatÃ³ objektummal</a></li>
+<li><a style='color: red' href='#applications'>AlkalmazÃ¡sok</a>
 <ul>
-<li><a style='color: red' href='#default_pars'>Default paraméterek beállítása</a></li>
-<li><a style='color: red' href='#single_method_classes'>Egyetlen metódusú osztályok kiváltása</a></li>
-<li><a style='color: red' href='#constant_attributes'>Kifelé rejtett attribútumok</a></li>
-<li><a style='color: red' href='#several_func_objects'>Egyedi függvény-objektumok gyártása</a></li>
-<li><a style='color: red' href='#decorators'>Dekorátorok</a></li>
+<li><a style='color: red' href='#default_pars'>Default paramÃ©terek beÃ¡llÃ­tÃ¡sa</a></li>
+<li><a style='color: red' href='#single_method_classes'>Egyetlen metÃ³dusÃº osztÃ¡lyok kivÃ¡ltÃ¡sa</a></li>
+<li><a style='color: red' href='#constant_attributes'>KifelÃ© rejtett attribÃºtumok</a></li>
+<li><a style='color: red' href='#several_func_objects'>Egyedi fÃ¼ggvÃ©ny-objektumok gyÃ¡rtÃ¡sa</a></li>
+<li><a style='color: red' href='#decorators'>DekorÃ¡torok</a></li>
 </ul>
 </li>
 <li><a style='color: red' href='#literature'>Irodalom</a></li>
 </ul>
 
-<h2 id='definition'>Definíció</h2>
+<h2 id='definition'>DefinÃ­ciÃ³</h2>
 <p>
-<span class='emph_4'>CLOSURE, LEXICAL CLOSURE:</span> Olyan függvény, amin belül definiálunk egy másik függvényt; a külsõ (factory) függvény a belsõt adja
-vissza, amely megõrzi a keletkezésekor fennálló belsõ állapotot (hívási paraméterek és lokális változók értékét).
+<span class='emph_4'>CLOSURE, LEXICAL CLOSURE:</span> Olyan fÃ¼ggvÃ©ny, amin belÃ¼l definiÃ¡lunk egy mÃ¡sik fÃ¼ggvÃ©nyt; a kÃ¼lsÅ‘ (factory) fÃ¼ggvÃ©ny a belsÅ‘t adja
+vissza, amely megÅ‘rzi a keletkezÃ©sekor fennÃ¡llÃ³ belsÅ‘ Ã¡llapotot (hÃ­vÃ¡si paramÃ©terek Ã©s lokÃ¡lis vÃ¡ltozÃ³k Ã©rtÃ©kÃ©t).
 </p>
 <p>
-(Igen, jól érzékeli az olvasó: ez így egyszerre hat tudományoskodónak, érthetetlennek és feleslegesnek. Valójában egyik sem.)
+(Igen, jÃ³l Ã©rzÃ©keli az olvasÃ³: ez Ã­gy egyszerre hat tudomÃ¡nyoskodÃ³nak, Ã©rthetetlennek Ã©s feleslegesnek. ValÃ³jÃ¡ban egyik sem.)
 </p>
 <p>
-Ismerkedésként nézzünk meg egy nagyon egyszerû closure-t:
+IsmerkedÃ©skÃ©nt nÃ©zzÃ¼nk meg egy nagyon egyszerÅ± closure-t:
 <pre>
 def outer_func(<span class='emph_1'>outerParam</span>):
     def inner_func(innerParam):
@@ -74,14 +74,14 @@ f('inner func parameter')
 # inner_func says: innerParam is: inner func parameter
 </div>
 </pre>
-A külsõ függvény csak gyárként (factory) szolgál, amikor felhívjuk, akkor visszaadja a belsõ függvényt. Az új, <code>f</code> függvény tulajdonképpen a
-belsõ függvényre mutató referencia; amikor õt felhívjuk, <code>inner_func</code> fog lefutni. És amikor lefut, láthatjuk, hogy megjegyezte a külsõ függvénynek
-azt az állapotát (lokális változóit és bemenõ paramétereit), ami az õ elkészítésekor érvényes volt.
+A kÃ¼lsÅ‘ fÃ¼ggvÃ©ny csak gyÃ¡rkÃ©nt (factory) szolgÃ¡l, amikor felhÃ­vjuk, akkor visszaadja a belsÅ‘ fÃ¼ggvÃ©nyt. Az Ãºj, <code>f</code> fÃ¼ggvÃ©ny tulajdonkÃ©ppen a
+belsÅ‘ fÃ¼ggvÃ©nyre mutatÃ³ referencia; amikor Å‘t felhÃ­vjuk, <code>inner_func</code> fog lefutni. Ã‰s amikor lefut, lÃ¡thatjuk, hogy megjegyezte a kÃ¼lsÅ‘ fÃ¼ggvÃ©nynek
+azt az Ã¡llapotÃ¡t (lokÃ¡lis vÃ¡ltozÃ³it Ã©s bemenÅ‘ paramÃ©tereit), ami az Å‘ elkÃ©szÃ­tÃ©sekor Ã©rvÃ©nyes volt.
 </p>
-<h2 id='with_class'>...és ugyanez objektummal</h2>
+<h2 id='with_class'>...Ã©s ugyanez objektummal</h2>
 <p>
-Nagyon tanulságos megnézni egy másik módszert a closure által megjegyzett információk tárolására. Ha valamilyen adatot meg kell jegyeznie a programnak, akkor az
-elsõ gondolatunk nyilván egy "hagyományos" objektum lesz (és ezentúl a második gondolatunk egy closure függvény, amint megszoktuk ezt az új fogalmat).
+Nagyon tanulsÃ¡gos megnÃ©zni egy mÃ¡sik mÃ³dszert a closure Ã¡ltal megjegyzett informÃ¡ciÃ³k tÃ¡rolÃ¡sÃ¡ra. Ha valamilyen adatot meg kell jegyeznie a programnak, akkor az
+elsÅ‘ gondolatunk nyilvÃ¡n egy "hagyomÃ¡nyos" objektum lesz (Ã©s ezentÃºl a mÃ¡sodik gondolatunk egy closure fÃ¼ggvÃ©ny, amint megszoktuk ezt az Ãºj fogalmat).
 
 <pre>
 class ClosureClass:
@@ -103,13 +103,13 @@ f('inner func parameter')
 # inner_func says: innerParam is: inner func parameter
 </div>
 </pre>
-Azt hiszem, jól látszik, mennyivel több segéd-kódot kellett írnunk a két sztring megjegyzéséhez &ndash; ez remélhetõleg felkelti a szimpátiát a closure
-irányában.
+Azt hiszem, jÃ³l lÃ¡tszik, mennyivel tÃ¶bb segÃ©d-kÃ³dot kellett Ã­rnunk a kÃ©t sztring megjegyzÃ©sÃ©hez &ndash; ez remÃ©lhetÅ‘leg felkelti a szimpÃ¡tiÃ¡t a closure
+irÃ¡nyÃ¡ban.
 </p>
-<h2 id='with_callable_class'>...vagy hívható objektummal</h2>
+<h2 id='with_callable_class'>...vagy hÃ­vhatÃ³ objektummal</h2>
 <p>
-Meg lehet oldani a feladatot egy kicsit direktebb, egyszerûbb módon is, ha a segédobjektumunkat hívhatóvá tesszük (tehát ilyen módon gyakorlatilag egy függvényt
-állítunk elõ).
+Meg lehet oldani a feladatot egy kicsit direktebb, egyszerÅ±bb mÃ³don is, ha a segÃ©dobjektumunkat hÃ­vhatÃ³vÃ¡ tesszÃ¼k (tehÃ¡t ilyen mÃ³don gyakorlatilag egy fÃ¼ggvÃ©nyt
+Ã¡llÃ­tunk elÅ‘).
 <pre>
 class CallableClosureClass:
     def __init__(self,<span class='emph_1'>outerParam</span>):
@@ -129,18 +129,18 @@ f('inner func parameter')          # __call__
 # inner_func says: innerParam is: inner func parameter
 </div>
 </pre>
-A "hagyományos" objektummal való megoldás akkor lehet elõnyösebb (olvashatóbb) a closure függvény-objektumnál, amikor többféle funkcionalitásra, azaz nem csak
-egyetlen metódusra van szükségünk.
+A "hagyomÃ¡nyos" objektummal valÃ³ megoldÃ¡s akkor lehet elÅ‘nyÃ¶sebb (olvashatÃ³bb) a closure fÃ¼ggvÃ©ny-objektumnÃ¡l, amikor tÃ¶bbfÃ©le funkcionalitÃ¡sra, azaz nem csak
+egyetlen metÃ³dusra van szÃ¼ksÃ©gÃ¼nk.
 
 <div class='emph_box_1' style='width: 50%'>
-A closure függvénynél a bemenõ pataméterek játsszák azt a szerepet, mint az objektumoknál a konstruktor paraméterei.
+A closure fÃ¼ggvÃ©nynÃ©l a bemenÅ‘ patamÃ©terek jÃ¡tsszÃ¡k azt a szerepet, mint az objektumoknÃ¡l a konstruktor paramÃ©terei.
 </div>
 </p>
-<h2 id='applications'>Alkalmazások</h2>
-<h3 id='default_pars' style='color:green;'>Default paraméterek beállítása</h3>
+<h2 id='applications'>AlkalmazÃ¡sok</h2>
+<h3 id='default_pars' style='color:green;'>Default paramÃ©terek beÃ¡llÃ­tÃ¡sa</h3>
 <p>
-A closure-t használhatjuk arra, hogy egy sokparaméteres függvény valahány paraméterének default értéket adjunk, ezáltal olvashatóbbá téve a programunkat.
-Legyen pl. egy négy paraméteres függvényünk, amelyet egy programrészben sokszor használunk úgy, hogy két paraméter értéke mindig 1000, ill. 100:
+A closure-t hasznÃ¡lhatjuk arra, hogy egy sokparamÃ©teres fÃ¼ggvÃ©ny valahÃ¡ny paramÃ©terÃ©nek default Ã©rtÃ©ket adjunk, ezÃ¡ltal olvashatÃ³bbÃ¡ tÃ©ve a programunkat.
+Legyen pl. egy nÃ©gy paramÃ©teres fÃ¼ggvÃ©nyÃ¼nk, amelyet egy programrÃ©szben sokszor hasznÃ¡lunk Ãºgy, hogy kÃ©t paramÃ©ter Ã©rtÃ©ke mindig 1000, ill. 100:
 <pre>
 def f_many_pars(a,b,c,d):
     return a + b + c + d
@@ -162,14 +162,14 @@ print(x)
 </div>
 </pre>
 </p>
-<h3 id='single_method_classes' style='color:green;'>Egyetlen metódusú osztályok kiváltása</h3>
+<h3 id='single_method_classes' style='color:green;'>Egyetlen metÃ³dusÃº osztÃ¡lyok kivÃ¡ltÃ¡sa</h3>
 <p>
-Tegyük fel, hogy egy programban számos helyen használnunk kell egy videotömörítõ függvényt, amely különbözõ videókat tömörít, de állandó paraméterekkel (felbontás,
-formátum...). Ezeket a paramétereket csak egyszer állítjuk be, de sokszor hívjuk a függvényünket. A paraméterek megjegyzésére a legcsúnyább megoldás globális
-változók alkalmazása; ehelyett jobb, ha egy segdosztályt definiálunk, de ennél is tömörebb és elegánsabb closure alkalmazása.
+TegyÃ¼k fel, hogy egy programban szÃ¡mos helyen hasznÃ¡lnunk kell egy videotÃ¶mÃ¶rÃ­tÅ‘ fÃ¼ggvÃ©nyt, amely kÃ¼lÃ¶nbÃ¶zÅ‘ videÃ³kat tÃ¶mÃ¶rÃ­t, de Ã¡llandÃ³ paramÃ©terekkel (felbontÃ¡s,
+formÃ¡tum...). Ezeket a paramÃ©tereket csak egyszer Ã¡llÃ­tjuk be, de sokszor hÃ­vjuk a fÃ¼ggvÃ©nyÃ¼nket. A paramÃ©terek megjegyzÃ©sÃ©re a legcsÃºnyÃ¡bb megoldÃ¡s globÃ¡lis
+vÃ¡ltozÃ³k alkalmazÃ¡sa; ehelyett jobb, ha egy segdosztÃ¡lyt definiÃ¡lunk, de ennÃ©l is tÃ¶mÃ¶rebb Ã©s elegÃ¡nsabb closure alkalmazÃ¡sa.
 
 <pre>
-                                    <span style='color:black;'>osztály            <b style='font-size:150%;'>&rArr;</b>            függvény</span>
+                                    <span style='color:black;'>osztÃ¡ly            <b style='font-size:150%;'>&rArr;</b>            fÃ¼ggvÃ©ny</span>
 class CompressClass:                                                  def outer_compress(resolution, format):
     def __init__(self, resolution, format):                               def inner_compress(inputVideo):
         self._resolution = resolution                                          # ... uses resolution, format
@@ -184,9 +184,9 @@ comp_obj_2 = CompressClass('1080p','mp3')                              comp_func
 comp_obj_2.compress(input_video)                                       comp_func_2(input_video)
 </pre>
 </p>
-<h3 id='constant_attributes' style='color:green;'>Kifelé rejtett attribútumok</h3>
+<h3 id='constant_attributes' style='color:green;'>KifelÃ© rejtett attribÃºtumok</h3>
 <p>
-A gyártó függvény paraméterei és lokális változói láthatóak a legyártott függvény számára, de kívülrõl ezek nem hozzáférhetõek.
+A gyÃ¡rtÃ³ fÃ¼ggvÃ©ny paramÃ©terei Ã©s lokÃ¡lis vÃ¡ltozÃ³i lÃ¡thatÃ³ak a legyÃ¡rtott fÃ¼ggvÃ©ny szÃ¡mÃ¡ra, de kÃ­vÃ¼lrÅ‘l ezek nem hozzÃ¡fÃ©rhetÅ‘ek.
 <pre>
 def func_factory(startParam):
     def func():
@@ -204,7 +204,7 @@ f2()
 # I am func, my start parameter: 999
 </div>
 </pre>
-Ha függvényattribútumot használnánk, az kívülrõl is változtatható lenne:
+Ha fÃ¼ggvÃ©nyattribÃºtumot hasznÃ¡lnÃ¡nk, az kÃ­vÃ¼lrÅ‘l is vÃ¡ltoztathatÃ³ lenne:
 
 <pre>
 def func_factory():
@@ -223,16 +223,16 @@ f1()
 # I am func, my start parameter: 999
 </div>
 </pre>
-Az elsõ megoldásnál el tudjuk rejteni a startParam változót a külvilág elõl, így a programot olvasva világos, hogy ezt a kezdeti beállítás után
-kívülrõl nem szabad módosítani. (A legyártott, belsõ függvény számára persze hozzáférhetõ marad.)
+Az elsÅ‘ megoldÃ¡snÃ¡l el tudjuk rejteni a startParam vÃ¡ltozÃ³t a kÃ¼lvilÃ¡g elÅ‘l, Ã­gy a programot olvasva vilÃ¡gos, hogy ezt a kezdeti beÃ¡llÃ­tÃ¡s utÃ¡n
+kÃ­vÃ¼lrÅ‘l nem szabad mÃ³dosÃ­tani. (A legyÃ¡rtott, belsÅ‘ fÃ¼ggvÃ©ny szÃ¡mÃ¡ra persze hozzÃ¡fÃ©rhetÅ‘ marad.)
 </p>
-<h3 id='several_func_objects' style='color:green;'>Egyedi függvény-objektumok gyártása</h3>
+<h3 id='several_func_objects' style='color:green;'>Egyedi fÃ¼ggvÃ©ny-objektumok gyÃ¡rtÃ¡sa</h3>
 <p>
-Olyankor lehet szükség arra, hogy egy függvénybõl ne csak egyetlen példány létezzen, amikor valamilyen statikus attribútummal ruházzuk fel a függvényt,
-amely a hívások között megõrzi az értékét, viszont a program különbözõ helyein más és más attribútum értékre van szükség. Legyen például egy függvényünk,
-amelyik valamilyen paramétereket kiértékel és ezeknek a függvényében jelzéseket ad ki; mondjuk figyelmeztet, hogy le kell olvasztani a hûtõt. A figyelmeztetés
-nyelvét be lehet állítani angolra vagy németre. Ha több helyen is szükség van erre a funkcióra és nem mindig mindenhol ugyanazt a nyelvet akarjuk
-használni, akkor több függvény-objektum példányra van szükségünk.
+Olyankor lehet szÃ¼ksÃ©g arra, hogy egy fÃ¼ggvÃ©nybÅ‘l ne csak egyetlen pÃ©ldÃ¡ny lÃ©tezzen, amikor valamilyen statikus attribÃºtummal ruhÃ¡zzuk fel a fÃ¼ggvÃ©nyt,
+amely a hÃ­vÃ¡sok kÃ¶zÃ¶tt megÅ‘rzi az Ã©rtÃ©kÃ©t, viszont a program kÃ¼lÃ¶nbÃ¶zÅ‘ helyein mÃ¡s Ã©s mÃ¡s attribÃºtum Ã©rtÃ©kre van szÃ¼ksÃ©g. Legyen pÃ©ldÃ¡ul egy fÃ¼ggvÃ©nyÃ¼nk,
+amelyik valamilyen paramÃ©tereket kiÃ©rtÃ©kel Ã©s ezeknek a fÃ¼ggvÃ©nyÃ©ben jelzÃ©seket ad ki; mondjuk figyelmeztet, hogy le kell olvasztani a hÅ±tÅ‘t. A figyelmeztetÃ©s
+nyelvÃ©t be lehet Ã¡llÃ­tani angolra vagy nÃ©metre. Ha tÃ¶bb helyen is szÃ¼ksÃ©g van erre a funkciÃ³ra Ã©s nem mindig mindenhol ugyanazt a nyelvet akarjuk
+hasznÃ¡lni, akkor tÃ¶bb fÃ¼ggvÃ©ny-objektum pÃ©ldÃ¡nyra van szÃ¼ksÃ©gÃ¼nk.
 
 <pre>
 def warn_factory():
@@ -256,7 +256,7 @@ f_warn_2()
 # Donnerwetter!
 </div>
 </pre>
-A gyár függvény persze elvégezheti az attribútum kezdeti beállítását:
+A gyÃ¡r fÃ¼ggvÃ©ny persze elvÃ©gezheti az attribÃºtum kezdeti beÃ¡llÃ­tÃ¡sÃ¡t:
 
 <pre class='pale'>
 def warn_factory(<span style='color:blue;'>language</span>):
@@ -280,9 +280,9 @@ f_warn_2()
 </pre>
 
 </p>
-<h3 id='decorators' style='color:green;'>Dekorátorok</h3>
+<h3 id='decorators' style='color:green;'>DekorÃ¡torok</h3>
 <p>
-A dekorátoroknál a külsõ függvénynek legalább egy paramétere maga is függvény; ez egy nagyobb (és fontos) téma, külön fejezetben fogunk foglalkozni vele.
+A dekorÃ¡toroknÃ¡l a kÃ¼lsÅ‘ fÃ¼ggvÃ©nynek legalÃ¡bb egy paramÃ©tere maga is fÃ¼ggvÃ©ny; ez egy nagyobb (Ã©s fontos) tÃ©ma, kÃ¼lÃ¶n fejezetben fogunk foglalkozni vele.
 </p>
 <h2 id='literature'>Irodalom</h2>
 <p>
@@ -293,7 +293,7 @@ A dekorátoroknál a külsõ függvénynek legalább egy paramétere maga is függvény; e
 <a href='http://www.trytoprogram.com/python-programming/python-closures/' target='_blank'>Python closures</a> trytoprogram.com
 </p>
 <p>
-<b>Könyvek</b>
+<b>KÃ¶nyvek</b>
 </p>
 <p>
 Dan Bader: Python Tricks - The Book<br>
@@ -326,7 +326,7 @@ Brett Slatkin: Effective Python<br>
 <i>&nbsp;&nbsp;Accept Functions for Simple Interfaces Instead of Classes</i>
 </p>
 <p>
-<b>Videók</b>
+<b>VideÃ³k</b>
 </p>
 <p>
 <a href='https://www.youtube.com/watch?v=swU3c34d2NQ' target='_blank'>Programming Terms: Closures - How to Use Them and Why They Are Useful</a> Corey Schaefer<br>

@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-<title>Függvény-dekorátorok bemutatása</title>
+<title>FĂĽggvĂ©ny-dekorĂˇtorok bemutatĂˇsa</title>
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
@@ -24,66 +24,66 @@
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
-<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.29 &mdash;</p>
+<span style='float:right;font-style:italic;'>Nemes MihĂˇly &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; UtolsĂł mĂłdosĂ­tĂˇs: 2020.10.29 &mdash;</p>
 </div>
-<h1>Függvény-dekorátorok bemutatása</h1>
+<h1>FĂĽggvĂ©ny-dekorĂˇtorok bemutatĂˇsa</h1>
 <ul class='contents'>
-<li><a style='color: red' href='#definition'>Definíció, "klasszikus" dekorátor</a></li>
-<li><a style='color: red' href='#pythonic_first'>Első ügyetlenkedés függvényobjektumokkal</a></li>
-<li><a style='color: red' href='#pythonic_second'>Második béna kísérlet</a></li>
-<li><a style='color: red' href='#closure'>Színre lép a closure</a>
+<li><a style='color: red' href='#definition'>DefinĂ­ciĂł, "klasszikus" dekorĂˇtor</a></li>
+<li><a style='color: red' href='#pythonic_first'>ElsĹ‘ ĂĽgyetlenkedĂ©s fĂĽggvĂ©nyobjektumokkal</a></li>
+<li><a style='color: red' href='#pythonic_second'>MĂˇsodik bĂ©na kĂ­sĂ©rlet</a></li>
+<li><a style='color: red' href='#closure'>SzĂ­nre lĂ©p a closure</a>
 <ul>
-<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNY</a></li>
+<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVĂ‰NY</a></li>
 </ul>
 </li>
-<li><a style='color: red' href='#multiple_decorators'>Többszörös dekorálás</a></li>
-<li><a style='color: red' href='#return_value'>Visszatérő érték</a></li>
-<li><a style='color: red' href='#func_args'>Függvényparaméterek kezelése</a></li>
-<li><a style='color: red' href='#pie'>Pie (kukacos) dekorátor szintaktika</a></li>
-<li><a style='color: red' href='#class_methods'>Objektum-metódusok dekorálása</a></li>
+<li><a style='color: red' href='#multiple_decorators'>TĂ¶bbszĂ¶rĂ¶s dekorĂˇlĂˇs</a></li>
+<li><a style='color: red' href='#return_value'>VisszatĂ©rĹ‘ Ă©rtĂ©k</a></li>
+<li><a style='color: red' href='#func_args'>FĂĽggvĂ©nyparamĂ©terek kezelĂ©se</a></li>
+<li><a style='color: red' href='#pie'>Pie (kukacos) dekorĂˇtor szintaktika</a></li>
+<li><a style='color: red' href='#class_methods'>Objektum-metĂłdusok dekorĂˇlĂˇsa</a></li>
 <li><a style='color: red' href='#literature'>Irodalom</a></li>
 </ul>
 
-<h2 id='definition'>Definíció, "klasszikus" dekorátor</h2>
+<h2 id='definition'>DefinĂ­ciĂł, "klasszikus" dekorĂˇtor</h2>
 <p>
-A Dekorátor tervezési minta arra szolgál, hogy egy függvény működését elő- és utómunkálatokkal lássa el, méghozzá úgy, hogy az eredeti függvény változatlan marad.
-Az elő- és utómunkálatok például azt jelentik, hogy
+A DekorĂˇtor tervezĂ©si minta arra szolgĂˇl, hogy egy fĂĽggvĂ©ny mĹ±kĂ¶dĂ©sĂ©t elĹ‘- Ă©s utĂłmunkĂˇlatokkal lĂˇssa el, mĂ©ghozzĂˇ Ăşgy, hogy az eredeti fĂĽggvĂ©ny vĂˇltozatlan marad.
+Az elĹ‘- Ă©s utĂłmunkĂˇlatok pĂ©ldĂˇul azt jelentik, hogy
 
 <ul>
-<li>a hívás előtt és/vagy után logfájlba vagy a képernyőre írunk információkat hibakeresés céljából,</li>
-<li>időmérést végzünk,</li>
-<li>fixen beállítunk egyes paramétereket, hogy ne kelljen minden hívásnál ezeket megadni,</li>
-<li>a bemeneti paramétereket ellenőrizzük,</li>
-<li>hozzáférési jogosultságokat kezelünk,</li>
-<li>eltárolunk eredményeket gyorsítás céljából,</li>
-<li>regisztráljuk a függvényt,</li>
-<li>lelassítjuk a függvényt, mert adott környezethez így illeszkedik jobban,</li>
-<li>szimuláció: helyettesítünk átmenetileg egy függvényt egy másikkal a környezet tesztelése érdekében:
+<li>a hĂ­vĂˇs elĹ‘tt Ă©s/vagy utĂˇn logfĂˇjlba vagy a kĂ©pernyĹ‘re Ă­runk informĂˇciĂłkat hibakeresĂ©s cĂ©ljĂˇbĂłl,</li>
+<li>idĹ‘mĂ©rĂ©st vĂ©gzĂĽnk,</li>
+<li>fixen beĂˇllĂ­tunk egyes paramĂ©tereket, hogy ne kelljen minden hĂ­vĂˇsnĂˇl ezeket megadni,</li>
+<li>a bemeneti paramĂ©tereket ellenĹ‘rizzĂĽk,</li>
+<li>hozzĂˇfĂ©rĂ©si jogosultsĂˇgokat kezelĂĽnk,</li>
+<li>eltĂˇrolunk eredmĂ©nyeket gyorsĂ­tĂˇs cĂ©ljĂˇbĂłl,</li>
+<li>regisztrĂˇljuk a fĂĽggvĂ©nyt,</li>
+<li>lelassĂ­tjuk a fĂĽggvĂ©nyt, mert adott kĂ¶rnyezethez Ă­gy illeszkedik jobban,</li>
+<li>szimulĂˇciĂł: helyettesĂ­tĂĽnk Ăˇtmenetileg egy fĂĽggvĂ©nyt egy mĂˇsikkal a kĂ¶rnyezet tesztelĂ©se Ă©rdekĂ©ben:
 <ul>
-<li>lassú függvényt egy gyorssal</li>
-<li>nehezen hozzáférhetőt egy lokálisan kézbentarthatóval</li>
+<li>lassĂş fĂĽggvĂ©nyt egy gyorssal</li>
+<li>nehezen hozzĂˇfĂ©rhetĹ‘t egy lokĂˇlisan kĂ©zbentarthatĂłval</li>
 </ul>
 </li>
 </ul>
 
-A "klasszikus" megoldás csak osztálymetódusokat tud kiterjeszteni öröklés segítségével, erről máshol lesz szó.
+A "klasszikus" megoldĂˇs csak osztĂˇlymetĂłdusokat tud kiterjeszteni Ă¶rĂ¶klĂ©s segĂ­tsĂ©gĂ©vel, errĹ‘l mĂˇshol lesz szĂł.
 </p>
 <p>
-A dekorátor lényegéhez tartozik, hogy a többletfunkció könnyen hozzátehető és könnyen eltávolítható legyen.
+A dekorĂˇtor lĂ©nyegĂ©hez tartozik, hogy a tĂ¶bbletfunkciĂł kĂ¶nnyen hozzĂˇtehetĹ‘ Ă©s kĂ¶nnyen eltĂˇvolĂ­thatĂł legyen.
 </p>
-<h2 id='pythonic_first'>Első ügyetlenkedés függvényobjektumokkal</h2>
+<h2 id='pythonic_first'>ElsĹ‘ ĂĽgyetlenkedĂ©s fĂĽggvĂ©nyobjektumokkal</h2>
 <p>
-A következőkben függvényobjektumok dekorálásáról lesz szó, "igazi" objektumok és öröklés nélkül. Erre legrosszabb megoldás az lenne, ha az elő- és utóműveleteket
-magába a függvénybe írnánk bele, mert ez bonyolult (több kilépési pont is lehet) és sokszor nem maradandó változtatásokról van szó, hanem egy idő után ezeket
-a járulékos utasításokat el kell távolítani.
-</p>
-<p>
-A másik rossz megoldás az lenne, ha a függvény felhívásának helyein építenénk be a járulékos műveleteket &ndash; sok helyen kellene változtatni és később ezeket
-a változásokat visszacsinálni.
+A kĂ¶vetkezĹ‘kben fĂĽggvĂ©nyobjektumok dekorĂˇlĂˇsĂˇrĂłl lesz szĂł, "igazi" objektumok Ă©s Ă¶rĂ¶klĂ©s nĂ©lkĂĽl. Erre legrosszabb megoldĂˇs az lenne, ha az elĹ‘- Ă©s utĂłmĹ±veleteket
+magĂˇba a fĂĽggvĂ©nybe Ă­rnĂˇnk bele, mert ez bonyolult (tĂ¶bb kilĂ©pĂ©si pont is lehet) Ă©s sokszor nem maradandĂł vĂˇltoztatĂˇsokrĂłl van szĂł, hanem egy idĹ‘ utĂˇn ezeket
+a jĂˇrulĂ©kos utasĂ­tĂˇsokat el kell tĂˇvolĂ­tani.
 </p>
 <p>
-Vagyis a függvény definícióját kellene úgy megváltoztatni, hogy ne kelljen belenyúlni. Első megoldás:
+A mĂˇsik rossz megoldĂˇs az lenne, ha a fĂĽggvĂ©ny felhĂ­vĂˇsĂˇnak helyein Ă©pĂ­tenĂ©nk be a jĂˇrulĂ©kos mĹ±veleteket &ndash; sok helyen kellene vĂˇltoztatni Ă©s kĂ©sĹ‘bb ezeket
+a vĂˇltozĂˇsokat visszacsinĂˇlni.
+</p>
+<p>
+Vagyis a fĂĽggvĂ©ny definĂ­ciĂłjĂˇt kellene Ăşgy megvĂˇltoztatni, hogy ne kelljen belenyĂşlni. ElsĹ‘ megoldĂˇs:
 
 <pre>
 def func():
@@ -103,7 +103,7 @@ func()
 # I am decorated, I do something AFTER I called the real function
 </div>
 </pre>
-Az eredeti függvény-objektumra ráállítottunk egy változót (orig_func):
+Az eredeti fĂĽggvĂ©ny-objektumra rĂˇĂˇllĂ­tottunk egy vĂˇltozĂłt (orig_func):
 <pre>
 
                   +-------------------------+
@@ -113,7 +113,7 @@ Az eredeti függvény-objektumra ráállítottunk egy változót (orig_func):
                   +-------------------------+  
 
 </pre>
-aztán func néven készítettünk egy olyan függvényt, amely elvégzi az elő- és utómunkálatokat, továbbá felhívja az eredeti függvényt:
+aztĂˇn func nĂ©ven kĂ©szĂ­tettĂĽnk egy olyan fĂĽggvĂ©nyt, amely elvĂ©gzi az elĹ‘- Ă©s utĂłmunkĂˇlatokat, tovĂˇbbĂˇ felhĂ­vja az eredeti fĂĽggvĂ©nyt:
 
 <pre>
 
@@ -135,13 +135,13 @@ aztán func néven készítettünk egy olyan függvényt, amely elvégzi az elő- és utóm
                   
 </pre>
 
-Visszacsinálni így lehet:
+VisszacsinĂˇlni Ă­gy lehet:
 
 <pre>
 func = orig_func
 </pre>
-Ez egész jónak látszik első ránézésre. Másodikra viszont feltűnik egy súlyos hiányosság: ha ugyanezzel a dekorátorral akarunk ellátni egy másik függvényt
-is, akkor az egészet duplikálnunk kell egy kevés változtatással:
+Ez egĂ©sz jĂłnak lĂˇtszik elsĹ‘ rĂˇnĂ©zĂ©sre. MĂˇsodikra viszont feltĹ±nik egy sĂşlyos hiĂˇnyossĂˇg: ha ugyanezzel a dekorĂˇtorral akarunk ellĂˇtni egy mĂˇsik fĂĽggvĂ©nyt
+is, akkor az egĂ©szet duplikĂˇlnunk kell egy kevĂ©s vĂˇltoztatĂˇssal:
 
 <pre>
 def func_2():
@@ -156,13 +156,13 @@ def func_2():
 
 func_2()
 </pre>
-Ez azért van így, mert a dekoráló függvénybe fixen belekódoltuk, hogy melyik függvényt dekorálja. Ezenkívül az is körülményes lesz, amikor
-több dekorátort is alkalmaznunk kell, pl. logolni is akarunk és időt is szeretnénk mérni. Az ilyen szituáció nagyon gyakran előfordul
+Ez azĂ©rt van Ă­gy, mert a dekorĂˇlĂł fĂĽggvĂ©nybe fixen belekĂłdoltuk, hogy melyik fĂĽggvĂ©nyt dekorĂˇlja. EzenkĂ­vĂĽl az is kĂ¶rĂĽlmĂ©nyes lesz, amikor
+tĂ¶bb dekorĂˇtort is alkalmaznunk kell, pl. logolni is akarunk Ă©s idĹ‘t is szeretnĂ©nk mĂ©rni. Az ilyen szituĂˇciĂł nagyon gyakran elĹ‘fordul
 a gyakorlatban.
 </p>
-<h2 id='pythonic_second'>Második béna kísérlet</h2>
+<h2 id='pythonic_second'>MĂˇsodik bĂ©na kĂ­sĂ©rlet</h2>
 <p>
-Ha nem akarjuk fixen belekódolni a dekorátorba az illető függvényt, akkor paraméterként kell neki átadni.
+Ha nem akarjuk fixen belekĂłdolni a dekorĂˇtorba az illetĹ‘ fĂĽggvĂ©nyt, akkor paramĂ©terkĂ©nt kell neki Ăˇtadni.
 
 <pre>
 def func():
@@ -175,20 +175,20 @@ def decorator(funcToBeDecorated):
 
 decorator(func)
 </pre>
-Ha a decorator függvényt felhívjuk, akkor a kívánt működést kapjuk, de ez nem felel meg nekünk, hiszen a func <b>összes</b> hívásának helyén át kellene
-írnunk a nevét decorator-ra. A func nevet pedig nem tudjuk hozzárendelni a decorator függvényhez, mert annak van egy olyan paramétere, ami func-nak nincs.
+Ha a decorator fĂĽggvĂ©nyt felhĂ­vjuk, akkor a kĂ­vĂˇnt mĹ±kĂ¶dĂ©st kapjuk, de ez nem felel meg nekĂĽnk, hiszen a func <b>Ă¶sszes</b> hĂ­vĂˇsĂˇnak helyĂ©n Ăˇt kellene
+Ă­rnunk a nevĂ©t decorator-ra. A func nevet pedig nem tudjuk hozzĂˇrendelni a decorator fĂĽggvĂ©nyhez, mert annak van egy olyan paramĂ©tere, ami func-nak nincs.
 </p>
 <p>
-Zsákutca.  Ezen a ponton kellene a történetbe egy megmentő...
+ZsĂˇkutca.  Ezen a ponton kellene a tĂ¶rtĂ©netbe egy megmentĹ‘...
 </p>
-<h2 id='closure'>Színre lép a closure</h2>
+<h2 id='closure'>SzĂ­nre lĂ©p a closure</h2>
 <p>
-...aki fel is bukkan rögtön Closure felügyelő személyében.
+...aki fel is bukkan rĂ¶gtĂ¶n Closure felĂĽgyelĹ‘ szemĂ©lyĂ©ben.
 </p>
 <p>
-Olyan closure-t fogunk használni a probléma megoldására, amely a becsomagolandó függvényt kapja bemenő paraméterként. Az általa visszaadott belső függvény
-mindig emlékszik az elkészülésekori környezetére, tehát a becsomagolandó függvényre is. A dekorátortól visszakapott függvénynek adhatjuk ugyanazt a nevet,
-mint az eredetinek, így ugyanazon függvényhívás most már az új működést fogja produkálni.
+Olyan closure-t fogunk hasznĂˇlni a problĂ©ma megoldĂˇsĂˇra, amely a becsomagolandĂł fĂĽggvĂ©nyt kapja bemenĹ‘ paramĂ©terkĂ©nt. Az Ăˇltala visszaadott belsĹ‘ fĂĽggvĂ©ny
+mindig emlĂ©kszik az elkĂ©szĂĽlĂ©sekori kĂ¶rnyezetĂ©re, tehĂˇt a becsomagolandĂł fĂĽggvĂ©nyre is. A dekorĂˇtortĂłl visszakapott fĂĽggvĂ©nynek adhatjuk ugyanazt a nevet,
+mint az eredetinek, Ă­gy ugyanazon fĂĽggvĂ©nyhĂ­vĂˇs most mĂˇr az Ăşj mĹ±kĂ¶dĂ©st fogja produkĂˇlni.
 <pre>
 def func():
     print('*** I am func!')
@@ -209,15 +209,15 @@ func()
 # I am decorator 1 AFTER I called the real func
 </div>
 </pre>
-Ha vissza akarunk térni az eredeti függvényhez, akkor csak ezt a sort kell törölni:
+Ha vissza akarunk tĂ©rni az eredeti fĂĽggvĂ©nyhez, akkor csak ezt a sort kell tĂ¶rĂ¶lni:
 
 <pre>
 func = decorator(func)
 </pre>
 </p>
-<h4 id='q_1' class='question'>REJTVÉNY</h4>
+<h4 id='q_1' class='question'>REJTVĂ‰NY</h4>
 <p>
-A dekorálás előtt ráállítunk egy változót az eredeti függvényre, aztán a dekorálás után végrehajtjuk (felhívjuk) ezt a változót:
+A dekorĂˇlĂˇs elĹ‘tt rĂˇĂˇllĂ­tunk egy vĂˇltozĂłt az eredeti fĂĽggvĂ©nyre, aztĂˇn a dekorĂˇlĂˇs utĂˇn vĂ©grehajtjuk (felhĂ­vjuk) ezt a vĂˇltozĂłt:
 
 <pre class='pale'>
 def func():
@@ -236,10 +236,10 @@ func = decorator(func)
 
 <span style='color:blue;'>f()  # ???</span>
 </pre>
-<span style='color:indigo;'>Mi fog végrehajtódni?</span> <span class='question'>Az eredeti, vagy a dekorált függvény?</span>
-<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">Megoldás</button>
+<span style='color:indigo;'>Mi fog vĂ©grehajtĂłdni?</span> <span class='question'>Az eredeti, vagy a dekorĂˇlt fĂĽggvĂ©ny?</span>
+<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">MegoldĂˇs</button>
 <div id='sol_1' class='solution'>
-Az eredeti. A dekoráló függvény által visszaadott változó egy másik memóriacímen lévő másik objektumra mutat, mint az eredeti:
+Az eredeti. A dekorĂˇlĂł fĂĽggvĂ©ny Ăˇltal visszaadott vĂˇltozĂł egy mĂˇsik memĂłriacĂ­men lĂ©vĹ‘ mĂˇsik objektumra mutat, mint az eredeti:
 
 <pre>
 ...
@@ -256,10 +256,10 @@ print(f)
 
 </div>
 </p>
-<h2 id='multiple_decorators'>Többszörös dekorálás</h2>
+<h2 id='multiple_decorators'>TĂ¶bbszĂ¶rĂ¶s dekorĂˇlĂˇs</h2>
 <p>
 </p>
-Nagyon könnyen tudunk többszörös dekorálást létrehozni tetszőleges sorrendben:
+Nagyon kĂ¶nnyen tudunk tĂ¶bbszĂ¶rĂ¶s dekorĂˇlĂˇst lĂ©trehozni tetszĹ‘leges sorrendben:
 
 <pre>
 <span class='pale'>
@@ -294,7 +294,7 @@ func()
 # I am decorator 2 AFTER I called the real func
 </div>
 </pre>
-Ha fordított sorrendben akarjuk alkalmazni a dekorátorokat, akkor csak ennyit kell tenni:
+Ha fordĂ­tott sorrendben akarjuk alkalmazni a dekorĂˇtorokat, akkor csak ennyit kell tenni:
 
 <pre>
 ...
@@ -317,9 +317,9 @@ Ha valamelyiket el akarjuk hagyni:
 func = decorator_2(func)
 </pre>
 </p>
-<h2 id='return_value'>Visszatérő érték</h2>
+<h2 id='return_value'>VisszatĂ©rĹ‘ Ă©rtĂ©k</h2>
 <p>
-Az eddigi példákban az áttekinthetőség érdekében a becsomagolt függvénynek nem volt visszatérő értéke &ndash; kezeljük most le azt is:
+Az eddigi pĂ©ldĂˇkban az ĂˇttekinthetĹ‘sĂ©g Ă©rdekĂ©ben a becsomagolt fĂĽggvĂ©nynek nem volt visszatĂ©rĹ‘ Ă©rtĂ©ke &ndash; kezeljĂĽk most le azt is:
 
 <pre>
 <span class='pale'>def func():
@@ -348,10 +348,10 @@ print('func returned:',ret_val)
 </div>
 </pre>
 </p>
-<h2 id='func_args'>Függvényparaméterek kezelése</h2>
+<h2 id='func_args'>FĂĽggvĂ©nyparamĂ©terek kezelĂ©se</h2>
 <p>
-Az eddigiekben &ndash; a példák egyszerűsége kedvéért &ndash; csak olyan függvényeket dekoráltunk, amelyeknek nem volt egyetlen paramétere sem. Nem okoz gondot
-az sem, ha tetszőleges függvényt szeretnénk dekorálni. A belső függvényben meg kell engednünk tetszőleges számú pozícionális és kulcsszavas paramétert:
+Az eddigiekben &ndash; a pĂ©ldĂˇk egyszerĹ±sĂ©ge kedvĂ©Ă©rt &ndash; csak olyan fĂĽggvĂ©nyeket dekorĂˇltunk, amelyeknek nem volt egyetlen paramĂ©tere sem. Nem okoz gondot
+az sem, ha tetszĹ‘leges fĂĽggvĂ©nyt szeretnĂ©nk dekorĂˇlni. A belsĹ‘ fĂĽggvĂ©nyben meg kell engednĂĽnk tetszĹ‘leges szĂˇmĂş pozĂ­cionĂˇlis Ă©s kulcsszavas paramĂ©tert:
 
 <pre>
 def func_1():
@@ -393,25 +393,25 @@ func_2(200, kwParam1 = 'HI THERE')
 </div>
 </pre>
 </p>
-<h2 id='pie'>Pie (kukacos) dekorátor szintaktika</h2>
+<h2 id='pie'>Pie (kukacos) dekorĂˇtor szintaktika</h2>
 <p>
-A függvénydekorátor receptje:
+A fĂĽggvĂ©nydekorĂˇtor receptje:
 
 <ol>
-<li>végy egy függvényt, amely egy másik függvényt kap paraméterül</li>
-<li>tartalmaz egy belső függvényt, amely a paraméterül kapott függvényt általában felhívja</li>
-<li>és a belső függvényt szolgáltatja visszatérő értékként;</li>
+<li>vĂ©gy egy fĂĽggvĂ©nyt, amely egy mĂˇsik fĂĽggvĂ©nyt kap paramĂ©terĂĽl</li>
+<li>tartalmaz egy belsĹ‘ fĂĽggvĂ©nyt, amely a paramĂ©terĂĽl kapott fĂĽggvĂ©nyt ĂˇltalĂˇban felhĂ­vja</li>
+<li>Ă©s a belsĹ‘ fĂĽggvĂ©nyt szolgĂˇltatja visszatĂ©rĹ‘ Ă©rtĂ©kkĂ©nt;</li>
 <br>
-<li style='color:blue; font-style: italic;'>a dekorátor függvényt hívd fel, paraméterként add oda neki a dekorálandó függvényt és</li>
-<li style='color:blue; font-style: italic;'>rendeld hozzá a dekorálandó függvény nevét a dekorátor által visszaadott függvényhez.</li>
+<li style='color:blue; font-style: italic;'>a dekorĂˇtor fĂĽggvĂ©nyt hĂ­vd fel, paramĂ©terkĂ©nt add oda neki a dekorĂˇlandĂł fĂĽggvĂ©nyt Ă©s</li>
+<li style='color:blue; font-style: italic;'>rendeld hozzĂˇ a dekorĂˇlandĂł fĂĽggvĂ©ny nevĂ©t a dekorĂˇtor Ăˇltal visszaadott fĂĽggvĂ©nyhez.</li>
 </ol>
 
-Az utolsó két lépésre:
+Az utolsĂł kĂ©t lĂ©pĂ©sre:
 
 <pre>
 func = decorator(func)
 </pre>
-bevezettek egy rövidített írásmódot:
+bevezettek egy rĂ¶vidĂ­tett Ă­rĂˇsmĂłdot:
 <pre>
 <span class='pale'>def decorator_1(funcToBeDecorated):
     def decorated():
@@ -438,17 +438,17 @@ func()
 </div>
 </pre>
 
-A <span class='emph_4'>@decorator_1</span> jelölés azt eredményezi, hogy amikor a futtató rendszer ehhez a ponthoz ér, akkor a háttérben elkészíti a függvény dekorált
-változatát. Az angol elnevezése ennek a szintaktikának <span class='emph_4'>pie&nbsp;decorator</span>, a "kukacos" elnevezés csak tőlem származik, tudós emberek
-jelenlétében ne használja az olvasó, vagy ha mégis, ne hivatkozzon rám.
+A <span class='emph_4'>@decorator_1</span> jelĂ¶lĂ©s azt eredmĂ©nyezi, hogy amikor a futtatĂł rendszer ehhez a ponthoz Ă©r, akkor a hĂˇttĂ©rben elkĂ©szĂ­ti a fĂĽggvĂ©ny dekorĂˇlt
+vĂˇltozatĂˇt. Az angol elnevezĂ©se ennek a szintaktikĂˇnak <span class='emph_4'>pie&nbsp;decorator</span>, a "kukacos" elnevezĂ©s csak tĹ‘lem szĂˇrmazik, tudĂłs emberek
+jelenlĂ©tĂ©ben ne hasznĂˇlja az olvasĂł, vagy ha mĂ©gis, ne hivatkozzon rĂˇm.
 </p>
 <p>
-Első ránézésre ez csak egy kis szintaktikai egyszerűsítésnek tűnik &ndash; syntactic sugar &ndash; ami arra jó, hogy egy kicsit kevesebbet kelljen gépelnünk.
-Valójában az egyszerűsítés olyan nagymértékű, hogy minőségi ugrást jelent a program olvashatóságában &ndash; ezért aztán Python programokban rengeteg helyen
-felbukkan. Érdemes alaposan megérteni!
+ElsĹ‘ rĂˇnĂ©zĂ©sre ez csak egy kis szintaktikai egyszerĹ±sĂ­tĂ©snek tĹ±nik &ndash; syntactic sugar &ndash; ami arra jĂł, hogy egy kicsit kevesebbet kelljen gĂ©pelnĂĽnk.
+ValĂłjĂˇban az egyszerĹ±sĂ­tĂ©s olyan nagymĂ©rtĂ©kĹ±, hogy minĹ‘sĂ©gi ugrĂˇst jelent a program olvashatĂłsĂˇgĂˇban &ndash; ezĂ©rt aztĂˇn Python programokban rengeteg helyen
+felbukkan. Ă‰rdemes alaposan megĂ©rteni!
 </p>
 <p>
-Természetesen több dekorátort is alkalmazhatunk:
+TermĂ©szetesen tĂ¶bb dekorĂˇtort is alkalmazhatunk:
 
 <pre>
 <span class='pale'>
@@ -487,7 +487,7 @@ func()</span>
 # I am decorator 2 AFTER I called the real func
 </div>
 </pre>
-Ha fordított sorrendben akarjuk a dekorátorokat alkalmazni, nyilván így kell eljárnunk:
+Ha fordĂ­tott sorrendben akarjuk a dekorĂˇtorokat alkalmazni, nyilvĂˇn Ă­gy kell eljĂˇrnunk:
 
 <pre>
 ...
@@ -503,9 +503,9 @@ func()
 </div>
 </pre>
 </p>
-<h2 id='class_methods'>Objektum-metódusok dekorálása</h2>
+<h2 id='class_methods'>Objektum-metĂłdusok dekorĂˇlĂˇsa</h2>
 <p>
-Természetesen semmi akadálya nincs annak, hogy nemcsak szabad függvényekre, hanem osztályok metódusaira is alkalmazzuk a megismert mechanizmust.
+TermĂ©szetesen semmi akadĂˇlya nincs annak, hogy nemcsak szabad fĂĽggvĂ©nyekre, hanem osztĂˇlyok metĂłdusaira is alkalmazzuk a megismert mechanizmust.
 
 <pre>
 def decorator_1(funcToBeDecorated):
@@ -573,7 +573,7 @@ my_obj.method_1()</span>
 <a href='https://refactoring.guru/design-patterns/decorator/python/example' target='_blank'>Decorator in Python</a> refactoring.guru<br>
 </p>
 <p>
-<b>Könyvek</b>
+<b>KĂ¶nyvek</b>
 </p>
 <p>
 Dan Bader: Python Tricks - The Book<br>
@@ -597,7 +597,7 @@ Luciano Ramalho: Fluent Python<br>
 <i>&nbsp;&nbsp;Function Decorators and Closures</i><br>
 </p>
 <p>
-<b>Videók</b>
+<b>VideĂłk</b>
 </p>
 <p>
 <a href='https://www.youtube.com/watch?v=FsAPt_9Bf3U' target='_blank'>Python Tutorial: Decorators - Dynamically Alter The Functionality Of Your Functions</a>
@@ -611,7 +611,7 @@ function toggle_from_none(ID) {
       b = document.getElementById('b_' + ID);
 
   e.style.display = no_block ? 'block' : 'none';
-  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+  b.textContent  = no_block ? 'MegoldĂˇs elrejtĂ©se' : 'MegoldĂˇs';
 }
 </script>
 </body>

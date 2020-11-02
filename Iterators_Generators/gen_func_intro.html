@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-<title>Generátor függvények bemutatása</title>
+<title>GenerĂˇtor fĂĽggvĂ©nyek bemutatĂˇsa</title>
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
@@ -17,23 +17,23 @@
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
-<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.09 &mdash;</p>
+<span style='float:right;font-style:italic;'>Nemes MihĂˇly &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; UtolsĂł mĂłdosĂ­tĂˇs: 2020.10.09 &mdash;</p>
 </div>
-<h1>Generátor függvények bemutatása</h1>
+<h1>GenerĂˇtor fĂĽggvĂ©nyek bemutatĂˇsa</h1>
 <ul class='contents'>
-<li><a style='color: red' href='#definition'>Definíció</a></li>
-<li><a style='color: red' href='#compare'>Összehasonlítás objektum-iterátorral</a></li>
-<li><a style='color: red' href='#memory'>A generátor memóriája</a></li>
-<li><a style='color: red' href='#return'>Return a generátor függvényben</a></li>
-<li><a style='color: red' href='#stopiteration'>StopIteration-t dobunk a generátor függvényben</a></li>
-<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVÉNYEK</a></li>
+<li><a style='color: red' href='#definition'>DefinĂ­ciĂł</a></li>
+<li><a style='color: red' href='#compare'>Ă–sszehasonlĂ­tĂˇs objektum-iterĂˇtorral</a></li>
+<li><a style='color: red' href='#memory'>A generĂˇtor memĂłriĂˇja</a></li>
+<li><a style='color: red' href='#return'>Return a generĂˇtor fĂĽggvĂ©nyben</a></li>
+<li><a style='color: red' href='#stopiteration'>StopIteration-t dobunk a generĂˇtor fĂĽggvĂ©nyben</a></li>
+<li><a style='color: indigo; font-size: 70%;' href='#q_1'>REJTVĂ‰NYEK</a></li>
 <li><a style='color: red' href='#literature'>Irodalom</a></li>
 </ul>
 
-<h2 id='definition'>Definíció</h2>
+<h2 id='definition'>DefinĂ­ciĂł</h2>
 <p>
-GENERÁTOR: iterátor, amelyet nem osztállyal, hanem olyan függvénnyel valósítunk meg, amelyben legalább egy yield utasítás van (return helyett).
+GENERĂTOR: iterĂˇtor, amelyet nem osztĂˇllyal, hanem olyan fĂĽggvĂ©nnyel valĂłsĂ­tunk meg, amelyben legalĂˇbb egy yield utasĂ­tĂˇs van (return helyett).
 
 <pre>
 def my_first_generator():
@@ -47,7 +47,7 @@ print(gen)
 # &lt;generator object my_first_generator at 0x022393F0>
 </div>
 </pre>
-Tehát a generátor függvény felhívásakor csak elkészült az iterátor.
+TehĂˇt a generĂˇtor fĂĽggvĂ©ny felhĂ­vĂˇsakor csak elkĂ©szĂĽlt az iterĂˇtor.
 
 <pre>
 print(next(gen))
@@ -66,24 +66,24 @@ print(next(gen))
 </pre>
 </p>
 <p>
-Ha yield(100) helyett return 100 lenne, akkor mindig 100 lenne a kimenet. A generátor-függvény megjegyzi a belső állapotát és a következő next()-nél
-onnan folytatja a végrehajtást, ahol a yield-del abbahagyta.
+Ha yield(100) helyett return 100 lenne, akkor mindig 100 lenne a kimenet. A generĂˇtor-fĂĽggvĂ©ny megjegyzi a belsĹ‘ ĂˇllapotĂˇt Ă©s a kĂ¶vetkezĹ‘ next()-nĂ©l
+onnan folytatja a vĂ©grehajtĂˇst, ahol a yield-del abbahagyta.
 </p>
 <p>
-Amikor a generátor "kimerült", azaz nem tud több értéket szolgáltatni, akkor a next() hatására StopIteration kivételt dob.
+Amikor a generĂˇtor "kimerĂĽlt", azaz nem tud tĂ¶bb Ă©rtĂ©ket szolgĂˇltatni, akkor a next() hatĂˇsĂˇra StopIteration kivĂ©telt dob.
 
 <pre>
 
-  <b style='color:black;'>HÍVÓ           GENERÁTOR</b>
+  <b style='color:black;'>HĂŤVĂ“           GENERĂTOR</b>
 
-next()  ==>    (nincs több elem)
+next()  ==>    (nincs tĂ¶bb elem)
 
         <==    StopIteration
 </pre>
-A hívó így értesül arról, hogy kimerült a generátor.
+A hĂ­vĂł Ă­gy Ă©rtesĂĽl arrĂłl, hogy kimerĂĽlt a generĂˇtor.
 </p>
 <p>
-for ciklusban ugyanúgy lehet használni, mint bármely iterátort:
+for ciklusban ugyanĂşgy lehet hasznĂˇlni, mint bĂˇrmely iterĂˇtort:
 
 <pre>
 gen = my_first_generator()
@@ -102,10 +102,10 @@ for i,x in enumerate(my_first_generator()):
 # 2 120
 </div>
 </pre>
-A for ciklus kiadja a next() hívásokat és amikor StopIteration kivételt kap, akkor befejezi a ciklust.
+A for ciklus kiadja a next() hĂ­vĂˇsokat Ă©s amikor StopIteration kivĂ©telt kap, akkor befejezi a ciklust.
 </p>
 <p>
-Mivel ez a generátor számokat produkál, ezeket összegezni is tudjuk:
+Mivel ez a generĂˇtor szĂˇmokat produkĂˇl, ezeket Ă¶sszegezni is tudjuk:
 
 <pre>
 print(sum(my_first_generator()))
@@ -113,8 +113,8 @@ print(sum(my_first_generator()))
 # 330
 </div>
 </pre>
-A sum() függvény mindaddig hívja a next() függvényt, míg ki nem merül a generátor és a visszakapott elemeket összegzi. A join() függvény segítségével
-össze tudjuk fűzni a generátor által szolgáltatott elemeket:
+A sum() fĂĽggvĂ©ny mindaddig hĂ­vja a next() fĂĽggvĂ©nyt, mĂ­g ki nem merĂĽl a generĂˇtor Ă©s a visszakapott elemeket Ă¶sszegzi. A join() fĂĽggvĂ©ny segĂ­tsĂ©gĂ©vel
+Ă¶ssze tudjuk fĹ±zni a generĂˇtor Ăˇltal szolgĂˇltatott elemeket:
 
 <pre>
 def my_gen():
@@ -127,9 +127,9 @@ print('|'.join(my_gen()))
 # AAA|bbb|CCC
 </div>
 </pre>
-<h2 id='compare'>Összehasonlítás objektum-iterátorral</h2>
+<h2 id='compare'>Ă–sszehasonlĂ­tĂˇs objektum-iterĂˇtorral</h2>
 <p>
-Nézzük meg, egy osztállyal hogyan tudnánk létrehozni ugyanezt az iterátort.
+NĂ©zzĂĽk meg, egy osztĂˇllyal hogyan tudnĂˇnk lĂ©trehozni ugyanezt az iterĂˇtort.
 
 <pre>
 class my_first_gen_class():
@@ -162,26 +162,26 @@ for x in gen:
 </pre>
 </p>
 <p>
-Sok segéd-kódot kellett létrehoznunk, nehezebben áttekinthető az egész.
+Sok segĂ©d-kĂłdot kellett lĂ©trehoznunk, nehezebben ĂˇttekinthetĹ‘ az egĂ©sz.
 </p>
 <div class='emph_box_1'>
 <p>
-<b>Generátor előnye</b> osztály-iterátorokkal szemben:
+<b>GenerĂˇtor elĹ‘nye</b> osztĂˇly-iterĂˇtorokkal szemben:
 </p>
 <p>
-&#9679; Sok esetben egyszerűbb, mint az erre a célra készített osztállyal felépített iterátor.<br>
-&#9679; Ha legalább egy yield-et elhelyezünk egy függvényben, ezzel automatikusan generátorrá válik.
+&#9679; Sok esetben egyszerĹ±bb, mint az erre a cĂ©lra kĂ©szĂ­tett osztĂˇllyal felĂ©pĂ­tett iterĂˇtor.<br>
+&#9679; Ha legalĂˇbb egy yield-et elhelyezĂĽnk egy fĂĽggvĂ©nyben, ezzel automatikusan generĂˇtorrĂˇ vĂˇlik.
 </p>
 </div>
 <p>
-Persze ha más funkcionalitásra (metóduskra) és megjegyzett állapotváltozókra (tagváltozókra, attribútumokra) is szükség van, akkor már az objektumos megoldás lesz
-egyszerűbb.
+Persze ha mĂˇs funkcionalitĂˇsra (metĂłduskra) Ă©s megjegyzett ĂˇllapotvĂˇltozĂłkra (tagvĂˇltozĂłkra, attribĂştumokra) is szĂĽksĂ©g van, akkor mĂˇr az objektumos megoldĂˇs lesz
+egyszerĹ±bb.
 </p>
 
-<h2 id='memory'>A generátor memóriája</h2>
+<h2 id='memory'>A generĂˇtor memĂłriĂˇja</h2>
 <p>
-A generátor függvény alkalmas arra, hogy az inicializáláskor kapott argumentumokat és a később keletkező lokális változók értékét megjegyezze. Ebben hasonlít
-egy objektumra, ami szintén meg tudja őrizni a konstruktorban kapott paramétereket és a később keletkező tagváltozókat is.
+A generĂˇtor fĂĽggvĂ©ny alkalmas arra, hogy az inicializĂˇlĂˇskor kapott argumentumokat Ă©s a kĂ©sĹ‘bb keletkezĹ‘ lokĂˇlis vĂˇltozĂłk Ă©rtĂ©kĂ©t megjegyezze. Ebben hasonlĂ­t
+egy objektumra, ami szintĂ©n meg tudja Ĺ‘rizni a konstruktorban kapott paramĂ©tereket Ă©s a kĂ©sĹ‘bb keletkezĹ‘ tagvĂˇltozĂłkat is.
 
 <pre>
 def my_second_generator(param_1, param_2):
@@ -203,16 +203,16 @@ for i in gen:
 # *** received from generator: 1130
 </div>
 </pre>
-Egy érdekes különbség: az objektum csak akkor "emlékszik" az __init__-ben kapott paraméterekre, ha azokat eltárolja tagváltozókban, míg a generátornak nem kell
-változókba bemásolnia az indításkor kapott paramétereket ('AAA','BBB').
+Egy Ă©rdekes kĂĽlĂ¶nbsĂ©g: az objektum csak akkor "emlĂ©kszik" az __init__-ben kapott paramĂ©terekre, ha azokat eltĂˇrolja tagvĂˇltozĂłkban, mĂ­g a generĂˇtornak nem kell
+vĂˇltozĂłkba bemĂˇsolnia az indĂ­tĂˇskor kapott paramĂ©tereket ('AAA','BBB').
 </p>
-<h2 id='return'>Return a generátor függvényben</h2>
+<h2 id='return'>Return a generĂˇtor fĂĽggvĂ©nyben</h2>
 <p>
-Eddig olyan eseteket láttunk, amikor a függvény törzsének végéhez értünk végrehajtás közben - ekkor a Python futtató rendszer automatikusan StopIteration
-kivételt dob Ha for ciklusban működtetjük az iterátort, akkor az lenyeli ezt a kivételt és véget ér a ciklus.
+Eddig olyan eseteket lĂˇttunk, amikor a fĂĽggvĂ©ny tĂ¶rzsĂ©nek vĂ©gĂ©hez Ă©rtĂĽnk vĂ©grehajtĂˇs kĂ¶zben - ekkor a Python futtatĂł rendszer automatikusan StopIteration
+kivĂ©telt dob Ha for ciklusban mĹ±kĂ¶dtetjĂĽk az iterĂˇtort, akkor az lenyeli ezt a kivĂ©telt Ă©s vĂ©get Ă©r a ciklus.
 </p>
 <p>
-Ugyanez történik, ha return-nel lépünk ki a generátor-függvényből.
+Ugyanez tĂ¶rtĂ©nik, ha return-nel lĂ©pĂĽnk ki a generĂˇtor-fĂĽggvĂ©nybĹ‘l.
 
 <pre>
 def my_third_generator():
@@ -230,7 +230,7 @@ for i in gen:
 *** received from generator: 200
 </div>
 </pre>
-A return által visszaadott érték a StopIteration paramétereként megy át a hívóhoz:
+A return Ăˇltal visszaadott Ă©rtĂ©k a StopIteration paramĂ©terekĂ©nt megy Ăˇt a hĂ­vĂłhoz:
 
 <pre>
 gen = my_third_generator()
@@ -248,9 +248,9 @@ while(True):
 </div>
 </pre>
 </p>
-<h2 id='stopiteration'>StopIteration-t dobunk a generátor függvényben</h2>
+<h2 id='stopiteration'>StopIteration-t dobunk a generĂˇtor fĂĽggvĂ©nyben</h2>
 <p>
-Nem jó ötlet.
+Nem jĂł Ă¶tlet.
 <pre>
 def my_third_generator():
     yield 100
@@ -265,7 +265,7 @@ for i in gen:
     print(i)
 </pre>
 
-Ha 3.7-nél régebbi Python verziónk van, akkor ez lesz a kimenet:
+Ha 3.7-nĂ©l rĂ©gebbi Python verziĂłnk van, akkor ez lesz a kimenet:
 <pre>
 <div class='result'>
 # 100
@@ -273,7 +273,7 @@ Ha 3.7-nél régebbi Python verziónk van, akkor ez lesz a kimenet:
 </div>
 </pre>
 
-Ha viszont legalább 3.7-es, akkor ez:
+Ha viszont legalĂˇbb 3.7-es, akkor ez:
 <pre>
 <div class='result'>
 # 100
@@ -292,20 +292,20 @@ Ha viszont legalább 3.7-es, akkor ez:
 # RuntimeError: generator raised StopIteration
 </div>
 </pre>
-A PEP 479 szerint működnek már ezek a verziók, azaz minden generátorfüggvényben keletkező StopIteration-t futási hibává konvertál a Python.
-Szerintem ez logikus, mert kevesebb így a lehetőség félreértésekre. A StopIteration-t a futtató rendszer használja, nem jó, ha más célokra is alkalmazni akarjuk.
+A PEP 479 szerint mĹ±kĂ¶dnek mĂˇr ezek a verziĂłk, azaz minden generĂˇtorfĂĽggvĂ©nyben keletkezĹ‘ StopIteration-t futĂˇsi hibĂˇvĂˇ konvertĂˇl a Python.
+Szerintem ez logikus, mert kevesebb Ă­gy a lehetĹ‘sĂ©g fĂ©lreĂ©rtĂ©sekre. A StopIteration-t a futtatĂł rendszer hasznĂˇlja, nem jĂł, ha mĂˇs cĂ©lokra is alkalmazni akarjuk.
 </p>
 <div class='emph_box_1' style='width: 60%;'>
 <p>
-<b>TANULSÁG</b>
+<b>TANULSĂG</b>
 </p>
-Ha be akarjuk fejezni a generátor függvény futását, argumentum nélküli return-t használjunk.
+Ha be akarjuk fejezni a generĂˇtor fĂĽggvĂ©ny futĂˇsĂˇt, argumentum nĂ©lkĂĽli return-t hasznĂˇljunk.
 </div>
-<h2 id='q_1' class='question'>REJTVÉNYEK</h2>
+<h2 id='q_1' class='question'>REJTVĂ‰NYEK</h2>
 <h2 class='question'>&#9312;</h2>
 <p>
-Egy olyan generátorra van szükségünk, amely egy számsorozatot kap bemenetként és a kimeneten kiadja a számokat úgy, hogy a párosakhoz 100-at ad hozzá, a
-páratlanakhoz pedig 200-at. Egy teszteset és a várt kimenet:
+Egy olyan generĂˇtorra van szĂĽksĂ©gĂĽnk, amely egy szĂˇmsorozatot kap bemenetkĂ©nt Ă©s a kimeneten kiadja a szĂˇmokat Ăşgy, hogy a pĂˇrosakhoz 100-at ad hozzĂˇ, a
+pĂˇratlanakhoz pedig 200-at. Egy teszteset Ă©s a vĂˇrt kimenet:
 <pre>
 for x in my_gen(range(1,5)):
     print(x)
@@ -316,7 +316,7 @@ for x in my_gen(range(1,5)):
 # 104
 </div>
 </pre>
-A generátorunk és a teszteset:
+A generĂˇtorunk Ă©s a teszteset:
 
 <pre>
 def my_gen(inputNumbers):
@@ -337,17 +337,17 @@ for x in my_gen(range(1,5)):
 # <span class='emph_1'>204</span>
 </div>
 </pre>
-Megjelentek felesleges számok a kimeneten.
+Megjelentek felesleges szĂˇmok a kimeneten.
 </p>
 <p>
-<span class='question'>Vajon miért?</span>
-<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">Megoldás</button>
+<span class='question'>Vajon miĂ©rt?</span>
+<button id='b_sol_1' class='sol_button' onclick="toggle_from_none('sol_1')">MegoldĂˇs</button>
 <div id='sol_1' class='solution'>
-A yield paraméterét visszaadja a generátor a hívónak és várja a következő next()-et. Amikor ez megérkezik, a yield utáni utasítással folytatja a végrehajtást.
-Amikor páros szám érkezik, akkor hozzáad 100-at és várakozik; a következő next() hívásnál itt folytatja, azaz yield(n + 200)-nál.
+A yield paramĂ©terĂ©t visszaadja a generĂˇtor a hĂ­vĂłnak Ă©s vĂˇrja a kĂ¶vetkezĹ‘ next()-et. Amikor ez megĂ©rkezik, a yield utĂˇni utasĂ­tĂˇssal folytatja a vĂ©grehajtĂˇst.
+Amikor pĂˇros szĂˇm Ă©rkezik, akkor hozzĂˇad 100-at Ă©s vĂˇrakozik; a kĂ¶vetkezĹ‘ next() hĂ­vĂˇsnĂˇl itt folytatja, azaz yield(n + 200)-nĂˇl.
 </div>
-<span class='question'>Hogyan lehet kijavítani a generátort?</span>
-<button id='b_sol_2' class='sol_button' onclick="toggle_from_none('sol_2')">Megoldás</button>
+<span class='question'>Hogyan lehet kijavĂ­tani a generĂˇtort?</span>
+<button id='b_sol_2' class='sol_button' onclick="toggle_from_none('sol_2')">MegoldĂˇs</button>
 <div id='sol_2' class='solution'>
 Helyesen:
 <pre>
@@ -363,20 +363,20 @@ def my_gen(inputNumbers):                     def my_gen(inputNumbers):
 </p>
 <h2 class='question'>&#9313;</h2>
 <p>
-Adott egy generátor:
+Adott egy generĂˇtor:
 <pre>
 def my_gen():
     yield(200)
     yield(300)
     yield(500)
 </pre>
-Elő akarunk állítani egy listát, amelynek az elemei a my_gen által szolgáltatott számok, osztva az összegükkel. A várt kimenet:
+ElĹ‘ akarunk ĂˇllĂ­tani egy listĂˇt, amelynek az elemei a my_gen Ăˇltal szolgĂˇltatott szĂˇmok, osztva az Ă¶sszegĂĽkkel. A vĂˇrt kimenet:
 <pre>
 <div class='result'>
 # [0.2, 0.3, 0.5]
 </div>
 </pre>
-Az első megoldás és a kimenet:
+Az elsĹ‘ megoldĂˇs Ă©s a kimenet:
 <pre>
 g = my_gen()
 x = [ i / sum(g) for i in g ]
@@ -385,21 +385,21 @@ print(x)
 # [0.25]
 </div>
 </pre>
-Arra gyorsan rájövünk, hogy mi a probléma: a sum() függvény kimeríti a generátort, ezért kapunk csak egyetlen elemet.
+Arra gyorsan rĂˇjĂ¶vĂĽnk, hogy mi a problĂ©ma: a sum() fĂĽggvĂ©ny kimerĂ­ti a generĂˇtort, ezĂ©rt kapunk csak egyetlen elemet.
 </p>
 <p>
-<span class='question'>De miért ez a kimenet?</span>
-<button id='b_sol_3' class='sol_button' onclick="toggle_from_none('sol_3')">Megoldás</button>
+<span class='question'>De miĂ©rt ez a kimenet?</span>
+<button id='b_sol_3' class='sol_button' onclick="toggle_from_none('sol_3')">MegoldĂˇs</button>
 <div id='sol_3' class='solution'>
-Elindul a for ciklus, veszi az első elemet a generátorból, ez 200. Ezután meghívjuk a sum() függvényt, ami összeadja a <b>maradék elemeket</b>, az eredmény
+Elindul a for ciklus, veszi az elsĹ‘ elemet a generĂˇtorbĂłl, ez 200. EzutĂˇn meghĂ­vjuk a sum() fĂĽggvĂ©nyt, ami Ă¶sszeadja a <b>maradĂ©k elemeket</b>, az eredmĂ©ny
 800.
 </div>
 </p>
 <p>
-<span class='question'>Mi a jó megoldás?</span>
-<button id='b_sol_3' class='sol_button' onclick="toggle_from_none('sol_4')">Megoldás</button>
+<span class='question'>Mi a jĂł megoldĂˇs?</span>
+<button id='b_sol_3' class='sol_button' onclick="toggle_from_none('sol_4')">MegoldĂˇs</button>
 <div id='sol_4' class='solution'>
-Először kiszámítjuk az összeget, utána újra létrehozzuk a generátort:
+ElĹ‘szĂ¶r kiszĂˇmĂ­tjuk az Ă¶sszeget, utĂˇna Ăşjra lĂ©trehozzuk a generĂˇtort:
 
 <pre>
 g = my_gen()
@@ -421,7 +421,7 @@ print(x)
 <a href='https://www.python-course.eu/python3_generators.php' target='_blank'>Generators and Iterators</a> python-course.eu<br>
 <a href='https://realpython.com/introduction-to-python-generators/' target='_blank'>How to Use Generators and yield in Python</a> Real Python<br>
 <a href='https://nedbatchelder.com/text/iter.html' target='_blank'>Loop like a native: while, for, iterators, generators</a> Ned Batchelder
-Python 2-ben vannak a példák, de ez nem lényeges és nem zavaró.<br>
+Python 2-ben vannak a pĂ©ldĂˇk, de ez nem lĂ©nyeges Ă©s nem zavarĂł.<br>
 <a href='http://www.trytoprogram.com/python-programming/python-generators/' target='_blank'>Python Generators</a> trytoprogram.com<br>
 <a href='https://jeffknupp.com/blog/2013/04/07/improve-your-python-yield-and-generators-explained/' target='_blank'>Improve Your Python: 'yield' and Generators
 Explained</a> jeffknupp.com<br>
@@ -430,7 +430,7 @@ Generators</a> jeffknupp.com<br>
 <a href='https://stackabuse.com/python-generators/' target='_blank'>Python Generators</a> stackabuse.com
 </p>
 <p>
-<b>Könyvek</b>
+<b>KĂ¶nyvek</b>
 </p>
 <p>
 Dan Bader: Python Tricks - The Book<br>
@@ -467,12 +467,12 @@ Brett Slatkin: Effective Python<br>
 <i>&nbsp;&nbsp;Consider Generators Instead of Returning Lists</i><br>
 <i>&nbsp;&nbsp;Consider Generator Expressions for Large Comprehensions</i>
 </p>
-<b>Videók</b>
+<b>VideĂłk</b>
 <p>
 Corey Schaefer: <a href='https://www.youtube.com/watch?v=bD05uGo_sVI' target='_blank'>Python Tutorial: Generators - How to use them and the benefits you
-receive</a> Python 2-ben vannak a példák, de ez nem lényeges és nem zavaró.<br>
+receive</a> Python 2-ben vannak a pĂ©ldĂˇk, de ez nem lĂ©nyeges Ă©s nem zavarĂł.<br>
 Ned Batchelder: <a href='https://www.youtube.com/watch?v=EnSu9hHGq5o' target='_blank'>Loop like a native: while, for, iterators, generators</a>
-Python 2-ben vannak a példák, de ez nem lényeges és nem zavaró.<br>
+Python 2-ben vannak a pĂ©ldĂˇk, de ez nem lĂ©nyeges Ă©s nem zavarĂł.<br>
 Michael Kennedy: <a href='https://www.youtube.com/watch?v=KoH6FgVjnmg' target='_blank'>Pythonic code: Tip 4 Processing large data sets with yield and generators</a>
 </p>
 
@@ -482,7 +482,7 @@ function toggle_from_none(ID) {
       b = document.getElementById('b_' + ID);
 
   e.style.display = no_block ? 'block' : 'none';
-  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+  b.textContent  = no_block ? 'MegoldĂˇs elrejtĂ©se' : 'MegoldĂˇs';
 }
 </script>
 </body>

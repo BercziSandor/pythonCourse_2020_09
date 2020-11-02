@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-<title>Generátor  függvények 3.rész</title>
+<title>GenerĂˇtor  fĂĽggvĂ©nyek 3.rĂ©sz</title>
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
@@ -20,22 +20,22 @@
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
-<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.20 &mdash;</p>
+<span style='float:right;font-style:italic;'>Nemes MihĂˇly &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; UtolsĂł mĂłdosĂ­tĂˇs: 2020.09.20 &mdash;</p>
 </div>
 
-<h1>Generátor  függvények 4.rész<br>
+<h1>GenerĂˇtor  fĂĽggvĂ©nyek 4.rĂ©sz<br>
 <span style='font-size:70%; color:gray;'>&bull; yield from &bull;</span></h1>
 <ul class='contents'>
-<li><a style='color: red' href='#definition'>Definíció</a></li>
-<li><a style='color: red' href='#two_way'>yield from kétirányú adatforgalomnál</a></li>
+<li><a style='color: red' href='#definition'>DefinĂ­ciĂł</a></li>
+<li><a style='color: red' href='#two_way'>yield from kĂ©tirĂˇnyĂş adatforgalomnĂˇl</a></li>
 <li><a style='color: red' href='#literature'>Irodalom</a></li>
 </ul>
 
-<h2 id='definition'>Definíció</h2>
+<h2 id='definition'>DefinĂ­ciĂł</h2>
 <p>
-A yield from utasítással delegálni tudjuk az iterálást egy generátornak. Amikor csak egyirányú adatforgalom van (nincs send(), csak a felhívott generátor
-ad vissza értékeket), akkor ez minimális egyszerűsítést jelent. Egy nagyon egyszerű példa:
+A yield from utasĂ­tĂˇssal delegĂˇlni tudjuk az iterĂˇlĂˇst egy generĂˇtornak. Amikor csak egyirĂˇnyĂş adatforgalom van (nincs send(), csak a felhĂ­vott generĂˇtor
+ad vissza Ă©rtĂ©keket), akkor ez minimĂˇlis egyszerĹ±sĂ­tĂ©st jelent. Egy nagyon egyszerĹ± pĂ©lda:
 
 <pre>
 def sub_gen():
@@ -60,7 +60,7 @@ for i in main_it:
 # 3. sub_gen yield
 </div>
 </pre>
-main_gen csak továbbadta a sub_gen-től kapott értékeket a hívónak. Ha nem létezne a yield from utasítás, akkor mindössze ennyivel bonyolódna a program:
+main_gen csak tovĂˇbbadta a sub_gen-tĹ‘l kapott Ă©rtĂ©keket a hĂ­vĂłnak. Ha nem lĂ©tezne a yield from utasĂ­tĂˇs, akkor mindĂ¶ssze ennyivel bonyolĂłdna a program:
 
 <pre class='pale'>
 def main_gen():
@@ -69,11 +69,11 @@ def main_gen():
     <span style='color: blue;'>for i in sub_it:
         yield (i)</span>
 </pre>
-A legegyszerűbb esetben tehát nem történik más, mint hogy a yield from utasítás "végigjárja" a belső generátort next() utasításokkal és a kapott értékeket
-továbbadja a hívónak. Megspórolunk egy for ciklust, ami egyszerűsíti a program szerkezetét, de nem sokkal.
+A legegyszerĹ±bb esetben tehĂˇt nem tĂ¶rtĂ©nik mĂˇs, mint hogy a yield from utasĂ­tĂˇs "vĂ©gigjĂˇrja" a belsĹ‘ generĂˇtort next() utasĂ­tĂˇsokkal Ă©s a kapott Ă©rtĂ©keket
+tovĂˇbbadja a hĂ­vĂłnak. MegspĂłrolunk egy for ciklust, ami egyszerĹ±sĂ­ti a program szerkezetĂ©t, de nem sokkal.
 </p>
 <p>
-Egy másik szemléltető példácska:
+Egy mĂˇsik szemlĂ©ltetĹ‘ pĂ©ldĂˇcska:
 
 <pre>
 def f1():
@@ -89,14 +89,14 @@ for i in f1():
 </pre>
 
 </p>
-<h2 id='two_way'>yield from kétirányú adatforgalomnál</h2>
+<h2 id='two_way'>yield from kĂ©tirĂˇnyĂş adatforgalomnĂˇl</h2>
 <p>
-A yield from előnye akkor válik világossá, amikor nemcsak fogadni akarjuk a generátor által küldött adatot, hanem send() segítségével küldeni is szeretnénk neki.
-A következő példában a "belső" generátor mindig hozzáad a kapott értékekhez 1000-et és így adja vissza a hívónak; a delegáló generátor létrehozza a belsőt
-és csak közvetíti az adatokat a hívó és a belső generátor között.
+A yield from elĹ‘nye akkor vĂˇlik vilĂˇgossĂˇ, amikor nemcsak fogadni akarjuk a generĂˇtor Ăˇltal kĂĽldĂ¶tt adatot, hanem send() segĂ­tsĂ©gĂ©vel kĂĽldeni is szeretnĂ©nk neki.
+A kĂ¶vetkezĹ‘ pĂ©ldĂˇban a "belsĹ‘" generĂˇtor mindig hozzĂˇad a kapott Ă©rtĂ©kekhez 1000-et Ă©s Ă­gy adja vissza a hĂ­vĂłnak; a delegĂˇlĂł generĂˇtor lĂ©trehozza a belsĹ‘t
+Ă©s csak kĂ¶zvetĂ­ti az adatokat a hĂ­vĂł Ă©s a belsĹ‘ generĂˇtor kĂ¶zĂ¶tt.
 </p>
 <p>
-Először írjuk meg a belső generátort és használjuk közvetlenül.
+ElĹ‘szĂ¶r Ă­rjuk meg a belsĹ‘ generĂˇtort Ă©s hasznĂˇljuk kĂ¶zvetlenĂĽl.
 <pre>
 def sub_gen():
     print('sub_gen STARTED')
@@ -109,8 +109,8 @@ def sub_gen():
 
         received_in_send = yield(return_value)
 </pre>
-A yield(None)-ra azért van szükség, mert indításkor egy generátornak csak None-t lehet küldeni &ndash; erre ő célszerűen None-t küld vissza; amikor ez megtörtént,
-akkor már tud fogadni send()-el küldött számokat. Minden generátort mindig be kell kurblizni egy első next() hívással.
+A yield(None)-ra azĂ©rt van szĂĽksĂ©g, mert indĂ­tĂˇskor egy generĂˇtornak csak None-t lehet kĂĽldeni &ndash; erre Ĺ‘ cĂ©lszerĹ±en None-t kĂĽld vissza; amikor ez megtĂ¶rtĂ©nt,
+akkor mĂˇr tud fogadni send()-el kĂĽldĂ¶tt szĂˇmokat. Minden generĂˇtort mindig be kell kurblizni egy elsĹ‘ next() hĂ­vĂˇssal.
 <pre>
 sub_it = sub_gen()
 x = next(sub_it)  # start the generator
@@ -126,7 +126,7 @@ for i in range(50,53):
 # caller sent: 52 received: 1052
 </div>
 </pre>
-Készítsünk most egy "külső" generátort, ami csak közvetíti az adatforgalmat.
+KĂ©szĂ­tsĂĽnk most egy "kĂĽlsĹ‘" generĂˇtort, ami csak kĂ¶zvetĂ­ti az adatforgalmat.
 
 <pre>
 def main_gen():
@@ -149,21 +149,21 @@ for i in range(50,53):
 # caller sent: 52 received: 1052
 </div>
 </pre>
-Látható, hogy main_gen-nek semmit nem kell csinálnia ahhoz, hogy mindkét irányban átmenjen rajta az adat. A yield from utasítás mágikusan gondoskodik erről.
+LĂˇthatĂł, hogy main_gen-nek semmit nem kell csinĂˇlnia ahhoz, hogy mindkĂ©t irĂˇnyban Ăˇtmenjen rajta az adat. A yield from utasĂ­tĂˇs mĂˇgikusan gondoskodik errĹ‘l.
 <pre>
 
     +--------------+             +------------+             +---------+
     |              | send()  ==> |  main_gen  | send () ==> |         |
-    | Hívó program | <== yield() |            | <== yield() | sub_gen |
+    | HĂ­vĂł program | <== yield() |            | <== yield() | sub_gen |
     |              |             | <span class='emph_1'>yield from</span> |             |         |
     +--------------+             +------------+             +---------+
 
 </pre>
-Éppen ez az egyik oka, amiért ez nehéz fogalom: egy egyszerű jelölés bonyolult, a háttérben lezajló kétirányú adatforgalmat ír le. Ráadásul a név sem igazán szerencsés,
-azt sugallja, hogy csak yield utasítások hajtódnak végre; a delegate megnevezés találóbb lenne.
+Ă‰ppen ez az egyik oka, amiĂ©rt ez nehĂ©z fogalom: egy egyszerĹ± jelĂ¶lĂ©s bonyolult, a hĂˇttĂ©rben lezajlĂł kĂ©tirĂˇnyĂş adatforgalmat Ă­r le. RĂˇadĂˇsul a nĂ©v sem igazĂˇn szerencsĂ©s,
+azt sugallja, hogy csak yield utasĂ­tĂˇsok hajtĂłdnak vĂ©gre; a delegate megnevezĂ©s talĂˇlĂłbb lenne.
 </p>
 <p>
-Valósítsuk meg az átjátszóállomásként szolgáló generátort úgy, hogy nem használunk yield from utasítást.
+ValĂłsĂ­tsuk meg az ĂˇtjĂˇtszĂłĂˇllomĂˇskĂ©nt szolgĂˇlĂł generĂˇtort Ăşgy, hogy nem hasznĂˇlunk yield from utasĂ­tĂˇst.
 <pre>
 def main_gen():
     print('main_gen STARTED')
@@ -175,11 +175,11 @@ def main_gen():
         received_from_sub = sub_it.send(received_from_caller)
         received_from_caller = yield(received_from_sub)
 </pre>
-Látható, hogy ez már lényegesen bonyolultabb &ndash; és akkor arról még nem is szóltunk, hogy a yield from a kivételeket is helyesen kezeli, azok számára is
+LĂˇthatĂł, hogy ez mĂˇr lĂ©nyegesen bonyolultabb &ndash; Ă©s akkor arrĂłl mĂ©g nem is szĂłltunk, hogy a yield from a kivĂ©teleket is helyesen kezeli, azok szĂˇmĂˇra is
 teljesen transzparens.
 </p>
 <p>
-Gyakori eset, hogy nem a külső generátor belsejében hozzuk létre a belsőt, hanem paraméterként adjuk át neki:
+Gyakori eset, hogy nem a kĂĽlsĹ‘ generĂˇtor belsejĂ©ben hozzuk lĂ©tre a belsĹ‘t, hanem paramĂ©terkĂ©nt adjuk Ăˇt neki:
 <pre>
 def main_gen(subIt):
     print('main_gen STARTED')
@@ -202,12 +202,12 @@ for i in range(50,53):
 </p>
 <p>
 <a href='https://stackoverflow.com/questions/9708902/in-practice-what-are-the-main-uses-for-the-new-yield-from-syntax-in-python-3'
-target='_blank'>In practice, what are the main uses for the new “yield from” syntax in Python 3.3?</a> Stackoverflow<br>
+target='_blank'>In practice, what are the main uses for the new â€śyield fromâ€ť syntax in Python 3.3?</a> Stackoverflow<br>
 <a href='https://www.slideshare.net/dabeaz/a-curious-course-on-coroutines-and-concurrency-5286140'
 target='_blank'>A Curious Course on Coroutines and Concurrency</a> David Beazley<br>
 </p>
 <p>
-<b>Könyvek</b>
+<b>KĂ¶nyvek</b>
 </p>
 <p>
 Luciano Ramalho: Fluent Python<br>
@@ -224,7 +224,7 @@ David Beazley, Brian K. Jones: Python Cookbook<br>
 <i>&nbsp;&nbsp;Implementing the Iterator Protocol</i>
 </p>
 <p>
-<b>Videók</b>
+<b>VideĂłk</b>
 </p>
 <p>
 <a href='https://www.youtube.com/watch?v=Z_OAlIhXziw' target='_blank'>A Curious Course on Coroutines and Concurrency</a> David Beazley<br>
@@ -238,7 +238,7 @@ function toggle_from_none(ID) {
       b = document.getElementById('b_' + ID);
 
   e.style.display = no_block ? 'block' : 'none';
-  b.textContent  = no_block ? 'Megoldás elrejtése' : 'Megoldás';
+  b.textContent  = no_block ? 'MegoldĂˇs elrejtĂ©se' : 'MegoldĂˇs';
 }
 </script>
 
