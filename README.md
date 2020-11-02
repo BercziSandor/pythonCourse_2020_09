@@ -65,6 +65,27 @@ Python course on 09.2020 by Mihály Nemes
   - [6.9. requests_1.py](#69-requests_1py)
   - [6.10. any_all_1.py](#610-any_all_1py)
   - [6.11. Functions/func_objects.html](#611-functionsfunc_objectshtml)
+- [7. Lection 7](#7-lection-7)
+  - [7.1. exceptions_2.py](#71-exceptions_2py)
+  - [7.2. copy_1.py](#72-copy_1py)
+  - [7.3. Num_py/numpy_1.py](#73-num_pynumpy_1py)
+  - [7.4. Num_py/numpy_2.py](#74-num_pynumpy_2py)
+  - [7.5. repeat_7.py](#75-repeat_7py)
+  - [7.6. Iterators_Generators/gen_func_intro.html](#76-iterators_generatorsgen_func_introhtml)
+  - [7.7. Databases/sqlite3_1.py](#77-databasessqlite3_1py)
+  - [7.8. solutions_6.py](#78-solutions_6py)
+  - [7.9. requests_1.py](#79-requests_1py)
+  - [7.10. any_all_1.py](#710-any_all_1py)
+- [8. Lection 8](#8-lection-8)
+  - [8.1. Num_py/numpy_3.py](#81-num_pynumpy_3py)
+  - [8.2. Num_py/numpy_4.py](#82-num_pynumpy_4py)
+  - [8.3. Num_py/numpy_5.py](#83-num_pynumpy_5py)
+  - [8.4. Iterators_Generators/gen_func_2.html](#84-iterators_generatorsgen_func_2html)
+  - [8.5. Classes/inheritance_2.py](#85-classesinheritance_2py)
+  - [8.6. Functions/closures.html](#86-functionsclosureshtml)
+  - [8.7. repeat_8.py](#87-repeat_8py)
+  - [8.8. Functions/decorators_intro.html](#88-functionsdecorators_introhtml)
+  - [8.9. solutions_7.py](#89-solutions_7py)
 
 Home: http://szoftvermli.biz/PYTHON_2020_1/
 
@@ -349,3 +370,85 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 ## 6.11. Functions/func_objects.html
 [Functions/func_objects.html](Functions/func_objects.html)
  * a függvény-objektumról tanultak összefoglalása
+
+# 7. Lection 7
+
+## 7.1. exceptions_2.py
+[exceptions_2.py](Lecture_7/exceptions_2.py)
+ * else, finally, továbbdobás
+
+## 7.2. copy_1.py
+[copy_1.py](Lecture_7/copy_1.py)
+ * copy, deepcopy
+
+## 7.3. Num_py/numpy_1.py
+[Num_py/numpy_1.py](Num_py/numpy_1.py)
+ * shape, ndim, dtype, slicing
+
+## 7.4. Num_py/numpy_2.py
+[Num_py/numpy_2.py](Num_py/numpy_2.py)
+ * Mátrix alapműveletek, broadcasting, astype, táblaforgatás
+
+## 7.5. repeat_7.py
+[repeat_7.py](Lecture_7/repeat_7.py)
+ * ismétlés
+
+## 7.6. Iterators_Generators/gen_func_intro.html
+[Iterators_Generators/gen_func_intro.html](Iterators_Generators/gen_func_intro.html)
+  * generátor-függvények
+
+## 7.7. Databases/sqlite3_1.py
+[Databases/sqlite3_1.py](Databases/sqlite3_1.py)
+ * sqlite3 adatbázis:
+   connect, commit, autotransact, fetchone, fetchall, fetchmany
+
+## 7.8. solutions_6.py
+[solutions_6.py](Lecture_7/solutions_6.py)
+ * Lecture_6/exercises_6.py megoldásai
+
+## 7.9. requests_1.py
+[requests_1.py](Lecture_7/requests_1.py)
+ * ismerkedés a requests modullal
+
+## 7.10. any_all_1.py
+[any_all_1.py](Lecture_7/any_all_1.py)
+ * any() és all() függvények
+
+# 8. Lection 8
+
+## 8.1. Num_py/numpy_3.py
+[Num_py/numpy_3.py](Num_py/numpy_3.py)
+ * array tuple-ból, dict-ből, delimitált sztringből
+ * reshape, size
+
+## 8.2. Num_py/numpy_4.py
+[Num_py/numpy_4.py](Num_py/numpy_4.py)
+ * logikai mátrixműveletek, maszkolás, np.average, where
+
+## 8.3. Num_py/numpy_5.py
+[Num_py/numpy_5.py](Num_py/numpy_5.py)
+ * műveletek vektorizálásának gyorsító hatása
+
+## 8.4. Iterators_Generators/gen_func_2.html
+[Iterators_Generators/gen_func_2.html](Iterators_Generators/gen_func_2.html)
+ * GeneratorExit, close, send, raise, throw
+
+## 8.5. Classes/inheritance_2.py
+[Classes/inheritance_2.py](Classes/inheritance_2.py)
+ * öröklés, absztrakt osztályok
+
+## 8.6. Functions/closures.html
+[Functions/closures.html](Functions/closures.html)
+ * closure részletesebb bemutatása
+
+## 8.7. repeat_8.py
+[repeat_8.py](Lecture_8/repeat_8.py)
+ * ismétlés
+
+## 8.8. Functions/decorators_intro.html
+[Functions/decorators_intro.html](Functions/decorators_intro.html)
+ * dekorátorok
+
+## 8.9. solutions_7.py
+[solutions_7.py](Lecture_8/solutions_7.py)
+ * Lecture_7/exercises_7.py megoldásai
