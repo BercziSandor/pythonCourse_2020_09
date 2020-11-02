@@ -1,6 +1,7 @@
 pythonCourse_2020_09
 Python course on 09.2020 by Mihály Nemes
 
+Home: http://szoftvermli.biz/PYTHON_2020_1/
 - [1. Lection 1](#1-lection-1)
   - [1.1. python_install_run.html](#11-python_install_runhtml)
   - [1.2. python_literature.html](#12-python_literaturehtml)
@@ -87,15 +88,14 @@ Python course on 09.2020 by Mihály Nemes
   - [8.8. Functions/decorators_intro.html](#88-functionsdecorators_introhtml)
   - [8.9. solutions_7.py](#89-solutions_7py)
 
-Home: http://szoftvermli.biz/PYTHON_2020_1/
 
 # 1. Lection 1
 ## 1.1. python_install_run.html
-[python_install_run.html](python_install_run.html)
+[python_install_run.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_install_run.html)
 * Python és modulok installálása, futtatás
 
 ## 1.2. python_literature.html
-[python_literature.html](python_literature.html)
+[python_literature.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_literature.html)
 * irodalomjegyzék
 
 ## 1.3. mix.py
@@ -181,7 +181,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
   * szöveges fájl megnyitása és sorok olvasása
 
 ## 2.9. python_intro.html
-[python_intro.html](python_intro.html)
+[python_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_intro.html)
 
 ## 2.10. exercises_2.py
 [exercises_2.py](Lecture_2/exercises_2.py)
@@ -368,7 +368,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
  * any() és all() függvények
 
 ## 6.11. Functions/func_objects.html
-[Functions/func_objects.html](Functions/func_objects.html)
+[Functions/func_objects.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/func_objects.html)
  * a függvény-objektumról tanultak összefoglalása
 
 # 7. Lection 7
@@ -394,7 +394,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
  * ismétlés
 
 ## 7.6. Iterators_Generators/gen_func_intro.html
-[Iterators_Generators/gen_func_intro.html](Iterators_Generators/gen_func_intro.html)
+[Iterators_Generators/gen_func_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Iterators_Generators/gen_func_intro.html)
   * generátor-függvények
 
 ## 7.7. Databases/sqlite3_1.py
@@ -430,7 +430,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
  * műveletek vektorizálásának gyorsító hatása
 
 ## 8.4. Iterators_Generators/gen_func_2.html
-[Iterators_Generators/gen_func_2.html](Iterators_Generators/gen_func_2.html)
+[Iterators_Generators/gen_func_2.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Iterators_Generators/gen_func_2.html)
  * GeneratorExit, close, send, raise, throw
 
 ## 8.5. Classes/inheritance_2.py
@@ -438,7 +438,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
  * öröklés, absztrakt osztályok
 
 ## 8.6. Functions/closures.html
-[Functions/closures.html](Functions/closures.html)
+[Functions/closures.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/closures.html)
  * closure részletesebb bemutatása
 
 ## 8.7. repeat_8.py
@@ -446,8 +446,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
  * ismétlés
 
 ## 8.8. Functions/decorators_intro.html
-[Functions/decorators_intro.html](Functions/decorators_intro.html)
-<a href="Functions/decorators_intro.html" title="Functions/decorators_intro.html">Functions/decorators_intro.html</a>
+[Functions/decorators_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/decorators_intro.html)
  * dekorátorok
 
 ## 8.9. solutions_7.py
