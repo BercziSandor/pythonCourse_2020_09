@@ -447,6 +447,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 
 ## 8.8. Functions/decorators_intro.html
 [Functions/decorators_intro.html](Functions/decorators_intro.html)
+<a href="Functions/decorators_intro.html" title="Functions/decorators_intro.html">Functions/decorators_intro.html</a>
  * dekorátorok
 
 ## 8.9. solutions_7.py
