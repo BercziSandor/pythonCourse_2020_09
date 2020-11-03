@@ -3,6 +3,8 @@
 # A broadcasting lehetővé teszi, hogy egy skalárt hozzáadjunk
 # egy tömbhöz:
 
+import numpy as np
+
 x = np.array([1, 2, 3, 4, 5, 6])
 y = x + 10
 print(y) # [11 12 13 14 15 16]

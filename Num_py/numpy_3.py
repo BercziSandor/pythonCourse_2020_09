@@ -3,6 +3,8 @@
 
 # Tuple a forrás:
 
+import numpy as np
+
 tup = (10, 20, 30)
 arr_1 = np.array(tup)
 print(arr_1) # [10 20 30]
