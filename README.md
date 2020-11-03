@@ -2,18 +2,18 @@ pythonCourse_2020_09
 Python course on 09.2020 by Mihály Nemes
 
 Home: http://szoftvermli.biz/PYTHON_2020_1/
-1. [1. Lection 1](#1-lection-1)
-2. [2. Lection 2](#2-lection-2)
-3. [3. Lection 3](#3-lection-3)
-4. [4. Lection 4](#4-lection-4)
-5. [5. Lection 5](#5-lection-5)
-6. [6. Lection 6](#6-lection-6)
-7. [7. Lection 7](#7-lection-7)
-8. [8. Lection 8](#8-lection-8)
-9. [9. Lection 9](#9-lection-9)
+1. [1. Lection](#1-lection)
+2. [2. Lection](#2-lection)
+3. [3. Lection](#3-lection)
+4. [4. Lection](#4-lection)
+5. [5. Lection](#5-lection)
+6. [6. Lection](#6-lection)
+7. [7. Lection](#7-lection)
+8. [8. Lection](#8-lection)
+9. [9. Lection](#9-lection)
 
 
-# 1. Lection 1
+# 1. Lection
 ## 1.1. python_install_run.html
 [python_install_run.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_install_run.html)
 * Python és modulok installálása, futtatás
@@ -63,7 +63,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 [Functions/scope_1.py](Functions/scope_1.py)
 * lokális és globális változók
 
-# 2. Lection 2
+# 2. Lection
 ## 2.1. Functions/func_objects_1.py
 [Functions/func_objects_1.py](Functions/func_objects_1.py)
  * függvény-objektumok
@@ -111,7 +111,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 [exercises_2.py](Lecture_2/exercises_2.py)
  * feladatok
 
-# 3. Lection 3
+# 3. Lection
 ## 3.1. Comprehensions/listcomp_1.py, set_dict_comp_1.py
 [Comprehensions/listcomp_1.py](Comprehensions/listcomp_1.py)
 [Comprehensions/set_dict_comp_1.py](Comprehensions/set_dict_comp_1.py)
@@ -159,7 +159,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 [Datastructures/conversions_1.py](Datastructures/conversions_1.py)
  * alap adatszerkezetek átalakítása egymásba
 
-# 4. Lection 4
+# 4. Lection
 ## 4.1. repeat_4.py
 [repeat_4.py](Lecture_4/repeat_4.py)
  * ismétlés
@@ -205,7 +205,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 [Iterators_Generators/iterator_2.py](Iterators_Generators/iterator_2.py)
  * saját iterlható osztály készítése
 
-# 5. Lection 5
+# 5. Lection
 ## 5.1. repeat_5.py
 [repeat_5.py](Lecture_5/repeat_5.py)
  * ismétlés
@@ -249,7 +249,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 
 ########################
 
-# 6. Lection 6
+# 6. Lection
 ## 6.1. Datastructures/index_2.py
 [Datastructures/index_2.py](Datastructures/index_2.py)
  * Lista részének módosítása és törlése slicing-gal
@@ -295,7 +295,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 [Functions/func_objects.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/func_objects.html)
  * a függvény-objektumról tanultak összefoglalása
 
-# 7. Lection 7
+# 7. Lection
 
 ## 7.1. exceptions_2.py
 [exceptions_2.py](Lecture_7/exceptions_2.py)
@@ -338,7 +338,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 [any_all_1.py](Lecture_7/any_all_1.py)
  * any() és all() függvények
 
-# 8. Lection 8
+# 8. Lection
 
 ## 8.1. Num_py/numpy_3.py
 [Num_py/numpy_3.py](Num_py/numpy_3.py)
@@ -377,7 +377,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 [solutions_7.py](Lecture_8/solutions_7.py)
  * Lecture_7/exercises_7.py megoldásai
 
-# 9. Lection 9
+# 9. Lection
 
 ## 9.1. Iterators_Generators/gen_exp_intro.html
 [Iterators_Generators/gen_exp_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Iterators_Generators/gen_exp_intro.html)
