@@ -1,0 +1,21 @@
+Iterators_Generators\gen_exp_intro.html
+ * generátor kifejezések
+
+Num_py\numpy_6.py
+ * példa reshape alkalmazására
+
+Num_py\numpy_7.py
+ * Excel táblából beolvasás, táblaforgatás (pivoting), csv fájl olvasás-írás
+
+Databases\sqlite3_2.py
+ * memória-adatbázisok
+
+Functions\closures.html
+ * closure részletesebb bemutatása
+
+repeat_9.py
+ * ismétlés
+ 
+Functions\decorators_intro.html
+ * dekorátorok
+
