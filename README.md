@@ -87,6 +87,14 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
   - [8.7. repeat_8.py](#87-repeat_8py)
   - [8.8. Functions/decorators_intro.html](#88-functionsdecorators_introhtml)
   - [8.9. solutions_7.py](#89-solutions_7py)
+- [9. Lection 9](#9-lection-9)
+  - [9.1. Iterators_Generators/gen_exp_intro.html](#91-iterators_generatorsgen_exp_introhtml)
+  - [9.2. Num_py/numpy_6.py](#92-num_pynumpy_6py)
+  - [9.3. Num_py/numpy_7.py](#93-num_pynumpy_7py)
+  - [9.4. Databases/sqlite3_2.py](#94-databasessqlite3_2py)
+  - [9.5. Functions/closures.html](#95-functionsclosureshtml)
+  - [9.6. repeat_9.py](#96-repeat_9py)
+  - [9.7. Functions/decorators_intro.html](#97-functionsdecorators_introhtml)
 
 
 # 1. Lection 1
@@ -452,3 +460,34 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 ## 8.9. solutions_7.py
 [solutions_7.py](Lecture_8/solutions_7.py)
  * Lecture_7/exercises_7.py megoldásai
+
+# 9. Lection 9
+
+## 9.1. Iterators_Generators/gen_exp_intro.html
+[Iterators_Generators/gen_exp_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Iterators_Generators/gen_exp_intro.html)
+ * generátor kifejezések
+
+## 9.2. Num_py/numpy_6.py
+[Num_py/numpy_6.py](Num_py/numpy_6.py)
+ * példa reshape alkalmazására
+
+## 9.3. Num_py/numpy_7.py
+[Num_py/numpy_7.py](Num_py/numpy_7.py)
+ * Excel táblából beolvasás, táblaforgatás (pivoting), csv fájl olvasás-írás
+
+## 9.4. Databases/sqlite3_2.py
+[Databases/sqlite3_2.py](Databases/sqlite3_2.py)
+ * memória-adatbázisok
+
+## 9.5. Functions/closures.html
+[Functions/closures.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/closures.html)
+ * closure részletesebb bemutatása
+
+## 9.6. repeat_9.py
+[repeat_9.py](repeat_9.py)
+ * ismétlés
+
+## 9.7. Functions/decorators_intro.html
+[Functions/decorators_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/decorators_intro.html)
+ * dekorátorok
+
