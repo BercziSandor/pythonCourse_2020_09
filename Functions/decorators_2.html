@@ -1,0 +1,192 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Dekorátorok 2.</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  code { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .pale { color: gray; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+  .data { color:green; }
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }
+  .emph_4 { color: gray; font-family: courier new; letter-spacing: 0.1em; }
+  .big_red { color:red; font-size:120%; font-weight:bold; margin-top:-5px; margin-bottom:-17px; } /* for div in text */
+  .deleted { text-decoration: line-through; color: blue; }
+  .question  { font-family:Cooper Black; color:indigo; }
+  .sol_button { color:indigo; font-size: 110%; }
+  .solution { display:none; border: 1px groove black; border-radius: 5px; margin: 10px 20px 5px 20px; padding: 5px; background-color: palegoldenrod; }
+  .emph_box_1 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; text-align: center; font-size: 120%; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.06 &mdash;</p>
+</div>
+<h1>Dekorátorok 2. rész</h1>
+<ul class='contents'>
+<li><a style='color: red' href='#decorate_with_callable'>Függvény helyett hívható osztály</a></li>
+<li><a style='color: red' href='#functools_wraps'>Név és docstring megőrzése</a></li>
+<li><a style='color: red' href='#predefined'>Előre definiált dekorátorok</a></li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='decorate_with_callable'>Függvény helyett hívható osztály</h2>
+<p>
+Tudjuk, hogy a __call__ metódus definiálásával hívhatóvá tudunk tenni egy osztályt, ezért a dekoráló függvény helyett használhatunk egy ilyen osztályt is.
+A konstruktorban átadjuk a dekorálandó függvényt az objektumnak.
+
+<pre>
+class DecorClass_1():
+    def __init__(self,funcToBeDecorated):
+        self.func = funcToBeDecorated
+
+    def __call__(self,*args, **kwargs):
+        print('I am DecorClass_1 BEFORE I call the real func')
+        ret_val = self.func(*args, **kwargs)
+        print('I am DecorClass_1 AFTER I called the real func')
+
+        return ret_val
+
+@DecorClass_1
+def func(funcPar):
+    print('*** I am func, funcPar = ', funcPar)
+    return 999
+
+func(555)
+<div class='result'>
+# I am DecorClass_1 BEFORE I call the real func
+# *** I am func, funcPar =  555
+# I am DecorClass_1 AFTER I called the real func
+</div>
+</pre>
+A @DecorClass_1 helyett írhatjuk persze ezt is:
+ 
+<pre>
+func = DecorClass_1(func)
+</pre>
+
+mindkét esetben ugyanaz történik: A DecorClass_1 felhívódik, paraméterként megkapja a dekorálandó függvényobjektumot és a visszatérő értékéhez hozzárendeljük
+az eredeti függvény nevét.
+</p>
+<p>
+Ízlés kérdése, hogy hívható objektumot vagy függvényt használunk &ndash; szerintem a függvény-megoldás áttekinthetőbb. Kivétel: ha a dekoráláshoz több megjegyzendő
+információ (attribútum) és segédművelet (metódus) szükséges &ndash; ilyenkor természetesebbnek tűnik az osztály alkalmazása. Az osztály-megoldás hátránya, hogy
+functools.wraps nem alkalmazható rá. (Erről később lesz szó.)
+</p>
+<h2 id='functools_wraps'>Név és docstring megőrzése</h2>
+<p>
+Amikor dekorátort kap egy függvény, akkor sajnos ez elfedi a nevét és a docstring-jét:
+
+<pre>
+def decorator_1(funcToBeDecorated):
+    def decorated(*args, **kwargs):
+        print('I am decorator 1 BEFORE I call',funcToBeDecorated.__name__)
+        ret_val = funcToBeDecorated(*args, **kwargs)
+        print('I am decorator 1 AFTER I called',funcToBeDecorated.__name__)
+
+        return ret_val
+
+    return decorated
+
+@decorator_1
+def func(funcPar):
+    '''This is a very important function'''
+    print('*** I am func, funcPar =',funcPar)
+    return 999
+
+print(func.__name__)
+help(func)
+<div class='result'>
+# decorated
+# Help on function decorated in module __main__:
+#
+# decorated(*args, **kwargs)
+</div>
+</pre>
+Ez többek között akkor okoz gondot, amikor debuggert használunk, vagy a pickle modullal szerializáljuk a programunkat. Megoldást kínál a problémára
+a functools modul wraps dekorátora. (Ez egy olyan dekorátor, ami dekorátorokon segít.)
+
+<pre>
+from functools import wraps
+
+<span class='pale'>def decorator_1(funcToBeDecorated):</span>
+    @wraps(funcToBeDecorated)
+    <span class='pale'>def decorated(*args, **kwargs):
+        print('I am decorator 1 BEFORE I call',funcToBeDecorated.__name__)
+        ret_val = funcToBeDecorated(*args, **kwargs)
+        print('I am decorator 1 AFTER I called',funcToBeDecorated.__name__)
+
+        return ret_val
+
+    return decorated
+
+@decorator_1
+def func(funcPar):
+    '''This is a very important function'''
+    print('*** I am func, funcPar =',funcPar)
+    return 999
+
+print(func.__name__)
+help(func)</span>
+<div class='result'>
+<b style='color:green;'># func
+# Help on function func in module __main__:
+#
+# func(funcPar)
+#     This is a very important function</b>
+</div>
+</pre>
+</p>
+<h2 id='predefined'>Előre definiált dekorátorok</h2>
+<p>
+Számos feladat létezik, amelyeket dekorátorokkal lehet megoldani, ezek közül egyes gyakran előfordulóakhoz előre elkészített dekorátor-függvények állnak
+rendelkezésre. Már találkoztunk is néhánnyal: a @property, @[name].setter, @deleter, @classmethod, @staticmethod, @abstractmethod dekorátorokat készen kapjuk a
+Python futtató rendszertől, nem nekünk kell megírni a dekoráló függvényt.
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://wiki.python.org/moin/PythonDecoratorLibrary' target='_blank'>wiki.python.org</a> PythonDecoratorLibrary<br>
+<a href='https://www.geeksforgeeks.org/creating-decorator-inside-a-class-in-python/' target='_blank'>Creating Decorator inside a class in Python</a> geeksforgeeks.org<br>
+<a href='https://www.geeksforgeeks.org/class-as-decorator-in-python/' target='_blank'>Class as decorator in python</a> geeksforgeeks.org<br>
+<a href='https://towardsdatascience.com/using-class-decorators-in-python-2807ef52d273' target='_blank'>Using Class Decorators in Python</a> towardsdatascience.com<br>
+<a href='https://stackoverflow.com/questions/4650333/difference-between-decorator-classes-and-decorator-functions' target='_blank'>Difference between decorator
+classes and decorator functions</a> Stackoverflow<br>
+<a href='https://stackoverflow.com/questions/4309607/whats-the-preferred-way-to-implement-a-hook-or-callback-in-python/4321509'
+target='_blank'>What's the preferred way to implement a hook or callback in Python?</a> Stackoverflow<br>
+<a href='https://stackoverflow.com/questions/10294014/python-decorator-best-practice-using-a-class-vs-a-function' target='_blank'>Python decorator best practice,
+using a class vs a function</a> Stackoverflow<br>
+<a href='https://github.com/lord63/awesome-python-decorator' target='_blank'>awesome-python-decorator</a> GitHub &ndash; előre definiált dekorátorok<br><br>
+<a href='https://www.geeksforgeeks.org/create-an-exception-logging-decorator-in-python/' target='_blank'>Create an Exception Logging Decorator in Python</a>
+geeksforgeeks.org<br>
+<a href='https://www.geeksforgeeks.org/dispatch-decorator-in-python/' target='_blank'>Dispatch Decorator in Python</a> geeksforgeeks.org<br>
+<a href='https://www.geeksforgeeks.org/python-property-decorator-property/' target='_blank'>Python Property Decorator – @property</a> geeksforgeeks.org<br>
+<a href='https://www.geeksforgeeks.org/context-manager-using-contextmanager-decorator/' target='_blank'>Context Manager Using @contextmanager
+Decorator</a> geeksforgeeks.org<br>
+</p>
+<p>
+<b>Könyvek</b>
+</p>
+<p>
+Mark Lutz: Learning Python<br>
+<i>&nbsp;&nbsp;Class Decorators and Metaclasses</i><br>
+<i>&nbsp;&nbsp;Coding Properties with Decorators</i><br>
+<i>&nbsp;&nbsp;Decorators</i>
+</p>
+<p>
+Luciano Ramalho: Fluent Python<br>
+<i>&nbsp;&nbsp;Function Decorators and Closures</i><br>
+</p>
+<p>
+Brett Slatkin: Effective Python<br>
+<i>&nbsp;&nbsp;Define Function Decorators with functools.wraps</i><br>
+</p>
+</body>
+</html>

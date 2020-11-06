@@ -1,0 +1,27 @@
+Jupyter Notebook
+================
+
+-- Installálás:
+
+python -m pip install notebook
+
+A python.exe könytára alatti Scripts könyvtárba kerül be.
+
+-- Futtatás:
+
+[elérési útvonal]jupyter-notebook.exe
+
+ld. run_jupyter.bat
+
+Megjelenik egy parancs-ablak, abban elindul egy program, ami elindít a localhost
+8888-as portján egy szervert, az pedig elindítja a böngészőben a Jupytert.
+Ezt a parancs-ablakot ne zárjuk be, amíg a Jupyter fut.
+
+-- Olvasni/megnézni való:
+
+https://ipython.readthedocs.io/en/stable/interactive/tutorial.html Introducing IPython
+https://www.youtube.com/watch?v=HW29067qVWk Jupyter Notebook Tutorial: Introduction, Setup, and Walkthrough (Corey Schaefer)
+https://realpython.com/jupyter-notebook-introduction/ Jupyter Notebook: An Introduction (Real Python)
+https://www.youtube.com/watch?v=JI1HWUAyJHE IPython Notebook best practices for data science (Jonathan Whitmore)
+https://www.youtube.com/watch?v=zxkdO07L29Q Make Jupyter/IPython Notebook even more magical with cell magic extensions! (Nicolas Kruchten)
+https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html Visualization with Matplotlib (Jake VanderPlas)

@@ -1,0 +1,14 @@
+Classes\file_reader.py spec_reader_1.py spec_reader_2.py
+ * örököltetés kontra kompozíció
+
+Iterators_Generators\gen_cascade.html generator_advantages.html
+ * generátorok kaszkádba kötése; előnyei
+
+Visual\matplot_1.py
+ * matplotlib bemutatása
+
+Jupyter_NB\jupyter_intro.txt, jupy_demo_1.ipynb, jupy_demo_2.ipynb
+ * Jupyter Notebook bemutatása
+
+repeat_10.py
+ * ismétlés

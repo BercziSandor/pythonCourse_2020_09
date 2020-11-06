@@ -14,14 +14,8 @@ Iterators_Generators\gen_func_2.html
 Classes\inheritance_2.py
  * öröklés, absztrakt osztályok
 
-Functions\closures.html
- * closure részletesebb bemutatása
-
 repeat_8.py
  * ismétlés
-
-Functions\decorators_intro.html
- * dekorátorok
 
 solutions_7.py
  * Lecture_7\exercises_7.py megoldásai

@@ -66,15 +66,19 @@ class Grandfather(Family):
     def greet(self):
         print('én vagyok a nagyapa')
 
-class Father(Family):
+class Father(Grandfather):
     def greet(self):
         print('én vagyok az apa')
 
+class Son(Father): pass
 g = Grandfather()
 g.greet()
 
 f = Father()
 f.greet()
+
+s = Son()
+s.greet()
 
 class Somebody():
     def greet(self):

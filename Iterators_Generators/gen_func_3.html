@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Generátor  függvények 3.rész</title>
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
@@ -22,7 +22,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.09.20 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.24 &mdash;</p>
 </div>
 <h1>Generátor  függvények 3.rész<br>
 <span style='font-size:70%; color:gray;'>&bull; Adat és parancs átvitele &bull;</span></h1>
@@ -84,8 +84,8 @@ print('CALLER received:', ret_dict)
 </p>
 <h2 id='command_sent'>A generátor parancsot kap send()-del</h2>
 <p>
-Láttuk <a href='#throw_into' target='_blank'>fentebb</a>, hogy amikor a generátor az adatforrás, akkor problémás neki throw() segítségével parancsot küldeni,
-mert ekkor egy yield mintegy eltűnik. Az adatforrás típusú generátornak viszont könnyen tudunk parancsokat küldeni a send() metódussal. A következő példában
+Láttuk <a href='gen_func_2.html#throw_into' target='_blank'>korábban</a>, hogy amikor a generátor az adatforrás, akkor problémás neki throw() segítségével parancsot
+küldeni, mert ekkor egy yield mintegy eltűnik. Az adatforrás típusú generátornak viszont könnyen tudunk parancsokat küldeni a send() metódussal. A következő példában
 a generátor állítja elő az értékeket és a vezérlő paraméter függvényében ezeket vagy változatlanul, vagy duplázva adja át a hívónak.
 
 <pre>
@@ -129,7 +129,7 @@ while True:
 </p>
 <h2 id='command_and_data_sent'>A generátor adatot ÉS parancsot kap send()-del</h2>
 <p>
-A nyelő típusú generátor az adat mellett kaphat a hívótól parancsokat is; <a href='#throw_db_example' target='_blank'>fentebb</a> láttunk példát arra, hogy
+A nyelő típusú generátor (korutin) az adat mellett kaphat a hívótól parancsokat is; <a href='#throw_db_example' target='_blank'>fentebb</a> láttunk példát arra, hogy
 a parancsokat lehet throw() segítségével továbbítani a generátornak. Nézzünk most meg egy olyan megoldást ugyanarra a feladatra, ahol a send() szolgál a parancs
 továbbítására is.
 
@@ -233,7 +233,7 @@ A yield nem csak arra szolgál, hogy adatot adjon át a hívónak, hanem jelzi i
 A generátorok kategorizálhatók a tényleges <span class='emph_1'>adat</span>forgalom iránya szerint (hiba- és státuszjelzések persze mindkét irányban mehetnek):
 
 <ul>
-<li>Nyelő típusú: a hívótól kapott adattal valamit csinál, tipikusan fájlban, adatbázisban eltárolja, hálózati kapcsolaton kiküldi.</li>
+<li>Nyelő típusú (korutin): a hívótól kapott adattal valamit csinál, tipikusan fájlban, adatbázisban eltárolja, hálózati kapcsolaton kiküldi.</li>
 <li>Forrás típusú: ő állítja elő az adatot, pl. egy adatbázisból kiolvasva és átadja a hívónak.</li>
 <li>Kétirányú: a hívótól kapja az adatot és valamilyen műveletek után vissza is küldi neki.</li>
 </ul>
