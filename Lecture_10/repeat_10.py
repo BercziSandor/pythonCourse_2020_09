@@ -96,7 +96,6 @@ g = func('ABC')
 for x in g:
     print(x)
 
-
 ######################################
 
 # 8.)
@@ -140,5 +139,20 @@ print(x)
 
 x = list(range(5))
 print(x)
+
+######################################
+
+# 13.)
+
+def dob():
+    print('dobálok')
+    raise Exception('dobok egy kivételt')
+
+try:
+    dob()
+except ValueError:
+    print('elkaptam egy kivételt')
+finally:
+    print('itt a vége')
 
 ######################################

@@ -1,0 +1,14 @@
+mix_11.py
+ * else ág ciklusokban
+
+Databases\sqlite3_3.py
+ * a NULL
+
+CharCoding
+ * karakterkódolási problémák
+
+data_cleaning.html
+ * adattisztítás
+
+repeat_11.py
+ * ismétlés

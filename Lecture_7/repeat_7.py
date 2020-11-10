@@ -78,3 +78,16 @@ x = 'This',
 print(len(x))
 
 ######################################
+
+from statistics import mean
+
+def func():
+    val = 1
+    while val < 4:
+        yield(val)
+        val += 1
+
+g = func()
+print(mean(g))
+
+######################################

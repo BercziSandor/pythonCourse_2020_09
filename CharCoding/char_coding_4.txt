@@ -1,0 +1,65 @@
+KÍSÉRLETEK SZÖVEGSZERKESZTŐVEL
+==============================
+
+Vegyünk egy á betűt példának. Szabványos neve: LATIN SMALL LETTER A WITH ACUTE.
+
+Unicode kódja: E1 (hexa) 225 (decimális). e1-et is írhatunk.
+UTF-8 ábrázolása 2 bájt: 0xc3 0xa1
+Latin-1, Nyugat-Európai kódlap (ISO-8859-1, Windows-1252) kódja: E1 (hexa) 225 (decimális)
+Latin-2, Kelet-Európai kódlap  (ISO-8859-2, Windows-1250) kódja: E1 (hexa) 225 (decimális)
+DOS Latin-2 (OEM 852, CP 852) kódja: A0 (hexa) 160 (decimális)
+
+Ennek a betűnek a Latin-1 és Latin-2 kódja megegyezik. (Nem minden magyar ékezetes betűnél ez a helyzet.)
+
+ISO-8859-1, Windows-1252: Van köztük különbség. (Magyar ékezeteseknél nincs.)
+ISO-8859-2, Windows-1250: Van köztük különbség. (Magyar ékezeteseknél nincs.)
+
+===========================================
+
+Kísérlet: Notepad++-ban hozzunk létre egy fájlt és állítsuk be így a karakterkódolást:
+
+Encoding --> Character sets --> Central European --> Windows-1250
+
+Írjunk a fájlba egy á betűt és mentsük el. Ezután Total Commanderrel nézzük meg, hogy
+mi van a fájlban.
+
+Kiválasztjuk a fájlt --> F3 --> Options --> Hex
+
+Azt fogjuk látni, hogy egy darab E1 értékű bájt van a fájlban.
+
+A Notepad++-ban a következő beállításoknál ugyanezt az eredményt fogjuk kapni:
+
+Eastern European --> ISO 8859-2    E1
+Western Europian --> ISO 8859-1    E1
+                 --> Windows 1252  E1
+
+Ha viszont ezt választjuk:
+
+Central Europian --> OEM 852
+
+akkor egy A0 értékű bájt lesz a fájlban.
+
+Ha a Notepad+++-ban ezt választjuk:
+
+Encoding --> Encode in UTF-8
+
+akkor az á betűt elmentve a fájlban két karakter lesz: C3 és A1 (hexa).
+
+===========================================
+
+Kísérlet: Notepad++-ban hozzunk létre egy yyy.txt fájlt és állítsuk be így a karakterkódolást:
+
+Encoding --> Character sets --> Eastern European --> ISO 8859-2
+
+Írjunk a fájlba egy á betűt és mentsük el. Total Commanderrel nézzük meg, hogy egy E1
+értékű bájt van a fájlban.
+
+Indítsunk egy parancsablakot (cmd)és írassuk ki a fájl tartalmát:
+
+type yyy.txt
+
+Egy ß karakter fogunk látni.
+
+Az ok: A parancsablak kódkészlete CP 852 (OEM 852).
+
+===========================================

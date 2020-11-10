@@ -1,0 +1,955 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Adattisztítás</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px; }
+  .pre_2  { color: green; margin: 8px; }}
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }
+  .emph_3 { color: black; font-weight: bold; }
+  .emph_4 { color: blue; font-weight: bold; }
+  .emph_5 { color: green; font-weight: bold; font-size: 120%; }
+  .blq_1  { border-left: 3px solid #FC4;padding-left: 16px; font-family: Georgia; font-style: italic; }
+</style>
+</head>
+<body>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; nemes.budapest@gmail.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2019.11.03 &mdash;</p>
+
+<ul>
+<li><a href="#cleanness_def">Milyen a tiszta adat?</a></li>
+<li><a href="#how_clean">És hogyan lesz tiszta?</a></li>
+<li><a href="#input_data">Milyen a bejövő adat?</a></li>
+<li><a href="#input_source">Honnan jön az adat?</a></li>
+<li><a href="#main_steps">A bejövő adattal történő főbb lépések</a></li>
+<li><a href="#preprocess">Első előfeldolgozás az adatbázison kívül</a></li>
+<li><a href="#auto_or_not">A két fő hibajavítási módszer</a>
+<ul>
+<li><a href="#diff">Néhány szó a különbségképzésről</a></li>
+</ul>
+</li>
+<hr style="margin-right:70%;">
+<li><a href="#main_problem_types">A fő hibafajták</a>
+<ul>
+<li><a href="#field_formal_errors">Mezőtartalom formai hibák</a>
+<ul>
+<li><a href="#field_type_hard_errors">Betöltést gátló durva típushibák</a></li>
+<li><a href="#field_type_incompat_hard_errors">Betöltést gátló durva inkompatibilitási hibák</a></li>
+<li><a href="#distort_errors">Adattorzító inkompatibilitási hibák</a></li>
+</ul>
+</li>
+<li><a href="#field_semantic_errors">Mezők tartalmi hibái</a></li>
+<li><a href="#search_disturb_errors">Keresést nehezítő hibák</a></li>
+<li><a href="#inhomog_field_content">Inhomogén mezőtartalom</a></li>
+<li><a href="#inacc_field_content">Pontatlan mezőtartalom</a></li>
+<li><a href="#unnecessary_cols">Felesleges oszlopok (mezők)</a></li>
+<li><a href="#missing_values">Hiányzó értékek, kitöltetlenség</a></li>
+<li><a href="#record_level_content_errors">Rekord-szintű tartalmi problémák</a></li>
+<li><a href="#record_connect_errors">Rekord-kapcsolati problémák</a></li>
+</ul>
+</li>
+<hr style="margin-right:70%;">
+<li><a href="#transform_after_cleaning">Tisztítás utáni transzformációk</a></li>
+<hr style="margin-right:70%;">
+<li><a href="#tech_details">Néhány technikai részlet, bemutatásként</a>
+<ul>
+<li><a href="#tech_det_pandas_preprocess">CSV fájl tisztításának néhány lépése Python + Pandas segítségével</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="cleanness_def"></div>
+<h2>Milyen a tiszta adat?</h2>
+<p>
+Egy jól megtervezett és karbantartott adatbázisban csak 'tiszta' adatok vannak, amelyek közötti összefüggések is megfelelően karban vannak tartva:
+
+<blockquote>
+&#9679; aminek egyedinek kell lennie, az tényleg egyedi (PRIMARY KEY, UNIQUE megkötés)<br>
+&#9679; ami hivatkozik egy másik táblára, az csak olyan értékeket tartalmaz, ami ott valóban megtalálható (FOREIGN KEY)<br>
+&#9679; minden szükséges mező ki van töltve minden rekordban (ehhez a NOT NULL megkötés <b>nem elegendő</b>!)<br>
+&#9679; a numerikus és dátum adatok megfelelő típusú mezőkben vannak, itt nem lehetnek formai hibás értékek (pl. numerikus mezőben szöveg)<br>
+&#9679; nincsenek formailag helyes, tartalmilag hibás hivatkozások (pl. egy személy rekordjában nem az ő TAJ száma vagy email címe található)<br>
+&#9679; nincsenek 'kilógó adatok' (pl. testmagasságnál tíz méter)<br>
+&#9679; a numerikus mérési, kerekítési és átviteli hibák ki vannak lehetőség szerint küszöbölve (pl. átlagolással)<br>
+&#9679; egy mezőnél a kitöltetlenség csak egyféleképpen van jelölve (mindig NULL-al vagy mindig üres sztringgel)<br>
+&#9679; a szöveges mezők nem tartalmaznak
+<blockquote>
+&#x25B6; a szóköztől eltérő láthatatlan, 'fehér' karaktereket<br>
+&#x25B6; a mező elején és végén szóközt<br>
+&#x25B6; a mező belsejében egynél több szóközt (ott, ahol csak egyre számítunk)<br>
+</blockquote>
+&#9679; a nevek, lakcímek írásmódja egységes (pl. dr mindig szóközzel van elválasztva a névtől és nem ponttal)<br>
+&#9679; az alfanumerikus azonosítók írásmódja egységes<br>
+<blockquote>
+&#x25B6; csak csupa kisbetű vagy nagybetű található bennük lehetőség szerint (ha a létező rendszer megengedi)<br>
+&#x25B6; a tagolásra mindig ugyanazt a karaktert használjuk, pl. kötőjelet
+</blockquote>
+&#9679; a szöveges mezőkben lévő numerikus azonosítók egységesek (pl. adott hosszra vezető nullákkal ki vannak egészítve).
+</blockquote>
+</p>
+<div id="how_clean"></div>
+<h2>És hogyan lesz tiszta?</h2>
+<p>
+A vágyott tisztaság eléréséhez jól működő adatbetöltö és ellenőrző programokra van szükség. Az adattisztító-betöltő folyamat
+
+<ul>
+<li>ellenőrzi a bejövő adatot</li>
+<li>eltávolítja vagy lecseréli a hibás értékeket</li>
+<li>néha egész rekordokat eltávolít</li>
+<li>pótol hiányzó értékeket</li>
+<li>átformázza az adattartalmat a fogadó oldal konvenciói szerint</li>
+<li>és végül betölti az adatokat a végleges helyükre.</li>
+</ul>
+
+Az első, élesen elkülönülő lépés az <b>előfeldolgozás</b>, amikor a betöltést megakadályozó hibákat eltávolítjuk; pl. INT típusú mezőbe nem lehet az 'egy' sztringet
+betölteni, aminek az a következménye, hogy az egész rekord nem kerül be az adattáblába, esetleg a teljes betöltés hibajelzéssel leáll. Az ilyen durva hibák megfelelő
+kezelése nyilván nagyon fontos, előfordulhat, hogy sok rekord eltűnik, ha ezt a lépést nem megfelelő gondossággal végezzük.
+</p>
+<p>
+Ez az előfeldolgozó művelet is két részre osztódik: Ha az adatbázison kívül van a bejövő adat (ahogy általában lenni szokott, pl. delimitált (CSV) szövegfájlban),
+akkor tartalmazhat olyan formai elemeket, amelyek megakadályozzák a betöltést &ndash; ezeket el kell távolítani vagy át kell konvertálni pl. Python+Pandas
+segítségével, aztán következhet a második előfeldolgozás, amelyet végezhetünk szintén még az adatbázison kívül és/vagy egy olyan zsilipelő táblában, amelyben
+minden mező VARCHAR vagy TEXT típusú.
+</p>
+<p>
+A következő, 'finomabb' hibák és hiányosságok eltávolítása nemcsak adatbetöltéskor szükséges, időről időre szükség van az adattáblák ellenőrzésére, mert
+lehet, hogy a korábbi adatbeviteleknél nem volt eléggé következetes a vizsgálat, vagy éppen azóta újabb hibafajtákat és javítási módokat találtunk ki.
+</p>
+<div id="input_data"></div>
+<h2>Milyen a bejövő adat?</h2>
+<p>
+Általánosan és egyszerűen megfogalmazva: mindig koszos.
+</p>
+<p>
+Adatbeviteli hibáktól kezdve a mérési pontatlanságig sokminden okozza, hogy szinte soha nem tiszta &ndash; de ha nincsenek is benne hibák, akkor is lehet
+a fogadó rendszer szempontjából piszkos, mert más ábrázolási módot használ, pl. a dátumban más sorrendben követi egymást az év, hónap és a nap. Ezért
+minden rendszernél fontos (és sokszor elhanyagolt) téma a bemeneti adat tisztítása &ndash; a Big Data, a mesterséges intelligencia, a tanuló algoritmusok
+világában pedig különösen így van. Egyes becslések szerint egy adattudós vagy adatmérnök az idejének 60%-át adattisztítással tölti (máshol 80%-ot olvastam) &ndash;
+hogy elkerülje a közismert igazságot:
+<pre>
+
+                                       +-------------------+
+                                       | <span class="emph_1">Szuperintelligens</span> |
+                                       | tökéletes program |
+                  TRÁGYA BEMENET ===>  | tele szofisztikált|  ===> TRÁGYA KIMENET
+                                       |    tudományos     |
+                                       |  algoritmusokkal  |
+                                       +-------------------+
+</pre>
+Avagy, mint tudjuk, nem mindenből lehet egyformán hatékonyan várat építeni. Az adattisztítást sokan nyűgnek érzik, mert szeretnének végre az 'igazi' munkájukkal, az
+elemzéssel foglalkozni, mások viszont (ide tartozom én is) érdekes, változatos, sok tudást igénylő mérnöki feladatnak látják. Persze hozzátartozik az is, hogy
+nekem kifejezetten ez a munkám, eddig keveset foglalkoztam a statisztikai elemzésekkel, azt is csak érdeklődésből.
+</p>
+<p>
+Amúgy a rossz minőségű adatok által okozott következmények rendkívül különbözőek, mondhatni színes palettán mozognak. Nézzük csak ezt kis újsághírt:
+<blockquote class="blq_1">
+2019 március 10-én az Ethiopian Airlines gépe 157 emberrel a fedélzeten Addisz-Abeba közelében lezuhant. A gép Kenya fővárosába, Nairobiba indult Addisz-Abebából,
+de hat perccel a felszállás után földbe csapódott.<br><br>
+Az érintett típus gépei az elmúlt fél évben kétszer is gyanús körülmények között zuhantak le, ami a feltételezések szerint egy bizonyos helyzetekben életveszélyesen
+működő szoftveres mechanizmussal, az un. MCAS működésével függ össze: az elvileg az átesés megakadályozására szolgáló korrekciós rendszert meghülyíthetik a
+<b>hibás adatok</b>.
+</blockquote>
+Itt lehet, hogy az algoritmus kidolgozói jó munkát végeztek, csak éppen tökéletes bemeneti adatokra számítottak, ami szerintem az óvoda középső csoportjától
+fölfelé már kifejezetten megbocsájthatatlan hozzáállás.
+</p>
+<p>
+Még egy matematikusnál is.
+</p>
+<div id="input_source"></div>
+<h2>Honnan jön az adat?</h2>
+<p>
+Az esetek nagyon nagy részében delimitált (CSV) szövegfájlokban, Excel-táblákban vagy HTML táblázatokban található a bejövő adat. A leggyakoribb a CSV fájl, ami
+származhat egy másik adatbázis vagy egy Excel tábla exportjából. Az ilyen fájlokat egy MySQL adattáblába közvetlenül a LOAD DATA INFILE utasítással tudjuk betölteni,
+más adatbáziskezelőknél hívhatják ezt a parancsot másképpen is.
+</p>
+<blockquote class="blq_1">
+Tágabb értelemben a 'Honnan jön' kérdésre az a válasz, hogy eredetileg vagy manuális begépeléssel kerülnek be az adatok valahová, vagy érzékelők,
+programok állítják elő ezeket. Utóbbira jó példa <a href="http://gemenczrt.hu/aktualis/gps-jelados-fekete-golyak/" target="_blank">Zoltánnak</a>, a gólyának az
+útinaplója.
+</blockquote>
+
+<div id="main_steps"></div>
+<h2>A bejövő adattal történő főbb lépések</h2>
+<p>
+Nagy vonalakban ez történik:
+<pre>
+
+        +------------------------------+      +-----------------+      +----------------+
+        |                              |      |                 |      |                |
+        | Adatellenőrzés és tisztítás  | ===> | Transzformációk | ===> |  Kiegészítések |
+        |                              |      |                 |      |                |
+        +------------------------------+      +-----------------+      +----------------+
+
+</pre>
+Itt 'kiegészítés' alatt az értendő, amikor a már megtisztított adatot kiegészítjük más forrásból származó egyéb adatokkal, pl. az ügyfél preferenciáival,
+elérhetőségével, stb. Most elsősorban az adattisztításról lesz szó, de azért röviden kitérünk majd a másik két lépésre is.
+</p>
+<p>
+<b>Első adattisztító lépés:</b> Az előfeldolgozás. A szövegfájl vagy Excel tábla tartalmát célszerű először programmal (tipikusan Python+Pandas kombinációval)
+tisztítani, a betöltést megakadályozó hibákat legalább részben így eltávolítani. Ekkor rendelkezésünkre áll a Pandas (vagy más program) hatalmas eszközkészlete,
+de az SQL fegyvertára és a már bentlévő adatok ismerete még nem. A felesleges oszlopokat nyilván már ezen a ponton jó eltávolítani.
+
+<blockquote class="blq_1">
+A 'programmal való tisztítás' gyakran nemcsak egy már meglévő, változatlan program futtatását jelenti, sokszor az adat jellegzetességeinek megjelenítéséről,
+manuálisan vagy célzott, testreszabott kis szkriptek segítségével végzett módosítások elvégzéséről van szó. Újabb és újabb hibafajtákat fedezünk fel, ezek
+detektálását és korrekcióját beépítjük a programjainkba, tehát iteratív a folyamat, amelyben szerepet játszik a megjelenítés, a szemmel való ellenőrzés
+segítése is. Utóbbi nagyon fontos dolog, érdemes hangsúlyozni:<br><br>
+
+<div style="color:blue;font-style: normal;">Az adatok javítását úgy is tudjuk segíteni, hogy jól áttekinthetően megmutatjuk a jellegzetességeket, segítjük a
+szemrevételezés utáni manuálisan vagy programmal végzett célzott módosításokat.</div><br>
+
+Tehát az adatmegjelenítésnek már ezen a ponton is nagy szerepe van!
+</blockquote>
+
+<b>Második adattisztító lépésként</b> hasznos lehet egy vagy több zsilipelő táblába betölteni az adatokat. Az első zsilipnél még minden mező sztring (VARCHAR vagy
+TEXT) típusú és nagyméretű, hogy csonkolás ne jöjjön létre. Itt már használni tudjuk az SQL szerszámkészletét a további ellenőrzésekhez, kiegészítésekhez. A szöveges
+mezőknek az az előnye, hogy nem fenyeget a típushibák veszélye, az egyetlen dolog, ami adatvesztést tud okozni, az a karakterkódolás problematikája.
+</p>
+<p>
+<b>A harmadik lépés</b> egy olyan zsilip-táblába való betöltés, amelynek mező-típusai már megegyeznek a végleges tábláéval. Ekkor nemcsak az SQL áll rendelkezésünkre,
+hanem az adatbázisban már bent lévő információ is. Itt dönteni tudunk több dologról:<br><br>
+
+&#9679; Mi történjen az olyan duplikátumokkal, amelyek a bejövő adatban ugyan egyediek, de az adatbázisban már szerepelnek?
+
+<ul>
+<li>A meglévő rekordot felülírjuk teljesen az új rekorddal?</li>
+<li>Az újnak csak egyes mezőit vegyük át?</li>
+<li>A bejövő rekordot elvessük?</li>
+</ul>
+
+&#9679; Mi történjen az 'árva' rekordokkal, amelyek valamely FOREIGN KEY megkötést sértenek? (Bejön egy rendelés, de nincs még a vevő bent az adatbázisban.)
+
+<ul>
+<li>Elvessük a bejövő rekordot?</li>
+<li>Félretegyük, amíg beérkezik a vevő-adat?</li>
+</ul>
+
+Ha elvetjük a rekordot, természetesen akkor is célszerű félretenni valahová további vizsgálat céljából; például utána tudunk majd nézni, mi okozta a
+problémát.<br><br>
+
+&#9679; Mi történjen a kitöltetlen mezőkkel? Ha például valamilyen statisztikai módszerrel, a hasonló rekordokból nyert információ alapján akarjuk kitölteni
+ezeket, akkor szükségünk van az adatbázisban már meglévő adatokra is, nemcsak a bejövőkre. (Lehet, hogy már tízezer rekordunk van bent és most csak száz új
+érkezett.)
+
+<pre>
+
+       +-----------------------------+     +------------------+     +------------------------+     +------------------+
+       | Tisztítás nem SQL eszközzel |     | 1. zsilip-tábla  |     |      2. zsilip         |     |  Végleges tábla  |
+       |      (előfeldolgozás)       | ==> |  minden sztring  | ==> |  végleges mezőtípusok  | ==> |                  |
+       |      <span class="emph_3">Python + Pandas</span>        |     |       <span class="emph_3">SQL</span>        |     | <span class="emph_3">SQL + DB-ben lévő infó</span> |     |                  |
+       +-----------------------------+     +------------------+     +------------------------+     +------------------+
+                     <span class="emph_2">&#923;
+                     |
+       +-----------------------------+
+       |  Betöltést megakadályozó    |
+       |    hibák eltávolítása       |
+       +-----------------------------+
+</pre>
+
+</p>
+<div id="preprocess"></div>
+<h2>Első előfeldolgozás az adatbázison kívül</h2>
+<p>
+&#9679; Egy textfájlban lehetnek üres sorok, ezeket egyes programok default értékekkel feltöltött rekordokként olvassák be, a MySQL LOAD DATA INFILE
+utasítása is hasonlóan működik. Ezeket érdemes még az adatbázison kívül eltávolítani, mert egy táblából az ilyen rekordok kiszűrése lehetséges ugyan,
+csak épp körülményes. Van olyan adatbetöltő program is, amely egyáltalán nem tolerálja az üres sorokat a textfájlban: hibajelzéssel leáll.
+</p>
+<p>
+&#9679; Az üres (csak sorvég-jelet tartalmazó) <b>sorokon</b> kívül a bemeneten lehetnek üres <b>rekordok</b> is, amelyekben megvan a megfelelő számú mező,
+csak épp mindegyik üres &ndash; pl. Excel tábla CSV-be történő exportálása során tudnak ilyenek keletkezni. Nyilván ezeket is érdemes még az adatbázison kívül
+eltávolítani.
+</p>
+<p>
+&#9679; Ha az utolsó bemeneti sor végén hiányzik a sorvégjel, egyes programok nem olvassák be az utolsó sort.
+</p>
+<p>
+&#9679; Ha az utolsó mező után hiányzik a mező-delimiter, akkor egyes programok nem olvassák be az utolsó mezőt és fordítva: ha van az utolsó mező után
+mező-delimiter, akkor egyes programok az utolsó tényleges mező után beolvasnak még egy üres mezőt is.
+</p>
+<p>
+&#9679; A bemeneti textfájlban van mezőneveket tartalmazó fejléc-sor, de a beolvasó program azt hiszi, hogy nincs, vagy fordítva.
+</p>
+<p>
+&#9679; Ha más a meződelimiter, mint amire a fogadó oldal számít, az nyilván tönkreteszi a beolvasást. Ez például úgy szokott létrejönni, hogy
+a vesszőnek, idézőjelnek és az aposztrofnak több változata van, és a bemeneten ezek felváltva fordulnak elő. Nézzük csak meg az idézőjel változatait,
+a hexa kódjukat és a Unicode megnevezésüket (<a href="http://unicode.org/cldr/utility/confusables.jsp?a=%22&r=None" target="_blank">innen</a> származnak az adatok):
+<br><br>
+
+<table style="color:blue; margin-left: 10%;">
+<tr><td>&#x0022;</td><td>0022</td><td>QUOTATION MARK</td><td style="color:black;">'normál', szokásos idézőjel</td></tr>
+<tr><td>&#x02BA;</td><td>02BA</td><td>MODIFIER LETTER DOUBLE PRIME</td><td></td></tr>
+<tr><td>&#x02EE;</td><td>02EE</td><td>MODIFIER LETTER DOUBLE APOSTROPHE</td><td></td></tr>
+<tr><td>&#x0027;&#x0027;</td><td>0027 0027</td><td>APOSTROPHE + APOSTROPHE</td><td style="color:black;">két aposztrof</td></tr>
+<tr><td>&#xFF02;</td><td>FF02</td><td>FULLWIDTH QUOTATION MARK</td><td></td></tr>
+<tr><td>&#x05F2;</td><td>05F2</td><td>HEBREW LIGATURE YIDDISH DOUBLE YOD</td><td></td></tr>
+<tr><td>&#x05F4;</td><td>05F4</td><td>HEBREW PUNCTUATION GERSHAYIM</td><td></td></tr>
+<tr><td>&#x201C;</td><td>201C</td><td>LEFT DOUBLE QUOTATION MARK</td><td></td></tr>
+<tr><td>&#x201D;</td><td>201D</td><td>RIGHT DOUBLE QUOTATION MARK</td><td></td></tr>
+<tr><td>&#x201F;</td><td>201F</td><td>DOUBLE HIGH-REVERSED-9 QUOTATION MARK</td><td></td></tr>
+<tr><td>&#x2033;</td><td>2033</td><td>DOUBLE PRIME</td><td></td></tr>
+<tr><td>&#x2036;</td><td>2036</td><td>REVERSED DOUBLE PRIME</td><td></td></tr>
+<tr><td>&#x3003;</td><td>3003</td><td>DITTO MARK</td><td></td></tr>
+<tr><td>&#x02DD;</td><td>02DD</td><td>DOUBLE ACUTE ACCENT</td><td></td></tr>
+<tr><td>&#x02F6;</td><td>02F6</td><td>MODIFIER LETTER MIDDLE DOUBLE ACUTE ACCENT</td><td></td></tr>
+</table>
+<br>
+Ezek közül sok annyira hasonlít egymásra, hogy szemrevételezéssel felfedezhetetlen a különbség.
+</p>
+<p>
+&#9679; A bejövő fájlban más sorrendben vannak az oszlopok, mint a táblában, ahová bekerül az adat. Ez nem hiba, csak figyelni kell rá.
+</p>
+<p>
+&#9679; Ha fix hosszságú, elválasztó nélküli mezőkből áll a bemenet, akkor előfordulhat, hogy mások a mezőhosszak, mint amire a beolvasó program számít.
+Ez a formátum pl. dBase és COBOL adatfájloknál fordul elő.
+</p>
+<div id="auto_or_not"></div>
+<h2>A két fő hibajavítási módszer</h2>
+<p>
+Érdemes ismét hangsúlyozni, hogy ha észlelünk valamilyen hibát, akkor azt
+
+<ul>
+<li>programmal (automatikusan) vagy</li>
+<li>manuálisan</li>
+</ul>
+
+javíthatjuk ki. A manuális javításhoz el kell készíteni az érintett hibás
+vagy csak gyanús rekordok (néha csak egyes oszlopok) listáját, esetleg kiegészítve segítő információkkal (hasonló, de hibátlan rekordok adataival).
+A listának jól áttekinthetőnek kell lennie, hogy a szakértő könnyen eligazodjon rajta.
+Ez mindig több munkával jár, mint az automatikus javítás, hiszen egy DELETE vagy UPDATE futtatása helyett készítenünk kell valamilyen ember számára
+olvasható táblázatot. Nem mindig kell (érdemes) külön felhasználói interfészt barkácsolni hozzá, elég lehet egy adattáblába vagy Excel táblázatba
+összegyűjteni az információt.
+</p>
+<div id="diff"></div>
+<p>
+<div class="emph_5">&#x25B6; Néhány szó a különbségképzésről</div><br>
+A problémás részek ügyes bemutatása külön kis művészet. Amikor például rekordok különbségeit vizsgáljuk, akkor sokat segít, ha az egyforma értékeket nem mutatjuk.
+Hadd hozzak ide a saját gyakorlatomból egy rekord-párt a 2100-ból, amelyet egy programom állított elő a felhasználó számára, hogy meg tudja vizsgálni,
+jelentősek-e az eltérések a párok tagjai között:
+
+<br><br>
+<table style="color:blue; margin-left: 10%;">
+<tr><td>11502227</td><td>013</td><td>022</td><td>SERIES 3</td><td>N</td><td>P</td><td>2012</td><td>2018</td><td>03/14</td><td>M</td><td>135</td>
+<td>2000</td><td>184</td><td>34250</td><td>4</td><td>LIM</td><td>S</td><td>3er LIM4d (B)</td><td>10/15</td><td>28781</td></tr>
+<tr><td>11502227</td><td>013</td><td>022</td><td>SERIES 3</td><td>N</td><td>P</td><td>2012</td><td>2018</td><td>03/14</td><td>M</td><td>135</td>
+<td>1997</td><td>184</td><td>38550</td><td>4</td><td>LIM</td><td>S</td><td>3er LIM4d (B)</td><td>10/15</td><td>28782</td></tr>
+</table>
+<br>
+Egy kicsit a rejtvényújságok 'vegyük észre a három apró különbséget a két ábra között' című feladványaira hasonlít, ugye? A nyolcszázadik rekordpár
+megszemlélése után kezd egyre kevésbé szórakoztató lenni a dolog...
+</p>
+<p>
+Kipróbáltam, mennyire lesz hálás a felhasználó, ha ilyen formában állítom elő a listát (az első mezőben az azonosító van):
+<br><br>
+<table style="color:blue; margin-left: 10%;">
+<tr><td>11502227</td><td>013</td><td>022</td><td>SERIES 3</td><td>N</td><td>P</td><td>2012</td><td>2018</td><td>03/14</td><td>M</td><td>135</td>
+<td>2000</td><td>184</td><td>34250</td><td>4</td><td>LIM</td><td>S</td><td>3er LIM4d (B)</td><td>10/15</td><td>28781</td></tr>
+<tr><td>11502227</td><td></td><td>   </td><td>        </td><td> </td><td> </td><td>    </td><td>    </td><td>    </td><td> </td><td>   </td>
+<td>1997</td><td>   </td><td>38550</td><td> </td><td>   </td><td> </td><td>            </td><td>     </td><td>28782</td></tr>
+</table>
+<br>
+<span style="float:right;font-style:italic;color:red;">Megfejtés: nagyon.</span><br>
+</p>
+<p>
+A különbségképzés amúgy sok helyen felbukkanó feladat és ott kezd érdekessé válni, amikor nemcsak a teljesen egyező értékeket tekintjük egyformának, hanem
+azokat is, ahol a különbség bizonyos küszöbérték alatt marad. És ha SQL segítségével vizsgáljuk a különbségeket, akkor mindig jusson eszünkbe, hogy egy ilyen
+összehasonlítás:
+
+<pre>
+
+   WHERE ABS(t1.x - t2.x) > 10
+
+</pre>
+bizony nem fogja általában kiválasztani az összes erősen különböző rekordot.
+</p>
+<div style="margin-left:10%;font-style:italic;">
+<p style="font-size:70%;">
+Nem választja? Miért nem választja?
+</p>
+<p style="font-size:110%;">
+Hogy lehet ez?
+</p>
+<p style="font-size:120%;">
+Hova lett?
+</p>
+<p style="font-size:140%;">
+Jajistenem, csak nem már megint...
+</p>
+</div>
+<p>
+De igen, már megint. A NULL. Ha valamelyik rekordban az x mező nincs kitöltve, az sajnos itt nem fog megjelenni. És persze ott sem, ahol a kellőképpen
+egyező rekordpárokat keressük:
+
+<pre>
+
+   WHERE ABS(t1.x - t2.x) <= 10
+
+</pre>
+A NULL, kedves öreg tréfacsináló barátunk a hiányzó mezőértékekből hiányzó rekordokat varázsol.
+</p>
+<div id="main_problem_types"></div>
+<h2>A fő hibafajták</h2>
+<p>
+Az itt következő felsorolás biztosan nem túl izgalmas olvasmány, nem is az a célja &ndash; a saját magam által megtapasztalt és (kisebb részben) leírásokban
+talált hibafajtákat gyűjtöttem össze lexikon-szerűen azért, hogy ötleteket adjak mindazoknak, akiknek adattisztítási feladata van. Nem kevés van ezek közt, amelyek
+NAGYON nem feltűnő hibák, nekem is sok órámba és ősz hajszálamba telt levadászni őket.
+</p>
+<p>
+Mindenekelőtt fel kell hívni a figyelmet a hibák két nagy kategóriájára:
+<ul>
+<li>a rendszeresekre és</li>
+<li>a ritkán előfordulóakra.</li>
+</ul>
+
+Utóbbiakat nyilván sokkal nehezebb
+felfedezni, de a jelentőségük legalább akkora, mint a rendszeres hibáké. Olyan a helyzet, mint a programhibákkal: a rendszeres hiba az első tesztelésnél
+már jelentkezik, az igazán gonosz hibák pedig csak bizonyos csillagállásnál, ha éppen péntek van és felhős az időjárás, de a szél nem nyugatról fúj délelőtt
+10 és 12 között... minden programozó hamar megtanulja szívből gyűlölni és rettegni ezt a fajtát.
+</p>
+<p>
+Itt most nem programok, hanem adatok teszteléséről és debuggolásáról lesz szó. Ha valaki talál a felsorolásban nem említett hibafajtát, kérem írja meg nekem,
+hálásan fogadom az ilyen adományokat!
+</p>
+<div id="field_formal_errors"></div>
+<p>
+<div class="emph_5">&#x25B6; Mezőtartalom formai hibák</div><br>
+
+<div id="field_type_hard_errors"></div>
+<div class="emph_4">&#x25B6;&#x25B6; Betöltést gátló durva típushibák</div><br>
+Durva típushibának nevezem az olyan mezőtartalmat, amely első ránézésre ember számára is felismerhetően eltér a várt formátumtól úgy, hogy megakadályozza
+a fogadó oldalon adott típussá alakítást, tehát magát az adatbetöltést. Legelőször természetesen ezeket kell kijavítani.<br><br>
+
+&#9679; Szám, dátum, geolokációs (geometriai) vagy JSON típusú mezőben általános szöveg. Ez rendszerint egyszerű adatbeviteli hibából, mellégépelésből,
+figyelmetlenségből keletkezik.<br><br>
+&#9679; Idézőjelek az értékek körül, pl. "13.2" &ndash; ez igazából nem hiba, gyakori adatformátum a bemeneti textfájlokban, de el kell távolítani, hogy
+szám típusú mezőbe betölthető legyen az adat.<br><br>
+
+<div id="field_type_incompat_hard_errors"></div>
+<div class="emph_4">&#x25B6;&#x25B6; Betöltést gátló durva inkompatibilitási hibák</div><br>
+Olyan mezőtartalom, amely ember, vagy egy másik rendszer számára megfelelő értelmű, de a fogadó oldal formai szabályainak, a fogadó mező típusának nem felel
+meg.<br><br>
+
+&#9679; Nem megfelelő számformátum: tizedes pont helyett vessző, ezres elválasztó karakter, szám normál alakú ábrázolása
+&ndash; ezek lehetetlenné tehetik a számmá alakítást. Ilyen probléma az is, amikor az egyik rendszerben meg van engedve az egynél kisebb számoknál
+a vezető nulla elhagyása, a másik viszont nem tudja a tizedesponttal kezdődő alakot feldolgozni. A nem megfelelő számformátum előfordulhat a bemenet
+minden sorában vagy csak egyesekben, pl. csak a nagyon nagy vagy nagyon kicsi számok vannak normál alakban leírva. Utóbbi fajtát nyilván
+nehezebb észlelni!<br><br>
+
+&#9679; A dátum, időpont, geolokációs adat nem az adatbeolvasó program által várt formátumú, pl. a dátumban az év, hónap, nap sorrend más, az év nem 4 karakteren
+van ábrázolva, az év, hónap, nap közötti elválasztó karakter más, mint az elvárt, stb.<br><br>
+
+&#9679; A bemeneti szövegfájlban CR-LF zárja le a sorokat (Windows-konvenció), de a beolvasó program csak LF-re számít (Unix konvenció); ilyenkor
+az utolsó mezőbe bekerül egy CR karakter.<br><br>
+
+&#9679; Delimitált szövegfájlban a delimiter karakter előfordul védelem (escape) nélkül egy mező tartalmában. Ez az illető rekordot teljesen tönkreteszi,
+hiszen ettől a helytől kezdve máshová helyezi át a mező-határokat.<br><br>
+
+&#9679; A kitöltetlenség jelzésére más szolgál a bemeneten, mint amit a fogadó oldal vár. Pl. MySQL táblába töltenénk be delimitált szövegfájlból
+LOAD DATA INFILE utasítással adatot, a MySQL a NULL jelzésére a \N sztringet várja, viszont a bemeneten pl. üres sztring, vagy "-" jelzi az adat hiányát.
+Szöveges mezőknél egyszerűen bekerül ez a jelzés sztringként (ami persze hiba), numerikus mezőknél viszont megakadályozza a betöltést.<br><br>
+
+<div style="width: 60%;margin: 15 auto;padding:15px 0px 25px 40px;background-color: #B1BBBA;border: 1px solid black;border-radius: 4px;
+font-size:120%;font-family:Georgia;">
+<div style="text-align:center;">
+Figyelem, figyelem! A kettes vágányra semmi érkezik. A vágány mellett tessék vigyázni!
+<br><br>
+&#9679;&#9679;&#9679;&#9679;&nbsp;&nbsp;SZOLGÁLATI KÖZLEMÉNY&nbsp;&nbsp;&#9679;&#9679;&#9679;&#9679;
+</div>
+<br>
+	A bemeneti vágányszakaszokon <span class="emph_1">mindig</span> kétféle dolog ábrázolása jár be:<br><br>
+<em>&nbsp;&nbsp;&nbsp;adaté és<br>
+&nbsp;&nbsp;&nbsp;adat<b>HIÁNY</b>é.</em>
+</div>
+<br>
+Kezdettől fogva foglalkozni kell az utóbbival is.
+A gonosz NULL már ezen a ponton lesben áll, hogy különféle álruhákba öltözve bosszantson minket. És közben még idegesítően vihog is.<br><br>
+<div id="distort_errors"></div>
+<div class="emph_4">&#x25B6;&#x25B6; Adattorzító inkompatibilitási hibák</div><br>
+
+Az adatbetöltést nem akadályozzák meg, de az adattartalmat torzítják ezek a hibák.<br><br>
+
+&#9679; Formailag nem hibás, csak a fogadó oldallal nem kompatibilis érték a túl hosszú szöveges tartalom, vagy túl nagy numerikus érték, amely csonkolódik,
+amikor a végleges helyére bekerül. Például a fogadó mező TINYINT típusú, de a bemeneten előfordul 255-nél nagyobb érték is.<br><br>
+
+&#9679; A rendszerünkben vezető nullákkal adott hosszra van kiegészítve egy sztringként tárolt numerikus azonosító (pl. 007), de a bemeneten hiányoznak
+a vezető nullák.<br><br>
+
+&#9679; A fogadó oldalon egész számra számítunk (INT típusú a mező), de a bemeneten előfordulnak törtszámok is. Ilyenkor vagy nem kerül be az adat, vagy
+csonkolódik, jó esetben kerekítődik.<br><br>
+
+&#9679; Személyek neve nem a várt formátumban jön be, pl. a vezetéknév és a keresztnév más sorrendben van.<br><br>
+
+&#9679; Ékezetes és egyéb nem ASCII karaktereknél karakterkészlet-konverzióból adódó problémák, pl. a bejövő adat ISO 8859-2 kódolású, a már eltárolt
+pedig UTF-8. Ha nem gondoskodunk a megfelelő konverzióról, akkor vagy nem kerül be az adat (hibajelzést kapunk), vagy eltorzítva kerül be.
+</p>
+<div id="field_semantic_errors"></div>
+<div class="emph_5">&#x25B6; Mezők tartalmi hibái</div><br>
+&#9679; Az adat jelentésének nem megfelelő tartalom, pl. személy nevében kérdőjel, formai hibás email-cím. A nem odaillő karaktereket gyakran programok
+helyezik el az adatban, pl. az Excel néha # karaktereket illeszt be valamilyen formai hiba jelzésére. Persze óvatosnak kell lenni, amikor az 'oda nem illő'
+karakterek körét meghatározzuk; ha például azt mondjuk, hogy egy névben nem fordulhat elő aposztrof, akkor könnyen megsértődhet egy híres testőr
+és bajban vagyunk, ha párbajra hív ki...<br><br>
+&#9679; Nem a várt hosszúságú adat, pl. tudjuk, hogy egy oszlopban csak 7 karakteres sztringek lehetnek, mert a rendszerünkben ez a konvenció, de a bemeneten
+5 karakteres sztring érkezik. Ez ugyan formai hibának tűnik, mégis inkább tartalminak nevezhető; az ilyen adat biztosan valaminek az azonosítására szolgál
+és a nem megfelelő hosszságú sztring nem fog azonosítani semmit.<br><br>
+&#9679; Hibásan beírt azonosító &ndash; formailag helyes ugyan, de nem azt azonosítja, amit kellene, pl. a biztosítási alkusz a szerződésre a saját vagy egy
+családtag email címét vagy adóazonosítóját írja be az ügyfélé helyett; vagy egy elgépelt email cím, ami helyes ugyan, csak épp nem az illetőhöz tartozik.<br><br>
+
+&#9679; A 'kilógó' adatokat, amelyekről eldöntjük, hogy mérési vagy adatbeviteli hibából származnak, el kell távolítani. Ilyen lehet például, amikor egy személy
+életkorára 500 év van megadva. Ennél a lépésnél nagyon gondosan kell eljárni, fel kell tenni a következő kérdéseket:
+
+<ul>
+<li>Nem lehet, hogy más mértékegységben van itt megadva az adat, mint amit feltételeztem? (Pl. a személy kora nem évben, hanem hónapban.)</li>
+<li>Nem lehet, hogy a túl nagy értékkel hiányzó adatot jelöltek?</li>
+<li>Nem lehet, hogy a kilógó adat valós, az én modellem hibás? Amikor olyan képletet próbálunk erőltetni, amely nem jól írja la a valóságot, akkor a kilógó
+érték az elméletünk hibáját jelezheti. Például nagyjából lineáris összefüggés van két mennyiség között, ám vannak kivételek &ndash; amikor a kivétellel
+találkozunk, akkor vagy ezt az adatpontot, vagy az elméletünket kell elvetni, esetleg finomítani.</li>
+</ul>
+
+</p>
+<div id="search_disturb_errors"></div>
+<div class="emph_5">&#x25B6; Keresést nehezítő hibák</div><br>
+&#9679; Több szóköz a szavak között ott, ahol egyet várnánk, pl. <b>Nagy&nbsp;&nbsp;&nbsp;&nbsp;János</b> &ndash; ezt nem fogja megtalálni a
+
+<pre>
+WHERE nev = 'Nagy János'
+</pre>
+
+kifejezés.<br><br>
+&#9679; Szóköz helyett más 'fehér', nem nyomtatható karakter. Ha a fenti példában a vezetéknév és a keresztnév között tabulátor, sorvégjel, non breaking space
+vagy bármi egyéb láthatatlan karakter van, ugyanúgy sikertelen lesz a lekérdezés. Zavaró szóközök és más fehér karakterek leggyakrabban a mező elejére vagy
+végére kerülnek be.
+<blockquote class="blq_1">
+Nemrégiben szkanderoztam például hosszasan egy olyan esettel, amikor két tábla összekapcsolásánál az egyik tétel az istennek sem akart megjelenni. Végül
+kiderült, hogy az egyik táblába ugyan jól került be az 12345 azonosító, a másikba viszont úgy, hogy valamilyen program egy non breaking space-t is odapottyantott a
+végére. VARCHAR mezők összekapcsolásánál a MySQL-ben nem számítanak a mezővégi szóközök &ndash; de az egyéb fehér karakterek annál inkább. Ráadásul a TRIM()
+függvény sem távolítja el ezeket. Az adattisztító programot ezúttal könnyű volt kiegészíteni, mert az illető mezőben csak számjegyek és az angol ábécé betűi
+fordulhatnak elő &ndash; az egyszerű trimmelés helyett írni kellett egy kis függvényt, amely reguláris kifejezéssel megkeresi és eltávolítja az összes egyéb fajta
+karaktert a mező végéről, illetve hibát jelez, ha ilyent a mező belsejében talál.
+</blockquote>
+Amennyiben mód van rá, a nem kívánt fehér karaktereket még az adatbázisba való betöltés ELŐTT el kell távolítani!
+</p>
+<div id="inhomog_field_content"></div>
+<p>
+<div class="emph_5">&#x25B6; Inhomogén mezőtartalom</div><br>
+&#9679; Kisbetű-nagybetű váltogatás. Ez a kereséseket nehezítheti és ha azonosítókról van szó, konzisztencia-problémákat is okozhat.<br><br>
+&#9679; A mértékegység nem minden bemeneti rekordban ugyanaz, egy távolság például hol méterben, hol centiméterben van megadva.<br><br>
+&#9679; Rövidített és kiírt forma váltogatása pl. Bp. és Budapest.<br><br>
+&#9679; Névben dr ponttal és pont nélkül vagy kiírva: doktor, persze a kisbetű-nagybetű is keveredhet.<br><br>
+&#9679; Szöveges bemenő adatban a kitöltetlenség különféle jelzése, pl. hol üres sztringgel, hol \N segítségével, adattáblában pedig hol NULL-al,
+hol üres sztringgel jelölik, hogy 'nincs adat'. Vagy az egyik rekordban N/A áll, a másikban Not applicable, a harmadikban csak egy mínuszjel. Gyakori
+módszer a kitöltetlenség jelzésére a lehetetlenül nagy vagy lehetetlenül kis érték is &ndash; ezek formailag megfelelnek a mező típusának, de
+szándékosan kilógnak az értelmezhető tartományból, például:
+
+<ul>
+<li>999 (személy kora)</li>
+<li>-1 (személy kora)</li>
+<li>9999.12.12 (teljesítés dátuma)</li>
+</ul>
+
+&#9679; Vezető nullával vagy anélkül beírt szám, pl. 4. kerület vagy 04. kerület.<br><br>
+&#9679; Kerületnél és emeletnél még az arab szám - római szám keveredés is előfordulhat, ráadásul ponttal lezárva vagy anélkül<br><br>
+&#9679; A logikai IGAZ-at 1-gyel, true-val és ok-val is jelölik. Gépelési hiba folytán is bekerülhetnek ilyen hibák pl. Budapesst.<br><br>
+
+&#9679; Alfanumerikus azonosítókban az elválasztójelet különféleképpen írják, pl. 1234-4567 vagy 1234 4567, esetleg az elválasztójel hiányzik: 12344567.<br><br>
+&#9679; Különféle dátum- és idő-formátumok:
+<ul>
+<li>év-hónap-nap sorrend különbségek: 2019-02-04 04-02-2019 02-04-2019</li>
+<li>az év lehet 4 vagy 2 karakteren ábrázolva 19-02-04</li>
+<li>a nap (óra, perc...) hiányozhat: 2019-02</li>
+<li>az elválasztójelek különbözőek lehetnek 2019/02/04 és 2019-02-04</li>
+</ul>
+A dátumformátumokról fentebb is szó volt, itt arra hívjuk fel a figyelmet, hogy a gyakorlatban néha a formátumok rekordról rekordra is változnak.<br><br>
+&#9679; Mértékegységek különféle írásmódja, pl. km és kilométer, l és liter.<br><br>
+
+A különböző írásmódokból és gépelési hibákból adódó eltérések kiszűréséhez jó eszközök lehetnek a reguláris kifejezések, a Levenshtein-távolságok meghatározásán
+alapuló programok, pl. Pythonban a FuzzyWuzzy könyvtár.
+</p>
+<div id="inacc_field_content"></div>
+<p>
+<div class="emph_5">&#x25B6; Pontatlan mezőtartalom</div><br>
+A pontatlanságokat sok esetben simítással, átlagolással csökkenteni lehet (vagy kell).<br><br>
+
+&#9679; Különböző mértékű kerekítés (kerekítési zaj).<br><br>
+&#9679; Mérési és átviteli zaj a gépi eredetű adatoknál.
+</p>
+<div id="unnecessary_cols"></div>
+<p>
+<div class="emph_5">&#x25B6; Felesleges oszlopok (mezők)</div><br>
+A konkrét felhasználás szempontjából szükségtelen adatokat minél hamarabb el kell távolítani; később már esetleg ezek végleg bent maradnak, mert mindenki azt hiszi,
+hogy valaki másnak a programja használja őket. Egy példa: olyan rekordazonosító mező, amelyet nem akarunk átvenni, mert a mi táblánkban más értékű azonosítót fog
+kapni a rekord.
+</p>
+<div id="missing_values"></div>
+<p>
+<div class="emph_5">&#x25B6; Hiányzó értékek, kitöltetlenség</div><br>
+Nyilván vannak olyan mezők, amelyek nem lehetnek üresek, ha pl. személyek adatai érkeznek be a személyi igazolvány számával azonosítva, akkor ez a szám nem
+hiányozhat, mert értelmezhetetlenné válik a rekord. A nem ennyire fontos, de hiányzó adatok pótlásának módszerei egy külön nagy témakör, amelyre még visszatérünk.
+</p>
+<div id="record_level_content_errors"></div>
+<p>
+<div class="emph_5">&#x25B6; Rekord-szintű tartalmi problémák</div><br>
+&#9679; Irreleváns rekordok, pl. csak személykocsik adatait gyűjtjük, de teherautók adatai is beérkeznek.<br><br>
+&#9679; Elévült rekordok, pl. egy marketing adatbázisban olyan személyek rekordjai, akik elköltöztek, elhunytak, állást változtattak, stb.
+</p>
+<div id="record_connect_errors"></div>
+<p>
+<div class="emph_5">&#x25B6; Rekord-kapcsolati problémák</div><br>
+&#9679; Konzisztencia-problémák, pl. előbb érkezik be egy rendelés, később az új vevő adatai egy másik csatornán.<br><br>
+&#9679; Konzisztencia-hibának tekinthető az is, amikor egy olyan gráfban keletkezik irányított kör, ahol ilyennek nem szabadna lennie. Ha a gráf egy fát
+ír le, akkor nem lehet benne irányított kör, nem tartalmazhat például egy berendezésben egy részegység olyan másikat, amely őt magát közvetlenül vagy közvetve
+tartalmazza.
+<br><br>
+&#9679; Duplikátumok, melyeknek két alfaja van:
+
+<ul>
+<li>ugyanaz a rekord beérkezik többször</li>
+<li>ugyanazon rekordazonosítóval beérkezik két különböző tartalmú rekord.</li>
+</ul>
+
+A többszörözésnek gyakran adatbeviteli hiba az oka, pl. véletlenül kétszer töltjük be ugyanazt az adatcsomagot. A másik tipikus forrás: egy JOIN
+DISTINCT nélkül 1:N-es adatkapcsolatnál. (Valamilyen rendeléssel bíró vevőket keresünk, ehhez összekapcsoljuk a vevők tábláját a rendelések táblájával;
+mivel egy vevőnek ilyen fajta rendelésből több is lehet, ezért az ő azonosítója többször meg fog jelenni a kimeneten.)
+</p>
+<p>
+Előfordul, hogy egyedinek képzelünk a bemeneti adatban egy mezőt, pusztán a megtévesztő elnevezése miatt. Például (ügyetlenül) ID névvel láttak el egy mezőt, ami
+egy kérdőív rekordban tulajdonképpen a kitöltés időpontját tartalmazza &ndash; de ugyanabban az időben több helyen is kitölthették a kérdőívet, tehát vagy az
+időpont és a hely megjelölését EGYÜTT tekinthetjük egyedinek, vagy valami más azonosítót kell keresnünk.
+</p>
+<div id="transform_after_cleaning"></div>
+<p>
+<div class="emph_5">&#x25B6; Tisztítás utáni transzformációk</div><br>
+Az adattisztítás <b>közben</b> is sok olyan műveletet végzünk, amelyeket joggal lehet transzformációnak nevezni, pl. az inhomogén, különböző mértékegységekben bejövő
+adatokat egységesítjük, vagy a bejövő fájlban más sorrendben vannak az oszlopok, mint a táblában, ahová bekerül az adat &ndash; itt viszont a már
+<b>megtisztított</b> adaton végrehajtott transzformációkra mutatunk néhány példát.
+<br><br>
+&#9679; Formátumátalakítás, pl. szöveges formában megadott helymegadás átalakítása geokoordinátákká:
+<pre>
+    1111 Budapest, Műegyetem rkp. 9 --> (47.479284,19.057937)
+</pre>
+Másik példa: szöveges kategóriák (pl. true, false) átalakítása numerikus értékekké.<br><br>
+
+&#9679; A bemeneten több mezőben ábrázolt tartalom összevonása egyetlen oszlopba, pl. a bemeneti év-hó-nap oszlopokból egyetlen dátum-oszlop készítése.
+Előfordul fordított irányú transzformáció is, amikor egy oszlopból többet csinálunk.<br><br>
+
+&#9679; Numerikus mezők normalizálása, elosztása valamely értékkel; rendszerint 0 és 1 közé történik a transzformálás - ezt egyes statisztikai algoritmusok
+igénylik. Nem nehéz belátni, hogy akár csak puszta megjelenítés szempontjából is könnyebben áttekinthető a normalizált adat.<br><br>
+
+&#9679; Egységesítés, időben változó faktorok hatásának figyelembevétele: ha például hosszabb ideje gyűjtünk pénzben kifejezhető adatokat, akkor a vásárlóértéknek és
+a devizák relatív értékének változásait figyelembe kell venni utólag &ndash; akár a pénznem is változhatott időközben, mondjuk az adott országban
+áttértek márkáról euróra.<br><br>
+
+&#9679; Részben az adattisztításhoz sorolhatók a hiányzó adatokkal való tennivalók, amikor bizonyos adatok hiánya esetén töröljük az illető rekordot, vagy
+pótoljuk az adatot fix vagy statisztikai módszerekkel meghatározott változó értékekkel &ndash; ez egy különálló, nagy téma.<br><br>
+
+&#9679; Időről időre a már tárolt adatokat felül kell vizsgálni &ndash; egyes mezőtartalmak elavulhatnak, pl. valakinek megváltozik a lakcíme.<br><br>
+
+&#9679; Sokszor táblaforgatásra is szükség van, pl. a jó-közepes-rossz értékeket tartalmazó egyetlen oszlopból hármat csinálunk, amelyek közül csak az
+tartalmaz 1-et, ami a rekord minősítésének megfelel, a másik kettőbe pedig 0 kerül. Erre is statisztikai algoritmusoknak lehet szükségük.<br><br>
+
+&#9679; Kategóriák létrehozása, pl. a címből városonkénti csoportokat képzünk, az életkorból fiatal - középkorú - idős csoportokat, stb. Ezt a műveletet
+generalizációnak is szokták nevezni.<br><br>
+
+&#9679; Aggregáció, pl. a napi eladási adatokat összevonjuk heti, havi, éves összegekké.
+</p>
+<br><hr style="margin:0 10%;border:2px solid gray;border-radius:2px;">
+<div id="tech_details"></div>
+<h2>Néhány technikai részlet, bemutatásként</h2>
+<p>
+Az itt következő kis kódrészletek csak a figyelem felkeltésére alkalmasak, afféle kedvcsinálók.
+</p>
+<div id="tech_det_pandas_preprocess"></div>
+<p>
+<div class="emph_5">&#x25B6; CSV fájl tisztításának néhány lépése Python + Pandas segítségével</div><br>
+
+A bemeneti fájlban <b>^</b> a meződelimiter, ezt azért szeretem, mert nem szokott szövegben előfordulni. A tabulátorral két gond van:
+
+<ol>
+<li>könnyen előfordulhat mezőkön belül és</li>
+<li>sérülékeny.</li>
+</ol>
+
+A sérülékenység alatt azt értem, hogy ha megnyitjuk a fájlt szövegszerkesztővel, akkor az a beállításaitól függően lecserélheti a tabulátorokat szóközökre.
+
+<pre class="pre_2">
+Name^Age^Income
+Red^25^1000
+Black^50^2000
+White^40^1500
+Green^30^1200
+Yellow^28^1300
+Brown^55^2100
+Purple^46^3300
+^44^2200                    <span class="emph_3"><== itt egy üres Name mező</span>
+NA^44^2200                  <span class="emph_3"><== itt egy NA nevű ember</span>
+Mr.NoAge^^6300              <span class="emph_3"><== itt egy üres Age mező</span>
+Mrs.NoAge^-^6400            <span class="emph_3"><== itt egy másik, - jellel</span>
+Dr.NoAge^--^7400            <span class="emph_3"><== itt egy harmadik, -- jellel</span>
+                            <span class="emph_3"><== itt egy üres sor</span>
+     trimmer ^ 44 ^  2900   <span class="emph_3"><== itt egy csomó szóköz</span>
+^^                          <span class="emph_3"><== itt egy üres rekord</span>
+
+</pre>
+
+A NA nevű ember azért került be a példába, mert a Pandas alapértelmezésként ezt a sztringet is "nincs adat" jelzésnek veszi. Ha nem vigyázunk, már
+beolvasásnál eltűnik ez a név!
+</p>
+<p>
+Beolvassuk a fájlt egy DataFrame-be:
+
+<pre>
+import pandas as pd
+
+df = pd.read_csv("piszkos_orig.csv",
+                 sep = "^",
+                 header = 0,         <span class="emph_3"># a nulladik sor fejléc</span>
+                 dtype = object,     <span class="emph_3"># értelmezzünk mindent sztringként</span>
+                 na_filter = False)  <span class="emph_3"># és semmit sem adathiányként</span>
+print(df)
+</pre>
+
+A df DataFrame tartalma így néz ki:
+<pre class="pre_2">
+
+             Name   Age    Income
+0             Red    25      1000
+1           Black    50      2000
+2           White    40      1500
+3           Green    30      1200
+4          Yellow    28      1300
+5           Brown    55      2100
+6          Purple    46      3300
+7                    44      2200
+8              NA    44      2200
+9        Mr.NoAge            6300
+10      Mrs.NoAge     -      6400
+11       Dr.NoAge    --      7400
+12       trimmer    44     2900
+13
+
+</pre>
+Látszik, hogy minden sor automatikusan kapott egy sorszámot, ún. indexet, ami főleg akkor praktikus, amikor duplikátumok vannak a bejövő adatban. Ha például
+a 20. és a 130. sor egyforma, akkor ki tudjuk jelölni, melyiket akarjuk törölni. Az üres sor eltűnt, a pandas ezeket automatikusan figyelmen kívül hagyja,
+de persze az üres rekord megmaradt.
+</p>
+<p>
+Érdemes lehet előre megszámolni a bemeneti fájl sorait, például így:
+
+<pre>
+
+n_input_lines = 0
+with open("piszkos_orig.csv", "r") as f:
+  for line in f: n_input_lines += 1
+
+</pre>
+mert így tudni fogjuk, hány sornak kellene bekerülnie a a DataFrame-be. Ha ennél kevesebb érkezik, meg kell vizsgálni, mi ennek az oka &ndash; lehet, hogy
+csak volt néhány üres sor a fájlban.
+
+<div style="width: 60%;margin: 15 auto;padding:15px;background-color: #B1BBBA;border: 1px solid black;border-radius: 4px;
+font-size:120%;font-family:Georgia;">
+Amikor csak lehet, MINDIG állapítsunk meg ellenőrző értékeket, amelyek azt tükrözik, hogy mit várunk egy művelet eredményétől!
+Ez gyakran nem jár sok munkával, de éppilyen gyakran ösztönösen berzenkedünk ellene: Mi lesz, ha nem stimmel az ellenőrzés? Akkor nekiállhatok keresgélni a
+hibát. Annyival inkább szeretnék inkább túllenni ezen az egészen...
+</div>
+</p>
+<p>
+Beolvasás után mindenhonnan eltávolítjuk a mező elejéről és végéről a szóközöket és tabulátorokat:
+
+<pre>
+
+df = df.apply(lambda x: x.str.strip())
+
+</pre>
+
+Megnézzük, milyen módokon van jelölve az adathiány &ndash; ezt persze segíthetjük programmal is, de most maradjunk meg az egyszerű szemrevételezésnél. Azt
+találjuk, hogy üres sztring, "-", "--" jelzi azt, hogy nincs adat; kiderítjük azt is, hogy NA egy név, benne kell hagynunk. Minden ilyen jelzést
+lecserélünk üres sztringre és kiírjuk a DataFrame-et egy piszkos_1.csv nevű fájlba:
+
+<pre>
+
+df.replace(["-","--"],"",inplace = True)
+df.to_csv("piszkos_1.csv",
+           sep = "^",
+           index = False)                   <span class="emph_3"># az indexet nem akarjuk kiírni</span>
+
+</pre>
+A következő lépésben innen fogunk beolvasni és tovább feldolgozni. Ez a kiírás - visszaolvasás persze nem feltétlenül szükséges, de tapasztalataim szerint
+<b>JÓ GYAKORLAT</b>, ha pillanatfelvételeket készítünk a feldolgozás stádiumairól. Eltűnt adatok megkereséséhez ez nagy segítség lehet!
+</p>
+<p>
+A visszaolvasás így történik:
+<pre>
+
+missing_values = [""]
+df = pd.read_csv("piszkos_1.csv",
+                 sep = "^",
+                 header = 0,                 <span class="emph_3"># a nulladik sor fejléc</span>
+                 na_values = missing_values, <span class="emph_3"># csak az általunk megadott értékek jelezzenek adathiányt</span>
+                 keep_default_na = False)    <span class="emph_3"># a Pandas alapértelemezett értékei viszont ne</span>
+
+</pre>
+A df DataFrame tartalma most:
+
+<pre class="pre_2">
+
+         Name   Age  Income
+0         Red  25.0  1000.0
+1       Black  50.0  2000.0
+2       White  40.0  1500.0
+3       Green  30.0  1200.0
+4      Yellow  28.0  1300.0
+5       Brown  55.0  2100.0
+6      Purple  46.0  3300.0
+7         NaN  44.0  2200.0
+8          NA  44.0  2200.0
+9    Mr.NoAge   NaN  6300.0
+10  Mrs.NoAge   NaN  6400.0
+11   Dr.NoAge   NaN  7400.0
+12    trimmer  44.0  2900.0
+13        NaN   NaN     NaN
+
+</pre>
+
+A Pandas mindig NaN-nal jelöli az adathiányt, ami kicsit félrevezető, hiszen ez a "not a number" rövidítése, de sztringeknél is ezt használja. Szóval
+nála ez jelenti a NULL-t (régi barátunkat). Most távolítsuk el azon sorokat, ahol minden mező üres:
+
+<pre>
+
+df.dropna(axis = 0,        <span class="emph_3"># sorokat akarunk törölni (nem oszlopokat)</span>
+          how = "all",     <span class="emph_3"># ahol minden mező üres</span>
+          inplace = True)  <span class="emph_3"># mindezt helyben, azaz df-et magát módosítva</span>
+
+</pre>
+
+A df DataFrame tartalma így módosult:
+
+<pre class="pre_2">
+
+         Name   Age  Income
+0         Red  25.0  1000.0
+1       Black  50.0  2000.0
+2       White  40.0  1500.0
+3       Green  30.0  1200.0
+4      Yellow  28.0  1300.0
+5       Brown  55.0  2100.0
+6      Purple  46.0  3300.0
+7         NaN  44.0  2200.0       <span class="emph_1"><== itt egy sor név-mező nélkül</span>
+8          NA  44.0  2200.0
+9    Mr.NoAge   NaN  6300.0
+10  Mrs.NoAge   NaN  6400.0
+11   Dr.NoAge   NaN  7400.0
+12    trimmer  44.0  2900.0
+
+</pre>
+Remek, tényleg eltűnt az üres sor.
+</p>
+<p>
+Hibásnak tekintjük azokat a sorokat, ahol a Name mező nincs kitöltve. Ezeket kiírjuk egy no_name.csv nevű fájlba, aztán töröljük a df DataFrame-ből:
+
+<pre>
+
+df_no_name = df[df["Name"].isnull()]
+df_no_name.to_csv("no_name.csv", sep = "^")                <span class="emph_3"># kiírjuk a hibásakat, az indexet is</span>
+df.drop(df.loc[df["Name"].isnull()].index, inplace = True) <span class="emph_3"># aztán töröljük ezeket df-ből</span>
+
+</pre>
+A no_name.csv tartalma:
+<pre class="pre_2">
+
+^Name^Age^Income
+7^^44.0^2200.0
+
+</pre>
+
+Általában az is <b>JÓ GYAKORLAT</b>, ha nemcsak töröljük, hanem protokolláljuk is a hibás rekordokat, mert így meg tudjuk majd vizsgálni a hibák okait.
+Ha csak eltávolítjuk a hibákat, esetleg sosem derül fény arra, hogyan és hol kerültek be ezek.
+</p>
+<p>
+A most már még valamivel tisztább adatainkat kiírjuk egy piszkos_2.csv nevű fájlba:
+<pre>
+
+df.to_csv("piszkos_2.csv", sep = "^", index = False)
+
+</pre>
+A piszkos_2.csv tartalma:
+<pre class="pre_2">
+
+Name^Age^Income
+Red^25.0^1000.0
+Black^50.0^2000.0
+White^40.0^1500.0
+Green^30.0^1200.0
+Yellow^28.0^1300.0
+Brown^55.0^2100.0
+Purple^46.0^3300.0
+NA^44.0^2200.0
+Mr.NoAge^^6300.0
+Mrs.NoAge^^6400.0
+Dr.NoAge^^7400.0
+trimmer^44.0^2900.0
+
+</pre>
+
+</p>
+<p>
+Összefoglalásként nézzük meg, hogy az eddigi lépések hogyan néznek ki:
+
+<pre>
+
+import pandas as pd
+
+df = pd.read_csv("piszkos_orig.csv",sep = "^",header = 0,dtype = object,na_filter = False)
+df = df.apply(lambda x: x.str.strip())
+df.replace(["-","--"],"",inplace = True)
+df.to_csv("piszkos_1.csv",sep = "^",index = False)
+missing_values = [""]
+df = pd.read_csv("piszkos_1.csv",sep = "^",header = 0,na_values = missing_values,keep_default_na = False)
+df.dropna(axis = 0,how = "all",inplace = True)
+df_no_name = df[df["Name"].isnull()]
+df_no_name.to_csv("no_name.csv", sep = "^")
+df.drop(df.loc[df["Name"].isnull()].index, inplace = True)
+df.to_csv("piszkos_2.csv", sep = "^", index = False)
+
+</pre>
+Elég sok mindent megcsináltunk, még pillanatfelvételeket is készítettünk az adatokról &ndash; és nem igazán nevezhető hosszúnak a szkriptünk.
+És persze a read_csv függvénynek még ezer paramétere van, például tudunk az adatok gyors megszemléléséhez csak néhány sort beolvasni a bemeneti fájlból:
+
+<pre>
+
+df = pd.read_csv("piszkos_orig.csv",
+                 sep = "^",
+                 header = 0,
+                 dtype = object,
+                 na_filter = False,
+                 nrows = 10)                <span class="emph_3"># csak az első 10 sort olvassuk be</span>
+
+</pre>
+
+vagy akár egy darabot kivágni a közepéből:
+
+<pre>
+
+df = pd.read_csv("piszkos_orig.csv",
+                 sep = "^",
+                 header = 0,
+                 dtype = object,
+                 na_filter = False,
+                 skiprows = range(1,1000),  <span class="emph_3"># kihagyjuk az első 1000 sort</span>
+                 skipfooter = 1000)         <span class="emph_3"># és az utolsó 1000-et is</span>
+
+</pre>
+Ha csak egy kisebb részt olvasunk be először, akkor rögtön láthatjuk, nincs-e valami általános félreértés a formátummal kapcsolatban; tudjuk,hogy 10 sornak
+kellene beolvasódnia és láthatjuk, hogy tényleg annyi jött-e be.
+</p>
+<p>
+Van olyan, akit mindez nem győz meg arról, hogy a Python + Pandas egy nagyszerű szerszámosláda??? Pontosabban persze így hangzik a tanulság:
+</p>
+<p style="text-align:center;font-size:120%;font-weight: bold;">
+Python + SQL: menő.
+</p>
+<p>
+Sok olyan szoftveres van, aki csak az egyik eszközkészletet használja, egyszerűen azért, mert a másikat nem ismeri. NAGYON megéri mindkettőbe beleásni magunkat!
+</p>
+</body>
+</html>

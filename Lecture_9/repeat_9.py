@@ -198,3 +198,29 @@ print(arr)
 #  [77 88 99]]
 
 ######################################
+
+# 10.)
+
+def func():
+    yield(10)
+    yield(20)
+    yield(30)
+
+g = func()
+print(max(g) - sum(func()))
+
+######################################
+
+# 11.)
+
+def func(param):
+    yield(param)
+    yield(param + 10)
+    yield(param + 20)
+
+g_1 = func(100)
+g_2 = func(200)
+
+print(max(g_1) - max(g_2))
+
+######################################

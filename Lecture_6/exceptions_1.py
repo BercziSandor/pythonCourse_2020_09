@@ -17,6 +17,15 @@ except Exception as e:
 
 # big parameter: 12
 
+# Az elkapás helyén a ténylegesen dobott kivétel típusának ősét megadva: el fogjuk kapni
+# a kivételt.
+
+# MyException őse Exception
+
+# raise MyException
+# ...
+# except Exception elkapja
+
 #######################################
 
 # Dobhatunk beépített kivételt is. Paramétert
