@@ -6,6 +6,8 @@
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
   pre { color: blue; margin: 8px 8px 8px 20px; }
+  .code_2 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .code_3 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; font-family: Courier New; }
   .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
   .contents { margin-left:30%; color:red; font-size: 120%; }
   .question  { font-family:Cooper Black; color:indigo; }
@@ -13,12 +15,13 @@
   .solution { display:none; border: 1px groove black; border-radius: 5px; margin: 10px 20px 5px 20px; padding: 10px; background-color: palegoldenrod; }
   .emph_1 { color: red; font-weight: bold; }
   .emph_box_1 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; text-align: center; font-size: 120%; }
+  .emph_box_2 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; font-size: 120%; }
 </style>
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.09 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.14 &mdash;</p>
 </div>
 <h1>Generátor függvények bemutatása</h1>
 <ul class='contents'>
@@ -129,10 +132,17 @@ print('|'.join(my_gen()))
 </pre>
 <h2 id='compare'>Összehasonlítás objektum-iterátorral</h2>
 <p>
+Adott egy generátor:
+
+<pre>
+def my_gen():
+    for i in (100, 110, 120):
+        yield i
+</pre>
 Nézzük meg, egy osztállyal hogyan tudnánk létrehozni ugyanezt az iterátort.
 
 <pre>
-class my_first_gen_class():
+class my_gen_class():
     def __init__(self):
         self.value = 100
 
@@ -148,13 +158,13 @@ class my_first_gen_class():
         else:
             raise StopIteration
 
-gen = my_first_gen_class()
+gen = my_gen_class()
 print(gen)
 
 for x in gen:
     print(x)
 <div class='result'>
-# <__main__.my_first_gen_class object at 0x02307490>
+# <__main__.my_gen_class object at 0x02307490>
 # 100
 # 110
 # 120
@@ -164,8 +174,8 @@ for x in gen:
 <p>
 Sok segéd-kódot kellett létrehoznunk, nehezebben áttekinthető az egész.
 </p>
-<div class='emph_box_1'>
-<p>
+<div class='emph_box_2' style='width:60%'>
+<p style='text-align: center;'>
 <b>Generátor előnye</b> osztály-iterátorokkal szemben:
 </p>
 <p>
@@ -174,8 +184,8 @@ Sok segéd-kódot kellett létrehoznunk, nehezebben áttekinthető az egész.
 </p>
 </div>
 <p>
-Persze ha más funkcionalitásra (metóduskra) és megjegyzett állapotváltozókra (tagváltozókra, attribútumokra) is szükség van, akkor már az objektumos megoldás lesz
-egyszerűbb.
+Persze ha más funkcionalitásra (metódusokra) és megjegyzett állapotváltozókra (tagváltozókra, attribútumokra) is szükség van, akkor már az objektumos megoldás
+lehet egyszerűbb.
 </p>
 
 <h2 id='memory'>A generátor memóriája</h2>
@@ -204,7 +214,7 @@ for i in gen:
 </div>
 </pre>
 Egy érdekes különbség: az objektum csak akkor "emlékszik" az __init__-ben kapott paraméterekre, ha azokat eltárolja tagváltozókban, míg a generátornak nem kell
-változókba bemásolnia az indításkor kapott paramétereket ('AAA','BBB').
+változókba bemásolnia az indításkor kapott paramétereket (itt: <span class='code_3'>'AAA', 'BBB'</span>).
 </p>
 <h2 id='return'>Return a generátor függvényben</h2>
 <p>

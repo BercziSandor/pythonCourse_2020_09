@@ -1,7 +1,7 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-<title>Python kóstoló</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Python kĂłstolĂł</title>
 <style>
   h3   { color: blue; }
   h4   { color: green; }
@@ -31,88 +31,88 @@
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
-<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.09 &mdash;</p>
+<span style='float:right;font-style:italic;'>Nemes MihĂˇly &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; UtolsĂł mĂłdosĂ­tĂˇs: 2020.11.06 &mdash;</p>
 </div>
 
-<h1 style='text-align:center;'>Python kóstoló</h1>
+<h1 style='text-align:center;'>Python kĂłstolĂł</h1>
 <p>
 <ul class='contents'>
-<li><a style='color: red' href='#apologizing'>Egy kis magyarázkodás</a></li>
-<li><a style='color: red' href='#easy_combine'>Lego jelleg (elemek könnyű kombinálhatósága)</a>
+<li><a style='color: red' href='#apologizing'>Egy kis magyarĂˇzkodĂˇs</a></li>
+<li><a style='color: red' href='#easy_combine'>Lego jelleg (elemek kĂ¶nnyĹ± kombinĂˇlhatĂłsĂˇga)</a>
 <ul>
-<li><a style='color: red' href='#duck_typing'>Polimorfizmus, dinamikus típusok, duck typing</a>
+<li><a style='color: red' href='#duck_typing'>Polimorfizmus, dinamikus tĂ­pusok, duck typing</a>
 <ul>
-<li><a style='color: red' href='#iterator_interface'>Iterátor interfész példák</a></li>
-<li><a style='color: red' href='#testability'>Tesztelhetőség</a></li>
-<li><a style='color: red' href='#extended_usability'>Kiterjesztett használhatóság</a></li>
+<li><a style='color: red' href='#iterator_interface'>IterĂˇtor interfĂ©sz pĂ©ldĂˇk</a></li>
+<li><a style='color: red' href='#testability'>TesztelhetĹ‘sĂ©g</a></li>
+<li><a style='color: red' href='#extended_usability'>Kiterjesztett hasznĂˇlhatĂłsĂˇg</a></li>
 </ul>
 </li>
-<li><a style='color: red' href='#dunder_functions'>Dunder függvények &ndash; a gépezet elrejtése</a></li>
-<li><a style='color: red' href='#data_structures'>Sokféle és rugalmas adatszerkezet</a>
+<li><a style='color: red' href='#dunder_functions'>Dunder fĂĽggvĂ©nyek &ndash; a gĂ©pezet elrejtĂ©se</a></li>
+<li><a style='color: red' href='#data_structures'>SokfĂ©le Ă©s rugalmas adatszerkezet</a>
 <ul>
-<li><a style='color: red' href='#misc_type_collections'>Kevert típusok adatszerkezetekben</a></li>
-<li><a style='color: red' href='#structured_items'>Strukturált elemek adatszerkezetekben</a></li>
-<li><a style='color: red' href='#extended_dict'>Dictionary kulcs bármely fix típus lehet</a></li>
-<li><a style='color: red' href='#data_conversions'>Az adatszerkezetek könnyen átalakíthatók egymásba</a></li>
-<li><a style='color: red' href='#extendable_types'>Az alap adattípusok bővíthetők</a></li>
+<li><a style='color: red' href='#misc_type_collections'>Kevert tĂ­pusok adatszerkezetekben</a></li>
+<li><a style='color: red' href='#structured_items'>StrukturĂˇlt elemek adatszerkezetekben</a></li>
+<li><a style='color: red' href='#extended_dict'>Dictionary kulcs bĂˇrmely fix tĂ­pus lehet</a></li>
+<li><a style='color: red' href='#data_conversions'>Az adatszerkezetek kĂ¶nnyen ĂˇtalakĂ­thatĂłk egymĂˇsba</a></li>
+<li><a style='color: red' href='#extendable_types'>Az alap adattĂ­pusok bĹ‘vĂ­thetĹ‘k</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a style='color: red' href='#introspection'>Introspekció &ndash; objektum az egész világ</a>
+<li><a style='color: red' href='#introspection'>IntrospekciĂł &ndash; objektum az egĂ©sz vilĂˇg</a>
 <ul>
 <li><a style='color: red' href='#docstrings'>Docstring</a></li>
 </ul>
 </li>
-<li><a style='color: red' href='#tracing'>Jó hibajelzés</a></li>
-<li><a style='color: red' href='#enhanced_indexing'>Indexelés kiterjesztése</a>
+<li><a style='color: red' href='#tracing'>JĂł hibajelzĂ©s</a></li>
+<li><a style='color: red' href='#enhanced_indexing'>IndexelĂ©s kiterjesztĂ©se</a>
 <ul>
-<li><a style='color: red' href='#negative_index'>Negatív indexek</a></li>
+<li><a style='color: red' href='#negative_index'>NegatĂ­v indexek</a></li>
 <li><a style='color: red' href='#slicing'>Slicing</a></li>
 </ul>
 </li>
-<li><a style='color: red' href='#default_params'>Ügyesen választott default paraméterek</a></li>
-<li><a style='color: red' href='#polymorph_params'>Ügyesen választott polimorf paraméterek</a></li>
-<li><a style='color: red' href='#concise_constructs'>Néhány tömör nyelvi elem</a></li>
-<li><a style='color: red' href='#function_objects'>Függvényobjektumok, funkcionális programozás</a></li>
-<li><a style='color: red' href='#generators'>Generátorok, korutinok</a></li>
-<li><a style='color: red' href='#useful_functions'>Sok hasznos függvény és metódus</a></li>
-<li><a style='color: red' href='#useful_modules'>Sok hasznos modul jól dokumentálva</a></li>
-<li><a style='color: red' href='#easy_install'>Könnyű installálás</a></li>
-<li><a style='color: red' href='#easy_for_beginners'>Kezdőknek (is) könnyen tanulható</a></li>
-<li style='color: black'><a style='color: black' href='#disadvantages'>...és a hátrányok</a> <span style='color: black'>&#9760;</span>
+<li><a style='color: red' href='#default_params'>Ăśgyesen vĂˇlasztott default paramĂ©terek</a></li>
+<li><a style='color: red' href='#polymorph_params'>Ăśgyesen vĂˇlasztott polimorf paramĂ©terek</a></li>
+<li><a style='color: red' href='#concise_constructs'>NĂ©hĂˇny tĂ¶mĂ¶r nyelvi elem</a></li>
+<li><a style='color: red' href='#function_objects'>FĂĽggvĂ©nyobjektumok, funkcionĂˇlis programozĂˇs</a></li>
+<li><a style='color: red' href='#generators'>GenerĂˇtorok, korutinok</a></li>
+<li><a style='color: red' href='#useful_functions'>Sok hasznos fĂĽggvĂ©ny Ă©s metĂłdus</a></li>
+<li><a style='color: red' href='#useful_modules'>Sok hasznos modul jĂłl dokumentĂˇlva</a></li>
+<li><a style='color: red' href='#easy_install'>KĂ¶nnyĹ± installĂˇlĂˇs</a></li>
+<li><a style='color: red' href='#easy_for_beginners'>KezdĹ‘knek (is) kĂ¶nnyen tanulhatĂł</a></li>
+<li style='color: black'><a style='color: black' href='#disadvantages'>...Ă©s a hĂˇtrĂˇnyok</a> <span style='color: black'>&#9760;</span>
 <ul>
-<li><a style='color: black' href='#no_typecheck'>Típusellenőrzés hiánya &rarr; futás közben kiderülő hibák</a></li>
-<li><a style='color: black' href='#no_declaration'>Deklaráció hiánya &rarr; még futás közben sem kiderülő hibák</a></li>
-<li><a style='color: black' href='#no_private'>Nincsenek private és protected elemek</a></li>
-<li><a style='color: black' href='#missing_constructs'>Nincs switch és nincs const</a></li>
-<li><a style='color: black' href='#low_speed'>Lassúság?</a></li>
+<li><a style='color: black' href='#no_typecheck'>TĂ­pusellenĹ‘rzĂ©s hiĂˇnya &rarr; futĂˇs kĂ¶zben kiderĂĽlĹ‘ hibĂˇk</a></li>
+<li><a style='color: black' href='#no_declaration'>DeklarĂˇciĂł hiĂˇnya &rarr; mĂ©g futĂˇs kĂ¶zben sem kiderĂĽlĹ‘ hibĂˇk</a></li>
+<li><a style='color: black' href='#no_private'>Nincsenek private Ă©s protected elemek</a></li>
+<li><a style='color: black' href='#missing_constructs'>Nincs switch Ă©s nincs const</a></li>
+<li><a style='color: black' href='#low_speed'>LassĂşsĂˇg?</a></li>
 </ul>
 </li>
 </ul>
 </p>
-<h2 id='apologizing'>Egy kis magyarázkodás</h2>
+<h2 id='apologizing'>Egy kis magyarĂˇzkodĂˇs</h2>
 <p>
-Noha a Pythonnal való ismerkedés elején járunk, mégis érdemesnek gondolom áttekinteni, hogy mit tartok a nyelv (és a hozzá kapcsolódó ökoszisztéma) előnyeinek
-és hátrányainak, mert hitem szerint így céltudatosabb lehet az ismerkedés, kevésbé fogunk teljesen elveszni a szintaktika tanulmányozásában, jobban és gyorsabban
-kirajzolódnak a részleteken túl az egésznek is a körvonalai.
+Noha a Pythonnal valĂł ismerkedĂ©s elejĂ©n jĂˇrunk, mĂ©gis Ă©rdemesnek gondolom Ăˇttekinteni, hogy mit tartok a nyelv (Ă©s a hozzĂˇ kapcsolĂłdĂł Ă¶koszisztĂ©ma) elĹ‘nyeinek
+Ă©s hĂˇtrĂˇnyainak, mert hitem szerint Ă­gy cĂ©ltudatosabb lehet az ismerkedĂ©s, kevĂ©sbĂ© fogunk teljesen elveszni a szintaktika tanulmĂˇnyozĂˇsĂˇban, jobban Ă©s gyorsabban
+kirajzolĂłdnak a rĂ©szleteken tĂşl az egĂ©sznek is a kĂ¶rvonalai.
 </p>
 <p>
-Pythonban teljesen kezdők számára biztosan egyes részek távolinak és elvontnak fognak tűnni &ndash; de szerintem akkor is hasznos egy ilyenfajta bemutatás. Újra
-és újra vissza fogunk térni ezekre a gondolatokra és egyre világosabbá fognak válni.
+Pythonban teljesen kezdĹ‘k szĂˇmĂˇra biztosan egyes rĂ©szek tĂˇvolinak Ă©s elvontnak fognak tĹ±nni &ndash; de szerintem akkor is hasznos egy ilyenfajta bemutatĂˇs. Ăšjra
+Ă©s Ăşjra vissza fogunk tĂ©rni ezekre a gondolatokra Ă©s egyre vilĂˇgosabbĂˇ fognak vĂˇlni.
 </p>
 <p>
-Nincs mese, a tanulás már csak ilyen iteratív folyamat.
+Nincs mese, a tanulĂˇs mĂˇr csak ilyen iteratĂ­v folyamat.
 </p>
-<h2 id='easy_combine'>Lego jelleg (elemek könnyű kombinálhatósága)</h2>
+<h2 id='easy_combine'>Lego jelleg (elemek kĂ¶nnyĹ± kombinĂˇlhatĂłsĂˇga)</h2>
 <p>
-A Python számomra leglenyűgözőbb tulajdonsága az, amilyen könnyen és áttekinthetően lehet programrészeket, modulokat egymáshoz illeszteni.
+A Python szĂˇmomra leglenyĹ±gĂ¶zĹ‘bb tulajdonsĂˇga az, amilyen kĂ¶nnyen Ă©s ĂˇttekinthetĹ‘en lehet programrĂ©szeket, modulokat egymĂˇshoz illeszteni.
 </p>
-<h3 id='duck_typing'>&rtrif; Polimorfizmus, dinamikus típusok, duck typing</h3>
+<h3 id='duck_typing'>&rtrif; Polimorfizmus, dinamikus tĂ­pusok, duck typing</h3>
 <p>
-A nyelv nagyon fontos tulajdonsága a dinamikus típusosság. Ez azt jelenti, hogy ha egy függvény felhívja a paraméterként kapott objektumnak valamilyen
-metódusát, akkor paraméterként minden olyan objektum szerepelhet, amelyik rendelkezik az illető metódussal.
+A nyelv nagyon fontos tulajdonsĂˇga a dinamikus tĂ­pusossĂˇg. Ez azt jelenti, hogy ha egy fĂĽggvĂ©ny felhĂ­vja a paramĂ©terkĂ©nt kapott objektumnak valamilyen
+metĂłdusĂˇt, akkor paramĂ©terkĂ©nt minden olyan objektum szerepelhet, amelyik rendelkezik az illetĹ‘ metĂłdussal.
 
 <pre>
 def func(param):
@@ -135,31 +135,31 @@ func(la)
 # Good evening
 </div>
 </pre>
-Nincs megkötés arra, hogy a <code>param</code> objektum milyen típusú legyen, csak egy dolog fontos: legyen neki greeting() nevű metódusa. A dinamikus
-típusosságnak angolul <span class='code_2'>duck typing</span> a neve, ami arra a mondásra utal, hogy ha valami úgy jár és úgy hápog, mint egy kacsa, akkor
+Nincs megkĂ¶tĂ©s arra, hogy a <code>param</code> objektum milyen tĂ­pusĂş legyen, csak egy dolog fontos: legyen neki greeting() nevĹ± metĂłdusa. A dinamikus
+tĂ­pusossĂˇgnak angolul <span class='code_2'>duck typing</span> a neve, ami arra a mondĂˇsra utal, hogy ha valami Ăşgy jĂˇr Ă©s Ăşgy hĂˇpog, mint egy kacsa, akkor
 az egy kacsa.
 </p>
 <p>
-A dinamikus típusosság óriási rugalmasságot kölcsönöz a nyelvnek, mintegy szabványos csatlakozókkal látja el az elemeket, amitől ezek szabadon
-kombinálhatóvá válnak.
+A dinamikus tĂ­pusossĂˇg ĂłriĂˇsi rugalmassĂˇgot kĂ¶lcsĂ¶nĂ¶z a nyelvnek, mintegy szabvĂˇnyos csatlakozĂłkkal lĂˇtja el az elemeket, amitĹ‘l ezek szabadon
+kombinĂˇlhatĂłvĂˇ vĂˇlnak.
 </p>
-<h4 id='iterator_interface'>&rtrif;&rtrif; Iterátor interfész példák</h4>
+<h4 id='iterator_interface'>&rtrif;&rtrif; IterĂˇtor interfĂ©sz pĂ©ldĂˇk</h4>
 <p>
-Rendkívül gyakran kell valamilyen elemek sorozatának tagjait egyenként elővennünk. Pythonban így járunk végig
+RendkĂ­vĂĽl gyakran kell valamilyen elemek sorozatĂˇnak tagjait egyenkĂ©nt elĹ‘vennĂĽnk. Pythonban Ă­gy jĂˇrunk vĂ©gig
 <pre>
-<b style='color:black;'>számsorozatot:                 sztringet:               listát vagy tuple-t:        halmazt:</b>
+<b style='color:black;'>szĂˇmsorozatot:                 sztringet:               listĂˇt vagy tuple-t:        halmazt:</b>
                                                         x = (10,'A',30)
 x = range(5)                   x = 'Python'             x = [10,'A',30]             x = {10, 'A', 30}
 <span class='emph_1'>for i in x:                    for i in x:              for i in x:                 for i in x:</span>
     print(i,end=' ')               print(i,end=' ')         print(i,end=' ')            print(i,end=' ')
 print()                        print()                   print()                    print()
 <div class='result'>
-# 0 1 2 3 4                    # P y t h o n             # 10 A 30                  # 10 A 30 (a sorrend nem garantált)
+# 0 1 2 3 4                    # P y t h o n             # 10 A 30                  # 10 A 30 (a sorrend nem garantĂˇlt)
 </div>
 </pre>
 
 <pre>
-<b style='color:black;'>szövegfájl sorait:             adatbázistábla sorait:</b>
+<b style='color:black;'>szĂ¶vegfĂˇjl sorait:             adatbĂˇzistĂˇbla sorait:</b>
 
                                cursor.execute("SELECT * FROM employee")
 x = open('demo_1.txt','r')     x = cursor.fetchall()
@@ -171,9 +171,9 @@ x = open('demo_1.txt','r')     x = cursor.fetchall()
 </div>
 </pre>
 
-Ezek az elemek mind megvalósítják az úgynevezett iterátor interfészt, ezért <b>teljesen egyformán</b> tudjuk megkapni az általuk szolgáltatott adatsorozatot.
-Sőt, mi magunk is tudunk írni olyan osztályt, amely megvalósítja ezt az interfészt, ezért az általa szolgáltatott elemeken végig lehet menni egy közönséges for
-ciklussal. Példaként vegyünk egy nem túl hasznos, ám annál egyszerűbb osztályt, amely nullától háromig tud számolni:
+Ezek az elemek mind megvalĂłsĂ­tjĂˇk az Ăşgynevezett iterĂˇtor interfĂ©szt, ezĂ©rt <b>teljesen egyformĂˇn</b> tudjuk megkapni az Ăˇltaluk szolgĂˇltatott adatsorozatot.
+SĹ‘t, mi magunk is tudunk Ă­rni olyan osztĂˇlyt, amely megvalĂłsĂ­tja ezt az interfĂ©szt, ezĂ©rt az Ăˇltala szolgĂˇltatott elemeken vĂ©gig lehet menni egy kĂ¶zĂ¶nsĂ©ges for
+ciklussal. PĂ©ldakĂ©nt vegyĂĽnk egy nem tĂşl hasznos, Ăˇm annĂˇl egyszerĹ±bb osztĂˇlyt, amely nullĂˇtĂłl hĂˇromig tud szĂˇmolni:
 <pre>
 class StupidCounter:
     def __init__(self):
@@ -199,14 +199,14 @@ print()
 # 0 1 2 3
 </div>
 </pre>
-A részletekről később majd szó lesz, most csak az a lényeg, hogy ha néhány egyszerű szabályt betartunk, akkor a mi buta kis számlálónkat ugyanúgy tudják
-használni a többi programrészek, mint egy listát. Az ő szempontjukból ez egyszerűen csak egy <span class='emph_4'>valami</span>, ami számsorozatot produkál,
-ha az <span style='font-family:Comic Sans MS; color:blueviolet;'>iterátor interfész</span> nevű etikett szerint megkérik rá.
+A rĂ©szletekrĹ‘l kĂ©sĹ‘bb majd szĂł lesz, most csak az a lĂ©nyeg, hogy ha nĂ©hĂˇny egyszerĹ± szabĂˇlyt betartunk, akkor a mi buta kis szĂˇmlĂˇlĂłnkat ugyanĂşgy tudjĂˇk
+hasznĂˇlni a tĂ¶bbi programrĂ©szek, mint egy listĂˇt. Az Ĺ‘ szempontjukbĂłl ez egyszerĹ±en csak egy <span class='emph_4'>valami</span>, ami szĂˇmsorozatot produkĂˇl,
+ha az <span style='font-family:Comic Sans MS; color:blueviolet;'>iterĂˇtor interfĂ©sz</span> nevĹ± etikett szerint megkĂ©rik rĂˇ.
 </p>
-<h4 id='testability'>&rtrif;&rtrif; Tesztelhetőség</h4>
+<h4 id='testability'>&rtrif;&rtrif; TesztelhetĹ‘sĂ©g</h4>
 <p>
-Többek között a tesztelhetőséget is roppantul javítja a dinamikus típusosság. Ha van például egy függvényünk, amelynek paraméterül egy megnyitott fájl-objektumot
-adunk át, hogy abból olvasson sorokat, akkor tesztelhetjük a függvényt akár egy listával is, amelyben sztringek vannak.
+TĂ¶bbek kĂ¶zĂ¶tt a tesztelhetĹ‘sĂ©get is roppantul javĂ­tja a dinamikus tĂ­pusossĂˇg. Ha van pĂ©ldĂˇul egy fĂĽggvĂ©nyĂĽnk, amelynek paramĂ©terĂĽl egy megnyitott fĂˇjl-objektumot
+adunk Ăˇt, hogy abbĂłl olvasson sorokat, akkor tesztelhetjĂĽk a fĂĽggvĂ©nyt akĂˇr egy listĂˇval is, amelyben sztringek vannak.
 
 <pre>
 def func(param):
@@ -227,25 +227,25 @@ func(test_data)
 # I do something with: line 2
 </div>
 </pre>
-<h4 id='extended_usability'>&rtrif;&rtrif; Kiterjesztett használhatóság</h4>
+<h4 id='extended_usability'>&rtrif;&rtrif; Kiterjesztett hasznĂˇlhatĂłsĂˇg</h4>
 <p>
-Másrészt nemcsak fájlt, hanem olyan objektumot is átadhatunk paraméterként a függvénynek, amelyik például a webről olvas be adatokat. Vagy egy hálózatból.
-Vagy kiáshatja akár a zőldséges kertjéből is, teljesen mindegy, az a lényeg, hogy legyen neki <code>__next__</code> metódusa, aminek hatására szolgáltasson
-egy sztringet és dobjon egy <code>StopIteration</code> kivételt, mikor már elfogyott az adat.
+MĂˇsrĂ©szt nemcsak fĂˇjlt, hanem olyan objektumot is Ăˇtadhatunk paramĂ©terkĂ©nt a fĂĽggvĂ©nynek, amelyik pĂ©ldĂˇul a webrĹ‘l olvas be adatokat. Vagy egy hĂˇlĂłzatbĂłl.
+Vagy kiĂˇshatja akĂˇr a zĹ‘ldsĂ©ges kertjĂ©bĹ‘l is, teljesen mindegy, az a lĂ©nyeg, hogy legyen neki <code>__next__</code> metĂłdusa, aminek hatĂˇsĂˇra szolgĂˇltasson
+egy sztringet Ă©s dobjon egy <code>StopIteration</code> kivĂ©telt, mikor mĂˇr elfogyott az adat.
 </p>
 <p>
-NEM kell külön egy függvényt írni, ami fájlból olvassa a sztringeket, egy másikat, amelyik a webről, stb. és aztán ugyanazt csinálják a kapott sztring-sorozattal.
-Egyetlen függvény elég, ha a paraméterként kapott objektum megvalósítja az iterátor interfészt. Érdemes végiggondolni, hogy más nyelvekben hogy oldanánk meg
+NEM kell kĂĽlĂ¶n egy fĂĽggvĂ©nyt Ă­rni, ami fĂˇjlbĂłl olvassa a sztringeket, egy mĂˇsikat, amelyik a webrĹ‘l, stb. Ă©s aztĂˇn ugyanazt csinĂˇljĂˇk a kapott sztring-sorozattal.
+Egyetlen fĂĽggvĂ©ny elĂ©g, ha a paramĂ©terkĂ©nt kapott objektum megvalĂłsĂ­tja az iterĂˇtor interfĂ©szt. Ă‰rdemes vĂ©giggondolni, hogy mĂˇs nyelvekben hogy oldanĂˇnk meg
 egy ilyen feladatot.
 </p>
-<h3 id='dunder_functions'>&rtrif; Dunder függvények &ndash; a gépezet elrejtése</h3>
+<h3 id='dunder_functions'>&rtrif; Dunder fĂĽggvĂ©nyek &ndash; a gĂ©pezet elrejtĂ©se</h3>
 <p>
-A double underscore (dunder) metódusokra épp az előbb láttunk példát: ha egy osztály implementálja az <code>__iter__</code> és a <code>__next__</code> metódusokat,
-akkor a futtató rendszer ugyanazokkal a módszerekkel (pl.for ciklussal) végig tudja járni az objektum által szolgáltatott elemeket, mint egy számsorozatot. Egy
-másik gyakran előforduló szituáció objektumok sztringként való megjelenítése.
+A double underscore (dunder) metĂłdusokra Ă©pp az elĹ‘bb lĂˇttunk pĂ©ldĂˇt: ha egy osztĂˇly implementĂˇlja az <code>__iter__</code> Ă©s a <code>__next__</code> metĂłdusokat,
+akkor a futtatĂł rendszer ugyanazokkal a mĂłdszerekkel (pl.for ciklussal) vĂ©gig tudja jĂˇrni az objektum Ăˇltal szolgĂˇltatott elemeket, mint egy szĂˇmsorozatot. Egy
+mĂˇsik gyakran elĹ‘fordulĂł szituĂˇciĂł objektumok sztringkĂ©nt valĂł megjelenĂ­tĂ©se.
 </p>
 <p>
-Készítsünk egy egyszerű kis osztályt és írassuk ki egy példányát sztringként:
+KĂ©szĂ­tsĂĽnk egy egyszerĹ± kis osztĂˇlyt Ă©s Ă­rassuk ki egy pĂ©ldĂˇnyĂˇt sztringkĂ©nt:
 <pre>
 class MyLittleClass:
     def __init__(self,x):
@@ -257,12 +257,12 @@ print(m)
 # <__main__.MyLittleClass object at 0x028A7970>
 </div>
 </pre>
-Ez persze nem túl informatív. Más nyelvekben az a szokásos megoldás, hogy a MyLittleClass-hoz írni kell egy metódust, pl. toString() névvel és ezt fogja majd
-meghívni <b>a program</b> ott, ahol szükség van az objektum sztringgé alakítására. A Python viszont más módszert követ: ha definiálunk egy <code>__str__</code>
-metódust, akkor ezt <b>a futtató rendszer</b> automatikusan mindenhol felhívja, ahol szükség van sztring formában való megjelenítésre. Ha nincs ilyen metódus,
-akkor kiírja az objektum nevét és memóriacímét a fent látható módon. Már az is egy ügyes konvenció, hogy a program ilyenkor nem áll le hibajelzéssel &ndash;
-ha az illető objektum nem tud szépen bemutatkozni, akkor csak annyit mond róla: Ez itt egy MyLittleClass fajta objektum, kicsit kuka szegény, de azért
-fogadjátok szeretettel.
+Ez persze nem tĂşl informatĂ­v. MĂˇs nyelvekben az a szokĂˇsos megoldĂˇs, hogy a MyLittleClass-hoz Ă­rni kell egy metĂłdust, pl. toString() nĂ©vvel Ă©s ezt fogja majd
+meghĂ­vni <b>a program</b> ott, ahol szĂĽksĂ©g van az objektum sztringgĂ© alakĂ­tĂˇsĂˇra. A Python viszont mĂˇs mĂłdszert kĂ¶vet: ha definiĂˇlunk egy <code>__str__</code>
+metĂłdust, akkor ezt <b>a futtatĂł rendszer</b> automatikusan mindenhol felhĂ­vja, ahol szĂĽksĂ©g van sztring formĂˇban valĂł megjelenĂ­tĂ©sre. Ha nincs ilyen metĂłdus,
+akkor kiĂ­rja az objektum nevĂ©t Ă©s memĂłriacĂ­mĂ©t a fent lĂˇthatĂł mĂłdon. MĂˇr az is egy ĂĽgyes konvenciĂł, hogy a program ilyenkor nem Ăˇll le hibajelzĂ©ssel &ndash;
+ha az illetĹ‘ objektum nem tud szĂ©pen bemutatkozni, akkor csak annyit mond rĂłla: Ez itt egy MyLittleClass fajta objektum, kicsit kuka szegĂ©ny, de azĂ©rt
+fogadjĂˇtok szeretettel.
 
 <pre class='pale'>
 class MyLittleClass:
@@ -278,36 +278,36 @@ print(m)
 # my little x is: 10
 </div>
 </pre>
-Számos műveletet tehát a Python a háttérben, valahol a gépházban elvégez, ha betartunk bizonyos konvenciókat, ezáltal a programjaink nagyon leegyszerűsödnek.
+SzĂˇmos mĹ±veletet tehĂˇt a Python a hĂˇttĂ©rben, valahol a gĂ©phĂˇzban elvĂ©gez, ha betartunk bizonyos konvenciĂłkat, ezĂˇltal a programjaink nagyon leegyszerĹ±sĂ¶dnek.
 </p>
-<h3 id='data_structures'>&rtrif; Sokféle és rugalmas adatszerkezet</h3>
+<h3 id='data_structures'>&rtrif; SokfĂ©le Ă©s rugalmas adatszerkezet</h3>
 <p>
-A Python alap adatstruktúrái (list, tuple, dict, set...) rugalmasak és egymással kombinálhatóak, ezért a legtöbb esetben függvény bemenő paramétereként is
-és visszatérő értékeként is megfelelnek az adott probléma leírására, így aztán nem kell erre a célra külön speciális osztályokat, struktúrákat definiálni.
-Ez NAGYON fontos &ndash; nézzük csak át egyszer ilyen szemmel a programjainkat: mekkora része az, ahol az egyik programrész által szolgáltatott adatokat valami
-más formára hozunk, hogy a következő programrész fel tudja azokat dolgozni.
+A Python alap adatstruktĂşrĂˇi (list, tuple, dict, set...) rugalmasak Ă©s egymĂˇssal kombinĂˇlhatĂłak, ezĂ©rt a legtĂ¶bb esetben fĂĽggvĂ©ny bemenĹ‘ paramĂ©terekĂ©nt is
+Ă©s visszatĂ©rĹ‘ Ă©rtĂ©kekĂ©nt is megfelelnek az adott problĂ©ma leĂ­rĂˇsĂˇra, Ă­gy aztĂˇn nem kell erre a cĂ©lra kĂĽlĂ¶n speciĂˇlis osztĂˇlyokat, struktĂşrĂˇkat definiĂˇlni.
+Ez NAGYON fontos &ndash; nĂ©zzĂĽk csak Ăˇt egyszer ilyen szemmel a programjainkat: mekkora rĂ©sze az, ahol az egyik programrĂ©sz Ăˇltal szolgĂˇltatott adatokat valami
+mĂˇs formĂˇra hozunk, hogy a kĂ¶vetkezĹ‘ programrĂ©sz fel tudja azokat dolgozni.
 </p>
 <p>
-<u>Érdemes tudatosan tanulmányozni</u> az adatszerkezetek egymásba alakításának módjait. Nagyon jó kis eszköz lesz a szerszámosládánkban! Egy profi nem csak
-sok adatszerkezetet ismer, hanem azt is tudja, hogyan lehet egyiket a másikba átvarázsolni.
+<u>Ă‰rdemes tudatosan tanulmĂˇnyozni</u> az adatszerkezetek egymĂˇsba alakĂ­tĂˇsĂˇnak mĂłdjait. Nagyon jĂł kis eszkĂ¶z lesz a szerszĂˇmoslĂˇdĂˇnkban! Egy profi nem csak
+sok adatszerkezetet ismer, hanem azt is tudja, hogyan lehet egyiket a mĂˇsikba ĂˇtvarĂˇzsolni.
 </p>
-<h4 id='misc_type_collections'>&rtrif;&rtrif; Kevert típusok adatszerkezetekben</h4>
+<h4 id='misc_type_collections'>&rtrif;&rtrif; Kevert tĂ­pusok adatszerkezetekben</h4>
 <p>
-A list, tuple, dict, set adatszerkezetekben keverten fordulhatnak elő különböző típusú adatok:
+A list, tuple, dict, set adatszerkezetekben keverten fordulhatnak elĹ‘ kĂĽlĂ¶nbĂ¶zĹ‘ tĂ­pusĂş adatok:
 
 <pre>
 lst = [1300,'John','Bull',180.5]  # int, str, float
 tup = (1300,'John','Bull',180.5)
 dic = {'id': 1300, 'first_name': 'John', 'family_name': 'Bull', 'height': 180.5}
 </pre>
-Egy C, C++ vagy Java programozó számára eleinte ez kifejezetten idegesítő tud lenni &ndash; az ember megszokta, hogy a tömbökben egyforma típusú elemek
-vannak &ndash; mi ez a rendetlenség, kérem? Aztán hamar kiderül, hogy nagy előny, ha nem kell újabb és újabb összetett típusokat definiálni csak azért, hogy függvények
-beszélgetni tudjanak egymással.
+Egy C, C++ vagy Java programozĂł szĂˇmĂˇra eleinte ez kifejezetten idegesĂ­tĹ‘ tud lenni &ndash; az ember megszokta, hogy a tĂ¶mbĂ¶kben egyforma tĂ­pusĂş elemek
+vannak &ndash; mi ez a rendetlensĂ©g, kĂ©rem? AztĂˇn hamar kiderĂĽl, hogy nagy elĹ‘ny, ha nem kell Ăşjabb Ă©s Ăşjabb Ă¶sszetett tĂ­pusokat definiĂˇlni csak azĂ©rt, hogy fĂĽggvĂ©nyek
+beszĂ©lgetni tudjanak egymĂˇssal.
 </p>
 <p>
-Az persze igaz, hogy pl. egy tuple-nak nincs egy fix helyen lévő deklarációja, ahol meg tudnánk nézni, milyen mezői vannak, továbbá pozíció szerint kell
-elérnünk az elemeket, pl. tudnunk kell, hogy tup[<b>3</b>] írja le a személy magasságát &ndash; de erre a problémára megoldást jelent a standard könyvtár
-<code>namedtuple</code> típusa:
+Az persze igaz, hogy pl. egy tuple-nak nincs egy fix helyen lĂ©vĹ‘ deklarĂˇciĂłja, ahol meg tudnĂˇnk nĂ©zni, milyen mezĹ‘i vannak, tovĂˇbbĂˇ pozĂ­ciĂł szerint kell
+elĂ©rnĂĽnk az elemeket, pl. tudnunk kell, hogy tup[<b>3</b>] Ă­rja le a szemĂ©ly magassĂˇgĂˇt &ndash; de erre a problĂ©mĂˇra megoldĂˇst jelent a standard kĂ¶nyvtĂˇr
+<code>namedtuple</code> tĂ­pusa:
 
 <pre>
 from collections import namedtuple
@@ -322,14 +322,14 @@ print(john<span class='emph_1'>.id</span>, john<span class='emph_1'>[0]</span>)
 # 1300 1300
 </div>
 </pre>
-Magának a struktúrának és a mezőinek is nevet adtunk; a mezőket névvel is és indexelve is elérhetjük.
+MagĂˇnak a struktĂşrĂˇnak Ă©s a mezĹ‘inek is nevet adtunk; a mezĹ‘ket nĂ©vvel is Ă©s indexelve is elĂ©rhetjĂĽk.
 </p>
-<h4 id='structured_items'>&rtrif;&rtrif; Strukturált elemek adatszerkezetekben</h4>
+<h4 id='structured_items'>&rtrif;&rtrif; StrukturĂˇlt elemek adatszerkezetekben</h4>
 <p>
-A listák, dict-ek, stb. nemcsak elemi adattípusokat tartalmazhatnak, hanem összetetteket is, tehát az adatszerkezeteket egymásba lehet ágyazni.
+A listĂˇk, dict-ek, stb. nemcsak elemi adattĂ­pusokat tartalmazhatnak, hanem Ă¶sszetetteket is, tehĂˇt az adatszerkezeteket egymĂˇsba lehet Ăˇgyazni.
 </p>
 <p>
-&ofcir; Egy dict-ben az érték lehet például lista vagy tuple:
+&ofcir; Egy dict-ben az Ă©rtĂ©k lehet pĂ©ldĂˇul lista vagy tuple:
 <pre>
 lst = [10, 20]
 tup = ('A', 'B')
@@ -340,7 +340,7 @@ print(d)
 # {'my_list': [10, 20], 'my_tuple': ('A', 'B'), 'my_dict': {'pi': 3.14, 'e': 2.71}}
 </div>
 </pre>
-&ofcir; Vagy fordítva: egy lista tartalmazhat dict-eket:
+&ofcir; Vagy fordĂ­tva: egy lista tartalmazhat dict-eket:
 
 <pre>
 d_1 = { 'one': 1, 'two': 2 }
@@ -352,11 +352,11 @@ print(lst)
 </div>
 </pre>
 </p>
-<h4 id='extended_dict'>&rtrif;&rtrif; Dictionary kulcs bármely fix típus lehet</h4>
+<h4 id='extended_dict'>&rtrif;&rtrif; Dictionary kulcs bĂˇrmely fix tĂ­pus lehet</h4>
 <p>
-A dict típusnál a kulcs nemcsak sztring vagy szám lehet, hanem bármely fix, változtathatatlan (immutable) típusú elem, például egy tuple is.
-Tegyük fel, hogy egy játékprogramban egyes, koordinátáikkal megadott helyeket veszélyesnek, másokat biztonságosnak kell tekintenünk. Ennek
-leírására jól jöhet egy ilyen dict:
+A dict tĂ­pusnĂˇl a kulcs nemcsak sztring vagy szĂˇm lehet, hanem bĂˇrmely fix, vĂˇltoztathatatlan (immutable) tĂ­pusĂş elem, pĂ©ldĂˇul egy tuple is.
+TegyĂĽk fel, hogy egy jĂˇtĂ©kprogramban egyes, koordinĂˇtĂˇikkal megadott helyeket veszĂ©lyesnek, mĂˇsokat biztonsĂˇgosnak kell tekintenĂĽnk. Ennek
+leĂ­rĂˇsĂˇra jĂłl jĂ¶het egy ilyen dict:
 
 <pre>
 point_1 = (12,20)
@@ -368,7 +368,7 @@ print(d)
 # (12,20): 'dangerous', (30,4): 'safe'
 </div>
 </pre>
-A halmazok is tartalmazhatnak tetszőleges fix típusú objektumokat, ami ezek után nem meglepő, mert a halmazok felfoghatók olyan dict-eknek, amelyekben
+A halmazok is tartalmazhatnak tetszĹ‘leges fix tĂ­pusĂş objektumokat, ami ezek utĂˇn nem meglepĹ‘, mert a halmazok felfoghatĂłk olyan dict-eknek, amelyekben
 csak kulcsok vannak.
 
 <pre>
@@ -387,12 +387,12 @@ print(tup_set)
 </div>
 </pre>
 </p>
-<h4 id='data_conversions'>&rtrif;&rtrif; Az adatszerkezetek könnyen átalakíthatók egymásba</h4>
+<h4 id='data_conversions'>&rtrif;&rtrif; Az adatszerkezetek kĂ¶nnyen ĂˇtalakĂ­thatĂłk egymĂˇsba</h4>
 <p>
-Nagyon gyakran előfordul, hogy adott ponton az addigi helyett egy más formátumban szeretnénk tárolni az adatainkat.
+Nagyon gyakran elĹ‘fordul, hogy adott ponton az addigi helyett egy mĂˇs formĂˇtumban szeretnĂ©nk tĂˇrolni az adatainkat.
 </p>
 <p>
-&ofcir; Például egy lista elemeit egy halmazban szeretnénk elhelyezni. Így járunk el:
+&ofcir; PĂ©ldĂˇul egy lista elemeit egy halmazban szeretnĂ©nk elhelyezni. ĂŤgy jĂˇrunk el:
 
 <pre>
 my_lst = [10, 20, 10, 30, 10, 40]
@@ -402,10 +402,10 @@ print(my_set)
 # {40, 10, 20, 30}
 </div>
 </pre>
-Hát ez nem túl bonyolult. És nem túl nehezen olvasható.
+HĂˇt ez nem tĂşl bonyolult. Ă‰s nem tĂşl nehezen olvashatĂł.
 </p>
 <p>
-&ofcir; Egy másik példa: a fentebb definiált <code>Person</code> típusú tuple-t át akarjuk alakítani listává vagy dict-té:
+&ofcir; Egy mĂˇsik pĂ©lda: a fentebb definiĂˇlt <code>Person</code> tĂ­pusĂş tuple-t Ăˇt akarjuk alakĂ­tani listĂˇvĂˇ vagy dict-tĂ©:
 
 <pre>
 from collections import namedtuple
@@ -425,7 +425,7 @@ print(john_dict['id'])
 # 1300
 </div>
 </pre>
-Ha ragaszkodunk hozzá, hogy ne <code>OrderedDict</code>, hanem <code>dict</code> struktúrában legyenek John adatai, az sem nehéz:
+Ha ragaszkodunk hozzĂˇ, hogy ne <code>OrderedDict</code>, hanem <code>dict</code> struktĂşrĂˇban legyenek John adatai, az sem nehĂ©z:
 
 <pre>
 john_dict = <span class='emph_1'>dict(</span>john_dict<span class='emph_1'>)</span>
@@ -435,7 +435,7 @@ print(john_dict)
 </div>
 </pre>
 
-&ofcir; Egy dict kulcs-érték párjait akarjuk list vagy tuple formába alakítani:
+&ofcir; Egy dict kulcs-Ă©rtĂ©k pĂˇrjait akarjuk list vagy tuple formĂˇba alakĂ­tani:
 
 <pre>
 d = { 'one': 1, 'two': 2 }
@@ -449,7 +449,7 @@ print(tup)
 </div>
 </pre>
 
-&ofcir; Ugyanez visszafelé: kulcs-érték párokból álló tuple-ok listáját szeretnénk dict formátumra alakítani:
+&ofcir; Ugyanez visszafelĂ©: kulcs-Ă©rtĂ©k pĂˇrokbĂłl ĂˇllĂł tuple-ok listĂˇjĂˇt szeretnĂ©nk dict formĂˇtumra alakĂ­tani:
 
 <pre>
 lst = [('one', 1), ('two', 2)]
@@ -459,7 +459,7 @@ print(d)
 # { 'one': 1, 'two': 2 }
 </div>
 </pre>
-&ofcir; Két listában lévő elemeket így párosítunk össze tuple-ok listájává, hogy ezekből aztán dict-et vagy listát csináljunk:
+&ofcir; KĂ©t listĂˇban lĂ©vĹ‘ elemeket Ă­gy pĂˇrosĂ­tunk Ă¶ssze tuple-ok listĂˇjĂˇvĂˇ, hogy ezekbĹ‘l aztĂˇn dict-et vagy listĂˇt csinĂˇljunk:
 
 <pre>
 keys   = ['one', 'two']
@@ -474,9 +474,9 @@ print(lst)
 </div>
 </pre>
 </p>
-<h4 id='extendable_types'>Az alap adattípusok bővíthetők</h4>
+<h4 id='extendable_types'>Az alap adattĂ­pusok bĹ‘vĂ­thetĹ‘k</h4>
 <p>
-Bátrabbak akár le is származtathatnak új típusokat a meglévőkből; mivel a Pythonban MINDEN objektum, az adattípusok is.
+BĂˇtrabbak akĂˇr le is szĂˇrmaztathatnak Ăşj tĂ­pusokat a meglĂ©vĹ‘kbĹ‘l; mivel a Pythonban MINDEN objektum, az adattĂ­pusok is.
 <pre>
 class MyDict(<span class='emph_1'>dict</span>):
     def __init__(self, args):
@@ -494,12 +494,12 @@ print(md['AA'])
 # BB
 </div>
 </pre>
-Az osztályunk dict-ként is működik és ezen kívül tud még dicsekedni is a felmenőivel.
+Az osztĂˇlyunk dict-kĂ©nt is mĹ±kĂ¶dik Ă©s ezen kĂ­vĂĽl tud mĂ©g dicsekedni is a felmenĹ‘ivel.
 </p>
-<h2 id='introspection'>Introspekció &ndash; objektum az egész világ</h2>
+<h2 id='introspection'>IntrospekciĂł &ndash; objektum az egĂ©sz vilĂˇg</h2>
 <p>
-Programból le tudjuk kérdezni mindenféle modulnak és egyéb objektumnak a tulajdonságait. Ha például arra vagyok kíváncsi, hogy a fentebbi példában szereplő
-<code>MyLittleClass</code> osztálynak van-e <b>f1</b> nevű attribútuma vagy metódusa, akkor ezt így tehetem meg:
+ProgrambĂłl le tudjuk kĂ©rdezni mindenfĂ©le modulnak Ă©s egyĂ©b objektumnak a tulajdonsĂˇgait. Ha pĂ©ldĂˇul arra vagyok kĂ­vĂˇncsi, hogy a fentebbi pĂ©ldĂˇban szereplĹ‘
+<code>MyLittleClass</code> osztĂˇlynak van-e <b>f1</b> nevĹ± attribĂştuma vagy metĂłdusa, akkor ezt Ă­gy tehetem meg:
 <pre>
 print(<span class='emph_1'>hasattr</span>(MyLittleClass,'f1'))
 <div class='result'>
@@ -507,7 +507,7 @@ print(<span class='emph_1'>hasattr</span>(MyLittleClass,'f1'))
 </div>
 </pre>
 
-Ha azt szeretném tudni, van-e a <code>MyDict</code> osztálynak doSomething nevű metódusa (tehát végrehajtható attribútuma):
+Ha azt szeretnĂ©m tudni, van-e a <code>MyDict</code> osztĂˇlynak doSomething nevĹ± metĂłdusa (tehĂˇt vĂ©grehajthatĂł attribĂştuma):
 
 <pre>
 has_it = False
@@ -522,16 +522,16 @@ print(has_it)
 </div>
 </pre>
 
-Az introspekciót elsősorban a futtató rendszer használja pl. arra, hogy a "dunder" varázslatokat véghezvigye, de a felhasználói
-programokban is néha szükségünk van rá; továbbá a programozónak is hasznos, amikor kíváncsi arra, hogy egy adott modulnak, osztálynak vagy objektumnak milyen
-tulajdonságai vannak. Ehhez csak ennyit kell leírni:
+Az introspekciĂłt elsĹ‘sorban a futtatĂł rendszer hasznĂˇlja pl. arra, hogy a "dunder" varĂˇzslatokat vĂ©ghezvigye, de a felhasznĂˇlĂłi
+programokban is nĂ©ha szĂĽksĂ©gĂĽnk van rĂˇ; tovĂˇbbĂˇ a programozĂłnak is hasznos, amikor kĂ­vĂˇncsi arra, hogy egy adott modulnak, osztĂˇlynak vagy objektumnak milyen
+tulajdonsĂˇgai vannak. Ehhez csak ennyit kell leĂ­rni:
 
 <pre>
 <span class='emph_1'>dir</span>(MyLittleClass)
 </pre>
 
-Mivel a Pythonban MINDEN objektum: a beépített adattípusok, az osztályok, a modulok, a függvények &ndash; ezért mindennek ugyanúgy tudjuk lekérdezni a
-tulajdonságait. Ha például az str adattípus nem-dunder tulajdonságait szeretném kilistáztatni:
+Mivel a Pythonban MINDEN objektum: a beĂ©pĂ­tett adattĂ­pusok, az osztĂˇlyok, a modulok, a fĂĽggvĂ©nyek &ndash; ezĂ©rt mindennek ugyanĂşgy tudjuk lekĂ©rdezni a
+tulajdonsĂˇgait. Ha pĂ©ldĂˇul az str adattĂ­pus nem-dunder tulajdonsĂˇgait szeretnĂ©m kilistĂˇztatni:
 
 <pre>
 for name in <span class='emph_1'>dir</span>(str):
@@ -548,7 +548,7 @@ for name in <span class='emph_1'>dir</span>(str):
 # zfill
 </div>
 </pre>
-Ha ezek után a zfill metódusról akarok további információt:
+Ha ezek utĂˇn a zfill metĂłdusrĂłl akarok tovĂˇbbi informĂˇciĂłt:
 
 <pre>
 print(<span class='emph_1'>help</span>(str.zfill))
@@ -565,7 +565,7 @@ print(<span class='emph_1'>help</span>(str.zfill))
 </p>
 <h3 id='docstrings'>&rtrif; Docstring</h3>
 <p>
-Az általunk készített modulok, osztályok, függvények tulajdonságai is lekérdezhetővé válnak a help() függvénnyel, ha ellátjuk őket egy úgynevezett
+Az Ăˇltalunk kĂ©szĂ­tett modulok, osztĂˇlyok, fĂĽggvĂ©nyek tulajdonsĂˇgai is lekĂ©rdezhetĹ‘vĂ© vĂˇlnak a help() fĂĽggvĂ©nnyel, ha ellĂˇtjuk Ĺ‘ket egy Ăşgynevezett
 docstring-gel:
 
 <pre>
@@ -581,8 +581,8 @@ print(<span class='emph_1'>help</span>(myfunc))
 #     Returns the input parameter multiplied by 2
 </div>
 </pre>
-Mondanom sem kell, hogy ezt is a dunder mechanizmussal valósítja meg a Python: lekérdezi az objektum <code>__doc__</code> attribútumát. Ha nem definiáltunk
-docstring-et, akkor a help() függvény a deklarációt adja vissza:
+Mondanom sem kell, hogy ezt is a dunder mechanizmussal valĂłsĂ­tja meg a Python: lekĂ©rdezi az objektum <code>__doc__</code> attribĂştumĂˇt. Ha nem definiĂˇltunk
+docstring-et, akkor a help() fĂĽggvĂ©ny a deklarĂˇciĂłt adja vissza:
 
 <pre>
 def myfunc(param):
@@ -595,16 +595,16 @@ print(<span class='emph_1'>help</span>(myfunc))
 # myfunc(param)
 </div>
 </pre>
-tehát itt sem hibajelzéssel reagál az illető tulajdonság hiányára.
+tehĂˇt itt sem hibajelzĂ©ssel reagĂˇl az illetĹ‘ tulajdonsĂˇg hiĂˇnyĂˇra.
 </p>
-<h2 id='tracing'>Jó hibajelzés</h2>
+<h2 id='tracing'>JĂł hibajelzĂ©s</h2>
 <p>
-Futási hiba esetén nagyon világos formában megkapjuk a teljes stack trace-t, ezáltal a hibakeresés sok esetben nagyon egyszerűvé válik.
+FutĂˇsi hiba esetĂ©n nagyon vilĂˇgos formĂˇban megkapjuk a teljes stack trace-t, ezĂˇltal a hibakeresĂ©s sok esetben nagyon egyszerĹ±vĂ© vĂˇlik.
 </p>
-<h2 id='enhanced_indexing'>Indexelés kiterjesztése</h2>
-<h3 id='negative_index'>&rtrif; Negatív indexek</h3>
+<h2 id='enhanced_indexing'>IndexelĂ©s kiterjesztĂ©se</h2>
+<h3 id='negative_index'>&rtrif; NegatĂ­v indexek</h3>
 <p>
-A tömb-szerű adatszerkezetek elemeit ugyanúgy nulláról kezdődő indexeléssel érjük el, mint más programnyelvekben:
+A tĂ¶mb-szerĹ± adatszerkezetek elemeit ugyanĂşgy nullĂˇrĂłl kezdĹ‘dĹ‘ indexelĂ©ssel Ă©rjĂĽk el, mint mĂˇs programnyelvekben:
 
 <pre>
 lst = [10,20,30,40]
@@ -614,7 +614,7 @@ print(lst[0], lst[2], lst[len(lst) - 1])
 # 10 30 40
 </div>
 </pre>
-viszont lehetőség van elérni az elemeket a sorozat végétől indulva ennél egyszerűbben:
+viszont lehetĹ‘sĂ©g van elĂ©rni az elemeket a sorozat vĂ©gĂ©tĹ‘l indulva ennĂ©l egyszerĹ±bben:
 
 <pre>
 print(lst[len(lst) - 1], lst[len(lst) - 2])
@@ -622,7 +622,7 @@ print(lst[len(lst) - 1], lst[len(lst) - 2])
 # 40 30
 </div>
 </pre>
-mégpedig negatív indexekkel, -1-től kezdve:
+mĂ©gpedig negatĂ­v indexekkel, -1-tĹ‘l kezdve:
 
 <pre>
 print(lst[-1], lst[-2])
@@ -633,7 +633,7 @@ print(lst[-1], lst[-2])
 </p>
 <h3 id='slicing'>&rtrif; Slicing</h3>
 <p>
-A sorozat egy szeletét, azaz egynél több elemet is meg tudunk címezni:
+A sorozat egy szeletĂ©t, azaz egynĂ©l tĂ¶bb elemet is meg tudunk cĂ­mezni:
 
 <pre>
 lst = [10,20,30,40,50,60]
@@ -643,7 +643,7 @@ print(lst[1:4])
 # [20, 30, 40]
 </div>
 </pre>
-sőt, lépésközt is definiálni tudunk:
+sĹ‘t, lĂ©pĂ©skĂ¶zt is definiĂˇlni tudunk:
 
 <pre>
 print(lst[0::2])
@@ -651,8 +651,8 @@ print(lst[0::2])
 # [10, 30, 50]
 </div>
 </pre>
-A meg nem adott paraméternek (itt: a lezáró, utolsó indexnek) a default értékét veszi automatikusan a futtató rendszer. Fordított sorrendben is be tudjuk
-járni a sorozatot:
+A meg nem adott paramĂ©ternek (itt: a lezĂˇrĂł, utolsĂł indexnek) a default Ă©rtĂ©kĂ©t veszi automatikusan a futtatĂł rendszer. FordĂ­tott sorrendben is be tudjuk
+jĂˇrni a sorozatot:
 
 <pre>
 print(lst[::-1])
@@ -660,18 +660,18 @@ print(lst[::-1])
 # [60, 50, 40, 30, 20, 10]
 </div>
 </pre>
-A slicing numerikus számításokban sűrűn előfordul és nemcsak olvashatóbbá teszi a programjainkat (amikor már megszoktuk ezt a jelölésmódot), hanem a
-programrészeket könnyebben kombinálhatóvá is. A numpy modul pedig több dimenziós tömbökre is kiterjeszti a negatív indexeket és a slicing-ot, ezáltal
-nagyon tömör, áttekinthető formában tudunk leírni mátrixműveleteket.
+A slicing numerikus szĂˇmĂ­tĂˇsokban sĹ±rĹ±n elĹ‘fordul Ă©s nemcsak olvashatĂłbbĂˇ teszi a programjainkat (amikor mĂˇr megszoktuk ezt a jelĂ¶lĂ©smĂłdot), hanem a
+programrĂ©szeket kĂ¶nnyebben kombinĂˇlhatĂłvĂˇ is. A numpy modul pedig tĂ¶bb dimenziĂłs tĂ¶mbĂ¶kre is kiterjeszti a negatĂ­v indexeket Ă©s a slicing-ot, ezĂˇltal
+nagyon tĂ¶mĂ¶r, ĂˇttekinthetĹ‘ formĂˇban tudunk leĂ­rni mĂˇtrixmĹ±veleteket.
 </p>
-<h2 id='default_params'>Ügyesen választott default paraméterek</h2>
+<h2 id='default_params'>Ăśgyesen vĂˇlasztott default paramĂ©terek</h2>
 <p>
-Számos könyvtári rutinnak sok paramétere van, ezáltal sokféle feladatot meg lehet oldani velük &ndash; viszont ha a tipikusan nem használt paramétereknek
-mindig meg kellene adnunk az értékét, akkor használhatatlanul bonyolulttá válna az egész. Elmondható, hogy általában a Python függvényeinél a default paraméterek
-ügyesen vannak meghatározva, a gyakori, egyszerűbb eseteket egyszerű függvényhívással tudjuk megoldani.
+SzĂˇmos kĂ¶nyvtĂˇri rutinnak sok paramĂ©tere van, ezĂˇltal sokfĂ©le feladatot meg lehet oldani velĂĽk &ndash; viszont ha a tipikusan nem hasznĂˇlt paramĂ©tereknek
+mindig meg kellene adnunk az Ă©rtĂ©kĂ©t, akkor hasznĂˇlhatatlanul bonyolulttĂˇ vĂˇlna az egĂ©sz. ElmondhatĂł, hogy ĂˇltalĂˇban a Python fĂĽggvĂ©nyeinĂ©l a default paramĂ©terek
+ĂĽgyesen vannak meghatĂˇrozva, a gyakori, egyszerĹ±bb eseteket egyszerĹ± fĂĽggvĂ©nyhĂ­vĂˇssal tudjuk megoldani.
 </p>
 <p>
-Adott például egy <b>^</b> jelekkel delimitált fájl, melynek első sora tartalmazza az oszlopneveket:
+Adott pĂ©ldĂˇul egy <b>^</b> jelekkel delimitĂˇlt fĂˇjl, melynek elsĹ‘ sora tartalmazza az oszlopneveket:
 
 <pre class='data'>
 Name^Age^Income
@@ -690,7 +690,7 @@ Dr.NoAge^^7400
 trimmer^44^2900
 ^^
 </pre>
-Olvassuk ezt be a pandas <code>read_csv</code> függvényének segítségével:
+Olvassuk ezt be a pandas <code>read_csv</code> fĂĽggvĂ©nyĂ©nek segĂ­tsĂ©gĂ©vel:
 
 <pre>
 import pandas as pd
@@ -715,10 +715,10 @@ print(df)
 # 13        NaN   NaN     NaN
 </div>
 </pre>
-A pandas beolvasta az adatokat, megállapította az oszlopok típusát, NaN értéket rendelt az üres cellákhoz és azonosítót adott minden sornak.
+A pandas beolvasta az adatokat, megĂˇllapĂ­totta az oszlopok tĂ­pusĂˇt, NaN Ă©rtĂ©ket rendelt az ĂĽres cellĂˇkhoz Ă©s azonosĂ­tĂłt adott minden sornak.
 </p>
 <p>
-Ez egy tipikus, legegyszerűbb feladat, a függvényhívás is egyszerű volt. Ami csak azért érdekes, mert a read_csv függvény deklarációja egyébként így néz ki:
+Ez egy tipikus, legegyszerĹ±bb feladat, a fĂĽggvĂ©nyhĂ­vĂˇs is egyszerĹ± volt. Ami csak azĂ©rt Ă©rdekes, mert a read_csv fĂĽggvĂ©ny deklarĂˇciĂłja egyĂ©bkĂ©nt Ă­gy nĂ©z ki:
 
 <pre>
 <span class='emph_1'>pd.read_csv(filepath_or_buffer, sep=','</span>, delimiter=None, header='infer', names=None, index_col=None, usecols=None, squeeze=False,
@@ -729,9 +729,9 @@ thousands=None, decimal=b'.', lineterminator=None, quotechar='"', quoting=0, esc
 tupleize_cols=None, error_bad_lines=True, warn_bad_lines=True, skipfooter=0, doublequote=True, delim_whitespace=False, low_memory=True,
 memory_map=False, float_precision=None<span class='emph_1'>)</span>
 </pre>
-és ezek mind nagyon hasznos paraméterek &ndash; de a legegyszerűbb esetben nem is kell tudnunk a létezésükről. Ha a mező-delimiter vessző lenne, akkor még a
-<b>sep</b> paramétert sem kellett volna megadnunk. Ha pedig például az első három sort akarjuk beolvasni szemrevételezés céljából, akkor csak az
-<b>nrows</b> paramétert kell specifikálnunk:
+Ă©s ezek mind nagyon hasznos paramĂ©terek &ndash; de a legegyszerĹ±bb esetben nem is kell tudnunk a lĂ©tezĂ©sĂĽkrĹ‘l. Ha a mezĹ‘-delimiter vesszĹ‘ lenne, akkor mĂ©g a
+<b>sep</b> paramĂ©tert sem kellett volna megadnunk. Ha pedig pĂ©ldĂˇul az elsĹ‘ hĂˇrom sort akarjuk beolvasni szemrevĂ©telezĂ©s cĂ©ljĂˇbĂłl, akkor csak az
+<b>nrows</b> paramĂ©tert kell specifikĂˇlnunk:
 
 <pre class='pale'>
 import pandas as pd
@@ -745,26 +745,26 @@ print(df)
 # 2       White  40.0  1500.0
 </div>
 </pre>
-Szerintem default értékeket ügyesen választani egyáltalán nem triviális feladat. Ha nem alkalmazunk default értékeket, akkor rengeteget kell gépelni, eközben
-sok a hibalehetőség és nehezen olvashatóvá válik a program. Ha pedig nem úgy választunk default értékeket, ahogy azt egy átlagos függvény-használó intuitívan
-elképzeli, és/vagy ahogy a gyakori esetek diktálják, akkor a program rendszeresen kellemetlen meglepetésekkel fog szolgálni.
+Szerintem default Ă©rtĂ©keket ĂĽgyesen vĂˇlasztani egyĂˇltalĂˇn nem triviĂˇlis feladat. Ha nem alkalmazunk default Ă©rtĂ©keket, akkor rengeteget kell gĂ©pelni, ekĂ¶zben
+sok a hibalehetĹ‘sĂ©g Ă©s nehezen olvashatĂłvĂˇ vĂˇlik a program. Ha pedig nem Ăşgy vĂˇlasztunk default Ă©rtĂ©keket, ahogy azt egy Ăˇtlagos fĂĽggvĂ©ny-hasznĂˇlĂł intuitĂ­van
+elkĂ©pzeli, Ă©s/vagy ahogy a gyakori esetek diktĂˇljĂˇk, akkor a program rendszeresen kellemetlen meglepetĂ©sekkel fog szolgĂˇlni.
 </p>
-<h2 id='polymorph_params'>Ügyesen választott polimorf paraméterek</h2>
+<h2 id='polymorph_params'>Ăśgyesen vĂˇlasztott polimorf paramĂ©terek</h2>
 <p>
-Egy megjegyzés a <code>read_csv</code> függvény a használatához: fájl útvonal helyett URL-t is megadhatunk, nem kell először letöltenünk a fájlt. Majd ő
-megcsinálja. Például:
+Egy megjegyzĂ©s a <code>read_csv</code> fĂĽggvĂ©ny a hasznĂˇlatĂˇhoz: fĂˇjl Ăştvonal helyett URL-t is megadhatunk, nem kell elĹ‘szĂ¶r letĂ¶ltenĂĽnk a fĂˇjlt. Majd Ĺ‘
+megcsinĂˇlja. PĂ©ldĂˇul:
 
 <pre>
 import pandas as pd
 
 df = pd.read_csv("https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/datasets/AirPassengers.csv")
 </pre>
-Én ezt az esetet, amikor a paraméter típusától függően a függvény mást és mást csinál, polimorf paraméternek hívom &ndash; nem tudom, létezik-e rá
-hivatalos megnevezés.
+Ă‰n ezt az esetet, amikor a paramĂ©ter tĂ­pusĂˇtĂłl fĂĽggĹ‘en a fĂĽggvĂ©ny mĂˇst Ă©s mĂˇst csinĂˇl, polimorf paramĂ©ternek hĂ­vom &ndash; nem tudom, lĂ©tezik-e rĂˇ
+hivatalos megnevezĂ©s.
 </p>
 <p>
-Egy másik példa a polimorf paraméterekre a sztringek <code>startswith, endswith</code> metódusa. Ha nem egy sztringet, hanem sztringekből álló
-tuple-t adunk meg, akkor mindegyik sztringgel megvizsgálják az egyezést és ha valamelyik illeszkedik a sztring elejére/végére, akkor True értékkel térnek vissza:
+Egy mĂˇsik pĂ©lda a polimorf paramĂ©terekre a sztringek <code>startswith, endswith</code> metĂłdusa. Ha nem egy sztringet, hanem sztringekbĹ‘l ĂˇllĂł
+tuple-t adunk meg, akkor mindegyik sztringgel megvizsgĂˇljĂˇk az egyezĂ©st Ă©s ha valamelyik illeszkedik a sztring elejĂ©re/vĂ©gĂ©re, akkor True Ă©rtĂ©kkel tĂ©rnek vissza:
 
 <pre>
 lst = ['a.txt','b.py','c.html','d.xls']
@@ -782,80 +782,80 @@ for e in lst:
 # c.html
 </div>
 </pre>
-Polimorf paramétereket alkalmazni <b>nagyon</b> ingoványos terület &ndash; ha nem eléggé intuitív a működés, akkor rettenetesen nehezen érthető és
-használható interfész lesz az eredmény. A Python nagy érdeme, hogy általában nagyon világosak az ilyen módon megírt függvényei is, kivételeket talán
-leginkább a matplotlib-ben lehet találni. De arra van mentség, azokat a funkciókat a MATLAB-ból vették át.
+Polimorf paramĂ©tereket alkalmazni <b>nagyon</b> ingovĂˇnyos terĂĽlet &ndash; ha nem elĂ©ggĂ© intuitĂ­v a mĹ±kĂ¶dĂ©s, akkor rettenetesen nehezen Ă©rthetĹ‘ Ă©s
+hasznĂˇlhatĂł interfĂ©sz lesz az eredmĂ©ny. A Python nagy Ă©rdeme, hogy ĂˇltalĂˇban nagyon vilĂˇgosak az ilyen mĂłdon megĂ­rt fĂĽggvĂ©nyei is, kivĂ©teleket talĂˇn
+leginkĂˇbb a matplotlib-ben lehet talĂˇlni. De arra van mentsĂ©g, azokat a funkciĂłkat a MATLAB-bĂłl vettĂ©k Ăˇt.
 </p>
-<h2 id='concise_constructs'>Néhány tömör nyelvi elem</h2>
+<h2 id='concise_constructs'>NĂ©hĂˇny tĂ¶mĂ¶r nyelvi elem</h2>
 <p>
-A "comprehension" névvel ellátott nyelvi konstrukció (magyar megfelelőjét nem ismerem) nagyon tömör írásmódot tesz lehetővé. Persze ha túlzásba visszük, akkor a
-tömörség már inkább rontja az olvashatóságot, semmint javítaná, de megfelelő keretek között tartva nagyon lényegesen megnöveli az áttekinthetőséget.
+A "comprehension" nĂ©vvel ellĂˇtott nyelvi konstrukciĂł (magyar megfelelĹ‘jĂ©t nem ismerem) nagyon tĂ¶mĂ¶r Ă­rĂˇsmĂłdot tesz lehetĹ‘vĂ©. Persze ha tĂşlzĂˇsba visszĂĽk, akkor a
+tĂ¶mĂ¶rsĂ©g mĂˇr inkĂˇbb rontja az olvashatĂłsĂˇgot, semmint javĂ­tanĂˇ, de megfelelĹ‘ keretek kĂ¶zĂ¶tt tartva nagyon lĂ©nyegesen megnĂ¶veli az ĂˇttekinthetĹ‘sĂ©get.
 </p>
 <blockquote class="blq_1">
-Az, hogy mennyire tömören vagy szószátyár módon tudunk leírni valamit, egyáltalán nem csak esztétikai kérdés. Tömören megfogalmazott állításokkal át tudjuk
-tekinteni a probléma és a megoldás lényegét; ha sok segédinformációt is el kell olvasnunk, akkor kevésbé leszünk képesek felfogni a lényeget.
+Az, hogy mennyire tĂ¶mĂ¶ren vagy szĂłszĂˇtyĂˇr mĂłdon tudunk leĂ­rni valamit, egyĂˇltalĂˇn nem csak esztĂ©tikai kĂ©rdĂ©s. TĂ¶mĂ¶ren megfogalmazott ĂˇllĂ­tĂˇsokkal Ăˇt tudjuk
+tekinteni a problĂ©ma Ă©s a megoldĂˇs lĂ©nyegĂ©t; ha sok segĂ©dinformĂˇciĂłt is el kell olvasnunk, akkor kevĂ©sbĂ© leszĂĽnk kĂ©pesek felfogni a lĂ©nyeget.
 </p>
 <p>
-El lehet mondani így is, hogyan mozog egy lejtőre tett test:
+El lehet mondani Ă­gy is, hogyan mozog egy lejtĹ‘re tett test:
 </p>
 <p style='text-align: center; font-size: 120%; color: blue;'>
-A nehézségi gyorsulást megszorozzuk a lejtő magasságával és elosztjuk a lejtő hosszával, aztán ezt megszorozzuk az idővel és hozzáadjuk a kezdeti
-sebességet.
+A nehĂ©zsĂ©gi gyorsulĂˇst megszorozzuk a lejtĹ‘ magassĂˇgĂˇval Ă©s elosztjuk a lejtĹ‘ hosszĂˇval, aztĂˇn ezt megszorozzuk az idĹ‘vel Ă©s hozzĂˇadjuk a kezdeti
+sebessĂ©get.
 </p>
 <p>
-Ez teljesen korrekt. De azért nekem ez jobban tetszik:
+Ez teljesen korrekt. De azĂ©rt nekem ez jobban tetszik:
 </p>
 <p style='text-align: center; font-size: 150%;'>
 v = g &times; sin &alpha; &times; t + v<sub>0</sub>
 </p>
 </blockquote>
 <p>
-Legyen például az a feladat, hogy
+Legyen pĂ©ldĂˇul az a feladat, hogy
 
 <ol>
-<li>megnyitunk egy szövegfájlt,</li>
+<li>megnyitunk egy szĂ¶vegfĂˇjlt,</li>
 <li>beolvassuk a sorait,</li>
-<li>a sorvégjeleket eltávolítjuk,</li>
-<li>azon sorokat elhelyezzük egy listában, melyek 3 karakternél hosszabbak és végül</li>
-<li>bezárjuk a fájlt.</li>
+<li>a sorvĂ©gjeleket eltĂˇvolĂ­tjuk,</li>
+<li>azon sorokat elhelyezzĂĽk egy listĂˇban, melyek 3 karakternĂ©l hosszabbak Ă©s vĂ©gĂĽl</li>
+<li>bezĂˇrjuk a fĂˇjlt.</li>
 </ol>
-A pythonikus megoldás így néz ki:
+A pythonikus megoldĂˇs Ă­gy nĂ©z ki:
 
 <pre>
 with open("infile.txt") as f:
     lst = [line.strip() for line in f if len(line.strip()) > 3]
 </pre>
-(<b>Igen</b>, ebben benne van a fájl bezárása is, bár az nem a comprehension érdeme, hanem a <code>with</code> context manageré, de így legalább vele is találkoztunk.)
+(<b>Igen</b>, ebben benne van a fĂˇjl bezĂˇrĂˇsa is, bĂˇr az nem a comprehension Ă©rdeme, hanem a <code>with</code> context managerĂ©, de Ă­gy legalĂˇbb vele is talĂˇlkoztunk.)
 </p>
 <p>
-Persze amíg szokatlan ez a szintaktika, addig nemhogy olvashatónak látjuk, hanem inkább idegesítőnek (én legalábbis így voltam vele) &ndash; de nagyon gyorsan
-meg lehet szokni. És bele lehet szeretni.
+Persze amĂ­g szokatlan ez a szintaktika, addig nemhogy olvashatĂłnak lĂˇtjuk, hanem inkĂˇbb idegesĂ­tĹ‘nek (Ă©n legalĂˇbbis Ă­gy voltam vele) &ndash; de nagyon gyorsan
+meg lehet szokni. Ă‰s bele lehet szeretni.
 </p>
-<h2 id='function_objects'>Függvényobjektumok, funkcionális programozás</h2>
+<h2 id='function_objects'>FĂĽggvĂ©nyobjektumok, funkcionĂˇlis programozĂˇs</h2>
 <p>
 
-Az, hogy a Pythonban a függvények is objektumok &ndash; mint ahogy minden más &ndash; és ezért átadhatók paraméterként más függvényeknek, továbbá lehetnek függvények
-visszatérő értékei, hatalmas lehetőségeket rejt magában. Sajnos ezeket kicsi és érthető példákon nem igazán lehet meggyőzően szemléltetni amíg a részletekkel meg nem
-ismerkedünk, ezért arra kérem az olvasót, higgye el nekem, hogy funkcionális programozás nagyon hasznos dolog. Azaz húzhatunk még egy vonást a Python
-<span class='code_2'>előnyök</span> rubrikájába.
+Az, hogy a Pythonban a fĂĽggvĂ©nyek is objektumok &ndash; mint ahogy minden mĂˇs &ndash; Ă©s ezĂ©rt ĂˇtadhatĂłk paramĂ©terkĂ©nt mĂˇs fĂĽggvĂ©nyeknek, tovĂˇbbĂˇ lehetnek fĂĽggvĂ©nyek
+visszatĂ©rĹ‘ Ă©rtĂ©kei, hatalmas lehetĹ‘sĂ©geket rejt magĂˇban. Sajnos ezeket kicsi Ă©s Ă©rthetĹ‘ pĂ©ldĂˇkon nem igazĂˇn lehet meggyĹ‘zĹ‘en szemlĂ©ltetni amĂ­g a rĂ©szletekkel meg nem
+ismerkedĂĽnk, ezĂ©rt arra kĂ©rem az olvasĂłt, higgye el nekem, hogy funkcionĂˇlis programozĂˇs nagyon hasznos dolog. Azaz hĂşzhatunk mĂ©g egy vonĂˇst a Python
+<span class='code_2'>elĹ‘nyĂ¶k</span> rubrikĂˇjĂˇba.
 </p>
 <p>
-És társaságban is nagyon jól veszi ki magát, ha a funkcionális programozást dícsérjük. Kicsi a lebukás veszélye, mert kevesen ismerik, akik meg ismerik, azok
-egyet fognak érteni és innen kezdve már csak bólogatnunk kell. Ha valaki mégis rákérdezne, hogy miért is jó az, akkor mérjük végig megvetően az illetőt és távozzunk
+Ă‰s tĂˇrsasĂˇgban is nagyon jĂłl veszi ki magĂˇt, ha a funkcionĂˇlis programozĂˇst dĂ­csĂ©rjĂĽk. Kicsi a lebukĂˇs veszĂ©lye, mert kevesen ismerik, akik meg ismerik, azok
+egyet fognak Ă©rteni Ă©s innen kezdve mĂˇr csak bĂłlogatnunk kell. Ha valaki mĂ©gis rĂˇkĂ©rdezne, hogy miĂ©rt is jĂł az, akkor mĂ©rjĂĽk vĂ©gig megvetĹ‘en az illetĹ‘t Ă©s tĂˇvozzunk
 gyorsan.
 </p>
-<h2 id='generators'>Generátorok, korutinok</h2>
+<h2 id='generators'>GenerĂˇtorok, korutinok</h2>
 <p>
-A generátorok olyan különleges függvények, amelyek megőrzik belső állapotukat, újabb és újabb hívásokkal a belsejükbe lehet visszaugrani &ndash; és ez pont
-annyira hasznos dolog, mint amennyire érthetetlennek hangzik első hallásra. Ezeket sem lehet jól bemutatni előzetesen, a részletek ismerete nélkül.
+A generĂˇtorok olyan kĂĽlĂ¶nleges fĂĽggvĂ©nyek, amelyek megĹ‘rzik belsĹ‘ Ăˇllapotukat, Ăşjabb Ă©s Ăşjabb hĂ­vĂˇsokkal a belsejĂĽkbe lehet visszaugrani &ndash; Ă©s ez pont
+annyira hasznos dolog, mint amennyire Ă©rthetetlennek hangzik elsĹ‘ hallĂˇsra. Ezeket sem lehet jĂłl bemutatni elĹ‘zetesen, a rĂ©szletek ismerete nĂ©lkĂĽl.
 </p>
-<h2 id='useful_functions'>Sok hasznos függvény és metódus</h2>
+<h2 id='useful_functions'>Sok hasznos fĂĽggvĂ©ny Ă©s metĂłdus</h2>
 <p>
-A beépített függvények, a standard könyvtár és az egyéb modulok függvényei rengeteg gyakran előforduló feladatot lefednek, igen sok megoldást készen
-kapunk. Nemhogy a kereket nem kell folyton újra feltalálnunk, hanem a traktort és a Ferrarit sem. Nézzünk meg néhány példát.
+A beĂ©pĂ­tett fĂĽggvĂ©nyek, a standard kĂ¶nyvtĂˇr Ă©s az egyĂ©b modulok fĂĽggvĂ©nyei rengeteg gyakran elĹ‘fordulĂł feladatot lefednek, igen sok megoldĂˇst kĂ©szen
+kapunk. Nemhogy a kereket nem kell folyton Ăşjra feltalĂˇlnunk, hanem a traktort Ă©s a Ferrarit sem. NĂ©zzĂĽnk meg nĂ©hĂˇny pĂ©ldĂˇt.
 </p>
 <p>
-&ofcir; Így iratjuk ki, hogy egy adott elem hányszor szerepel egy listában:
+&ofcir; ĂŤgy iratjuk ki, hogy egy adott elem hĂˇnyszor szerepel egy listĂˇban:
 
 <pre>
 lst = [10,20,30,10,50]
@@ -864,7 +864,7 @@ print(lst.<span class='emph_1'>count(10)</span>)
 # 2
 </div>
 </pre>
-&ofcir; Így fordítjuk meg helyben a listát:
+&ofcir; ĂŤgy fordĂ­tjuk meg helyben a listĂˇt:
 
 <pre>
 lst.<span class='emph_1'>reverse()</span>
@@ -874,7 +874,7 @@ print(lst)
 </div>
 </pre>
 
-&ofcir; Így számoljuk meg, hogy egy lista elemei hányszor fordulnak elő:
+&ofcir; ĂŤgy szĂˇmoljuk meg, hogy egy lista elemei hĂˇnyszor fordulnak elĹ‘:
 
 <pre>
 import collections
@@ -887,7 +887,7 @@ Counter({'b': 3, 'a': 2, 'c': 1})
 </div>
 </pre>
 
-&ofcir; Így iratjuk ki rekurzívan egy könyvtár összes alkönyvtárát:
+&ofcir; ĂŤgy iratjuk ki rekurzĂ­van egy kĂ¶nyvtĂˇr Ă¶sszes alkĂ¶nyvtĂˇrĂˇt:
 
 <pre>
 import os
@@ -904,7 +904,7 @@ for root, dirs, files in <span class='emph_1'>os.walk</span>("."):
 </div>
 </pre>
 
-&ofcir; Így iratjuk ki elemek permutációit:
+&ofcir; ĂŤgy iratjuk ki elemek permutĂˇciĂłit:
 
 <pre>
 from itertools import permutations
@@ -917,31 +917,31 @@ print(list(perm))
 </div>
 </pre>
 </p>
-<h2 id='useful_modules'>Sok hasznos modul jól dokumentálva</h2>
+<h2 id='useful_modules'>Sok hasznos modul jĂłl dokumentĂˇlva</h2>
 <p>
-Nagy a fejlesztő közösség, rengeteg  <a href='https://xkcd.com/353/' target='_blank'>hasznos modul</a> létezik és ezek tipikusan jól le vannak dokumentálva.
-Ha képet akarunk kapni arról, hogy hány modul létezik, érdemes <a href='https://pythonawesome.com/' target='_blank'>ide</a> benézni. Vigyázat, mélyvíz!
+Nagy a fejlesztĹ‘ kĂ¶zĂ¶ssĂ©g, rengeteg  <a href='https://xkcd.com/353/' target='_blank'>hasznos modul</a> lĂ©tezik Ă©s ezek tipikusan jĂłl le vannak dokumentĂˇlva.
+Ha kĂ©pet akarunk kapni arrĂłl, hogy hĂˇny modul lĂ©tezik, Ă©rdemes <a href='https://pythonawesome.com/' target='_blank'>ide</a> benĂ©zni. VigyĂˇzat, mĂ©lyvĂ­z!
 </p>
-<h2 id='easy_install'>Könnyű installálás</h2>
+<h2 id='easy_install'>KĂ¶nnyĹ± installĂˇlĂˇs</h2>
 <p>
-A modulok installálása szinte kivétel nélkül nagyon egyszerű még akkor is, ha több Python verzió van a gépünkön.
+A modulok installĂˇlĂˇsa szinte kivĂ©tel nĂ©lkĂĽl nagyon egyszerĹ± mĂ©g akkor is, ha tĂ¶bb Python verziĂł van a gĂ©pĂĽnkĂ¶n.
 </p>
-<h2 id='easy_for_beginners'>Kezdőknek (is) könnyen tanulható</h2>
+<h2 id='easy_for_beginners'>KezdĹ‘knek (is) kĂ¶nnyen tanulhatĂł</h2>
 <p>
-A nem nagyon haladó elemei a nyelvnek kifejezetten könnyen elsajátíthatók; nem véletlen, hogy egyre több helyen a Pythont választják bevezető nyelvnek
-kezdők (akár gyerekek) számára.
+A nem nagyon haladĂł elemei a nyelvnek kifejezetten kĂ¶nnyen elsajĂˇtĂ­thatĂłk; nem vĂ©letlen, hogy egyre tĂ¶bb helyen a Pythont vĂˇlasztjĂˇk bevezetĹ‘ nyelvnek
+kezdĹ‘k (akĂˇr gyerekek) szĂˇmĂˇra.
 </p>
-<h2 id='disadvantages'>...és a hátrányok &#9760;</h2>
+<h2 id='disadvantages'>...Ă©s a hĂˇtrĂˇnyok &#9760;</h2>
 <p>
-Feltétlenül szólni kell a nyelv hátrányairól is, nehogy az olvasó azt higgye, hogy elfogult vagyok a Python javára.
+FeltĂ©tlenĂĽl szĂłlni kell a nyelv hĂˇtrĂˇnyairĂłl is, nehogy az olvasĂł azt higgye, hogy elfogult vagyok a Python javĂˇra.
 </p>
 <p>
-Bár tényleg az vagyok, nincs mit tagadni, ha már így szóbakerült.
+BĂˇr tĂ©nyleg az vagyok, nincs mit tagadni, ha mĂˇr Ă­gy szĂłbakerĂĽlt.
 </p>
-<h3 id='no_typecheck'>&rtrif; Típusellenőrzés hiánya &rArr; futás közben kiderülő hibák</h3>
+<h3 id='no_typecheck'>&rtrif; TĂ­pusellenĹ‘rzĂ©s hiĂˇnya &rArr; futĂˇs kĂ¶zben kiderĂĽlĹ‘ hibĂˇk</h3>
 <p>
-Mint minden szkript-nyelvnél, amelynél nincs külön fordítási és típusellenőrzési fázis, egészen komoly hibák is rejtve tudnak maradni, míg az illető program-ágra
-nem fut a vezérlés:
+Mint minden szkript-nyelvnĂ©l, amelynĂ©l nincs kĂĽlĂ¶n fordĂ­tĂˇsi Ă©s tĂ­pusellenĹ‘rzĂ©si fĂˇzis, egĂ©szen komoly hibĂˇk is rejtve tudnak maradni, mĂ­g az illetĹ‘ program-Ăˇgra
+nem fut a vezĂ©rlĂ©s:
 <pre>
 x = 10
 #...
@@ -950,15 +950,15 @@ if x < 20:
 else:
 <div class='big_red'>   xprint(y) <span style='color:black;'># &#128163; (durr)</span></div>
 </pre>
-Itt az <code>else</code> ágban két hiba is van: nem létezik <b>xprint</b> függvény és nincs definiálva az <b>y</b> változó. Ám ez csak akkor derül ki, amikor
-x értéke pl. 100; a fenti esetben problémamentesen lefut a program.
+Itt az <code>else</code> Ăˇgban kĂ©t hiba is van: nem lĂ©tezik <b>xprint</b> fĂĽggvĂ©ny Ă©s nincs definiĂˇlva az <b>y</b> vĂˇltozĂł. Ăm ez csak akkor derĂĽl ki, amikor
+x Ă©rtĂ©ke pl. 100; a fenti esetben problĂ©mamentesen lefut a program.
 </p>
 <p>
-<b style='font-size:200%;color:red;'>&#x261e;</b> <span class='emph_1'>TEHÁT: Sokkal</span> gondosabban kell tesztelni, mint a kompilált nyelveknél,
-gondoskodni kell róla, hogy minden ágat bejárjunk.
+<b style='font-size:200%;color:red;'>&#x261e;</b> <span class='emph_1'>TEHĂT: Sokkal</span> gondosabban kell tesztelni, mint a kompilĂˇlt nyelveknĂ©l,
+gondoskodni kell rĂłla, hogy minden Ăˇgat bejĂˇrjunk.
 </p>
 <p>
-Tovább rontja a helyzetet a típusellenőrzés hiánya:
+TovĂˇbb rontja a helyzetet a tĂ­pusellenĹ‘rzĂ©s hiĂˇnya:
 
 <pre>
 lst = [20,30,40]
@@ -967,19 +967,19 @@ xst = 10
 if xst < 20:
     print(xst)
 else:
-    <span class='emph_1'>l</span>st = 99 # <span class='emph_1'>x</span>st-t akartunk írni, de nem sikerült
+    <span class='emph_1'>l</span>st = 99 # <span class='emph_1'>x</span>st-t akartunk Ă­rni, de nem sikerĂĽlt
 
 lst.append(200) <span class='big_black'># &#128163; (durr)</span>
 </pre>
-Ez is csak akkor derül ki, amikor xst pl. 100-as értéket kap. És ilyen hibát nagyon könnyű elkövetni.
+Ez is csak akkor derĂĽl ki, amikor xst pl. 100-as Ă©rtĂ©ket kap. Ă‰s ilyen hibĂˇt nagyon kĂ¶nnyĹ± elkĂ¶vetni.
 </p>
 <p>
-<b style='font-size:200%;color:red;'>&#x261e;</b> <span class='emph_1'>TEHÁT: Sokkal, de sokkal</span> gondosabban kell tesztelni, mint a típusellenőrzéses
-nyelveknél, gondoskodni kell róla, hogy minden ágat bejárjunk.
+<b style='font-size:200%;color:red;'>&#x261e;</b> <span class='emph_1'>TEHĂT: Sokkal, de sokkal</span> gondosabban kell tesztelni, mint a tĂ­pusellenĹ‘rzĂ©ses
+nyelveknĂ©l, gondoskodni kell rĂłla, hogy minden Ăˇgat bejĂˇrjunk.
 </p>
 <p>
-Másik tipikus hiba: kulcsszó-felülírás. Itt például előállítunk egy dict nevű objektumot, ami azt eredményezi, hogy a továbbiakban nem tudjuk ezt a kulcsszót
-használni egy dictionary létrehozására. A dict elvesztette kulcsszó jellegét.
+MĂˇsik tipikus hiba: kulcsszĂł-felĂĽlĂ­rĂˇs. Itt pĂ©ldĂˇul elĹ‘ĂˇllĂ­tunk egy dict nevĹ± objektumot, ami azt eredmĂ©nyezi, hogy a tovĂˇbbiakban nem tudjuk ezt a kulcsszĂłt
+hasznĂˇlni egy dictionary lĂ©trehozĂˇsĂˇra. A dict elvesztette kulcsszĂł jellegĂ©t.
 
 <pre>
 <span class='emph_1'>dict</span> = { 'A': 1 }
@@ -991,24 +991,24 @@ else:
     y = dict()  <span class='big_black'># &#128163; (durr)</span>
 </pre>
 
-<b style='font-size:200%;color:red;'>&#x261e;</b> <span class='emph_1'>TEHÁT: Nagyon-nagyon rettentően sokkal, de sokkal</span> gondosabban kell tesztelni, mint a
-kompilált nyelveknél, gondoskodni kell róla, hogy minden ágat bejárjunk.
+<b style='font-size:200%;color:red;'>&#x261e;</b> <span class='emph_1'>TEHĂT: Nagyon-nagyon rettentĹ‘en sokkal, de sokkal</span> gondosabban kell tesztelni, mint a
+kompilĂˇlt nyelveknĂ©l, gondoskodni kell rĂłla, hogy minden Ăˇgat bejĂˇrjunk.
 </p>
 <p>
-Az élesebb szemű olvasók talán sejtik már halványan, hogy az ilyen típusú hibákat és az ellenük való védekezést nagyon fontosnak tartom. És ha maguk is
-kergettek már hasonló hibákat nagyobb programokban, akkor biztosan lelkesen bólogatnak. Továbbá nekik is számos ősz hajszáluk van.
+Az Ă©lesebb szemĹ± olvasĂłk talĂˇn sejtik mĂˇr halvĂˇnyan, hogy az ilyen tĂ­pusĂş hibĂˇkat Ă©s az ellenĂĽk valĂł vĂ©dekezĂ©st nagyon fontosnak tartom. Ă‰s ha maguk is
+kergettek mĂˇr hasonlĂł hibĂˇkat nagyobb programokban, akkor biztosan lelkesen bĂłlogatnak. TovĂˇbbĂˇ nekik is szĂˇmos Ĺ‘sz hajszĂˇluk van.
 </p>
-<h3 id='no_declaration'>&rtrif; Deklaráció hiánya &rArr; még futás közben sem kiderülő hibák</h3>
+<h3 id='no_declaration'>&rtrif; DeklarĂˇciĂł hiĂˇnya &rArr; mĂ©g futĂˇs kĂ¶zben sem kiderĂĽlĹ‘ hibĂˇk</h3>
 <p>
-A változók akkor keletkeznek, amikor először értéket kapnak. Ha egy változónak értéket akarunk adni és elgépeljük a nevét, akkor létrejön egy új változó,
-ami esetleg ott árválkodik és senki nem kíváncsi az értékére, miközben a program egészen másképpen viselkedik, mint ahogy kellene neki
+A vĂˇltozĂłk akkor keletkeznek, amikor elĹ‘szĂ¶r Ă©rtĂ©ket kapnak. Ha egy vĂˇltozĂłnak Ă©rtĂ©ket akarunk adni Ă©s elgĂ©peljĂĽk a nevĂ©t, akkor lĂ©trejĂ¶n egy Ăşj vĂˇltozĂł,
+ami esetleg ott ĂˇrvĂˇlkodik Ă©s senki nem kĂ­vĂˇncsi az Ă©rtĂ©kĂ©re, mikĂ¶zben a program egĂ©szen mĂˇskĂ©ppen viselkedik, mint ahogy kellene neki
 
 <pre>
 x = 10
 #...
 if x < 20:
    print('do something')
-   <span class='emph_1'>y</span> = 100   # elgépelés <span class='emph_1'>x</span> = 100 helyett
+   <span class='emph_1'>y</span> = 100   # elgĂ©pelĂ©s <span class='emph_1'>x</span> = 100 helyett
 #...
 if x > 20:
    print('do something else') # ide sosem jutunk el
@@ -1016,36 +1016,36 @@ if x > 20:
 # do something
 </div>
 </pre>
-x helyett véletlenül y-t írtunk, ami miatt egy program-ág soha nem hajtódik végre. Ez a legkegyetlenebb hiba: nincs szintaktikai probléma, csak az eredmények
-lesznek néha hibásak.
+x helyett vĂ©letlenĂĽl y-t Ă­rtunk, ami miatt egy program-Ăˇg soha nem hajtĂłdik vĂ©gre. Ez a legkegyetlenebb hiba: nincs szintaktikai problĂ©ma, csak az eredmĂ©nyek
+lesznek nĂ©ha hibĂˇsak.
 </p>
 <p>
-<b style='font-size:200%;color:red;'>&#x261e;</b> <span class='emph_1'>TEHÁT: Nagyon-nagyon-<span style='font-size: 90%;'>nagyon-</span><span
-style='font-size: 90%;'>nagyon-</span><span style='font-size: 80%;'>nagyon </span> <span style='font-size: 70%;'>de igazán,</span>
-<span style='font-size: 50%;'>ne kelljen már mégegyszer elmondanom...</span></span>
+<b style='font-size:200%;color:red;'>&#x261e;</b> <span class='emph_1'>TEHĂT: Nagyon-nagyon-<span style='font-size: 90%;'>nagyon-</span><span
+style='font-size: 90%;'>nagyon-</span><span style='font-size: 80%;'>nagyon </span> <span style='font-size: 70%;'>de igazĂˇn,</span>
+<span style='font-size: 50%;'>ne kelljen mĂˇr mĂ©gegyszer elmondanom...</span></span>
 </p>
-<h3 id='no_private'>&rtrif; Nincsenek private és protected elemek</h3>
+<h3 id='no_private'>&rtrif; Nincsenek private Ă©s protected elemek</h3>
 <p>
-Osztályok definiálásakor nincs arra mód, hogy az adatrejtést <b>kikényszerítsük</b>, azaz hogy egyes attribútumok és metódusok hozzáférhetetlenek legyenek a
-külvilág számára. Mi tagadás, ez hátrány, de azért nem nagyon nagy hendikep. Elnevezési konvenciókkal és docstring-ekkel világossá lehet tenni, hogy melyek
-a private-nek vagy protected-nek szánt elemek &ndash; és bár a programozók tipikusan önfejű lények, de azért kevesen vannak köztük, akik szándékosan, tiltás
-ellenére is rombolják a saját munkájukat. Azaz önhekkerek.
+OsztĂˇlyok definiĂˇlĂˇsakor nincs arra mĂłd, hogy az adatrejtĂ©st <b>kikĂ©nyszerĂ­tsĂĽk</b>, azaz hogy egyes attribĂştumok Ă©s metĂłdusok hozzĂˇfĂ©rhetetlenek legyenek a
+kĂĽlvilĂˇg szĂˇmĂˇra. Mi tagadĂˇs, ez hĂˇtrĂˇny, de azĂ©rt nem nagyon nagy hendikep. ElnevezĂ©si konvenciĂłkkal Ă©s docstring-ekkel vilĂˇgossĂˇ lehet tenni, hogy melyek
+a private-nek vagy protected-nek szĂˇnt elemek &ndash; Ă©s bĂˇr a programozĂłk tipikusan Ă¶nfejĹ± lĂ©nyek, de azĂ©rt kevesen vannak kĂ¶ztĂĽk, akik szĂˇndĂ©kosan, tiltĂˇs
+ellenĂ©re is romboljĂˇk a sajĂˇt munkĂˇjukat. Azaz Ă¶nhekkerek.
 </p>
-<h3 id='missing_constructs'>&rtrif; Nincs switch és nincs const</h3>
+<h3 id='missing_constructs'>&rtrif; Nincs switch Ă©s nincs const</h3>
 <p>
-Számomra érthetetlen, miért maradt ki a nyelvből a switch (case) utasítás, amely a sokszoros if-else-eket kiváltaná. Időnként nagyon hiányzik. Hasonlóan
-hiányolom a konstansokat, amelyeket valamennyire lehet ugyan pótolni egyelemű tuple-lal, de azért nem egészen és ez körülményes is egy kicsit.
+SzĂˇmomra Ă©rthetetlen, miĂ©rt maradt ki a nyelvbĹ‘l a switch (case) utasĂ­tĂˇs, amely a sokszoros if-else-eket kivĂˇltanĂˇ. IdĹ‘nkĂ©nt nagyon hiĂˇnyzik. HasonlĂłan
+hiĂˇnyolom a konstansokat, amelyeket valamennyire lehet ugyan pĂłtolni egyelemĹ± tuple-lal, de azĂ©rt nem egĂ©szen Ă©s ez kĂ¶rĂĽlmĂ©nyes is egy kicsit.
 </p>
-<h3 id='low_speed'>&rtrif; Lassúság?</h3>
+<h3 id='low_speed'>&rtrif; LassĂşsĂˇg?</h3>
 <p>
-Egy interpretált nyelv, amilyen a Python is, mindig lassúbb egy kompilált nyelvnél, mint amilyen például a C++, hiszen futás közben állítja elő a
-bytecode-ból a gépi kódot. A Pythonnál ehhez még hozzájön az, hogy mindent objektumnak tekint, még egy numerikus konstanst is, ezért az értékek elérése
-tartalmaz egy járulékos indirekciót.
+Egy interpretĂˇlt nyelv, amilyen a Python is, mindig lassĂşbb egy kompilĂˇlt nyelvnĂ©l, mint amilyen pĂ©ldĂˇul a C++, hiszen futĂˇs kĂ¶zben ĂˇllĂ­tja elĹ‘ a
+bytecode-bĂłl a gĂ©pi kĂłdot. A PythonnĂˇl ehhez mĂ©g hozzĂˇjĂ¶n az, hogy mindent objektumnak tekint, mĂ©g egy numerikus konstanst is, ezĂ©rt az Ă©rtĂ©kek elĂ©rĂ©se
+tartalmaz egy jĂˇrulĂ©kos indirekciĂłt.
 </p>
 <p>
-A jó hír viszont az, hogy ez a sebességkülönbség <b>nagyon</b> ritkán zavaró. Akár fájlból olvas a program, akár adatbázisból, akár hálózatról &ndash; ezek
-a műveletek sokkal lassúbbak a memória-műveleteknél. A sebesség-különbség csak nagy mennyiségű numerikus számítás esetén válhat zavaróvá, viszont a numerikus
-műveletekhez használt modulokat (numpy, Numba) kifejezetten sebességre optimalizáltan alkották meg.
+A jĂł hĂ­r viszont az, hogy ez a sebessĂ©gkĂĽlĂ¶nbsĂ©g <b>nagyon</b> ritkĂˇn zavarĂł. AkĂˇr fĂˇjlbĂłl olvas a program, akĂˇr adatbĂˇzisbĂłl, akĂˇr hĂˇlĂłzatrĂłl &ndash; ezek
+a mĹ±veletek sokkal lassĂşbbak a memĂłria-mĹ±veleteknĂ©l. A sebessĂ©g-kĂĽlĂ¶nbsĂ©g csak nagy mennyisĂ©gĹ± numerikus szĂˇmĂ­tĂˇs esetĂ©n vĂˇlhat zavarĂłvĂˇ, viszont a numerikus
+mĹ±veletekhez hasznĂˇlt modulokat (numpy, Numba) kifejezetten sebessĂ©gre optimalizĂˇltan alkottĂˇk meg.
 </p>
 <p style='text-align:center; font-size: 300%;'>&spades;</p>
 </body>

@@ -79,6 +79,8 @@ print(len(x))
 
 ######################################
 
+# 8.)
+
 from statistics import mean
 
 def func():
@@ -89,5 +91,18 @@ def func():
 
 g = func()
 print(mean(g))
+
+######################################
+
+# 9.)
+
+def my_gen():
+    print('I am my_gen')
+    for i in (50, 60, 70):
+        yield 2 * i
+
+print('hello')
+g = my_gen()
+print('hello again')
 
 ######################################

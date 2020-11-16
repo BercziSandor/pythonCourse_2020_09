@@ -7,7 +7,7 @@ Databases\sqlite3_3.py
 CharCoding
  * karakterkódolási problémák
 
-data_cleaning.html
+Mix\data_cleaning.html
  * adattisztítás
 
 repeat_11.py

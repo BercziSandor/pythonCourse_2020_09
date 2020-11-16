@@ -1,15 +1,19 @@
-﻿Célszerűen mindenki mentse el azt a fájlt a saját nevét tartalmazó név alatt és a válaszokat a szövegbe, a kérdések után írja be. Természetesen lehet olyan kérdés,
+Célszerűen mindenki mentse el ezt a fájlt a saját nevét tartalmazó név alatt és a válaszokat a szövegbe, a kérdések után írja be. Természetesen lehet olyan kérdés,
 amire valakinek nincs érdemi válasza; ahol viszont van, ott a minél konkrétabb részletek érdekelnének.
-
-* Heti 2 alkalom, alkalmanként 1.5-2 óra megfelel? A cél az lenne, hogy két előadás között legyen mindenkinek ideje-energiája foglalkozni a témával.
-
-* A személyes vagy a távoktatást preferálod? Eltekintve a lehetőségek korlátaitól, ha szabad lenne a választás, melyiket választanád?
 
 * Milyen programnyelvekkel és mennyi tapasztalatod van?
 
-* Mennyire érzed alaposnak a tudásodat objektumorientált programozásban? Másképp fogalmazva: szükséged van-e egy bevezetésre vagy alapos ismétlésre ebben a témában?
+* Mennyire érzed alaposnak a tudásodat a következő témákban. Másképp fogalmazva: szükséged van-e egy bevezetésre vagy ismétlésre ebben a témában?
 
-* Mennyire ismered a kivételkezelés témakörét? Itt is az a kérdés, hogy szükség van-e bevezetésre.
+objektumorientált programozás
+kivételkezelés
+adatbáziskezelés (SQL)
+
+* Érdekelnének-e a következő témák, legalább bevezető szinten?
+
+    + Tervezési minták
+    + Refaktorizálás
+    + Verziókezelés (git)
 
 * Van-e olyan alapozó témakör a Pythonon belül, ami különösen érdekelne?
 

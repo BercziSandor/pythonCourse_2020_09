@@ -11,98 +11,88 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 7. [7. Lection](#7-lection)
 8. [8. Lection](#8-lection)
 9. [9. Lection](#9-lection)
+10. [10. Lection](#10-lection)
+11. [11. Lection](#11-lection)
+12. [12. Lection](#12-lection)
 
 
 # 1. Lection
-## 1.1. python_install_run.html
-[python_install_run.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_install_run.html)
-* Python és modulok installálása, futtatás
+## Python és modulok installálása, futtatás
+ - [python_install_run.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_install_run.html)
 
-## 1.2. python_literature.html
-[python_literature.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_literature.html)
-* irodalomjegyzék
+## Irodalomjegyzék
+ - [python_literature.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_literature.html)
 
 ## 1.3. mix.py
 [mix.py](Lecture_1/mix.py)
-* változók definiálása
-* feltételes utasítás
-* while cikus
-* range
-* for ciklus
+ - változók definiálása
+ - feltételes utasítás
+ - while cikus
+ - range
+ - for ciklus
 
 ## 1.4. Datastructures/numeric_types_1.py
 [Datastructures/numeric_types_1.py](Datastructures/numeric_types_1.py)
-* int típus
-* float típus
-* type()
+ - int típus
+ - float típus
+ - type()
 
-## 1.5. Datastructures/string_1.py
-[Datastructures/string_1.py](Datastructures/string_1.py)
-[Datastructures/string_1.py](Datastructures/string_1.py)
-* str típus
-* len(), rstrip(), lstrip()
+## str típus, len(), rstrip(), lstrip()
+ - [Datastructures/string_1.py](Datastructures/string_1.py)
+ - [Datastructures/string_1.py](Datastructures/string_1.py)
 
-## 1.6. Datastructures/list_1.py, list_2.py, list_3.py
-[Datastructures/list_1.py](Datastructures/list_1.py)
-[Datastructures/list_2.py](Datastructures/list_2.py)
-[Datastructures/list_3.py](Datastructures/list_3.py)
-* list típus
-* id
-* del
+## 1.6. List típus, id, del
+ - [Datastructures/list_1.py](Datastructures/list_1.py)
+ - [Datastructures/list_2.py](Datastructures/list_2.py)
+ - [Datastructures/list_3.py](Datastructures/list_3.py)
 
-## 1.7. Datastructures/tuple_1.py
-[Datastructures/tuple_1.py](Datastructures/tuple_1.py)
-* tuple típus
 
-## 1.8. Functions/func_params_1.py
-[Functions/func_params_1.py](Functions/func_params_1.py)
-* függvények fix paraméterekkel
-* default paraméterek
+## 1.7. Tuple típus
+ - [Datastructures/tuple_1.py](Datastructures/tuple_1.py)
 
-## 1.9. Functions/scope_1.py
-[Functions/scope_1.py](Functions/scope_1.py)
-* lokális és globális változók
+## 1.8. függvények fix paraméterekkel, default paraméterek
+ - [Functions/func_params_1.py](Functions/func_params_1.py)
+
+## 1.9. lokális és globális változók
+ - [Functions/scope_1.py](Functions/scope_1.py)
 
 # 2. Lection
 ## 2.1. Functions/func_objects_1.py
-[Functions/func_objects_1.py](Functions/func_objects_1.py)
- * függvény-objektumok
- * dir()
- * sys.getsizeof()
- * __sizeof__(), __call__(), __name__, __class__
+ - [Functions/func_objects_1.py](Functions/func_objects_1.py)
+   - függvény-objektumok
+   - dir()
+   - sys.getsizeof()
+   - __sizeof__(), __call__(), __name__, __class__
 
 ## 2.2. Datastructures/dict_1.py
-[Datastructures/dict_1.py](Datastructures/dict_1.py)
- * dict típus
- * tuple kibontása változókba
- * zip függvény
+ - [Datastructures/dict_1.py](Datastructures/dict_1.py)
+   - dict típus
+   - tuple kibontása változókba
+   - zip függvény
 
-## 2.3. Functions/func_params_2.py
-[Functions/func_params_2.py](Functions/func_params_2.py)
- * opcionális pozícionális és kulcsszó paraméterek
+## 2.3. Opcionális pozícionális és kulcsszó paraméterek
+ - [Functions/func_params_2.py](Functions/func_params_2.py)
 
 ## 2.4. Functions/scope_2.py
-[Functions/scope_2.py](Functions/scope_2.py)
- * egymásba ágyazott függvények
- * global, nonlocal
+ - [Functions/scope_2.py](Functions/scope_2.py)
+   - egymásba ágyazott függvények
+   - global, nonlocal
 
 ## 2.5. Functions/lambda_1.py
-[Functions/lambda_1.py](Functions/lambda_1.py)
- * lambda függvénykifejezések
- * sorted()
+ - [Functions/lambda_1.py](Functions/lambda_1.py)
+   - lambda függvénykifejezések
+   - sorted()
 
-## 2.6. Datastructures/set_1.py
-[Datastructures/set_1.py](Datastructures/set_1.py)
- * set típus
+## 2.6. set típus
+ - [Datastructures/set_1.py](Datastructures/set_1.py)
 
 ## 2.7. Datastructures/index_1.py
-[Datastructures/index_1.py](Datastructures/index_1.py)
-  * negatív indexek
-  * slicing
+ - [Datastructures/index_1.py](Datastructures/index_1.py)
+   - negatív indexek
+   - slicing
 
-## 2.8. files_1.py
-[files_1.py](Lecture_2/files_1.py)
-  * szöveges fájl megnyitása és sorok olvasása
+## 2.8. szöveges fájl megnyitása és sorok olvasása
+ - [files_1.py](Lecture_2/files_1.py)
 
 ## 2.9. python_intro.html
 [python_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_intro.html)
@@ -112,12 +102,9 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * feladatok
 
 # 3. Lection
-## 3.1. Comprehensions/listcomp_1.py, set_dict_comp_1.py
-[Comprehensions/listcomp_1.py](Comprehensions/listcomp_1.py)
-[Comprehensions/set_dict_comp_1.py](Comprehensions/set_dict_comp_1.py)
- * list comprehension
- * set comprehension
- * dict comprehension
+## List comprehensions: list, set, dict
+ - [Comprehensions/listcomp_1.py](Comprehensions/listcomp_1.py)
+ - [Comprehensions/set_dict_comp_1.py](Comprehensions/set_dict_comp_1.py)
 
 ## 3.2. solutions_2.py
 [solutions_2.py](Lecture_3/solutions_2.py)
@@ -276,8 +263,7 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 
 ## 6.7. Databases/sqlite3_1.py
 [Databases/sqlite3_1.py](Databases/sqlite3_1.py)
- * sqlite3 adatbázis:
-   connect, commit, autotransact, fetchone, fetchall, fetchmany
+ * sqlite3 adatbázis: connect, commit, autotransact, fetchone, fetchall, fetchmany
 
 ## 6.8. solutions_5.py
 [solutions_5.py](Lecture_6/solutions_5.py)
@@ -407,3 +393,61 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 [Functions/decorators_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/decorators_intro.html)
  * dekorátorok
 
+# 10. Lection
+
+## 10.1. Örököltetés kontra kompozíció
+  - Classes/file_reader.py
+  - spec_reader_1.py
+  - spec_reader_2.py
+
+## 10.2. Generátorok kaszkádba kötése, előnyei
+ - Iterators_Generators/gen_cascade.html
+ - generator_advantages.html
+
+## 10.3. matplotlib bemutatása
+ - Visual/matplot_1.py
+
+## 10.4. Jupyter Notebook bemutatása
+ - Jupyter_NB/jupyter_intro.txt
+ - jupy_demo_1.ipynb
+ - jupy_demo_2.ipynb
+
+## ismétlés
+ - repeat_10.py
+
+# 11. Lection
+## else ág ciklusokban
+ - 11.1. mix_11.py
+
+## a NULL
+ - 11.2. Databases/sqlite3_3.py
+
+## karakterkódolási problémák
+ - 11.3. CharCoding
+
+## adattisztítás
+ - 11.4. Mix/data_cleaning.html
+
+## ismétlés
+ - 11.5. repeat_11.py
+
+# 12. Lection
+
+## a context manager fogalma, megvalósítása, használata
+ - Mix\context_man_1-4
+
+## keresés szótárban, ha nincs benne az elem
+ - Datastructures\dict_2-3.py
+ * keresés több szótárban
+
+## mutábilis default paraméterek veszélye
+ - Functions\func_params_5.py
+
+## class és static metódusok
+ - Classes\classes_6.py
+
+## __repr__ és __str__ dunder metódusok
+ - Mix\repr_str.txt
+
+## ismétlés
+ - repeat_12.py

@@ -1,11 +1,10 @@
-* Összesen 10 alkalom az előzetes elképzelés, igény szerint ez változhat.
+* Összesen 12 alkalom lesz.
 
 * Az aktuális anyagok és az üzenetek (mint ez is) mindig elérhetők lesznek itt:
 
-http://szoftverkli.biz/PYTHON_2020_1
+http://szoftverkli.biz/PYTHON_2020_2
 
-* Javaslom, hogy Pythont, a Notepad++-t és a VS Code-ot töltse le mindenki, így a kezdésnél időt tudunk nyerni. Hamarosan elérhető lesz egy kis útmutató ezekről
-a fenti webhelyen.
+* Javaslom, hogy Pythont, a Notepad++-t és a VS Code-ot töltse le mindenki, így a kezdésnél időt tudunk nyerni.
 
 * Erősen számítok a visszajelzésekre a tanfolyam ideje alatt is. Ha valamelyik rész túl rövid vagy nem eléggé érthető volt, akkor alkalmunk van visszatérni rá; ha
 érdekel valakit egy téma, amiről addig nem volt szó, menet közben is jelezze!  Jó lenne kihasználni ezt a lehetőséget az interaktivitásra, ami egyéb tanfolyamoknál

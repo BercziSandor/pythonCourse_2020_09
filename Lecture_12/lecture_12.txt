@@ -1,0 +1,18 @@
+Mix\context_man_1-4
+ * a context manager fogalma, megvalósítása, használata
+
+Datastructures\dict_2-3.py
+ * keresés szótárban, ha nincs benne az elem
+ * keresés több szótárban
+
+Functions\func_params_5.py
+ * mutábilis default paraméterek veszélye
+
+Classes\classes_6.py
+ * class és static metódusok
+
+Mix\repr_str.txt
+ * __repr__ és __str__ dunder metódusok
+
+repeat_12.py
+ * ismétlés
