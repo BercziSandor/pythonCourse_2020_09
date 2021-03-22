@@ -17,10 +17,10 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
 
 
 # 1. Lection
-## Python és modulok installálása, futtatás
+## 1.1. Python és modulok installálása, futtatás
  - [python_install_run.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_install_run.html)
 
-## Irodalomjegyzék
+## 1.2. Irodalomjegyzék
  - [python_literature.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/python_literature.html)
 
 ## 1.3. mix.py
@@ -37,7 +37,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  - float típus
  - type()
 
-## str típus, len(), rstrip(), lstrip()
+## 1.5. str típus, len(), rstrip(), lstrip()
  - [Datastructures/string_1.py](Datastructures/string_1.py)
  - [Datastructures/string_1.py](Datastructures/string_1.py)
 
@@ -102,7 +102,7 @@ Home: http://szoftvermli.biz/PYTHON_2020_1/
  * feladatok
 
 # 3. Lection
-## List comprehensions: list, set, dict
+## 3.1. List comprehensions: list, set, dict
  - [Comprehensions/listcomp_1.py](Comprehensions/listcomp_1.py)
  - [Comprehensions/set_dict_comp_1.py](Comprehensions/set_dict_comp_1.py)
 
@@ -369,85 +369,82 @@ Fontosnak tartom, hogy aki még nem használta, az megismerkedjen vele.
 [Iterators_Generators/gen_exp_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Iterators_Generators/gen_exp_intro.html)
  * generátor kifejezések
 
-## 9.2. Num_py/numpy_6.py
-[Num_py/numpy_6.py](Num_py/numpy_6.py)
- * példa reshape alkalmazására
+## 9.2. Reshape alkalmazása
+ - [Num_py/numpy_6.py](Num_py/numpy_6.py)
 
-## 9.3. Num_py/numpy_7.py
-[Num_py/numpy_7.py](Num_py/numpy_7.py)
- * Excel táblából beolvasás, táblaforgatás (pivoting), csv fájl olvasás-írás
+## 9.3. Excel táblából beolvasás, táblaforgatás (pivoting), csv fájl olvasás-írás
+ - [Num_py/numpy_7.py](Num_py/numpy_7.py)
 
-## 9.4. Databases/sqlite3_2.py
-[Databases/sqlite3_2.py](Databases/sqlite3_2.py)
- * memória-adatbázisok
+## 9.4. Memória-adatbázisok
+ - [Databases/sqlite3_2.py](Databases/sqlite3_2.py)
 
-## 9.5. Functions/closures.html
-[Functions/closures.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/closures.html)
- * closure részletesebb bemutatása
+## 9.5. closure részletesebb bemutatása
+ - [Functions/closures.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/closures.html)
 
-## 9.6. repeat_9.py
-[repeat_9.py](repeat_9.py)
- * ismétlés
+## 9.6. ismétlés
+ - [repeat_9.py](Lecture_9/repeat_9.py)
 
-## 9.7. Functions/decorators_intro.html
-[Functions/decorators_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/decorators_intro.html)
- * dekorátorok
+## 9.7. Dekorátorok
+ - [Functions/decorators_intro.html](https://htmlpreview.github.io/?https://github.com/BercziSandor/pythonCourse_2020_09/blob/master/Functions/decorators_intro.html)
 
 # 10. Lection
 
 ## 10.1. Örököltetés kontra kompozíció
-  - Classes/file_reader.py
-  - spec_reader_1.py
-  - spec_reader_2.py
+ - [Classes/file_reader.py](Classes/file_reader.py)
+ - [spec_reader_1.py](Lecture_10/spec_reader_1.py)
+ - [spec_reader_2.py](Lecture_10/spec_reader_2.py)
 
 ## 10.2. Generátorok kaszkádba kötése, előnyei
- - Iterators_Generators/gen_cascade.html
- - generator_advantages.html
+ - [Iterators_Generators/gen_cascade.html](Iterators_Generators/gen_cascade.html)
+ - [generator_advantages.html](Lecture_10/generator_advantages.html)
 
 ## 10.3. matplotlib bemutatása
- - Visual/matplot_1.py
+ - [Visual/matplot_1.py](Visual/matplot_1.py)
 
 ## 10.4. Jupyter Notebook bemutatása
- - Jupyter_NB/jupyter_intro.txt
- - jupy_demo_1.ipynb
- - jupy_demo_2.ipynb
+ - [Jupyter_NB/jupyter_intro.txt](Jupyter_NB/jupyter_intro.txt)
+ - [Jupyter_NB/jupy_demo_1.ipynb](Jupyter_NB/jupy_demo_1.ipynb)
+ - [Jupyter_NB/jupy_demo_2.ipynb](Jupyter_NB/jupy_demo_2.ipynb)
 
-## ismétlés
- - repeat_10.py
+## 10.5. ismétlés
+ - [repeat_10.py](Lecture_10/repeat_10.py)
 
 # 11. Lection
-## else ág ciklusokban
- - 11.1. mix_11.py
+## 11.1. else ág ciklusokban
+ - [mix_11.py](Lecture_11/mix_11.py)
 
-## a NULL
- - 11.2. Databases/sqlite3_3.py
+## 11.2. a NULL
+ - [Databases/sqlite3_3.py](Databases/sqlite3_3.py)
 
-## karakterkódolási problémák
- - 11.3. CharCoding
+## 11.3. karakterkódolási problémák
+ - [CharCoding/char_code_test.txt](CharCoding/char_code_test.txt)
+ - [CharCoding/char_coding_1.txt](CharCoding/char_coding_1.txt)
+ - [CharCoding/char_coding_2.txt](CharCoding/char_coding_2.txt)
+ - [CharCoding/char_coding_3.txt](CharCoding/char_coding_3.txt)
+ - [CharCoding/char_coding_4.txt](CharCoding/char_coding_4.txt)
+ - [CharCoding/char_coding_5.txt](CharCoding/char_coding_5.txt)
 
-## adattisztítás
- - 11.4. Mix/data_cleaning.html
+## 11.4. adattisztítás
+ - [Mix/data_cleaning.html](Mix/data_cleaning.html)
 
-## ismétlés
- - 11.5. repeat_11.py
+## 11.5. ismétlés
+ - [repeat_11.py](Lecture_11/repeat_11.py)
 
 # 12. Lection
 
-## a context manager fogalma, megvalósítása, használata
- - Mix\context_man_1-4
+## 12.1. a context manager fogalma, megvalósítása, használata
+ - [Mix/context_man_1-4](Mix/context_man_1-4)
 
-## keresés szótárban, ha nincs benne az elem
- - Datastructures\dict_2-3.py
- * keresés több szótárban
+## 12.2. keresés szótárban, ha nincs benne az elem
+ - [Datastructures/dict_2-3.py](Datastructures/dict_2-3.py)
+## 12.3. mutábilis default paraméterek veszélye
+ - [Functions/func_params_5.py](Functions/func_params_5.py)
 
-## mutábilis default paraméterek veszélye
- - Functions\func_params_5.py
+## 12.4. class és static metódusok
+ - [Classes/classes_6.py](Classes/classes_6.py)
 
-## class és static metódusok
- - Classes\classes_6.py
+## 12.5. __repr__ és __str__ dunder metódusok
+ - [Mix/repr_str.txt](Mix/repr_str.txt)
 
-## __repr__ és __str__ dunder metódusok
- - Mix\repr_str.txt
-
-## ismétlés
- - repeat_12.py
+## 12.6. ismétlés
+ - [repeat_12.py](Lecture_12/repeat_12.py)
