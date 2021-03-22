@@ -1,18 +1,34 @@
 # https://www.python-course.eu/python3_inheritance.php
 
+# örököltetés, issubclass() függvény
+
 # A leszármaztatott osztály mindent tud, amit az ős.
 
 class Base:
     def base_function(self):
-        print('I am base_function')
+        print('base_function vagyok')
+
+class Derived(Base):
+    pass
+
+d = Derived()
+d.base_function()    # base_function vagyok
+
+############################
+
+# Meg persze tudni szokott mást is.
+
+class Base:
+    def base_function(self):
+        print('base_function vagyok')
 
 class Derived(Base):
     def derived_function(self):
-        print('I am derived_function')
+        print('derived_function vagyok')
 
 d = Derived()
-d.base_function()    # I am base_function
-d.derived_function() # I am derived_function
+d.base_function()    # base_function vagyok
+d.derived_function() # derived_function vagyok
 
 ############################
 
@@ -20,14 +36,17 @@ d.derived_function() # I am derived_function
 
 class Base:
     def base_function(self):
-        print('I am base_function')
+        print('base_function vagyok')
 
 class Derived(Base):
     def base_function(self):
-        print('I am base_function, redefined')
+        print('base_function vagyok, felüldefiniálva')
+
+b = Base()
+b.base_function() # base_function vagyok
 
 d = Derived()
-d.base_function() # I am base_function, redefined
+d.base_function() # base_function vagyok, felüldefiniálva
 
 ############################
 

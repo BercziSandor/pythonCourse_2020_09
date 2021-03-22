@@ -1,0 +1,9 @@
+# comment
+
+import numpy as np
+
+arr = np.array([1, 2])
+if len(arr) == 2:
+    print(2)
+
+   # comment again

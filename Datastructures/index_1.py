@@ -4,32 +4,38 @@
 # https://www.python-course.eu/python3_sequential_data_types.php
 
 lst = [10, 20, 30, 40, 50]
+#       0   1   2   3
 
 print(lst[len(lst) - 1]) # 50
 
 # Elég gyakran akarunk a lista (tuple, sztring...) végéről indulva elérni elemeket.
-# Ez negatív indexekkel lehetséges. Megjegyzéshez: a fenti kifejezésből elhagyjuk a len(lst)-t.
+# Ez negatív indexekkel lehetséges. (A fenti kifejezésből elhagyjuk a len(lst)-t.)
 
 print(lst[-1], lst[-2]) # 50 40
 
 ############################
 
-# Szintén gyakori feladat, hogy nem egyetlen elemet, hanem elemek egy csoportját akarjuk kiválasztani.
-# Az ilyen módon kiterjesztett indexelés neve slicing.
+# Szintén gyakori feladat, hogy nem egyetlen elemet, hanem egymás elemek egy csoportját akarjuk
+# kiválasztani. Az ilyen módon kiterjesztett indexelés neve slicing - a sorozat egy
+# szeletét választjuk ki.
 
-# ELSŐ ALAK:
+# ELSŐ ALAK: [kezdő index : utolsó UTÁNI index]
 
-# [kezdő index : utolsó UTÁNI index]
-
-# Amelyiket üresen hagyjuk, az a default értékét veszi fel.
-
-# Kezdő index default: 0, lezáró index: len(lista) - 1.
+# Amelyiket határt üresen hagyjuk, az a default értékét veszi fel.
+# Kezdő index default: 0, lezáró index default: len(lista).
 
 print(lst[0:])  # [10, 20, 30, 40 50]  0 felesleges
 print(lst[:])   # [10, 20, 30, 40 50]  lista másolata!
 print(lst[0:3]) # [10, 20, 30]         0 felesleges
 print(lst[:3])  # [10, 20, 30]
 print(lst[2:4]) # [30, 40]
+
+# Ha a slicing-gal a teljes listát jelöljük ki, az a lista MÁSOLATÁT hozza létre:
+
+lst = [10, 20, 30, 40, 50]
+lst_2 = lst[:]
+
+print(id(lst), id(lst_2)) # 32171152 32235352
 
 # Ha a lezárót túlcímezzük, megáll a határnál:
 
@@ -41,9 +47,7 @@ print(lst[-2:2])  # []
 
 ############################
 
-# MÁSODIK ALAK:
-
-# [kezdő index : utolsó UTÁNI index : lépésköz]
+# MÁSODIK ALAK: [kezdő index : utolsó UTÁNI index : lépésköz]
 
 # Lépésköz default: 1
 
@@ -66,3 +70,5 @@ print(lst[:2:-1])  # [50, 40]
 
 # A slicing jelölésmóddal sok probléma kompakt módon megoldható.
 # Tulajdonképpen bevezettünk egy új algebrai műveletet.
+
+############################

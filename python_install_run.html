@@ -7,29 +7,39 @@
   p { margin: 8px 0; }
   pre { color: blue; margin: 8px; }
   h4  { color: blue; }
+
   code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
   .code_2 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .code_3 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; font-family: Courier New; }
+  .code_4 { background-color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; border: 1px dotted; }
   #t01 { width:70%; border: 1px solid black; border-collapse: collapse; margin-left:auto; margin-right:auto; font-family: arial, sans-serif; }
+  .comment { color: lightslategray; font-style: italic; }
+  .comment_i { color: lightslategray; font-style: normal; }
   #t01 th { border: 1px solid black; padding: 5px 10px; }
   #t01 td { border: 1px solid black; padding: 5px 10px; }
-  #t01 td:last-child { width:100%; }
+  #xxt01 td:last-child { width:100%; }
   #t01 tr:nth-child(even) { background-color: #f2f2f2; }
   #t01 tr:nth-child(odd) { background-color: white; }
   .c { text-align: center; }
   .emph_1 { color: red; font-weight: bold; }
   .emph_4 { color: gray; font-family: courier new; letter-spacing: 0.1em; }
+  .emph_blue { background-color: navy; color: lightblue; padding: 5px; display:inline-block; margin-bottom: 2px; border-radius: 5px;
+               font-style: normal; font-size: 120%; }
   .contents { margin-left:30%; color:red; font-size: 120%; }
+  .blq_1  { border-left: 3px solid #FC4;padding-left: 16px; font-family: Georgia; font-style: italic; }
 </style>
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.02 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2021.03.22 &mdash;</p>
 </div>
 
 <h2>Python telepítése és futtatása</h2>
 <ul class='contents'>
+<p style='font-size: 150%;'>&nbsp;&nbsp;&#128013;</p>
 <li><a style='color:red' href='#download_python'>Python letöltése</a></li>
+<li><a style='color:red' href='#python_myit'>Cégen belül: MyIT</a></li>
 <li><a style='color:red' href='#online_python'>Online interpreterek</a></li>
 <li><a style='color:red' href='#run_python'>Python programok közvetlen futtatása</a>
 <ul>
@@ -69,27 +79,49 @@ sok helyen még használatban van.
 A 3-as verzión belül a 3.6-os az, amelybe az átlagosnál több (és hasznos) újdonság került be. Nyilván ha tehetjük, akkor a legfrissebb stabil verzióval érdemes
 dolgozni.
 </p>
+<h3 id='python_myit'>Cégen belül: MyIT</h3>
+<p>
+A <a href='https://myit.telekom.de' target='_blank'>MyIT oldalra</a> belépve, az <span class='code_2'>Application areas</span> <b>&rtrif;</b> <span class='code_2'>Self
+Service</span> menüpont alatt található a <code>WinPython</code>.
+</p>
 <h3 id='online_python'>Online interpreterek</h3>
 <p>
 Kisebb programok különböző Python verziókon való kipróbálásához hasznosak az online futtató környezetek, illetve olyankor is, amikor éppen a gépünkön nincs
-Python és mégis tanulni, gyakorolni akarunk.
+Python és mégis tanulni, gyakorolni akarunk. Olyankor is hasznosak, amikor több Python verzióban ki akarunk próbálni valamit.
 </p>
 <table id='t01'>
-<tr style='color:blueviolet;'><th></th><th>Python 3 verzió&nbsp;</th><th>Python 2 verzió</th><th>Egyéb<br>nyelvek</th><th>Megjegyzés<br>&nbsp;</th></tr>
-<tr><td><a href='https://repl.it/languages/python3' target='_blank'>repl.it</a></td><td class='c'>3.8.2</td><td class='c'></td><td class='c'>&#10004;</td><td></td></tr>
-<tr><td><a href='https://www.python.org/shell/' target='_blank'>python.org/shell</a></td><td class='c'>3.8.0</td><td class='c'></td><td class='c'></td> <td></td></tr>
-<tr><td><a href='https://www.pythonanywhere.com/try-ipython/' target='_blank'>pythonanywhere.com</a></td><td class='c'>3.8.0</td><td class='c'></td><td class='c'></td> <td></td></tr>
-<tr><td><a href='https://pythonprinciples.com/online-python-interpreter/' target='_blank'>pythonprinciples.com</a></td><td class='c'>3.7.6</td><td class='c'></td><td class='c'></td> <td></td></tr>
-<tr><td><a href='https://tio.run/' target='_blank'>tio.run</a></td><td class='c'>3.7.4</td><td class='c'>2.7.16</td><td class='c'>&#10004;</td><td>Cython, PyPy, Jython, IronPython, Stackless</td></tr>
-<tr><td><a href='https://ideone.com/' target='_blank'>ideone.com</a></td><td class='c'>3.7.3</td><td class='c'>2.7.13</td><td class='c'>&#10004;</td><td></td></tr>
-<tr><td><a href='https://rextester.com/' target='_blank'>rextester.com</a></td><td class='c'>3.6.9</td><td class='c'>2.7.17</td><td class='c'>&#10004;</td><td></td></tr>
+<tr style='color:blueviolet;'><th></th><th>Python 3 verzió&nbsp;</th><th>Python 2 verzió</th><th>Egyéb<br>nyelvek</th><th>Megjegyzés<br>&nbsp;</th>
+<th>numpy</th><th>pandas</th></tr>
+<tr><td><a href='https://repl.it/languages/python3' target='_blank'>repl.it</a></td><td class='c'>3.8.2</td><td class='c'></td><td class='c'>&#10004;</td>
+<td></td><td class='c'>&#10004;</td><td class='c'>&#10060;</td></tr>
+<tr><td><a href='https://www.python.org/shell/' target='_blank'>python.org/shell</a></td><td class='c'>3.8.0</td><td class='c'></td><td class='c'></td> <td></td>
+<td class='c'>&#10004;</td><td class='c'>&#10004;</td></tr>
+<tr><td><a href='https://www.pythonanywhere.com/try-ipython/' target='_blank'>pythonanywhere.com</a></td><td class='c'>3.8.0</td><td class='c'></td><td class='c'></td> <td></td>
+<td class='c'>&#10004;</td><td class='c'>&#10004;</td></tr>
+<tr><td><a href='https://pythonprinciples.com/online-python-interpreter/' target='_blank'>pythonprinciples.com</a></td><td class='c'>3.7.6</td><td class='c'></td><td class='c'></td> <td></td>
+<td class='c'>&#10060;</td><td class='c'>&#10060;</td></tr>
+<tr><td><a href='https://tio.run/' target='_blank'>tio.run</a></td><td class='c'>3.7.4</td><td class='c'>2.7.16</td><td class='c'>&#10004;</td><td>Cython, PyPy, Jython, IronPython, Stackless</td>
+<td class='c'>&#10060;</td><td class='c'>&#10060;</td></tr>
+<tr><td><a href='https://ideone.com/' target='_blank'>ideone.com</a></td><td class='c'>3.7.3</td><td class='c'>2.7.13</td><td class='c'>&#10004;</td><td></td>
+<td class='c'>&#10004;</td><td class='c'>&#10004;</td></tr>
+<tr><td><a href='https://runestone.academy/runestone/books/published/fopp/GeneralIntro/SpecialWaystoExecutePythoninthisBook.html' target='_blank'>runestone.academy</a>
+</td><td class='c'>3.7(ish)</td><td class='c'></td><td class='c'>&#10004;</td><td>Lépésenkénti végrehajtás is</td>
+<td class='c'>&#10060;</td><td class='c'>&#10060;</td></tr>
+<tr><td><a href='https://rextester.com/' target='_blank'>rextester.com</a></td><td class='c'>3.6.9</td><td class='c'>2.7.17</td><td class='c'>&#10004;</td><td></td>
+<td class='c'>&#10060;</td><td class='c'>&#10060;</td></tr>
 <tr><td><a href='https://www.w3resource.com/python-exercises/' target='_blank'>w3resource.com</a></td><td class='c'>3.6.6</td><td class='c'></td><td class='c'>&#10004;</td>
-<td>Bármelyik feladatot megnyitjuk és a <span style='color:royalblue;'>Go to editor</span>-t kiválasztjuk.</td></tr>
-<tr><td><a href='https://www.tutorialspoint.com/execute_python_online.php' target='_blank'>tutorialspoint.com</a></td><td class='c'>3.6.2</td><td class='c'>2.7.13</td><td class='c'>&#10004;</td><td></td></tr>
-<tr><td><a href='https://www.w3schools.com/python/python_compiler.asp' target='_blank'>w3schools.com</a></td><td class='c'>3.5.3</td><td class='c'></td><td class='c'>&#10004;</td><td></td></tr>
-<tr><td><a href='https://www.onlinegdb.com/online_python_interpreter' target='_blank'>onlinegdb.com</a></td><td class='c'>3.4.3</td><td class='c'></td><td class='c'>&#10004;</td><td></td></tr>
-<tr><td><a href='https://pynative.com/online-python-code-editor-to-execute-python-code/ target='_blank'>pynative.com</a></td><td class='c'>3.7.7</td><td class='c'></td><td class='c'></td><td></td></tr>
-<tr><td><a href='https://live.sympy.org/' target='_blank'>live.sympy.org</a></td><td class='c'></td><td class='c'>2.7.12</td><td class='c'></td> <td></td></tr>
+<td>Bármelyik feladatot megnyitjuk és a <span style='color:royalblue;'>Go to editor</span>-t kiválasztjuk.</td>
+<td class='c'>&#10004;</td><td class='c'>&#10004;</td></tr>
+<tr><td><a href='https://www.tutorialspoint.com/execute_python3_online.php' target='_blank'>tutorialspoint.com</a></td><td class='c'>3.6.2</td><td class='c'>2.7.13</td><td class='c'>&#10004;</td><td></td>
+<td class='c'>&#10060;</td><td class='c'>&#10060;</td></tr>
+<tr><td><a href='https://www.w3schools.com/python/python_compiler.asp' target='_blank'>w3schools.com</a></td><td class='c'>3.5.3</td><td class='c'></td><td class='c'>&#10004;</td><td></td>
+<td class='c'>&#10004;</td><td class='c'>&#10004;</td></tr>
+<tr><td><a href='https://www.onlinegdb.com/online_python_interpreter' target='_blank'>onlinegdb.com</a></td><td class='c'>3.4.3</td><td class='c'></td><td class='c'>&#10004;</td><td></td>
+<td class='c'>&#10004;</td><td class='c'>&#10004;</td></tr>
+<tr><td><a href='https://pynative.com/online-python-code-editor-to-execute-python-code/' target='_blank'>pynative.com</a></td><td class='c'>3.7.7</td><td class='c'></td><td class='c'></td><td></td>
+<td class='c'>&#10004;</td><td class='c'>&#10004;</td></tr>
+<tr><td><a href='https://live.sympy.org/' target='_blank'>live.sympy.org</a></td><td class='c'></td><td class='c'>2.7.12</td><td class='c'></td><td></td>
+<td class='c'>&#10060;</td><td class='c'>&#10060;</td></tr>
 </table>
 <p>
 <span style='color: blueviolet; font-weight: bold;'>Egyéb nyelvek</span>: C++, Java, stb. támogatása.
@@ -169,14 +201,14 @@ python <span class='emph_1'><</span> my_first.py
 <h4 id='run_script_interact'>Szkript futtatása interaktívan <sup><a href='#link-4'>[4]</a></sup></h4>
 <p>
 Nem túl gyakran, de előfordul, hogy a szkript lefutása után még további parancsokat akarunk begépelni; azt szeretnénk szimulálni, mintha a fájl
-tartalmát közvetlenül írtuk volna be. Ilyenkor a -i kapcsolóval kell felhívnunk az interpretert:
+tartalmát közvetlenül írtuk volna be. Ilyenkor a <code>-i</code> kapcsolóval kell felhívnunk az interpretert:
 <pre>
 python <span class='emph_1'>-i</span> my_first.py
 </pre>
 A képernyőn az interaktív promptot (>>>) fogjuk látni és pl. kiírathatjuk az i változó tartalmát:
 <pre>
-i: 10   <i># ezt írta ki a szkript</i>
->>> i   <i># ezt gépeltük be</i>
+i: 10   <span class='comment'># ezt írta ki a szkript</span>
+>>> i   <span class='comment'># ezt gépeltük be</span>
 20
 >>>
 </pre>
@@ -202,16 +234,73 @@ Ha a szkriptünk a standard bemenetről olvas és azt akarjuk, hogy fájlból j�
 python my_first.py <span class='emph_1'><</span> input.txt
 </pre>
 
-A standard kimenetre &ndash; tipikusan print() segítségével &ndash; írtakat így tudjuk egy fájlba átirányítani:
+A standard kimenetre &ndash; tipikusan <b class='code_3'>print()</b> segítségével &ndash; írtakat így tudjuk egy fájlba átirányítani:
 <pre>
 python my_first.py <span class='emph_1'>></span> output.txt
 </pre>
 
-A standard hibakimenetre (stderr) írtakat, a hibajelzéseket pedig így:
+a standard hibakimenetre (stderr) írtakat, a hibajelzéseket pedig így:
 <pre>
 python my_first.py <span class='emph_1'>2></span> error.txt
 </pre>
-Windows alatt a <b>2</b> és a <b>></b> között nem lehet szóköz.
+Windows alatt a <b>2</b> és a <b>></b> között nem lehet szóköz. Nyilván mindkét átirányítást alkalmazhatjuk egyszerre:
+<pre>
+python my_first.py <span class='emph_1'>></span> output.txt <span class='emph_1'>2></span> error.txt
+</pre>
+Ha azt akarjuk, hogy ne mindig új fájl keletkezzen, hanem a már meglévő végéhez fűződjön hozzá, amit írunk, akkor két > jelet kell alkalmaznunk:
+<pre>
+python my_first.py <span class='emph_1'>>></span> output.txt <span class='emph_1'>2>></span> error.txt
+</pre>
+
+<blockquote class="blq_1">
+<span class='emph_blue'>Jó gyakorlat:</span> A képernyőre szánt hibaüzeneteket <b>ne</b> a standard kimenetre, hanem a standard hiba-kimenetre írjuk, így
+átirányítással könnyen szétválasztható az eredmény a hibaüzenettől. Nézzük meg először a rosszabbik megoldást, amikor mindent a standard kimenetre írunk &ndash;
+jobboldalt feltüntettük a kimenetet, amiben láthatólag jól elvész a hibaüzenet:
+<pre style='margin-left:30px;'>
+def func(param):
+    if param < 0:   <span class='comment_i'># hibát szimulálunk</span>
+        return 'baj'
+    else:
+        return 'ok'                                                                      <span class='comment_i'>írok</span>
+                                                                                         <span class='comment_i'>sokmindent</span>
+print('írok'); print('sokmindent'); print('jó');  print('hosszasan')                     <span class='comment_i'>jó</span>
+                                                                                         <span class='comment_i'>hosszasan</span>
+ret_val = func(-100)                                                                     <span class='comment_i'>ajjaj, func valami rosszat talált</span>
+if ret_val == 'baj':                                                                     <span class='comment_i'>megint írok</span>
+    print('ajjaj, func valami rosszat talált')                                           <span class='comment_i'>mindenfélét</span>
+                                                                                         <span class='comment_i'>jót</span>
+print('megint írok'); print('mindenfélét'); print('jót'); print('és szépet')             <span class='comment_i'>és szépet</span>
+</pre>
+Ha viszont a hibaüzenetet a standard hibakimenetre írjuk:
+
+<pre style='margin-left:30px;'>
+<span class='emph_1'>import sys</span>
+...
+if ret_val == 'baj':
+    print('ajjaj, func valami rosszat talált'<span class='emph_1'>, file=sys.stderr</span>)
+...
+</pre>
+és a kimenetet megfelelően átirányítjuk:
+<pre>
+python my_first.py <span class='emph_1'>></span> output.txt <span class='emph_1'>2></span> error.txt
+</pre>
+akkor a hibaüzenetek szépen különválnak.
+<pre>
+output.txt                error.txt
+<div class='comment_i' style='margin-bottom:-10px; margin-top:-15px;'>
+írok                      ajjaj, func valami rosszat talált
+sokmindent
+jó
+hosszasan
+megint írok
+mindenfélét
+jót
+és szépet
+</div>
+</pre>
+</blockquote>
+Az átirányítással kapcsolatosan itt leírtak persze nem Python-specifikusak, azonban az átirányítást lehet a Python program belsejéből is
+intézni. <sup><a href='#link-8'>[8]</a></sup>
 </p>
 <h3 id='run_notepad_plus_plus'>Futtatás Notepad++-ban</h3>
 <p>
@@ -221,8 +310,8 @@ A Run menü Run almenüjét választjuk ki (F5), a felugró ablakba ezt írjuk:
 python.exe <span class='emph_1'>-i</span> "$(FULL_CURRENT_PATH)"
 </pre>
 szükség esetén python.exe teljes elérési útvonalával, majd elmentjük ezt a parancsot pl. <span class='emph_4'>pyrun</span> néven. Mentéskor billentyűkombinációt
-is hozzá tudunk rendelni &ndash; vigyázzunk, hogy ez ne ütközzön már meglévővel. Pl. Ctrl-P szokott lenni a nyomtatás kombinációja, tehát ez már foglalt.
-A -i kapcsoló fontos, hogy ne záródjon be a parancs-ablak a szkript lefutása után.
+is hozzá tudunk rendelni &ndash; vigyázzunk, hogy ez ne ütközzön már meglévővel. Pl. <span class='code_4'>Ctrl-P</span> szokott lenni a nyomtatás kombinációja,
+tehát ez már foglalt. A <code>-i</code> kapcsoló fontos, hogy ne záródjon be a parancs-ablak a szkript lefutása után.
 </p>
 <p>
 Ezután a Run menüből kiválasztjuk a <span class='emph_4'>pyrun</span> tételt, ekkor lefut interaktív módban az éppen megnyitott szkript.
@@ -238,6 +327,37 @@ A sorszámok mutatásának ki-bekapcsolása:
 <pre>
 Settings &rarr; Editing &rarr; <b style='color:black;'>&#9745;</b> Display line number
 </pre>
+</p>
+<p>
+<blockquote class="blq_1">
+Amikor Notepad++-ból futtatunk, akkor az aktuális munka-könyvtár NEM a futtatott modul könyvtára lesz, amiről könnyen meggyőződhetünk:
+
+<pre>
+import os
+
+print(os.getcwd()) <span class='comment_i'># C:\Program Files (x86)\Notepad++</span>
+</pre>
+Ez olyankor okoz meglepetést, amikor egy megnyitandó fájl helyét relatív útvonallal adjuk meg és hibajelzést kapunk:
+
+<pre>
+file_obj = open('yyy.txt') <span class='comment_i'># FileNotFoundError: [Errno 2] No such file or directory: 'yyy.txt'</span>
+</pre>
+Pedig ott van az <span class='code_4'>yyy.txt</span> fájl a szkriptünk könyvtárában... Csak épp a Python máshol tartózkodik.
+</p>
+<p>
+Ha parancssorból, batch-fájlból indítjuk a Pythont, akkor ez a probléma nem lép fel. Megtehetjük persze, hogy lekérdezzük a szkriptfájl
+könyvtárát és "odalépünk":
+
+<pre>
+import os
+
+p = os.path.abspath(__file__)  <span class='comment_i'># a szkript abszolút elérési útvonala</span>
+d = os.path.dirname(p)         <span class='comment_i'># a könyvtár</span>
+os.chdir(d)                    <span class='comment_i'># módosítjuk az aktuális könyvtárat</span>
+</pre>
+
+<span class='emph_blue'>Próbáljuk ki!</span>
+</blockquote>
 </p>
 <h3 id='tabs'>Tabulátorok kezelése</h3>
 <p>
@@ -273,17 +393,18 @@ View &rarr; Show symbol &rarr; Show white space and TAB
 </p>
 <h3 id='non_ascii'>Nem ASCII karakterek kezelése</h3>
 <p>
-Célszerű a szkriptjeinket utf-8 kódolással elmenteni, ekkor nem okoznak gondot az ékezetes karakterek pl. sztringekben és megjegyzésekben:
+Célszerű a szkriptjeinket a szövegszerkesztőben <code>utf-8</code> kódolással elmenteni, ekkor nem okoznak gondot az ékezetes karakterek pl. sztringekben
+és megjegyzésekben:
 </p>
 <pre>
-print('hajrá') # megjegyzés
+print('hajrá') <span class='comment'># megjegyzés</span>
 </pre>
 Ha pl. ISO 8852-ben van a szkript elmentve, akkor az elején egy megjegyzésben specifikálnunk kell ezt:
 
 <pre>
 # coding: iso-8859-2
 </pre>
-különben az első nem ASCII karakternél hibajelzést kapunk.
+különben az első nem-ASCII (ékezetes) karakternél hibajelzést kapunk.
 </p>
 <h4 id='non_ascii_notepad_plus_plus'>Notepad++-ban</h4>
 <p>
@@ -318,6 +439,8 @@ python -m pip install pandas
 <div id='link-6'>[6] <a href='https://stackoverflow.com/questions/7610001/what-is-the-purpose-of-the-m-switch' target='_blank'>What is the purpose of the
 -m switch?</a> (Stackoverflow)</div>
 <div id='link-7'>[7] <a href='https://realpython.com/what-is-pip/' target='_blank'>What Is Pip? A Guide for New Pythonistas</a> (RealPython)</div>
+<div id='link-8'>[8] <a href='https://stackabuse.com/writing-to-a-file-with-pythons-print-function/' target='_blank'>Writing to a File with Python's
+print() Function</a> (Stack Abuse)</div>
 </p>
 </body>
 </html>

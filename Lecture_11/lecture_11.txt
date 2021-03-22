@@ -1,14 +1,90 @@
 mix_11.py
  * else ág ciklusokban
 
+Num_py\numpy_11.py
+ * numpy aggregátor műveletek (sum...) és a kitöltetlenség
+   (gondolkodás a semmiről II.)
+ * NaN és None kezelése
+ * NaN-safe numpy műveletek
+
 Databases\sqlite3_3.py
- * a NULL
+ * a NULL (gondolkodás a semmiről III.)
 
-CharCoding
- * karakterkódolási problémák
+Text\char_coding_1.py
+ * sztringek tárolása (ábrázolása) Pythonban
+ * hexa konstansok megadása, hex() és ord() függvény
+ * hexa numerikus konstansok
+ * hexa konstansok írása sztringbe
+ * chr() függvény
 
-Mix\data_cleaning.html
- * adattisztítás
+Datastructures\bytes_1.py
+ * bytes adattípus
+   + bytes és sztring közötti konverzió
+   + Unicode és UTF-8 megjelenítése
+   + ISO-8859-2 kódolás
+   + bytes() konstruktor
+   + encode(), decode() metódusok
+   + ord() függvény
+   + decode() hibakezelése, az errors paraméter:
+     - strict
+     - ignore
+     - replace
+     - Unicode replacement character
+   + megvalósuló hibás átkódolások
 
-repeat_11.py
+Datastructures\bytearray_1.py
+ * bytearray típus
+ * bytearray és sztring közötti konverzió
+
+Text\char_coding_2.txt
+ * karakterkódolások: más (nem UTF-8) kódolási módok
+ * magyar ékezetes betűk kódjai
+   + ISO-8859-1 (Latin-1), ISO-8859-2 (Latin-2)
+   + Windows-1250, Windows-1252
+   + UTF-8
+ * sztring <-> bytes, encode(), decode()
+ * hex() függvény
+
+Text\char_coding_3.txt
+ * kísérletek Notepad++ szövegszerkesztővel
+ * a Notepad++ karakterkonvertálója
+ * a charmap program
+
+Functions\filter_1.py
+ * filter objektum (filter függvény)
+   + filter kontra generátor kifejezés
+   + filter lambda függvénnyel
+   + filter beépített függvénnyel
+   + filter None-nal, mint függvénnyel
+
+-------------------
+Fakultatív:
+
+Text\char_coding_lit.txt
+ * olvasnivaló
+
+Jupyter_NB\jupyter_intro.txt
+ * Jupyter Notebook installálása, futtatása, olvasni/megnézni való
+
+jupy_demo_1.ipynb
+ * Jupyter Notebook cellák végrehajtása
+ * kifejezések kiíratása
+ * help ? segítségével
+ * help ?? segítségével
+
+jupy_demo_2.ipynb
+ * Markdown
+ * diagramok
+ * LateX
+ * oprendszer-parancsok futtatása
+ * Python modul futtatása
+
+-------------------------------------------
+solutions_10.py
+ * Lecture_10\exercises_10.py megoldásai
+
+tippmix_11.py
  * ismétlés
+
+exercises_11.py
+ * gyakorló feladatok otthonra

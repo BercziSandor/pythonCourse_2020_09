@@ -5,9 +5,11 @@
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
+  h4 { color: green; }
   pre { color: blue; margin: 8px 8px 8px 20px; }
   code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
   .code_2 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .comment { color: lightslategray; font-style: italic;}
   .pale { color: gray; }
   .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
   .contents { margin-left:30%; color:red; font-size: 120%; }
@@ -21,19 +23,27 @@
   .sol_button { color:indigo; font-size: 110%; }
   .solution { display:none; border: 1px groove black; border-radius: 5px; margin: 10px 20px 5px 20px; padding: 5px; background-color: palegoldenrod; }
   .emph_box_1 { margin: 20 auto;padding:10px 20px; background-color: #B1BBBA; border: 1px solid black; border-radius: 4px; text-align: center; font-size: 120%; }
+  .blq_1  { border-left: 3px solid #FC4;padding-left: 16px; font-family: Georgia; font-style: italic; }
 </style>
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.14 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2021.02.25 &mdash;</p>
 </div>
 
 <h1>Függvény-objektumok</h1>
 <ul class='contents'>
 <li><a style='color: red' href='#introduction'>A függvények igazi objektumok</a></li>
 <li><a style='color: red' href='#several_references'>Változók hozzárendelése függvényhez</a></li>
-<li><a style='color: red' href='#func_as_arg'>Függvény, mint hívási paraméter (callback)</a></li>
+<li><a style='color: red' href='#func_as_arg'>Függvény, mint hívási paraméter (callback)</a>
+<ul>
+<li><a style='color: green' href='#event_handler'>callback: eseménykezelők</a></li>
+<li><a style='color: green' href='#sorted_func'>callback: sorted() függvény</a></li>
+<li><a style='color: green' href='#progress_bar'>callback: haladásjelző (progress bar)</a></li>
+</ul>
+</li>
+</li>
 <li><a style='color: red' href='#func_returned'>Függvény mint visszatérő érték (gyár-függvények)</a></li>
 <li><a style='color: red' href='#func_in_data'>Függvények adatstruktúrákban</a></li>
 <li><a style='color: red' href='#attributes'>Függvények attribútumai</a></li>
@@ -55,7 +65,7 @@ függvény-objektum
 <li>lehetnek attribútumai és metódusai.</li>
 </ul>
 
-A függvény-objektum konstruktora a függvény definíciója, ez akkor fut le, amikor a futtató rendszer a def utasításhoz ér. A függvény definíciója olyan
+A függvény-objektum konstruktora a függvény definíciója, ez akkor fut le, amikor a futtató rendszer a <code>def</code> utasításhoz ér. A függvény definíciója olyan
 különleges konstruktor, ami azonnal le is fut, amikor a futtató rendszer erre a pontra érkezik (tehát nem kell külön felhívni) és mindjárt hozzá is rendel egy
 változónevet az így keletkező objektumhoz.
 
@@ -83,7 +93,7 @@ print(func, hex(id(func)))
 Ha több változóhoz hozzárendeljük a függvényobjektumot, ezek mind ugyanarra az egyetlen objektumra fognak mutatni:
 <pre>
 def func():
-    print('Hi, I am func')
+    print('func vagyok')
 
 <span class='emph_1'>f = func</span> # NEM történik függvényhívás!
 print(func, id(func))
@@ -93,23 +103,23 @@ f()
 <div class='result'>
 # &lt;function func at 0x01E98FA8> 32083880
 # &lt;function func at 0x01E98FA8> 32083880
-# Hi, I am func
-# Hi, I am func
+# func vagyok
+# func vagyok
 </div>
 </pre>
-Itt az f és a func változók ugyanarra a függvény-objektumra mutatnak; f() és func() hatására ugyanaz a kód fut le. Ami meg szokta lepni az embereket: a
-függvényre mutató változók egyenrangúak, bármelyiket, akár a definícióban szereplőt is meg lehet semmisíteni, az objektum maga és a többi rá mutató változók
-továbbra is élnek.
+Itt az f és a func változók ugyanarra a függvény-objektumra mutatnak; <code>f()</code> és <code>func()</code> hatására ugyanaz a kód fut le. Ami meg szokta lepni
+az embereket: a függvényre mutató változók egyenrangúak, bármelyiket, akár a definícióban szereplőt is meg lehet semmisíteni, az objektum maga és a többi
+rá mutató változók továbbra is élnek.
 
 <pre>
 def func():
-    print('Hi, I am func')
+    print('func vagyok')
 
 f = func
 <span class='emph_1'>del func</span>
 f()
 <div class='result'>
-# Hi, I am func
+# func vagyok
 </div>
 </pre>
 Más modulok függvényeire is ráállíthatunk persze változókat, sőt, az eredetit meg is semmisíthetjük (ami nyilván nagyon rossz ötlet):
@@ -132,22 +142,24 @@ print(my_sq(100))
 Egy függvény-objektumot átadhatunk egy másik függvénynek paraméterként:
 <pre>
 def func(funcParam):
-    print('I am func, I call the function I received as parameter')
+    print('func vagyok, felhívom a paraméterként kapott függvényt')
     funcParam()
 
 def func_2():
-    print('*** I am func_2')
+    print('*** én vagyok func_2')
 
 func(func_2)
 <div class='result'>
-# I am func, I call the function I received as parameter
-# *** I am func_2
+# func vagyok, felhívom a paraméterként kapott függvényt
+# *** én vagyok func_2
 </div>
 </pre>
-Ezt a mechanizmust használjuk, amikor eseménykezelőket rendelünk hozzá a felhasználói felület elemeihez. Szimuláljuk nagyon leegyszerűsítve:
+<h4 id='event_handler'>&bull; callback: eseménykezelők</h4>
+<p>
+Ezt a mechanizmust használjuk például akkor, amikor eseménykezelőket rendelünk hozzá a felhasználói felület elemeihez. Szimuláljuk nagyon leegyszerűsítve:
 
 <pre>
-def ui(<span class='emph_1'>click_func</span>,<span class='emph_2'>double_click_func</span>):
+def ui(<span class='emph_1'>click_func</span>, <span class='emph_2'>double_click_func</span>):
     while True:
         answer = input('what do you want? ')
         answer = answer.strip().lower()
@@ -165,7 +177,9 @@ def cl():
 def d_cl():
     print('DOUBLE CLICK!')
 
-ui(cl,d_cl)
+ui(cl,d_cl)     <span class='comment'># cl() és d_cl() fog felhívódni</span>
+
+##################################
 
 def cl_2():
     print('click 2')
@@ -173,21 +187,22 @@ def cl_2():
 def d_cl_2():
     print('double click 2')
 
-ui(cl_2,d_cl_2)
+ui(cl_2,d_cl_2) <span class='comment'># cl_2() és d_cl_2() fog felhívódni</span>
 </pre>
-Ha a felhasználó c-t gépel be, akkor a click_func hívódik fel, jelen esetben cl; ha d-t, akkor double_click_func, ha bármi mást, akkor nem történik semmi.
+Ha a felhasználó <span class='code_2'>c</span>-t gépel be, akkor a <code>click_func()</code> hívódik fel; ha <span class='code_2'>d</span>-t, akkor
+<code>double_click_func()</code>, ha bármi mást, akkor nem történik semmi.
 </p>
-<div style='text-align:center; font-size:200%'>&#9827;</div>
+<h4 id='sorted_func'>&bull; callback: sorted() függvény</h4>
 <p>
-Egy másik példát szolgáltat a standard könyvtár sorted függvénye, aminek megadhatunk <span class='emph_4'>key</span> kulcsszóval egy függvényt, amelyet az
+Közismert példát szolgáltat a standard könyvtár sorted függvénye, aminek megadhatunk <span class='emph_4'>key</span> kulcsszóval egy függvényt, amelyet az
 összehasonlításban fog használni. A példában sztringeket rendezünk a hosszuk szerint:
 
 <pre>
 lst = ['Z','FFF','AA']
 
-lst_2 = sorted(lst)         # "normal" sorting
+lst_2 = sorted(lst)         <span class='comment'># szokásos rendezés</span>
 print(lst_2)
-lst_3 = sorted(lst,key=<span class='emph_1'>len</span>) # sort by string length
+lst_3 = sorted(lst,key=<span class='emph_1'>len</span>) <span class='comment'># sztring hossz szerinti rendezés</span>
 print(lst_3)
 <div class='result'>
 # [ 'AA', 'FFF', 'Z']
@@ -200,10 +215,10 @@ Gyakran előforduló eset, hogy egy tuple vagy list elemekből álló listát ke
 <pre>
 lst = [('Z','A'),('A','K'),('B','Y')]
 
-lst_2 = sorted(lst)   # "normal" sorting
+lst_2 = sorted(lst)                          <span class='comment'># szokásos rendezés</span>
 print(lst_2)
 
-lst_3 = sorted(lst,key=lambda elem: elem[1]) # sort by second item
+lst_3 = sorted(lst,key=lambda elem: elem[1]) <span class='comment'># második elem szerinti rendezés</span>
 print(lst_3)
 
 def key_func(elem):
@@ -219,6 +234,38 @@ print(lst_3)
 </pre>
 A harmadik változat ekvivalens a másodikkal &ndash; azok kedvéért tettem bele, akik még idegenkednek a lambda függvényektől.
 </p>
+<h4 id='progress_bar'>&bull; callback: haladásjelző (progress bar)</h4>
+<p>
+Ha egy hosszú ideig futó függvény időnként visszajelzést akar adni a haladásáról, akkor hívási paraméterként megkapja azt a függvényt, ami a visszajelzést
+végzi.
+
+<pre>
+from time import sleep
+
+def slow_func(progressFunc):
+    for i in range(4):
+        sleep(1)  <span class='comment'># lassú műveletet szimulálunk</span>
+        progressFunc()
+
+def progress_1():
+    print('*', end='', flush=True)
+
+def progress_2():
+    print('>', end='', flush=True)
+
+slow_func(progress_1)
+print()
+
+###############################
+
+slow_func(progress_2)
+print()
+<div class='result'>
+# ****
+# >>>>
+</div>
+</pre>
+</p>
 <h2 id='func_returned'>Függvény mint visszatérő érték (gyár-függvények)</h2>
 <p>
 Egy függvény-objektum lehet egy másik függvény visszatérő értéke. Az alábbi kis példában <code>func_factory</code> minden alkalommal visszaad egy belső függvényére
@@ -226,7 +273,7 @@ mutató változót:
 <pre>
 def func_factory():
     def func():
-        print('I am func')
+        print('func vagyok')
 
     return func
 
@@ -241,15 +288,24 @@ f2()
 <div class='result'>
 # &lt;function func_factory.&lt;locals>.func at 0x02128F<span class='emph_2'>60</span>> 347707<span class='emph_2'>84</span>
 # &lt;function func_factory.&lt;locals>.func at 0x02128F<span class='emph_2'>18</span>> 347707<span class='emph_2'>12</span>
-I am func
-I am func
+# func vagyok
+# func vagyok
 </div>
 </pre>
-Látható, hogy f1 és f2 <b>nem</b> ugyanaz az objektum, hanem egy függvénynek két külön példánya. Ez például akkor lehet hasznos, amikor attribútummal ruházzuk
-fel a függvényt és ennek példányonként más értéket akarunk adni (ld. lentebb).
+<blockquote class="blq_1">
+Látható, hogy f1 és f2 <b>nem</b> ugyanaz az objektum, hanem a <code>func</code> függvénynek két külön példánya, ami azért van így, mert a func objektum a
+func_factory egy lokális változója. A lokális változók a stack-en keletkeznek a függvény hívásakor, minden hívásnál valahol máshol. Mivel az f1 globális változót
+ráállítottuk func címére, ezért ez az objektum (és az egész környezete) nem törlődik a stack-ről a func_factory visszatérése után. A stack-nek ez a területe
+csak akkor szabadul fel, amikor már egyetlen változó sem mutat a belsejébe. Ugyanígy az f2 globális változó a func_factory kódjának egy másik példányát
+rajzszögezi oda valahol a stack-hez, ő a func objektum egy másik példányára fog mutatni.
+</blockquote>
 </p>
 <p>
-Természetesen nem csak belső függvény lehet visszatérő érték, de ez kiemelten fontos eset, mert ez a closure és ezáltal a dekorátorok alapja.
+Ez az egész például akkor lehet hasznos, amikor attribútummal ruházzuk fel a függvényt és ennek példányonként más értéket akarunk adni (ld. lentebb).
+</p>
+<p>
+Természetesen nem csak belső függvény lehet visszatérő érték, de ez kiemelten fontos eset, mert ez a <span class='code_2'>closure</span> és ezáltal a dekorátorok
+alapja.
 
 <div class='emph_box_1' style='width:60%;'>
 Az, hogy egy függvény lehet függvényparaméter vagy visszatérő érték, nem bonyolult fogalom.<br>
@@ -367,15 +423,15 @@ A függvény-objektumnak ugyanúgy adhatunk attribútumokat, mint bármely más 
 
 <pre>
 def func():
-    print('In func; func.x =',func.x)
+    print('func-ban; func.x =',func.x)
     <span class='emph_1'>func.y = 'BBB'</span>
 
 <span class='emph_1'>func.x = 'AAA'</span>
 func()
-print('In main; func.y =',func.y)
+print('main-ben; func.y =',func.y)
 <div class='result'>
-# In func; func.x = AAA
-# In main; func.y = BBB
+# func-ban func.x = AAA
+# main-ben; func.y = BBB
 </div>
 </pre>
 Az attribútum megmarad a hívások között, szolgálhat például arra, hogy számoljuk a függvényhívások számát.
@@ -383,15 +439,15 @@ Az attribútum megmarad a hívások között, szolgálhat például arra, hogy s
 <pre>
 def func():
     func.num_calls += 1
-    print(f'in func number of calls: {func.num_calls}')
+    print(f'func-ban number of calls: {func.num_calls}')
 
 func.num_calls = 0
 func()
 func()
 print('total:',func.num_calls)
 <div class='result'>
-# in func number of calls: 1
-# in func number of calls: 2
+# func-ban number of calls: 1
+# func-ban number of calls: 2
 # total: 2
 </div>
 </pre>
@@ -404,15 +460,15 @@ def func():
         func.num_calls = 0</span>
 
     func.num_calls += 1
-    print(f'in func number of calls: {func.num_calls}')
+    print(f'func-ban number of calls: {func.num_calls}')
 
 <span style='color:blue;text-decoration: line-through;'>func.num_calls = 0</span>
 func()
 func()
 print('total:',func.num_calls)
 <div class='result'>
-# in func number of calls: 1
-# in func number of calls: 2
+# func-ban number of calls: 1
+# func-ban number of calls: 2
 # total: 2
 </div>
 </pre>
@@ -427,7 +483,7 @@ def func_factory():
             func.num_calls = 0
 
         func.num_calls += 1
-        print(f'in func number of calls: {func.num_calls}')
+        print(f'func-ban a hívások száma: {func.num_calls}')
 
     return func
 
@@ -436,15 +492,15 @@ f2 = func_factory()
 f1()
 f1()
 f2()
-print('total:',f1.num_calls + f2.num_calls)
+print('összesen:',f1.num_calls + f2.num_calls)
 <div class='result'>
-# in func number of calls: 1
-# in func number of calls: 2
-# in func number of calls: 1
-# total: 3
+# func-ban a hívások száma: 1
+# func-ban a hívások száma: 2
+# func-ban a hívások száma: 1
+# összesen: 3
 </div>
 </pre>
-Az attribútumok helyett általában closure használható, amelyről külön fejezet szól.
+Az attribútumok helyett általában <span class='code_2'>closure</span> használható, amelyről külön fejezet szól.
 </p>
 <h2 id='methods'>Függvények metódusai</h2>
 <p>
@@ -452,24 +508,24 @@ A függvény-objektumot felruházhatjuk metódusokkal is.
 
 <pre>
 def func():
-    print('I am func, I call my method')
+    print('func vagyok, hívom a metódusomat')
     func.method()
 
 def func_2():
-    print('*** I am func_2')
+    print('*** func_2 vagyok')
 
 def func_3():
-    print('--- I am func_3!')
+    print('--- func_3 vagyok!')
 
 func.method = func_2
 func()
 func.method = func_3
 func()
 <div class='result'>
-# I am func, I call my method
-# *** I am func_2
-# I am func, I call my method
-# --- I am func_3
+# func vagyok, hívom a metódusomat
+# *** func_2 vagyok
+# func vagyok, hívom a metódusomat
+# --- func_3 vagyok!
 </div>
 </pre>
 Így alkalmazni tudjuk a Strategy tervezési mintát; a változtatható metódus lehet pl. egy útvonaltervező algoritmus. Más-más algoritmust akarunk használni
@@ -480,11 +536,11 @@ fejleszthető lesz és nem keverednek a különböző megoldások áttekinthetet
 <p>
 <pre>
 def f2():
-    print('*** I am f2!')
+    print('*** f2 vagyok!')
     return f1
 
 def f1():
-    print('*** I am f1!')
+    print('*** f1  vagyok!')
     return 100
 
 print(f1 == f2())
@@ -496,7 +552,7 @@ print(f1 == f2)
 <div id='sol_1' class='solution'>
 <pre>
 <div class='result'>
-# *** I am f2!
+# *** f2 vagyok!
 # True
 # ----
 # False
@@ -542,7 +598,7 @@ David Beazley, Brian K. Jones: Python Cookbook<br>
 <b>Videó</b>
 </p>
 <p>
-<a href='https://www.youtube.com/watch?v=kr0mpwqttM0' target='_blank'>Programming Terms: First-Class Functions</a> Corey sSchaefer<br>
+<a href='https://www.youtube.com/watch?v=kr0mpwqttM0' target='_blank'>Programming Terms: First-Class Functions</a> Corey Schaefer<br>
 </p>
 <script>
 function toggle_from_none(ID) {

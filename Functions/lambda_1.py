@@ -21,9 +21,9 @@
 def my_func(param):
     return 2 * param
 
-# létrehoz egy függvényobjektumot és hozzárendeli a my_func nevet. Ilyenkor csak maga az objektum
-# készül el, a függvény törzsét csak indentálás szempontjából elleőrzi (hogy megtalálja a végét),
-# tehát ez például lefut:
+# létrehoz egy függvényobjektumot és hozzárendeli a my_func nevet. Ilyenkor csak maga az
+# objektum készül el, a függvény törzsét csak indentálás szempontjából ellenőrzi (hogy
+# megtalálja a végét), tehát ez például lefut:
 
 def stupid_func():
     nincs_is_ilyen_mi_ez_itt()
@@ -32,37 +32,39 @@ print('hello')  # hello
 
 # Létre tudunk hozni névtelen függvényobjektumokat is, ezeket lambda függvényeknek nevezzük.
 
-# Mire lehet jó egy névtelen objektum? Arra, hogy valahol azonnal a keletkezésekor, egyszer felhasználjuk.
-# Más objektumokkal kapcsolatban ez megszokott gyakorlat. Van például egy függvényünk, aminek át akarunk
-# adni paraméterként egy 2-es konstanst. Ezt így tesszük meg:
+# Mire lehet jó egy névtelen objektum? Arra, hogy valahol azonnal a keletkezésekor, egyszer
+# felhasználjuk. Más objektumokkal kapcsolatban ez megszokott gyakorlat. Van például egy
+# függvényünk, aminek át akarunk adni paraméterként egy 2-es konstanst. Ezt így tesszük meg:
 
 my_func(2)
 
-# ami egyszerűbb, mintha külön erre a célra létrehoznánk egy változót, hogy nevet adhassunk a konstansunknak:
+# ami egyszerűbb, mintha külön erre a célra létrehoznánk egy változót, hogy nevet adhassunk
+# a konstansunknak:
 
 two = 2
 my_func(two)
 
-# Az első, egyszerűbb megoldásnál is létrehoztunk egy int típusú objektumot, de nem kapott nevet,
-# csak felhasználtuk.
+# Az első, egyszerűbb megoldásnál is létrehoztunk egy int típusú objektumot, de nem kapott
+# nevet, csak felhasználtuk.
 
 ############################
 
-# A def kulcsszóval létrehozunk egy függvényt és azonnal nevet is adunk neki. A lambda kulcsszóval
-# létre tudunk hozni függvényt úgy, hogy NEM adunk neki nevet.
+# A def kulcsszóval létrehozunk egy függvényt és azonnal nevet is adunk neki. A lambda
+# kulcsszóval létre tudunk hozni függvényt úgy, hogy NEM adunk neki nevet.
 
 #            lambda param1, param2,... paramN : KIFEJEZÉS
 
 # a KIFEJEZÉS használja a param1... paramétereket.
 
-# A def egy konstruktor, ami létrehoz egy függvény-objektumot és egy nevet is rendel hozzá; a lambda csak
-# létrehozza, de nem ad nevet neki.
+# A def egy konstruktor, ami létrehoz egy függvény-objektumot és egy nevet is rendel hozzá; a
+# lambda csak létrehozza, de nem ad nevet neki.
 
 # Ez a kifejezés:
 
 lambda param: 2 * param
 
-# egy végrehajtható kifejezés. Mint minden kifejezéshez, ehhez is hozzárendelhetünk nevet (ami nem a tipikus használata):
+# egy végrehajtható kifejezés. Mint minden kifejezéshez, ehhez is hozzárendelhetünk nevet
+# (ami persze nem a tipikus használata):
 
 f = lambda param: 2 * param
 
@@ -77,8 +79,8 @@ print(f(3))  # 6
 x = (lambda param: 2 * param)(3)
 print(x)   # 6
 
-# Lambda függvény helyett MINDIG használhatunk "normális" függvényt, de van, ahol a lambda egyszerűbb,
-# praktikusabb - ott, ahol az illető függvényt egyetlen helyen akarjuk csak használni.
+# Lambda függvény helyett MINDIG használhatunk "normális" függvényt, de van, ahol a lambda
+# egyszerűbb, praktikusabb - ott, ahol az illető függvényt egyetlen helyen akarjuk csak használni.
 
 # Csak persze meg kell szokni a szintaktikáját. Eleinte mindenki utálni szokta szegényt.
 
@@ -88,8 +90,8 @@ print(x)   # 6
 
 # A lambda függvény egy kifejezés, utasításokat, mint pl. if, while nem tartalmazhat.
 
-# Ha kicsit is bonyolultabb a kifejezés, nagyon gyorsan sokkal olvashatatlanabbá tud válni, mint egy
-# "normális" függvény. Márpedig az olvashatóság nagy kincs.
+# Ha kicsit is bonyolultabb a kifejezés, nagyon gyorsan sokkal olvashatatlanabbá tud válni, mint
+# egy "normális" függvény. Márpedig az olvashatóság nagy kincs.
 
 ############################
 
@@ -97,8 +99,8 @@ print(x)   # 6
 
 # 1A.
 
-# lambda függvényt használhatunk ugrótábla kialakításához, hosszabb if...else szerkezetek kiváltása
-# céljából (mivel switch sajnos a Pythonban nincs).
+# lambda függvényt használhatunk ugrótábla kialakításához, hosszabb if...else szerkezetek
+# kiváltása céljából (mivel switch sajnos a Pythonban nincs).
 
 # Kiinduló függvény:
 
@@ -149,7 +151,7 @@ func(2, 10)  # 0.01
 
 # f1, f2, f3-at sehol máshol nem akarjuk alkalmazni, egyszer használatosak.
 # Ez rosszabbul olvasható (bár ez ízlés kérdése): ha azt akarjuk tudni, hogy
-# number = 1 hatsára mit csinál a függvény, akkor először megkeressük
+# number = 1 hatására mit csinál a függvény, akkor először megkeressük
 # az egyes indexű elemet, ez f2, aztán megkeressük f2 definícióját.
 
 ############################
@@ -269,3 +271,5 @@ print(lst_2)  # [('Eric', 170), ('John', 180), ('Abraham', 190)]
 # 2.) Mások használják és sokszor kell mások kódját megértenünk.
 #
 # 3.) Mélyebben, alaposabban megértjük a nyelv működését.
+
+############################

@@ -1,5 +1,8 @@
 # Dictionary (szótár) 3.
 # Szótárak egyesítése (merge); update metódus
+# ChainMap objektum
+
+# https://www.geeksforgeeks.org/chainmap-in-python/
 
 # A gyakorlatban előforduló feladat: két (vagy több) szótárat egyesíteni akarunk úgy,
 # hogy mindegyik kulcs szerepeljen az eredmény-szótárban. Egyező kulcsok esetén a másodiknak
@@ -29,13 +32,16 @@ print(dic_merged) # {'A': 1, 'COMMON': 99, 'C': 3}
 
 #######################################
 
-# Ha nem akarunk létrehozni egy új szótárat, akkor használhatjuka Chainmap objektumot:
+# Ha nem akarunk létrehozni egy új szótárat, akkor használhatjuk a Chainmap objektumot:
+
+from collections import ChainMap
 
 chain = ChainMap(dic_2, dic_1) # fordított sorrendben vettük a szótárakat
 
 print(chain) # ChainMap({'C': 3, 'COMMON': 99}, {'A': 1, 'COMMON': 2})
 
 print(chain['COMMON']) # 99
+print(chain['C'])      # 3
 print(chain.get('nincsilyen')) # None
 
 #######################################

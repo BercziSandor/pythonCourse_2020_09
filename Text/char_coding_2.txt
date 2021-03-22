@@ -1,0 +1,259 @@
+Karakterkódolások: más (nem UTF-8) kódolási módok
+ISO-8859-1 (Latin-1), ISO-8859-2 (Latin-2)
+Windows-1250, Windows-1252
+Magyar ékezetes betűk kódjai
+Sztring <-> bytes, encode(), decode()
+hex() függvény
+
+======================================================================================
+
+Számunkra  két legfontosabb szabványos kódolás az UTF-8-on kívül az ISO-8859-1 és az ISO-8859-2.
+Mindkettő egy bájtos; az első 128 érték megegyezik az ASCII kódtáblázattal.
+
+  ISO-8859-1 (Latin-1; Nyugat-Európai szabványos)
+  -----------------------------------------------
+
+Majdnem teljesen lefedi a Nyugat-Európai nyelvek ábécéit és néhány másét is (pl. maláj):
+Részletesen ld.: https://en.wikipedia.org/wiki/ISO/IEC_8859-1
+
+  ISO-8859-2 (Latin-2; Kelet-Európai szabványos)
+  ----------------------------------------------
+
+Lefedi a Kelet-Európai nyelvek ábécéit (és a türkmént).
+Részletesen ld.: https://en.wikipedia.org/wiki/ISO/IEC_8859-2
+
+#########################################
+
+  ISO-8859-1 <-> ISO-8859-2
+  -------------------------
+
+A magyar ékezetes betűk szempontjából nézve az a különbség a két kódtábla között, hogy
+az ISO-8859-2 minden magyar ékezetes betűt tartalmaz, viszont a 8859-1 nem tartalmazza
+az ő, Ő, ű, Ű betűket. 8859-2-ben ezek hexa és decimális kódja:
+
+   ő f5 245
+   Ő d5 213
+   ű fb 251
+   Ű db 219
+
+Ez a kis táblázat egyébként így keletkezett:
+
+for ch in('őŐűŰ'):
+    b = ch.encode('ISO-8859-2')  # a karakternek megfelelő 1 elemű bytes típusú tömb
+    i = b[0]                     # a bájt értéke (int, decimálisan jelenik meg)
+    x = hex(i)                   # a bájtnak megfelelő hexa érték
+    x = x[2:]                    # 0x levágva
+    print(ch, x, i)
+
+Ezek a kódok a 8859-1 kódban a hullámos (tilde, ~) ékezetű  o-t és a háztetős (caret, ^)
+ékezetű u-t jelentik. Amikor tehát magyar szövegben ilyen karaktereket látunk, az azt
+jelenti, hogy a megjelenítő program 8859-1-nek hitte a kódolást, pedig az valójában 8859-2.
+
+A többi magyar ékezetes karakter kódja megegyezik a Latin-1-ben és a Latin-2-ben, sőt, még
+a Unicode kóddal is egyezik, mert a Unicode a Latin-1 karakterkészlet elemeit változatlanul
+tartalmazza. (A Unicode egy bájtos kódok a Latin-1-nek felelnek meg.)
+
+#########################################
+
+Windows-1250 és Windows-1252 kódtáblák
+--------------------------------------
+
+A Windows-1250 a Latin-2-nek felel meg majdnem pontosan, de szerencsére a magyar betűk
+szempontjából teljesen.
+
+A Windows-1252 a Latin-1-nek felel meg majdnem pontosan, de szerencsére a magyar betűk
+szempontjából teljesen: az ő és ű hiányoznak, helyükön ugyanazok vannak, mint a Latin-1-ben.
+
+#########################################
+
+Összefoglalva a magyar ékezetes karakterek különböző kódtáblákban:
+
+  +-----------------------------+----------------------------------------++-------------------------------------+
+  | ISO-8859-1,   ISO-8859-2,   |                                        ||                                     |
+  | Windows-1250, Windows-1252, | ISO-8859-2,               ISO-8859-1,  ||                UTF-8                |
+  |          Unicode            | Windows-1250    Unicode   Windows-1252 ||                                     |
+  +-----------------------------+----------------------------------------++-------------------------------------+
+  |         á  e1 225           |  ő  f5 245     0x151 337       -       || á  c3 a1|195 161   ő  c5 91|197 145 |
+  |         Á  c1 193           |  Ő  d5 213     0x150 336       -       || Á  c3 81|195 129   Ő  c5 90|197 144 |
+  |         é  e9 233           |  ű  fb 251     0x171 369       -       || é  c3 a9|195 169   ű  c5 b1|197 177 |
+  |         É  c9 201           |  Ű  db 219     0x170 368       -       || É  c3 89|195 137   Ű  c5 b0|197 176 |
+  |         í  ed 237           |                                        || í  c3 ad|195 173                    |
+  |         Í  cd 205           |                                        || Í  c3 8d|195 141                    |
+  |         ó  f3 243           |                                        || ó  c3 b3|195 179                    |
+  |         Ó  d3 211           |                                        || Ó  c3 93|195 147                    |
+  |         ö  f6 246           |                                        || ö  c3 b6|195 182                    |
+  |         Ö  d6 214           |                                        || Ö  c3 96|195 150                    |
+  |         ú  fa 250           |                                        || ú  c3 ba|195 186                    |
+  |         Ú  da 218           |                                        || Ú  c3 9a|195 154                    |
+  |         ü  fc 252           |                                        || ü  c3 bc|195 188                    |
+  |         Ü  dc 220           |                                        || Ü  c3 9c|195 156                    |
+  +-----------------------------+----------------------------------------++-------------------------------------+
+
+A Unicode értékek kiíratása így történt:
+
+for ch in('őŐűŰ'):
+    i = ord(ch) # karakter Unicode kódja decimálisan
+    h = hex(i)  # hexává alakítva
+    print(h, i)
+
+Az UTF-8 pedig így:
+
+for ch in('áÁéÉíÍóÓöÖúÚüÜőŐűŰ'):
+    b_arr = ch.encode('UTF-8')  # a karakternek megfelelő 2 elemű bytes típusú tömb
+    i_0 = b_arr[0]              # első bájt értéke (int, decimálisan jelenik meg)
+    h_0 = hex(i_0)              # első bájt hexa értéke
+    x_0 = h_0[2:]               # 0x levágva
+
+    i_1 = b_arr[1]              # második bájt  bájt értéke (int, decimálisan jelenik meg)
+    h_1 = hex(i_1)              # második bájt hexa értéke
+    x_1 = h_1[2:]               # 0x levágva
+
+    print(ch, x_0, x_1, i_0, i_1)
+
+#########################################
+
+NÉHÁNY ÁTALAKÍTÁS KÜLÖNBÖZŐ KÓDKÉSZLETEK KÖZÖTT
+-----------------------------------------------
+
+Vegyünk egy speciális magyar betűt:
+
+s_1 = 'ő'
+
+# Az első karakter kódja (Unicode, mert a Python minden sztringet így tárol):
+dec_val = ord(s_1[0])
+print(dec_val) # 337
+
+# A kód hexadecimálisan kifejezve:
+hex_val = hex(dec_val)
+print(hex_val) # 0x151
+
+# Tehát az ő betű Unicode kódja 337 0x151
+
+# Alakítsuk át a sztringünket Latin-2 kódolású bájtokká
+
+s_1 = 'ő'
+b = s_1.encode('ISO-8859-2')
+print(b)  # b'\xf5'
+# egy hexa f5 értékű valami
+
+print(type(b), len(b)) # <class 'bytes'> 1
+# egy bytes típusú, 1 hosszúságú objektum
+
+print(type(b[0])) # <class 'int'>
+# a bytes sorozat elemei int típusúak
+
+print(b[0], hex(b[0])) # 245 0xf5
+# decimálisan, illetve hexában ennyi az ő betű ISO-8859-2 (Latin-2) kódja
+
+# Alakítsuk vissza:
+
+s_2 = b.decode('ISO-8859-2')
+print(s_2) # ő
+
+# Visszakaptuk az ő betűnket. Ellenőrizzük le:
+
+print(ord(s_2[0]), hex(ord(s_2[0]))) # 337 0x151
+
+# Stimmel.
+
+======================================================================================
+
+Tegyük fel, hogy a bájtsorozatról azt hisszük, hogy ISO-8859-1 kódolású és
+végezzük el így a visszaalakítást.
+
+s_2 = b.decode('ISO-8859-1')
+print(s_2) # o
+
+# A terminálablakban egy o betűt látunk, de nézzük meg, mi is ez valójában:
+
+print(ord(s_2[0]), hex(ord(s_2[0]))) # 245 0xf5
+
+Ha beírjuk a keresőbe, hogy
+
+unicode f5 hexa
+
+megkapjuk pl. ezt az oldalt:
+
+https://www.fileformat.info/info/unicode/char/f5/index.htm
+
+ahol kiderül, hogy ez egy LATIN SMALL LETTER O WITH TILDE, vagyis egy hullámos ékezetű o,
+amit a terminálablak o betűként jelenített meg.
+
+A print utasítás átalakította a kódot a terminálnak való átadáskor. Ha fájlba irányítjuk
+a szkript kimenetét:
+
+python test.py > out.txt
+
+akkor megint más kódolási szabályok lesznek érvényesek; hibajelzést kapunk, amit úgy
+tudunk elkerülni, hogy sys.stdout számára a megfelelő kódkészletet definiáljuk. Erről
+később lesz még szó.
+
+======================================================================================
+
+                        *** A FŐ TANULSÁG ***
+
+Mindig nézzük meg, milyen KÓDOKRÓL van szó. A megjelenítéskor különféle konverziók történhetnek!
+Amit a képernyőn látunk, azt valamilyen program szemüvegén keresztül látjuk.
+
+======================================================================================
+
+Igazoljuk most azt, hogy a Latin-1 kódkészletben nincs ő betű!
+
+s_1 = 'ő'
+b = s_1.encode('ISO-8859-1')
+
+# UnicodeEncodeError: 'latin-1' codec can't encode character '\u0151' in position 0:
+# ordinal not in range(256)
+
+# Valóban hibajelzést kaptunk, bár egy kicsit rejtélyes szöveggel: arról panaszkodik,
+# hogy a hexa 151-es érték (337 decimálisan) nincs benne a 0-255 tartományban. Ez igaz, viszont
+# a Latin-2 átalakításnál egyáltalán nem zavarta. A problémája valójában az, hogy ez a 337-es
+# Unicode kód a Latin-1-ben nincs benne.
+
+======================================================================================
+
+Próbáljuk ki az UTF-8 kódkészletre alakítást is.
+
+s_1 = 'ő'
+b = s_1.encode('UTF-8')
+
+print(b)  # b'\xc5\x91'
+# egy bytes típusú tömb, melyben egy c5 és egy 91 hexa értékű bájt van.
+
+# Ha a decimális értékeket is látni akarjuk:
+
+for e in b:
+    print(e)
+
+# 197
+# 145
+
+Valóban ez a két bájt alkotja az ő betű UTF-8 kódját. Ha nem vagyunk benne biztosak,
+írjuk be ezt a keresőbe:
+
+ő utf 8 code
+
+aztán olvassuk el ezt:
+
+https://www.compart.com/en/unicode/U+0151
+
+Visszaalakítani nyilván így tudjuk:
+
+s_2 = b.decode('UTF-8')
+print(s_2, ord(s_2), hex(ord(s_2))) # ő 337 0x151
+
+Valóban, ez az ő betű Unicode kódja.
+
+======================================================================================
+
+Ez az egész téma azért fontos, mert vannak programok, amelyek bájtsorozatot szolgáltatnak
+(pl. a requests) és ha ezek szöveget tartalmaznak, akkor nem feltétlenül UTF-8-ban
+vannak kódolva. Másrészt nagyon sokszor kell átkódolnunk a szövegeket, pl. akkor, amikor
+fájlba vagy adatbázisba írjuk, vagy hálózaton küldjük ki és ilyenkor pontosan érteni
+kell, hogy mi is történik.
+
+Továbbá ez az egész problémakör nyilván nemcsak a Python keretei között merül fel.
+Viszont itt a sztringek bytes típusúvá alakításával könnyen meg tudjuk nézni, mit
+produkál a kódolás.
+
+======================================================================================

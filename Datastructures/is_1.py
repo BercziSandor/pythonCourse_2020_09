@@ -1,4 +1,4 @@
-# is operátor vs == operátor
+# is operátor kontra == operátor
 
 # x is y akkor True, ha a két változó memóriacíme megegyezik, tehát ugyanarról az
 # objektumról van szó. x == y akkor True, ha a két objektum tartalma megegyezik.

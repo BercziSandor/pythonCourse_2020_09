@@ -1,10 +1,3 @@
-Num_py\numpy_3.py
- * array tuple-ból, dict-ből, delimitált sztringből
- * reshape, size
-
-Num_py\numpy_4.py
- * logikai mátrixműveletek, maszkolás, np.average, where
-
 Num_py\numpy_5.py
  * műveletek vektorizálásának gyorsító hatása
 
@@ -14,8 +7,33 @@ Iterators_Generators\gen_func_2.html
 Classes\inheritance_2.py
  * öröklés, absztrakt osztályok
 
-repeat_8.py
+Panda\series_1.py
+ * Series adattípus bemutatása
+ * implicit és explicit indexelés
+ * loc, iloc attribútum
+
+A Python program kapcsolata a környezetével: Environment\environ_1.py
+ * Környezeti változók, os.environ objektum, SET Windows parancs
+
+----------------------------------------
+Fakultatív:
+
+Iterators_Generators\gen_func_3.html
+ * adat és parancs átvitele
+
+Iterators_Generators\gen_func_4.html
+ * yield from
+
+Mix\datetime_2.py
+ * dateutil modul: relativedelta
+ * calendar modul
+
+----------------------------------------
+tippmix_8.py
  * ismétlés
 
 solutions_7.py
  * Lecture_7\exercises_7.py megoldásai
+
+exercises_8.py
+ * gyakorló feladatok

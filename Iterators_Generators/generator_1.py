@@ -5,14 +5,15 @@
 # yield-del abbahagyta.
 
 def my_first_gen():
+    print('my_first_gen start')
     yield(1)
     yield(2)
     yield(3)
 
-it = my_first_gen()
+it = my_first_gen() # semmit nem ír ki!!
 print(it) # <generator object my_first_gen at 0x021B0330>
 
-x = next(it)
+x = next(it) # my_first_gen start
 print(x) # 1
 
 x = next(it)
@@ -28,6 +29,7 @@ for e in it:
     print(e, end=' ')
 print()
 
+# my_first_gen start
 # 1 2 3
 
 ####################################
@@ -56,6 +58,8 @@ for e in m:
 print()
 # nohtyp
 
+####################################
+
 # Most ugyanezt generátor-függvénnyel valósítjuk meg.
 
 def miez(param):
@@ -72,5 +76,9 @@ for e in m:
     print(e, end='')
 print()
 # nohtyp
+
+####################################
+
+# Költői kérdés: Melyik megoldás egyszerűbb?
 
 ####################################

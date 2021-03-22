@@ -1,13 +1,13 @@
 Functions\func_objects_1.py
  * függvény-objektumok
  * dir()
- * sys.getsizeof()
- * __sizeof__(), __call__(), __name__, __class__
+ * __call__(), __name__, __class__
 
 Datastructures\dict_1.py
  * dict típus
  * tuple kibontása változókba
- * zip függvény
+ * zip() függvény
+ * sorted() függvény
 
 Functions\func_params_2.py
  * opcionális pozícionális és kulcsszó paraméterek
@@ -20,17 +20,24 @@ Functions\lambda_1.py
  * lambda függvénykifejezések
  * sorted()
 
-Datastructures\set_1.py
- * set típus
+Environment\argv_1.py
+ * sys.argv: indítási paraméterek (command line parameters) elérése
 
-Datastructures\index_1.py
-  * negatív indexek
-  * slicing
+---------------------
+Fakultatív:
 
-files_1.py
-  * szöveges fájl megnyitása és sorok olvasása
+Measure\size_1.py
+ * objektumok mérete
+ * __sizeof__() metódus
+ * sys.getsizeof() függvény
+ * pympler.asizeof() függvény
 
-python_intro.html
+---------------------
+solutions_1.py
+ * Lecture_1\exercises_1.py megoldásai
 
 exercises_2.py
- * feladatok
+ * gyakorló feladatok
+
+tippmix_2.py
+ * gyakorlás

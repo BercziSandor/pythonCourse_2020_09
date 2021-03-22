@@ -21,7 +21,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.06 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.17 &mdash;</p>
 </div>
 
 <h1>Generátor  függvények 4.rész<br>
@@ -45,7 +45,7 @@ def sub_gen():
     yield('3. sub_gen yield')
 
 def main_gen():
-    print('main_gen started')
+    print('main_gen ELINDULT')
     sub_it = sub_gen()
     <span class='emph_1'>yield from</span> sub_it
 
@@ -53,7 +53,7 @@ main_it = main_gen()
 for i in main_it:
     print(i)
 <div class='result'>
-# main_gen STARTED
+# main_gen ELINDULT
 # sub_gen STARTED
 # 1. sub_gen yield
 # 2. sub_gen yield
@@ -64,7 +64,7 @@ main_gen csak továbbadta a sub_gen-től kapott értékeket a hívónak. Ha nem 
 
 <pre class='pale'>
 def main_gen():
-    print('main_gen STARTED')
+    print('main_gen ELINDULT')
     sub_it = sub_gen()
     <span style='color: blue;'>for i in sub_it:
         yield (i)</span>
@@ -100,7 +100,7 @@ Először írjuk meg a belső generátort és használjuk közvetlenül.
 <pre>
 def sub_gen():
     print('sub_gen STARTED')
-    received_in_send = yield(None)  # respond to first next()
+    received_in_send = yield(None)  # az első next()-re reagálunk
     while True:
         if received_in_send is None:
             return_value = None
@@ -113,40 +113,40 @@ A yield(None)-ra azért van szükség, mert indításkor egy generátornak csak 
 akkor már tud fogadni send()-el küldött számokat. Minden generátort mindig be kell kurblizni egy első next() hívással.
 <pre>
 sub_it = sub_gen()
-x = next(sub_it)  # start the generator
-print('caller received after first next:',x)
+x = next(sub_it)  # elindítjuk a generátort
+print('a hívó az első next után ezt kapta:',x)
 for i in range(50,53):
     x = sub_it.send(i)
-    print('caller sent:',i,'received:',x)
+    print('a hívó ezt küldte:',i,'ezt kapta:',x)
 <div class='result'>
 # sub_gen STARTED
-# caller received after first next: None
-# caller sent: 50 received: 1050
-# caller sent: 51 received: 1051
-# caller sent: 52 received: 1052
+# a hívó az első next után ezt kapta: None
+# a hívó ezt küldte: 50 ezt kapta: 1050
+# a hívó ezt küldte: 51 ezt kapta: 1051
+# a hívó ezt küldte: 52 ezt kapta: 1052
 </div>
 </pre>
 Készítsünk most egy "külső" generátort, ami csak közvetíti az adatforgalmat.
 
 <pre>
 def main_gen():
-    print('main_gen STARTED')
+    print('main_gen ELINDULT')
     sub_it = sub_gen()
     <span class='emph_1'>yield from</span> sub_it
 
 main_it = main_gen()
-x = next(main_it)  # start the generator
-print('caller received after first next:',x)
+x = next(main_it)  # elindítjuk a generátort
+print('a hívó az első next után ezt kapta:',x)
 for i in range(50,53):
     x = main_it.send(i)
-    print('caller sent:',i,'received:',x)
+    print('a hívó ezt küldte:',i,'ezt kapta:',x)
 <div class='result'>
-<span style='color:red;'># main_gen STARTED</span>
+<span style='color:red;'># main_gen ELINDULT</span>
 # sub_gen STARTED
-# caller received after first next: None
-# caller sent: 50 received: 1050
-# caller sent: 51 received: 1051
-# caller sent: 52 received: 1052
+# a hívó az első next után ezt kapta: None
+# a hívó ezt küldte: 50 ezt kapta: 1050
+# a hívó ezt küldte: 51 ezt kapta: 1051
+# a hívó ezt küldte: 52 ezt kapta: 1052
 </div>
 </pre>
 Látható, hogy main_gen-nek semmit nem kell csinálnia ahhoz, hogy mindkét irányban átmenjen rajta az adat. A yield from utasítás mágikusan gondoskodik erről.
@@ -166,9 +166,9 @@ azt sugallja, hogy csak yield utasítások hajtódnak végre; a delegate megneve
 Valósítsuk meg az átjátszóállomásként szolgáló generátort úgy, hogy nem használunk yield from utasítást.
 <pre>
 def main_gen():
-    print('main_gen STARTED')
+    print('main_gen ELINDULT')
     sub_it = sub_gen()
-    received_from_sub = next(sub_it)  # start the sub generator
+    received_from_sub = next(sub_it)  # beindítjuk a sub generátort
     received_from_caller = yield(received_from_sub)
 
     while True:
@@ -182,17 +182,17 @@ teljesen transzparens.
 Gyakori eset, hogy nem a külső generátor belsejében hozzuk létre a belsőt, hanem paraméterként adjuk át neki:
 <pre>
 def main_gen(subIt):
-    print('main_gen STARTED')
+    print('main_gen ELINDULT')
     yield from subIt
- 
+
 sub_it = sub_gen()
 main_it = main_gen(sub_it)
 <span class='pale'>
-x = next(main_it)  # start the generator
-print('caller received after first next:',x)
+x = next(main_it)  # elindítjuk a generátort
+print('a hívó az első next után ezt kapta:',x)
 for i in range(50,53):
     x = main_it.send(i)
-    print('caller sent:',i,'received:',x)
+    print('a hívó ezt küldte:',i,'ezt kapta:',x)
 </span>
 </pre>
 </p>

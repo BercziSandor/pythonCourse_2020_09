@@ -1,0 +1,150 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Dekorátorok paraméterekkel</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }  
+  .comment { color: lightslategray; font-style: italic; }
+  .code_4 { background-color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; border: 1px dotted; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2021.03.11 &mdash;</p>
+</div>
+<h1>Dekorátorok paraméterekkel</h1>
+<ul class='contents'>
+<li><a style='color: red' href='#the_problem'>A probléma</a></li>
+<li><a style='color: red' href='#the_solution'>A megoldás</a></li>
+<li><a style='color: red' href='#example'>Példa</a></li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='the_problem'>A probléma</h2>
+<p>
+A dekorátorok így néznek ki:
+
+<pre>
+<span class='emph_1'>func</span> = decorator(<span class='emph_1'>func</span>)
+</pre>
+amit a "kukacos" jelöléssel így tudunk leírni:
+
+<pre>
+@decorator
+def func():...
+</pre>
+A dekorátor függvénynek egyetlen paramétere van: a dekorálandó függvény. Viszont vannak szituációk, amikor szeretnénk további paramétereket is átadni a
+dekorátornak; például egy fájlnevet, ahová a dekorátor a tényleges függvény hívása előtt és után információkat írhat.
+</p>
+<h2 id='the_solution'>A megoldás</h2>
+<p>
+A Python készítői azt a megoldást választották, hogy a paraméteres dekorátornak a meghíváskor vissza kell adnia egy olyan <span class='code_4'>függvényt</span>,
+amely a tényleges dekorátor és amelyet felhívva megkapjuk a dekorált függvényt:
+<pre>
+<span class='emph_1'>func</span> = outer_decor(2)(<span class='emph_1'>func</span>) <span class='comment'># outer_decor(2) által visszaadott függvényt meghívjuk func paraméterrel</span>
+</pre>
+
+Lépésekre bontva:
+<pre>
+temp_func = outer_decor(2)
+<span class='emph_1'>func</span> = temp_func(<span class='emph_1'>func</span>)
+</pre>
+
+A külső függvény closure segítségével megjegyzi a kezdeti paramétereket. Mindez kukacosan:
+<pre>
+@outer_decor(2)
+func
+</pre>
+</p>
+<h2 id='example'>Példa</h2>
+<p>
+A paramétert csak ki fogja írni a dekorált függvény.
+
+<pre>
+def param_saver(param):
+    def decorator(<span class='emph_1'>funcToBeDecorated</span>):
+        def decorated(<span class='emph_2'>*args, **kwargs</span>):
+            print('dekorátor paraméter:', param)
+
+            return <span class='emph_1'>funcToBeDecorated</span>(<span class='emph_2'>*args, **kwargs</span>)
+
+        return decorated
+
+    return decorator
+
+def func(a, b):
+    return a + b
+
+<span class='emph_1'>func</span> = param_saver(2)(<span class='emph_1'>func</span>)
+x = func(10, 20)
+print('x:', x)
+<div class='result'>
+# dekorátor paraméter: 2
+# x: 30
+</div>
+</pre>
+
+Lépésekre bontva:
+<pre>
+temp_func = param_saver(2)
+<span class='emph_1'>func</span> = temp_func(<span class='emph_1'>func</span>)
+x = func(10, 20)
+print('x:', x)
+<div class='result'>
+# dekorátor paraméter: 2
+# x: 30
+</div>
+</pre>
+
+Ugyanez kukacos jelöléssel:
+<pre>
+@param_saver(2)
+def func(a, b):
+    return a + b
+
+x = func(10, 20)
+print('x:', x)
+<div class='result'>
+# dekorátor paraméter: 2
+# x: 30
+</div>
+</pre>
+
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://speakerdeck.com/pycon2019/reuven-m-lerner-practical-decorators' target='_blank'>Reuven M. Lerner - Practical decorators - PyCon 2019</a><br>
+<a href='https://realpython.com/primer-on-python-decorators/' target='_blank'>Primer on Python Decorators</a> Real Python<br>
+</p>
+<p>
+<b>Könyvek</b>
+</p>
+<p>
+David Beazley, Brian K. Jones: Python Cookbook<br>
+<i>&nbsp;&nbsp;Defining a Decorator That Takes Arguments</i><br>
+</p>
+<p>
+Mark Lutz: Learning Python<br>
+<i>&nbsp;&nbsp;Decorator arguments</i>
+</p>
+<p>
+Luciano Ramalho: Fluent Python<br>
+<i>&nbsp;&nbsp;Parameterized Decorators</i><br>
+</p>
+<p>
+<b>Videók</b>
+</p>
+<p>
+<a href='https://www.youtube.com/watch?v=MjHpMCIvwsY' target='_blank'>Reuven M. Lerner - Practical decorators - PyCon 2019</a>
+</p>
+</body>
+</html>

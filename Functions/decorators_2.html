@@ -10,6 +10,7 @@
   .pale { color: gray; }
   .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
   .contents { margin-left:30%; color:red; font-size: 120%; }
+  .comment { color: lightslategray; font-style: italic;}
   .data { color:green; }
   .emph_1 { color: red; font-weight: bold; }
   .emph_2 { color: green; font-weight: bold; }
@@ -25,7 +26,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.06 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.12.31 &mdash;</p>
 </div>
 <h1>Dekorátorok 2. rész</h1>
 <ul class='contents'>
@@ -43,29 +44,29 @@ A konstruktorban átadjuk a dekorálandó függvényt az objektumnak.
 <pre>
 class DecorClass_1():
     def __init__(self,funcToBeDecorated):
-        self.func = funcToBeDecorated
+        <span class='emph_1'>self.func</span> = funcToBeDecorated
 
     def __call__(self,*args, **kwargs):
-        print('I am DecorClass_1 BEFORE I call the real func')
-        ret_val = self.func(*args, **kwargs)
-        print('I am DecorClass_1 AFTER I called the real func')
+        print('DecorClass_1 vagyok MIELŐTT hívnám az igazi függvényt')
+        ret_val = <span class='emph_1'>self.func</span>(*args, **kwargs)       <span class='comment'># funcToBeDecorated hívódik fel</span>
+        print('DecorClass_1 vagyok MIUTÁN hívtam az igazi függvényt')
 
         return ret_val
 
 @DecorClass_1
 def func(funcPar):
-    print('*** I am func, funcPar = ', funcPar)
+    print('*** func vagyok, funcPar = ', funcPar)
     return 999
 
 func(555)
 <div class='result'>
-# I am DecorClass_1 BEFORE I call the real func
-# *** I am func, funcPar =  555
-# I am DecorClass_1 AFTER I called the real func
+# DecorClass_1 vagyok MIELŐTT hívnám az igazi függvényt
+# *** func vagyok, funcPar =  555
+# DecorClass_1 vagyok MIUTÁN hívtam az igazi függvényt
 </div>
 </pre>
 A @DecorClass_1 helyett írhatjuk persze ezt is:
- 
+
 <pre>
 func = DecorClass_1(func)
 </pre>
@@ -85,9 +86,9 @@ Amikor dekorátort kap egy függvény, akkor sajnos ez elfedi a nevét és a doc
 <pre>
 def decorator_1(funcToBeDecorated):
     def decorated(*args, **kwargs):
-        print('I am decorator 1 BEFORE I call',funcToBeDecorated.__name__)
+        print('decorator_1 vagyok MIELŐTT hívnám:',funcToBeDecorated.__name__)
         ret_val = funcToBeDecorated(*args, **kwargs)
-        print('I am decorator 1 AFTER I called',funcToBeDecorated.__name__)
+        print('decorator_1 vagyok MIUTÁN hívtam:',funcToBeDecorated.__name__)
 
         return ret_val
 
@@ -95,8 +96,8 @@ def decorator_1(funcToBeDecorated):
 
 @decorator_1
 def func(funcPar):
-    '''This is a very important function'''
-    print('*** I am func, funcPar =',funcPar)
+    '''Ez egy roppant fontos függvény'''
+    print('*** func vagyok, funcPar =',funcPar)
     return 999
 
 print(func.__name__)
@@ -109,7 +110,7 @@ help(func)
 </div>
 </pre>
 Ez többek között akkor okoz gondot, amikor debuggert használunk, vagy a pickle modullal szerializáljuk a programunkat. Megoldást kínál a problémára
-a functools modul wraps dekorátora. (Ez egy olyan dekorátor, ami dekorátorokon segít.)
+a <code>functools</code> modul wraps dekorátora. (Ez egy olyan dekorátor, ami dekorátorokon segít.)
 
 <pre>
 from functools import wraps
@@ -117,9 +118,9 @@ from functools import wraps
 <span class='pale'>def decorator_1(funcToBeDecorated):</span>
     @wraps(funcToBeDecorated)
     <span class='pale'>def decorated(*args, **kwargs):
-        print('I am decorator 1 BEFORE I call',funcToBeDecorated.__name__)
+        print('decorator_1 vagyok MIELŐTT hívnám:',funcToBeDecorated.__name__)
         ret_val = funcToBeDecorated(*args, **kwargs)
-        print('I am decorator 1 AFTER I called',funcToBeDecorated.__name__)
+        print('decorator_1 vagyok MIUTÁN hívtam:',funcToBeDecorated.__name__)
 
         return ret_val
 
@@ -127,26 +128,37 @@ from functools import wraps
 
 @decorator_1
 def func(funcPar):
-    '''This is a very important function'''
-    print('*** I am func, funcPar =',funcPar)
+    '''Ez egy roppant fontos függvény'''
+    print('*** func vagyok, funcPar =',funcPar)
     return 999
 
 print(func.__name__)
 help(func)</span>
 <div class='result'>
-<b style='color:green;'># func
+# func
 # Help on function func in module __main__:
 #
 # func(funcPar)
-#     This is a very important function</b>
+#     Ez egy roppant fontos függvény</b>
 </div>
 </pre>
 </p>
 <h2 id='predefined'>Előre definiált dekorátorok</h2>
 <p>
 Számos feladat létezik, amelyeket dekorátorokkal lehet megoldani, ezek közül egyes gyakran előfordulóakhoz előre elkészített dekorátor-függvények állnak
-rendelkezésre. Már találkoztunk is néhánnyal: a @property, @[name].setter, @deleter, @classmethod, @staticmethod, @abstractmethod dekorátorokat készen kapjuk a
+rendelkezésre. Például a<br><br>
+@wraps (ld. itt fentebb)<br>
+@property<br>
+@[name].setter<br>
+@deleter<br>
+@classmethod<br>
+@staticmethod<br>
+@abstractmethod<br>
+@contextlib.contextmanager<br><br>
+dekorátorokat készen kapjuk a
 Python futtató rendszertől, nem nekünk kell megírni a dekoráló függvényt.
+
+Már találkoztunk is néhánnyal ezek közül.
 </p>
 <h2 id='literature'>Irodalom</h2>
 <p>

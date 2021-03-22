@@ -17,6 +17,8 @@ Megjelenik egy parancs-ablak, abban elindul egy program, ami elindít a localhos
 8888-as portján egy szervert, az pedig elindítja a böngészőben a Jupytert.
 Ezt a parancs-ablakot ne zárjuk be, amíg a Jupyter fut.
 
+-- A notebook-ok .ipynb kiterjesztésű fájlba mentődnek el. Ezek JSON fájlok.
+
 -- Olvasni/megnézni való:
 
 https://ipython.readthedocs.io/en/stable/interactive/tutorial.html Introducing IPython

@@ -7,7 +7,6 @@ class LimiterClass:
     def __init__(self, upperLimit):
         self.__upper_limit = upperLimit
         self.__value = None
-        self.__x__ = 7
 
     def setValue(self, value):
         if value > self.__upper_limit:

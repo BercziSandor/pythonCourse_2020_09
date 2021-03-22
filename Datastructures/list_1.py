@@ -1,6 +1,9 @@
 # https://www.python-course.eu/python3_sequential_data_types.php
 
-# Listák 1. És egy kevés sztring.
+# Listák 1.
+# append() metódus, for ciklus
+# elem törlése: del() és lista törlése
+# memóriacím lekérdezése: id()
 
 x = [10, 20, 30]
 print(x, type(x), len(x))  # [10, 20, 30] <class 'list'> 3
@@ -9,8 +12,8 @@ print(x, type(x), len(x))  # [10, 20, 30] <class 'list'> 3
 
 # Különféle típusú elemeket tartalmazhat
 
-x = [10, 'John', 32.5]  # [10, 'John', 32.5]
-print(x)
+x = [10, 'John', 32.5]
+print(x)  # [10, 'John', 32.5]
 
 # Nemcsak alaptípusokat tartalmazhat, hanem listát és egyéb összetett típusokat is.
 
@@ -23,10 +26,14 @@ x = []
 y = list()
 print(x, y)  # [] []
 
+#################################
+
 # Indexelhető
 
 x = [10, 'John', 32.5]
 print(x[0], x[len(x) - 1])  # 10 32.5
+
+#################################
 
 # Iterálható, for ciklussal bejárható
 
@@ -41,22 +48,32 @@ for i in range(len(x)):   # hivatalból üldözendő!
     print(x[i], end=' ')
 print()  # 10 John 32.5
 
+#################################
+
 # Módosítható
 
 x[1] = 'Jane'
 print(x)  # [10, 'Jane', 32.5]
+
+#################################
 
 # Új elem hozzáfűzése (append)
 
 x.append('new item')
 print(x)  # [10, 'Jane', 32.5, 'new item']
 
+# Figyeljük meg, hogy a módosítás helyben történik. Miből látszik ez?
+
+#################################
+
 # Elem törlése (del)
 
 del(x[1])
 print(x)  # [10, 32.5, 'new item']
 
-# A sztringeknél nincs append metódus. Miért?
+# Itt is helyben történik a módosítás, az x lista memóriacíme nem változik.
+
+#################################
 
 # Teljes lista törlése
 
@@ -76,7 +93,7 @@ print(id_1, id_2)  # 7202696 7202136
 # az eredeti lista, rá már egyetlen változó sem mutat, a futtató
 # rendszer ezt észreveszi és felszabadítja a memóriát.
 
-#####################
+#################################
 
 # Teljes lista törlése és a változó megsemmisítése.
 # Ritkán csináljuk: Ha nagyon nagy a lista és kevés a
@@ -99,11 +116,13 @@ y = x
 print(y)  # [1, 2, 3] y ugyanarra a memóriacímre mutat, mint x
 
 del(x)    # megszüntetjük az x nevet
-print(y)  # [1, 2, 3] y memgmaradt
+print(y)  # [1, 2, 3] y megmaradt
 del(y)
-print(y)  # de most maár nincs
+print(y)  # de most már nincs
 
 # Traceback (most recent call last):
 #   File "test.py", line 57, in <module>
 #     print(y)
 # NameError: name 'y' is not defined
+
+#################################

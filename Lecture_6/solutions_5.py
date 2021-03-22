@@ -98,6 +98,7 @@ check_limiter(lim, values, expect_values)
 # 2.
 
 # A függvény tuple-ként kapja meg a paramétereit és a lista vagy tuple utolsó
-# eleme után állhat vessző. Egy elemű tuple esetén pedig egyenesen közelező.
+# eleme után állhat vessző. Egy elemű tuple esetén pedig egyenesen közelező. (Kivéve,
+# ha függvény paraméterlistájáról van szó.)
 
 ####################################

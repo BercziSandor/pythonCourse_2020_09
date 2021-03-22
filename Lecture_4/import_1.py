@@ -1,5 +1,6 @@
-# https://docs.python.org/3/reference/import.html
 # https://realpython.com/python-modules-packages/
+# https://docs.python.org/3/reference/import.html
+# https://docs.python.org/3/tutorial/modules.html
 
 # Import variációk
 
@@ -87,7 +88,15 @@ module_1.func_1()
 #     module_1.func_1()
 # NameError: name 'module_1' is not defined
 
+###################################
 
+# Kipróbálásra ajánlom:
+
+import this
+
+# és
+
+import antigravity
 
 ###################################
 

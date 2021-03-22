@@ -20,7 +20,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.06 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.17 &mdash;</p>
 </div>
 <h1>Generátorok előnyei</h1>
 <ul class='contents'>
@@ -281,7 +281,7 @@ import psutil
 
 process = psutil.Process(os.getpid())
 x1 = process.memory_info().rss
-<span style='color: red;'>m = max(x for x in range(100_000))  # generator expression</span>
+<span style='color: red;'>m = max(x for x in range(100_000))  # generátor kifejezés</span>
 x2 = process.memory_info().rss
 print('m:',m,'memory diff:',x2 - x1)
 <div class='result'>
@@ -316,31 +316,31 @@ import time
 def f_first_return(n):
     res = []
     for i in range(n):
-        time.sleep(3)    # some slow operation
-        res.append(i)    # gather all data before
+        time.sleep(3)    # lassú műveletet szimulálunk
+        res.append(i)    # összegyűjtjük az összes adatot melőtt
 
-    return res           # we pass it on
+    return res           # továbbadnánk
 
 def f_first_yield(n):
     for i in range(n):
-        time.sleep(3)    # some slow operation
-        yield i          # pass data immediately on
+        time.sleep(3)    # lassú műveletet szimulálunk
+        yield i          # azonnal továbbadjuk az adatot
 
 def f_second(n):
     for r in f_first_return(n):
-        print('Second: Received from first:',r)
+        print('f_second: f_first-től kaptam:',r)
         time.sleep(1)
-        print(f'Second: ready at {time.perf_counter() - t_start:0.3} seconds')
+        print(f'f_second: kész ekkor: {time.perf_counter() - t_start:0.3} seconds')
 
 t_start = time.perf_counter()
 f_second(3)
 <div class='result'>
-# Second: Received from first: 0
-# Second: ready at <span style='color: red;'>10.0</span> seconds
-# Second: Received from first: 1
-# Second: ready at 11.0 seconds
-# Second: Received from first: 2
-# Second: ready at 12.0 seconds
+# f_second: f_first-től kaptam: 0
+# f_second: kész ekkor: <span style='color: red;'>10.0</span> seconds
+# f_second: f_first-től kaptam: 1
+# f_second: kész ekkor: 11.0 seconds
+# f_second: f_first-től kaptam: 2
+# f_second: kész ekkor: 12.0 seconds
 </div>
 </pre>
 10 másodpercig semmi nem történik, ekkor jelenik meg az első eredmény a kimeneten.
@@ -351,19 +351,19 @@ Ha a másik módszert választjuk:
 <pre class='pale'>
 def f_second(n):
     for r in <span style='color: blue;'>f_first_yield</span>(n):
-        print('Second: Received from first:',r)
+        print('Second: f_first-től kaptam:',r)
         time.sleep(1)
-        print(f'Second: ready at {time.perf_counter() - t_start:0.3} seconds')
+        print(f'Second: kész ekkor: {time.perf_counter() - t_start:0.3} seconds')
 
 t_start = time.perf_counter()
 f_second(3)
 <div class='result'>
-# Second: Received from first: 0
-# Second: ready at <span style='color: red;'>4.0</span> seconds
-# Second: Received from first: 1
-# Second: ready at 8.0 seconds
-# Second: Received from first: 2
-# Second: ready at 12.0 seconds
+# Second: f_first-től kaptam: 0
+# Second: kész ekkor: <span style='color: red;'>4.0</span> seconds
+# Second: f_first-től kaptam: 1
+# Second: kész ekkor: 8.0 seconds
+# Second: f_first-től kaptam: 2
+# Second: kész ekkor: 12.0 seconds
 </div>
 </pre>
 Ezúttal már 4 másodperc után elkezdi kiadni a második fokozat az eredményt.

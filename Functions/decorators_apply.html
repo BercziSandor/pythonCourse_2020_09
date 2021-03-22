@@ -1,0 +1,429 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Dekorátorok alkalmazásai</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  h3 { color: green; padding-left: 20px; margin-bottom: 5px; }
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .code_4 { background-color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; border: 1px dotted; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }
+  .comment { color: lightslategray; font-style: italic; }
+  .paleblock { background-color:white; color:steelblue; display: inline-block; padding-right: 30px; padding-bottom: 10px; margin-bottom:5px; border-radius: 10px; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.03.09 &mdash;</p>
+</div>
+<h1>Dekorátorok alkalmazásai</h1>
+<ul class='contents'>
+<li><a style='color: red' href='#time_measure'>Időmérés</a>
+<ul>
+<li><a style='color: green' href='#time_measure_param'>Paraméteres változat</a></li>
+</ul>
+</li>
+<li><a style='color: red' href='#logging_decor'>Logolás</a>
+<ul>
+<li><a style='color: green' href='#logging_1'>A visszatérő értéket logoljuk</a></li>
+<li><a style='color: green' href='#logging_2'>A bemenő paramétereket is logoljuk (nehezebb)</a></li>
+</ul>
+</li>
+<li><a style='color: red' href='#memoization'>Memoization</a>
+<ul>
+<li><a style='color: green' href='#memo_no_decor'>Dekorátor nélkül</a></li>
+<li><a style='color: green' href='#memo_with_decor'>Dekorátorral</a></li>
+</ul>
+</li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='time_measure'>Időmérés</h2>
+<p>
+A függvény végrehajtása előtt és után feljegyezzük az időt és a kettő különbségét eltároljuk valahol. Itt most csak ki fogjuk írni a standard
+kimenetre.
+</p>
+<p>
+A dekorátor:
+<pre>
+import time
+
+def <b>logtime</b>(<span class='emph_1'>funcToBeDecorated</span>):
+    def decorated(<span class='emph_2'>*args, **kwargs</span>):
+        start_time = time.perf_counter()
+        result = <span class='emph_1'>funcToBeDecorated</span>(<span class='emph_2'>*args, **kwargs</span>)    <span class='comment'># felhívjuk az eredeti függvényt</span>
+        total_time = time.perf_counter() - start_time
+        print(f'{<span class='emph_1'>funcToBeDecorated</span>.__name__}\t{round(total_time * 1_000_000, 1)} microsec')
+        return result <span class='comment'>   # visszaadjuk az eredeti függvény eredményét</span>
+
+    return decorated
+</pre>
+Alkalmazása:
+<pre>
+<b>@logtime</b>
+def func_1(a, b):
+    time.sleep(0.005) <span class='comment'># lassú műveletet szimulálunk</span>
+    return a + b
+
+<b>@logtime</b>
+def func_2(a, b):
+    time.sleep(0.05) <span class='comment'># lassú műveletet szimulálunk</span>
+    return a * b
+
+x = func_1(10, 20)
+print('x:', x)
+
+x = func_2(10, 20)
+print('x:', x)
+<div class='result'>
+# func_1	4838.0 microsec
+# x: 30
+# func_2	49880.6 microsec
+# x: 200
+</div>
+</pre>
+</p>
+<h3 id='time_measure_param'>&#x25BA; Paraméteres változat</h3>
+<p>
+Készítsük el most az időmérő dekorátornak olyan változatát, amelynek van egy paramétere is: ha a mért érték ennél kisebb, akkor nem jegyezzük fel. Ez olyankor
+lehet hasznos, amikor sok függvvényhívás van és a lassan futóakat keressük.
+
+<p>
+A dekorátor:
+<pre>
+import time
+
+def <b>logtime_param_saver</b>(<b style='color:black'>lowerLimit</b> = 0):
+    def logtime(<span class='emph_1'>funcToBeDecorated</span>):
+        def decorated(<span class='emph_2'>*args, **kwargs</span>):
+            start_time = time.perf_counter()
+            result = <span class='emph_1'>funcToBeDecorated</span>(<span class='emph_2'>*args, **kwargs</span>)    <span class='comment'># felhívjuk az eredeti függvényt</span>
+            total_time = time.perf_counter() - start_time
+
+            if total_time > <b style='color:black'>lowerLimit</b>:
+                print(f'{<span class='emph_1'>funcToBeDecorated</span>.__name__}\t{round(total_time * 1_000_000, 1)} microsec')
+            else:
+                print('kicsi érték, nem jegyzem fel')
+
+            return result    <span class='comment'># visszaadjuk az eredeti függvény eredményét</span>
+
+        return decorated
+
+    return logtime
+</pre>
+
+Alkalmazása:
+<pre>
+@<b>logtime_param_saver</b>() # minden időt ki fog írni
+def func_1(a, b):      # lassú műveletet szimulálunk
+    if a >= 0:
+        time.sleep(0.005)
+    else:
+        time.sleep(0.2)
+    return a + b
+
+
+x = func_1(10, 20)
+print('x:', x)
+
+x = func_1(-1, 20)
+print('x:', x)
+
+print('-------------------------')
+
+@<b>logtime_param_saver</b>(0.1) # nem minden időt fog kiírni
+def func_2(a, b):         # lassú műveletet szimulálunk
+    if a >= 0:
+        time.sleep(0.005)
+    else:
+        time.sleep(0.2)
+    return a + b
+
+
+x = func_2(10, 20)
+print('x:', x)
+
+x = func_2(-1, 20)
+print('x:', x)
+<div class='result'>
+# func_1	4059.3 microsec
+# x: 30
+# func_1	199990.3 microsec
+# x: 19
+# -------------------------
+# kicsi érték, nem jegyzem fel
+# x: 30
+# func_2	199978.8 microsec
+# x: 19
+</div>
+</pre>
+</p>
+<h2 id='logging_decor'>Logolás</h2>
+<p>
+A dekorált függvény nevét, paramétereit és visszatérő értékét egy fájlba vagy adatbázisba írjuk. Erre célszerű a Python <code>logging</code> modulját használni,
+amitől itt eltekintünk, hogy ne zavarja a lényeg megértését azoknál, akik ezt a modult nem ismerik.
+</p>
+<h3 id='logging_1'>&#x25BA; A visszatérő értéket logoljuk</h3>
+<p>
+A dekorált függvény nevét és visszatérő értékét egy fájlba vagy adatbázisba írjuk &ndash; itt az egyszerűség kedvéért csak a képernyőre fogunk írni.
+</p>
+<p>
+A dekorátor:
+<pre>
+def <b>trace_decorator_1</b>(<span class='emph_1'>funcToBeDecorated</span>):
+    def decorated(<span class='emph_2'>*args, **kwargs</span>):
+        ret_val = <span class='emph_1'>funcToBeDecorated</span>(<span class='emph_2'>*args, **kwargs</span>) <span class='comment'># felhívjuk az eredeti függvényt</span>
+        func_name = <span class='emph_1'>funcToBeDecorated</span>.__name__
+
+        print('log:', func_name, 'returns', ret_val)  <span class='comment'># fájlba, adatbázisba lehet írni</span>
+
+        return ret_val   <span class='comment'># visszaadjuk az eredeti függvény eredményét</span>
+
+    return decorated
+</pre>
+Alkalmazása:
+<pre>
+@<b>trace_decorator_1</b>
+def stupid_func(a, b):
+    return a + b
+
+x = stupid_func(10, 20)
+print('x:', x)
+<div class='result'>
+# log: stupid_func_1 returns: 30
+# x: 30
+</div>
+</pre>
+</p>
+<h3 id='logging_2'>&#x25BA; A bemenő paramétereket is logoljuk (nehezebb)</h3>
+<p>
+A dekorált függvény nevét, bemenő paramétereit és visszatérő értékét egy fájlba vagy adatbázisba írjuk &ndash; itt az egyszerűség kedvéért csak a képernyőre
+fogunk írni. A függvény összes bemenő paraméterének feljegyzéséhez szükség lesz az alábbi segédfüggvényre, amelynek működését itt nem tárgyaljuk részletesen:
+<pre>
+import inspect
+
+def get_all_args(func, *args, **kwargs):
+    <span class='comment'>''' a func függvény összes paraméterét adja vissza'''</span>
+
+    actual_args = args # aktuális pozícionális és opcionális paraméter értékek listája
+
+    pos_arg_names, _, _, default_args, *x = inspect.getfullargspec(func)
+    # pos_arg_names: pozícionális argumentumok nevei
+    # default_args: default pozícionális paraméter-értékek
+
+    if (pos_arg_names and default_args):   # pos_arg_names nem [] és default_args nem None
+        default_dic = dict(zip(pos_arg_names[::-1], default_args[::-1]))
+    else:
+        default_dic = {}
+
+    act_dic = dict(zip(pos_arg_names, actual_args))
+    pos_tuple = tuple((name, act_dic[name]) if name in act_dic else (name, default_dic[name]) for name in pos_arg_names)
+
+    opt_tuple = actual_args[len(pos_arg_names):]
+    kw_tuple = tuple((key, value) for key, value in kwargs.items())
+
+    args_tuple = (func.__name__, pos_tuple, opt_tuple, kw_tuple)
+
+    return(args_tuple)
+</pre>
+A dekorátor:
+
+<pre>
+def <b>trace_decorator_2</b>(<span class='emph_1'>funcToBeDecorated</span>):
+    def decorated(<span class='emph_2'>*args, **kwargs</span>):
+        args_tuple = get_all_args(<span class='emph_1'>funcToBeDecorated</span>, <span class='emph_2'>*args, **kwargs</span>)
+
+        ret_val = funcToBeDecorated(<span class='emph_2'>*args, **kwargs</span>) <span class='comment'># felhívjuk az eredeti függvényt</span>
+
+        description_tuple = (args_tuple, ret_val)
+        print(description_tuple)  <span class='comment'># fájlba, adatbázisba lehet írni</span>
+
+        return ret_val <span class='comment'>   # visszaadjuk az eredeti függvény eredményét</span>
+
+    return decorated
+</pre>
+
+Alkalmazása:
+
+<pre>
+@<b>trace_decorator_2</b>
+def stupid_func_1(a, b, c=30, d=40, *args, **kwargs):
+    return a + b + c + d
+
+x = stupid_func_1(10, 20, 50, 60, 70, e=100)
+print('x:', x)
+<div class='result'>
+# (('stupid_func_1', (('a', 10), ('b', 20), ('c', 50), ('d', 60)), (70,), (('e', 100),)), 140)
+# x: 140
+</div>
+</pre>
+</p>
+<h2 id='memoization'>Memoization</h2>
+<p>
+Nem elírás, nem hiányzik egy <b>r</b> betű &ndash; a korábbi számítási eredmények eltárolását hívják ilyen furcsán. Olyan időigényes műveleteknél használjuk,
+amelyeknél esély van rá, hogy a függvényt többször is fel fogják hívni ugyanazon paraméterekkel. Eltároljuk a bemenő paramétereket és az eredményt és
+a második hívástól kezdve már a tárolóból vesszük elő az eredményt, nem számoljuk ki újra. Jó példa egy rekurzív függvény, mint mondjuk a Fibonacci
+sorozat rekurzív kiszámítása, mert ott az N-ik elem kiszámításához fel kell használni az (N - 1)-ik elemet.
+</p>
+<h3 id='memo_no_decor'>&#x25BA; Dekorátor nélkül</h3>
+<p>
+Tegyük fel, hogy bele tudjuk és akarjuk építeni a függvény belsejébe az eredmények eltárolását, vagyis átírjuk az eredeti függvényt.
+</p>
+<p>
+Nézzen ki így eredetileg a lassú műveletet modellező függvénykénk:
+<pre>
+from time import sleep
+
+def slow_func(param):
+     if param == 1:
+         return 1
+
+     sleep(0.2)    <span class='comment'># lassú műveletet szimulálunk</span>
+     return param + slow_func(param - 1)
+
+x = slow_func(10)
+print(x)
+
+x = slow_func(3)
+print(x)
+
+x = slow_func(8)
+print(x)
+<div class='result'>
+# 55 <i>(lassú)</i>
+# 6  <i>(lassú)</i>
+# 36 <i>(lassú)</i>
+</div>
+</pre>
+A számok összegét adja vissza egytől a <span class='code_4'>param</span> értékéig nem túl ügyesen, rekurzióval, dehát a szemléltető függvényektől már
+megszokhattuk, hogy csetlenek-botlanak.
+</p>
+<p>
+Most az a feladat, hogy egy szótárat helyezzünk el a függvényben úgy, hogy az a hívások között megmaradjon &ndash; ebbe fogjuk írni a bemenő paramétereket és a
+visszatérő értékeket.
+</p>
+<p>
+Ha a hívások között meg akarjuk őrizni egy változó értékét, akkor ki kell használnunk, hogy a Pythonban a függvények is objektumok; a szótárat a függvény
+attribútumaként hozzuk létre, <span class='code_4'>slow_func.memo</span> lesz a neve.
+<pre>
+from time import sleep
+
+def slow_func(param):
+<div class='paleblock'>
+<div style='margin-top: -25px; margin-bottom: -20px;'>
+     def real_func(param): <span class='comment'># az eredeti, "tényleges" függvény</span>
+         if param == 1:
+             return 1
+
+         sleep(0.2)    # lassú műveletet szimulálunk
+         return param + slow_func(param - 1)
+</div>
+</div>
+     if not hasattr(slow_func,'memo'):   <span class='comment'># első hívás, memo még nem létezik</span>
+         slow_func.memo = dict()         <span class='comment'># ezért létrehozzuk</span>
+
+     if param in slow_func.memo:         <span class='comment'># ilyen paraméter már volt</span>
+         return slow_func.memo[param]
+
+     ret_val = <span style='background-color:white; color:red; border-radius: 3px; padding-left: 5px; padding-right: 5px;'>real_func(param)</span>
+     slow_func.memo[param] = ret_val     <span class='comment'># elmentjük</span>
+
+     return ret_val
+
+x = slow_func(10)
+print(x)
+
+x = slow_func(3)  <span class='comment'># ez már gyors lesz</span>
+print(x)
+
+x = slow_func(8)  <span class='comment'># ez is</span>
+print(x)
+
+print(slow_func.memo)
+<div class='result'>
+# 55 <i>(lassú)</i>
+# 6  <i>(gyors)</i>
+# 36 <i>(gyors)</i>
+# {1: 1, 2: 3, 3: 6, 4: 10, 5: 15, 6: 21, 7: 28, 8: 36, 9: 45, 10: 55}
+</div>
+</pre>
+
+</p>
+<h3 id='memo_with_decor'>&#x25BA; Dekorátorral</h3>
+<p>
+Nem tudjuk vagy nem akarjuk megváltoztatni a gyorsítandó függvényt, például azért, mert egy külső modulban van &ndash; ráadásul pl. C-ben megírva. Ilyenkor
+csak dekorátorral tudjuk megváltoztatni a működést.
+<pre>
+from time import sleep
+
+def <b>memo_1_decor</b>(<span class='emph_1'>funcToBeDecorated</span>):
+    '1 paraméteres függvényekhez'
+    def decorated(<span class='emph_2'>param</span>):
+        nonlocal memo
+
+        if param not in memo:
+            memo[param] = <span class='emph_1'>funcToBeDecorated</span>(<span class='emph_2'>param</span>)
+
+        return memo[param]
+
+    memo = dict()
+
+    return decorated
+
+@<b>memo_1_decor</b>
+<div class='paleblock'>
+<div style='margin-top: -30px; margin-bottom: -20px;'>
+def slow_func(param):
+     if param == 1:
+         return 1
+
+     sleep(0.2)    # lassú műveletet szimulálunk
+     return param + slow_func(param - 1)
+</div>
+</div>
+x = slow_func(10)
+print(x)
+
+x = slow_func(3)  <span class='comment'># ez már gyors lesz</span>
+print(x)
+
+x = slow_func(8)  <span class='comment'># ez is</span>
+print(x)
+
+print(slow_func.memo)
+<div class='result'>
+# 55 <i>(lassú)</i>
+# 6  <i>(gyors)</i>
+# 36 <i>(gyors)</i>
+</div>
+</pre>
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://speakerdeck.com/pycon2019/reuven-m-lerner-practical-decorators' target='_blank'>Reuven M. Lerner - Practical decorators - PyCon 2019</a><br>
+<a href='https://www.quora.com/What-are-some-practical-examples-of-Python-decorators' target='_blank'>What are some practical examples of Python decorators?</a>
+Quora<br>
+<a href='https://www.quora.com/When-do-you-find-using-Python-decorators-useful-Is-it-something-you-use-regularly' target='_blank'>When do you find using
+Python decorators useful? Is it something you use regularly?</a> Quora<br>
+<a href='https://godatadriven.com/blog/a-practical-example-of-generators-and-decorators-in-python/' target='_blank'>A practical example of generators and decorators
+in Python</a> Go Data Driven<br>
+<a href='https://realpython.com/primer-on-python-decorators/' target='_blank'>Primer on Python Decorators</a> Real Python<br>
+<a href='https://www.learnbyexample.org/python-decorators/' target='_blank'>Python Decorators</a> learnbyexample.org<br>
+<a href='https://www.python-course.eu/python3_memoization.php' target='_blank'>Memoization with Decorators</a> python-course.eu/<br>
+</p>
+<p>
+<b>Videók</b>
+</p>
+<p>
+<a href='https://www.youtube.com/watch?v=MjHpMCIvwsY' target='_blank'>Reuven M. Lerner - Practical decorators - PyCon 2019</a>
+</p>
+</body>
+</html>

@@ -37,7 +37,7 @@ print(x) # 300
 #########################################
 #########################################
 
-# LÁTOGATÁS A GÉPHÁZBAN
+# LÁTOGATÁS A GÉPHÁZBAN (bound method, __class__ attribútum)
 
 # Az itt következő hívási módokat nem szoktuk használni, csak azért lehet érdekes
 # megnézni ezeket, hogy a Python működéséről megtanuljunk valamit.

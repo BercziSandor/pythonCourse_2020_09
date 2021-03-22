@@ -1,13 +1,38 @@
-* Összesen 12 alkalom lesz.
+* Összesen 14 alkalom lesz.
 
 * Az aktuális anyagok és az üzenetek (mint ez is) mindig elérhetők lesznek itt:
 
-http://szoftverkli.biz/PYTHON_2020_2
+http://szoftverkli.biz/PythonProLatest
 
-* Javaslom, hogy Pythont, a Notepad++-t és a VS Code-ot töltse le mindenki, így a kezdésnél időt tudunk nyerni.
+* Érdemes a meglévő fájlokat törölni, mielőtt letöltjük a zip-et - néha áthelyeződnek, vagy átneveződnek egyes fájlok.
+
+* Javaslom, hogy Pythont, a Notepad++-t és a VS Code-ot töltse le mindenki, így a kezdésnél időt tudunk nyerni. Ha valaki más futtató környezetet
+  szeretne használni, tegye azt!
+
+* Aki nem használja a Total Commandert, annak javaslom, hogy töltse le; tervezek időt szakítani néhány kevésbé ismert lehetőség bemutatására.
+
+---------------------------------------------------------------
+
+* Az általam hasznosnak és nehezebben megtanulhatónak gondolt témákra fogunk koncentrálni, nem azokra a részekre, amelyeket pár perc alatt egyedül
+  is meg tud mindenki találni a Google segítségével és könnyen egyedül is el tudja sajátítani őket. Szerintem így használjuk ki legjobban az együtt
+  töltött időt - cserében ez sokszor nem annyira megnyugtató és kellemes, mint amikor azonnal felfogható programrészeket elemzünk az órán. Ez persze
+  kevésbé érvényes kezdő csoportokra (olyanokra, akik még nagyon keveset programoztak).
+
+---------------------------------------------------------------
 
 * Erősen számítok a visszajelzésekre a tanfolyam ideje alatt is. Ha valamelyik rész túl rövid vagy nem eléggé érthető volt, akkor alkalmunk van visszatérni rá; ha
-érdekel valakit egy téma, amiről addig nem volt szó, menet közben is jelezze!  Jó lenne kihasználni ezt a lehetőséget az interaktivitásra, ami egyéb tanfolyamoknál
-nem szokott rendelkezésre állni.
+  érdekel valakit egy téma, amiről addig nem volt szó, menet közben is jelezze!  Jó lenne kihasználni ezt a lehetőséget az interaktivitásra, ami egyéb tanfolyamoknál
+  nem szokott rendelkezésre állni.
+
+* Ha valaki példamegoldást küld email mellékletként, ne .py kiterjesztést használjon, azt nem engedi át az Outlook.
+
+* Ha valaki kénytelen kihagyni egy-két előadást, emiatt NE ADJA FEL, az anyag úgy van összeállítva, hogy nem keletkezik reménytelen lemaradás.
+
+* Minden héten kiadok házi feladatnak javasolt példákat. Aki igényli a konzultációt, küldje el a megoldásokat. Ha valakinek csak a példák egy részére
+  jut ideje, azt is nyugodtan küldheti! Ne legyen cél a "mindent vagy semmit" - ha egy példát megoldunk az ötből, az is többet ér, mint a nulla.
+
+* Minden héten lesznek tippmixnek nevezett kis találgatós játékaink, érdemees ezeket órán kívül is elővenni.
+
+---------------------------------------------------------------
 
 * Ha valakinek van kedve és energiája, örülnék neki, ha gyűjtené a lényeges hasonlóságokat és különbségeket más programnyelvekkel.

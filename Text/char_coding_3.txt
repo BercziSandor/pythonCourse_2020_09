@@ -1,0 +1,129 @@
+Kísérletek Notepad++ szövegszerkesztővel
+A Notepad++ karakterkonvertálója
+A charmap program
+========================================
+
+Vegyünk egy á betűt példának. Szabványos neve: LATIN SMALL LETTER A WITH ACUTE.
+
+Unicode kódja: E1 (hexa) 225 (decimális).
+UTF-8 ábrázolása 2 bájt: 0xc3 0xa1.
+Latin-1, (ISO-8859-1), Latin-2, (ISO-8859-2) Windows-1252, Windows-1250 kódja:
+E1 (hexa) 225 (decimális)
+
+DOS Latin-2 (OEM 852, CP 852) kódja: 0xa0 160 (decimális). Ezt azért érdemes megemlíteni, mert
+a Windows parancs-ablakának (amit a cmd paranccsal indítunk) ez a kódkészlete.
+
+===========================================
+
+Kísérlet: Notepad++-ban hozzunk létre egy fájlt és állítsuk be így a karakterkódolást:
+
+  Encoding --> Character sets --> Central European --> Windows-1250
+
+Írjunk a fájlba egy á betűt és mentsük el. Ezután Total Commanderrel nézzük meg, hogy
+mi van a fájlban.
+
+Kiválasztjuk a fájlt --> F3 --> Options --> Hex
+
+Azt fogjuk látni, hogy egy darab E1 értékű bájt van a fájlban.
+
+A Notepad++-ban a következő beállításoknál ugyanezt az eredményt fogjuk kapni:
+
+  Eastern European --> ISO 8859-2    E1
+  Western Europian --> ISO 8859-1    E1
+                   --> Windows 1252  E1
+
+Ha viszont ezt választjuk:
+
+  Central European --> OEM 852
+
+akkor egy A0 értékű bájt lesz a fájlban.
+
+Ha a Notepad+++-ban ezt választjuk:
+
+  Encoding --> Encode in UTF-8
+
+akkor az á betűt elmentve a fájlban két karakter lesz: C3 és A1.
+
+===========================================
+
+Azt, hogy a Notepad++-ben éppen milyen kódolás van beállítva, azt a keret alsó sorában
+jobboldalt láthatjuk.
+
+===========================================
+
+Kísérlet: Notepad++-ban hozzunk létre egy yyy.txt fájlt és állítsuk be így a karakterkódolást:
+
+  Encoding --> Character sets --> Eastern European --> ISO 8859-2
+
+Írjunk a fájlba egy á betűt és mentsük el. Total Commanderrel nézzük meg, hogy egy E1
+értékű bájt van a fájlban.
+
+Indítsunk egy parancsablakot (cmd)és írassuk ki a fájl tartalmát:
+
+type yyy.txt
+
+Egy ß karaktert fogunk látni.
+
+Az ok: A parancsablak kódkészlete CP 852 (OEM 852). Ebben a kódkészletben az E1
+ezt a német betűt (LOWER CASE SHARP S) jelenti.
+------------------------------------
+Játsszuk el fordítva is: a Notepad++-ban állítsunk be CP 852 kódolást:
+
+  Encoding --> Character sets --> Central European --> OEM 852
+
+Írjunk a fájlba egy á betűt és mentsük el. Total Commanderrel nézzük meg, hogy egy A0
+értékű bájt van a fájlban. Parancsablakban írassuk ki a fájl tartalmát:
+
+type yyy.txt
+
+Egy á karaktert fogunk látni.
+
+Az á betűt hagyjuk meg és a Notepad++-ban állítsunk be ISO 8859-2 kódolást. A karakter
+láthatatlanná fog válni, mert ebben a kódkészletben az A0 értékű bájt jelentése:
+non breaking space.
+
+===========================================
+
+A Notepad++ által használt ANSI megnevezés a számítógép által használt kódlapot
+(code page 0) jelenti.
+
+===========================================
+
+Próbáljuk ki a Notepad++ karakterkonvertálóját. Jelöljünk ki egy vagy több karaktert és:
+
+  Plugins --> Converter --> ASCII -> HEX
+
+A karakterek UTF-8 kódja fog megjelenni hexában. MINDIG UTF-8, függetlenül attól,
+hogy milyen kódolást állítottunk be a fájlra. Elég ügyetlen ez az ASCII elnevezés itt,
+talán inkább így kellett volna:
+
+  Characters -> HEX
+
+------------------------------------
+Fordítva is működik: Beírunk UTF-8 kódokat, kijelöljük és:
+
+  Plugins --> Converter --> HEX -> ASCII
+
+Ekkor az aktuális karakterkészletre fognak konvertálódni a hexa kódok. Ha pl. ISO 8859-2
+kódolás van beállítva és beírjuk ezt:
+
+c3a1  (á betű UTF-8 kódja)
+
+majd ezt kijelöljük és alávetjük a HEX -> ASCII konverziónak, akkor egy á betűt fogunk
+látni; mentés után a Total Commander segítségével meg tudunk győződni róla, hogy egy E1
+értékű bájt van a fájlban. Ezt a lehetőséget arra tudjuk használni, hogy beviszünk olyan
+karaktereket, amelyeket a billentyűzetünk (és nyelv-beállításunk) nem tartalmaz. Persze
+tudni kell hozzá az illető karakter UTF-8 kódját. Próbáljuk ki. Ebből:
+
+c3b5c3a6c3a7c3b8c2bfc3afc5a1c2b1
+
+ez lesz:
+
+oaço?iš±
+
+===========================================
+
+Parancssorból indítható a charmap program - az a hátránya, hogy Unicode ugyan van
+benne, de UTF-8 nincs.
+
+===========================================

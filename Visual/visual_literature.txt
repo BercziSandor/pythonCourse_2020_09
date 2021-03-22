@@ -1,0 +1,30 @@
+https://matplotlib.org/
+
+Corey Schaefer Matplotlib sorozata a Youtube-on:
+
+https://www.youtube.com/watch?v=UO98lJQ3QGI  Matplotlib Tutorial (Part 1): Creating and Customizing Our First Plots
+https://www.youtube.com/watch?v=nKxLfUrkLE8  Matplotlib Tutorial (Part 2): Bar Charts and Analyzing Data from CSVs
+https://www.youtube.com/watch?v=MPiz50TsyF0  Matplotlib Tutorial (Part 3): Pie Charts
+https://www.youtube.com/watch?v=xN-Supd4H38  Matplotlib Tutorial (Part 4): Stack Plots
+https://www.youtube.com/watch?v=x0Uguu7gqgk  Matplotlib Tutorial (Part 5): Filling Area on Line Plots
+https://www.youtube.com/watch?v=XDv6T4a0RNc  Matplotlib Tutorial (Part 6): Histograms
+https://www.youtube.com/watch?v=zZZ_RCwp49g  Matplotlib Tutorial (Part 7): Scatter Plots
+https://www.youtube.com/watch?v=_LWjaAiKaf8  Matplotlib Tutorial (Part 8): Plotting Time Series Data
+https://www.youtube.com/watch?v=Ercd-Ip5PfQ  Matplotlib Tutorial (Part 9): Plotting Live Data in Real-Time
+https://www.youtube.com/watch?v=XFZRVnP-MTU  Matplotlib Tutorial (Part 10): Subplots
+
+https://www.youtube.com/watch?v=vTingdk_pVM  Jake VanderPlas - How to Think about Data Visualization - PyCon 2019
+
+Könyvek:
+
+Jake VanderPlas: Python Data Science Handbook
+  --> Visualization with Matplotlib
+
+Theodore Petrou: Pandas Cookbook
+  --> Getting started with matplotlib
+
+Joel Grus: Data Science from Scratch
+  --> Chapter 3. Visualizing Data
+
+Wes McKinney: Python for Data Analysis
+  --> Plotting and Visualization

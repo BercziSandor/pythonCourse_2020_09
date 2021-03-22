@@ -1,0 +1,50 @@
+ImportsPackages\import_6.py
+ * package
+ * __init__.py függvény 2.: automatikus import, __all__ lista
+
+ContextMan\context_man_1.py
+ * context manager bemutatása
+ * getattr() függvény
+
+Datastructures\dict_3.py
+ * szótárak egyesítése (merge); update metódus
+ * ChainMap objektum
+
+ImportsPackages\pip_1.py
+ * pip install, list, freeze, show, uninstall
+ * pipdeptree modul
+
+ImportsPackages\venv_1.py
+ * Virtuális környezetek, venv modul
+
+-------------------------------------
+Fakultatív:
+
+ContextMan\context_man_2.py
+ * saját context manager objektummal megvalósítva I.
+
+ContextMan\context_man_3.py
+ * saját context manager objektummal megvalósítva II.
+   + Kivételkezelés az __exit__ metódusban (__enter__ sikeres volt)
+
+ContextMan\context_man_literature.txt
+ * irodalom
+
+Functions\decorators_apply.html
+ * dekorátorok alkalmazásai
+   + időmérés
+   + logolás
+   + memoization
+
+Mix\repr_str.py
+ * __repr__ és __str__ dunder metódusok
+
+-------------------------------------
+solutions_12.py
+ * Lecture_12\exercises_12.py megoldásai
+
+tippmix_13.py
+ * ismétlés
+
+exercises_13.py
+ * gyakorló feladatok otthonra

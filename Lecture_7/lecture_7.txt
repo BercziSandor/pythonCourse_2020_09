@@ -1,30 +1,61 @@
-exceptions_2.py
+Exceptions\exceptions_2.py
  * else, finally, továbbdobás
 
 copy_1.py
  * copy, deepcopy
 
-Num_py\numpy_1.py
- * shape, ndim, dtype, slicing
-
-Num_py\numpy_2.py
- * Mátrix alapműveletek, broadcasting, astype, táblaforgatás
-
-repeat_7.py
- * ismétlés
-
-Iterators_Generators\gen_func_intro.html
-  * generátor-függvények
+Num_py\numpy_3.py
+ * array tuple-ból, set-ből, dict-ből, delimitált sztringből
+ * reshape, newaxis
+ * shape változtatása helyben
+ * a helyben végzett műveletek előnyei
+ * len() függvény kontra size attribútum
 
 Databases\sqlite3_1.py
  * sqlite3 adatbázis:
    connect, commit, autotransact, fetchone, fetchall, fetchmany
 
+Num_py\numpy_4.py
+ * logikai tömbműveletek
+ * maszkolás
+ * np.average
+ * where
+ * fancy indexing
+
+Num_py\numpy_8.py
+ * fancy indexing
+
+Iterators_Generators\gen_func_intro.html
+  * generátor-függvények
+
+-------------------------------------------
+Fakultatív:
+
+Num_py\numpy_12.py
+ * numpy tömb memória- és időtakarékosabb létrehozása
+ * az nbytes attribútum
+ * dtypes explicit megadása tömb létrehozásánál
+
+Web\requests_1.py
+ * ismerkedés a requests modullal: get() metódus
+
+-------------------------------------------
 solutions_6.py
  * Lecture_6\exercises_6.py megoldásai
 
-requests_1.py
- * ismerkedés a requests modullal
+tippmix_7.py
+ * ismétlés
 
-any_all_1.py
- * any() és all() függvények
+exercises_7.py
+ * gyakorló feladatok
+
+########################
+
+Installálni kellene a pandas modult.
+
+SET HTTPS_PROXY=http://10.196.68.20:3128
+[útvonal\]python -m pip install pandas
+
+Valószínűleg hiányozni fognak neki modulok, ezeket is installálni kell.
+
+########################

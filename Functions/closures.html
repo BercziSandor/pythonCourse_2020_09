@@ -24,7 +24,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.10.29 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.17 &mdash;</p>
 </div>
 <h1>Closure</h1>
 <ul class='contents'>
@@ -56,22 +56,22 @@ Ismerkedésként nézzünk meg egy nagyon egyszerű closure-t:
 <pre>
 def outer_func(<span class='emph_1'>outerParam</span>):
     def inner_func(innerParam):
-        print('inner_func says: outerParam was',outerParam)
-        print('inner_func says: local_var was:',local_var)
-        print('inner_func says: innerParam is:',innerParam)
+        print('inner_func: outerParam ez volt',outerParam)
+        print('inner_func: local_var ez volt:',local_var)
+        print('inner_func: innerParam ez:',innerParam)
 
     <span class='emph_1'>local_var = '*LOCAL VARIABLE*'</span>
 
-    return inner_func    # returns the inner function object
+    return inner_func    # a belső függvényobjektumot adja vissza
 
-f = outer_func(<span class='emph_1'>'OUTER'</span>)  # a new function (inner_func) is created
-print(f)
-f('inner func parameter')
+f = outer_func(<span class='emph_1'>'OUTER'</span>)  # egy új függvény-objektum (inner_func) keletkezik
+print('f:', f)
+f('inner func paraméter')
 <div class='result'>
-# &lt;function outer_func.&lt;locals>.inner_func at 0x0232CB70>
-# inner_func says: outerParam was <span class='emph_1'>'OUTER'</span>
-# inner_func says: local_var was: <span class='emph_1'>*LOCAL VARIABLE*</span>
-# inner_func says: innerParam is: inner func parameter
+# f: &lt;function outer_func.&lt;locals>.inner_func at 0x0232CB70>
+# inner_func: outerParam ez volt: <span class='emph_1'>'OUTER'</span>
+# inner_func: local_var ez volt: <span class='emph_1'>*LOCAL VARIABLE*</span>
+# inner_func: innerParam ez: inner func paraméter
 </div>
 </pre>
 A külső függvény csak gyárként (factory) szolgál, amikor felhívjuk, akkor visszaadja a belső függvényt. Az új, <code>f</code> függvény tulajdonképpen a
@@ -89,18 +89,18 @@ class ClosureClass:
         self.outer_param = outerParam
         <span class='emph_1'>self.local_var = '*LOCAL VARIABLE*'</span>
 
-    def _inner_func(self,innerParam):
-        print('inner_func says: outerParam was',self.outer_param)
-        print('inner_func says: local_var was:',self.local_var)
-        print('inner_func says: innerParam is:',innerParam)
+    def inner_func(self,innerParam):
+        print('inner_func: outerParam ez volt:',self.outer_param)
+        print('inner_func: local_var  ez volt:',self.local_var)
+        print('inner_func: innerParam ez:',innerParam)
 
 clos_obj = ClosureClass('OUTER')
-f = clos_obj._inner_func
+f = clos_obj.inner_func
 f('inner func parameter')
 <div class='result'>
-# inner_func says: outerParam was <span class='emph_1'>'OUTER'</span>
-# inner_func says: local_var was: <span class='emph_1'>*LOCAL VARIABLE*</span>
-# inner_func says: innerParam is: inner func parameter
+# inner_func: outerParam  ez volt: <span class='emph_1'>'OUTER'</span>
+# inner_func: local_var  ez volt: <span class='emph_1'>*LOCAL VARIABLE*</span>
+# inner_func: innerParam ez: inner func parameter
 </div>
 </pre>
 Azt hiszem, jól látszik, mennyivel több segéd-kódot kellett írnunk a két sztring megjegyzéséhez &ndash; ez remélhetőleg felkelti a szimpátiát a closure
@@ -117,16 +117,16 @@ class CallableClosureClass:
         <span class='emph_1'>self.local_var = '*LOCAL VARIABLE*'</span>
 
     def __call__(self,innerParam):
-        print('inner_func says: outerParam was',self.outer_param)
-        print('inner_func says: local_var was:',self.local_var)
-        print('inner_func says: innerParam is:',innerParam)
+        print('inner_func: outerParam ez volt:',self.outer_param)
+        print('inner_func: local_var ez volt:',self.local_var)
+        print('inner_func: innerParam ez:',innerParam)
 
 f = CallableClosureClass('OUTER')  # __init__
-f('inner func parameter')          # __call__
+f('inner func paraméter')          # __call__
 <div class='result'>
-# inner_func says: outerParam was <span class='emph_1'>OUTER</span></span>
-# inner_func says: local_var was: <span class='emph_1'>*LOCAL VARIABLE*</span>
-# inner_func says: innerParam is: inner func parameter
+# inner_func: outerParam ez volt: <span class='emph_1'>OUTER</span></span>
+# inner_func: local_var ez volt: <span class='emph_1'>*LOCAL VARIABLE*</span>
+# inner_func: innerParam ez: inner func paraméter
 </div>
 </pre>
 A "hagyományos" objektummal való megoldás akkor lehet előnyösebb (olvashatóbb) a closure függvény-objektumnál, amikor többféle funkcionalitásra, azaz nem csak
@@ -190,7 +190,7 @@ A gyártó függvény paraméterei és lokális változói láthatóak a legyár
 <pre>
 def func_factory(startParam):
     def func():
-        print('I am func, my start parameter:',startParam)
+        print('func vagyok, indítási paraméterem:',startParam)
 
     return func
 
@@ -200,8 +200,8 @@ f2 = func_factory(999)
 f1()
 f2()
 <div class='result'>
-# I am func, my start parameter: 10
-# I am func, my start parameter: 999
+# func vagyok, indítási paraméterem: 10
+# func vagyok, indítási paraméterem: 999
 </div>
 </pre>
 Ha függvényattribútumot használnánk, az kívülről is változtatható lenne:
@@ -209,7 +209,7 @@ Ha függvényattribútumot használnánk, az kívülről is változtatható lenn
 <pre>
 def func_factory():
     def func():
-        print('I am func, my start parameter:',func_factory.startParam)
+        print('func vagyok, indítási paraméterem:',func_factory.startParam)
 
     return func
 
@@ -219,8 +219,8 @@ f1()
 <span class='emph_1'>func_factory.startParam = 999</span>
 f1()
 <div class='result'>
-# I am func, my start parameter: 10
-# I am func, my start parameter: 999
+# func vagyok, indítási paraméterem: 10
+# func vagyok, indítási paraméterem: 999
 </div>
 </pre>
 Az első megoldásnál el tudjuk rejteni a startParam változót a külvilág elől, így a programot olvasva világos, hogy ezt a kezdeti beállítás után

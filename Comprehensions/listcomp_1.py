@@ -32,8 +32,6 @@ print(lst) # [0, 10, 20, 30, 40]
 
 # Amikor megszokjuk, sokkal olvashatóbbnak fogjuk látni a listcomp alakot.
 
-# A collection persze nem feltétlenül lista, lehet bármely iterálható sorozat.
- 
 ####################################
 
 # Feltétel a for ciklusban

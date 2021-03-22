@@ -1,25 +1,28 @@
 # Függvény-objektumok 1.
+# dir()
+# __call__(), __name__, __class__
+
+# https://dbader.org/blog/python-first-class-functions
+# https://www.linuxtopia.org/online_books/programming_books/python_programming/python_ch10s04.html
+# Könyvek:
+
+# Mark Lutz: Learning Python
+#  --> Function Objects: Attributes and Annotations
+
+# Luciano Ramalho: Fluent Python
+#  --> First-Class Functions
+
+##########################################
 
 # A Pythonban a függvények is objektumok.
-
 # Többek közt van memóriacímük és méretük.
 
 def func_1():
     print('func_1!!')
 
-def func_2():
-    lst = [1, 2, 3, 4, 5, 6, 10000000]
-    print('func_2 lst =',lst)
-
-import sys
-
 print(func_1)  # <function func_1 at 0x0058D660>
 
 # Figyelem - zárójel nélkül! Nem hívtuk meg a függvényt.
-
-print(sys.getsizeof(func_1),sys.getsizeof(func_2))  # 72 72
-
-# Ez a függvény-objektum mérete, NEM a kódé!
 
 # Ha func_1 egy objektum, akkor le tudjuk kérdezni a tulajdonságait.
 
@@ -32,12 +35,7 @@ print(d)
 # '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__',
 # '__str__', '__subclasshook__']
 
-# Lekérdezhetjük a két függvény-objektum méretét:
-
-print(func_1.__sizeof__(), func_2.__sizeof__())  # 56 56
-
-# A sys.getsizeof() azért mond nagyobb számot, mert ő hozzászámolja a garbage collector működéséhez szükséges segéd-információ
-# méretét is, ami az 'igazi' objektum mellett van tárolva.
+##########################################
 
 # Nem meglepő módon van neki __call__ metódusa, hívjuk ezt meg:
 
@@ -60,7 +58,7 @@ f = func_1
 f()               # func_1!!
 print(f.__name__) # James Bond
 
-#################################
+##########################################
 
 # Egy függvénydeklaráció:
 
@@ -73,7 +71,7 @@ def func(x):
 #    rögtön létre is hoz egyet. Ez tehát egy konstruktor, ami le is fut.
 # 2. Hozzá is rendel egy változónevet (func) az újszülötthöz.
 
-#################################
+##########################################
 
 # Ha a függvény egy objektum, akkor át lehet adni egy másik függvénynek paraméterként:
 
@@ -87,13 +85,14 @@ def func_2(funcObj):
     print('x:',x)
 
 func_2(func_1)
+
 # func_2: felhívom a paraméterként kapott függvényt
 # func_1: jelentkezem
 # x: 42
 
-#############################
+##########################################
 
-# Szimuláljunk egy rajzoló függvényt:
+# Miért hasznos ez? Első éldaként szimuláljunk egy rajzoló függvényt.
 
 def plotter(xValues,func):
     for x in xValues:
@@ -124,7 +123,7 @@ plotter(x_values,square)
 # 3 9
 # 4 16
 
-#############################
+##########################################
 
 # Maga a rajzoló függvény is lehet paraméter. Legyen egy függvényünk, ami valami
 # bonyolult algoritmus segítségével állít elő adatokat. Paraméterként kap egy
@@ -136,11 +135,11 @@ def data_creator(plotFunc):
 
 def plotter_1(xyPairs):
     for x in xyPairs:
-        print(x[0], '*', x[1])
+        print(x[0], '*', x[1])  # szimulálunk egyfajta megjelenítést
 
 def plotter_2(xyPairs):
     for x in xyPairs:
-        print(x[0], '->', x[1]
+        print(x[0], '->', x[1]  # itt egy másik fajtát
 
 data_creator(plotter_1)
 print('-----------')
@@ -163,7 +162,7 @@ data_creator(plotter_2)
 # az adatokat, a rajzolást a vonal másik végén majd elintézik. Nem véletlen, hogy ezeket a függvényeket
 # callback függvényeknek hívják.
 
-#############################
+##########################################
 
 # Egy függvény paraméterként nem csak adatot tud kapni, hanem eljárást, működést, algoritmust is.
 # Persze ugyanezt meg lehet valósítani "hagyományos" objektumokkal is: a plotter függvény egy objektum
@@ -173,7 +172,9 @@ data_creator(plotter_2)
 # világosabb és egyszerűbb helyette egy függvényt alkalmazni; vagy hívhatóvá tenni az
 # osztályt (ami tulajdonképpen ugyanaz).
 
-#############################
+##########################################
 
 # Függvényt paraméterként C-ben is tudunk átadni függvénypointer segítségével - csak annak a
 # szintaktikája bonyolultabb.
+
+##########################################

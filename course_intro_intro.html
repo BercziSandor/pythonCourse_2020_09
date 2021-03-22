@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Bevezetés a bevezetésbe</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p  { margin: 8px 0; }
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .id_1 { text-align: center; }
+  .code_2 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style="float:left;">&mdash; Utolsó módosítás: 2021.03.18 &mdash;</span>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+</div>
+<div style='clear:both;'/>
+
+<div id='0' class='id_1' style='display:block;'>
+<h1>Mi a főszabály?</h1>
+</div>
+<div id='1' class='id_1' style='display:none;'>
+<h1>Órán kérdezni nem szabad.</h1>
+</div>
+<div id='2' class='id_1'  style='display:none;'>
+<h1>Hanem kötelező.</h1>
+</div>
+<div id='3' style='display:none;'></div>
+<div style='text-align: center;'>
+<button id='step_button' style='border-radius: 4px;' onclick='step_phase()'><h3>Lássuk!<br>(Drámai feszültség)</h3></button>
+</div>
+
+<script>
+var phase = 1, last = 3;
+function step_phase() {
+	if(phase > last) return;
+
+  var e = document.getElementById(phase),
+      e_prev = document.getElementById(phase - 1),
+      btn = document.getElementById('step_button');
+
+  e_prev.style.display = 'none';
+  phase == 3 ? e.style.display = 'none' : e.style.display = 'block';
+
+  switch(phase){
+	  case 1:
+	    btn.innerHTML = '<h2>Mi van???<br>(Katarzis)</h2>';
+	    btn.style.color = 'red';
+	  break;
+	  case 2:
+	    btn.innerHTML = '<h3>Ja, az már más.<br>Van még valami?<br>(Happy end)</h3>';
+	    btn.style.color = 'green';
+	  break;
+	  case 3:
+	    window.location.href = 'course_intro.html';
+	  break;
+  }
+
+  phase++;
+}
+</script>
+
+</body>
+</html>

@@ -1,11 +1,14 @@
 # Dictionary (szótár) 1.
-# Tuple kibontása változókba
-# zip függvény
+# tuple kibontása változókba
+# zip() függvény
+# sorted() függvény
 
 # https://www.python-course.eu/python3_dictionaries.php
 # https://realpython.com/python-dicts/
 # https://realpython.com/iterate-through-dictionary-python/
 # https://www.python-course.eu/python3_zip_tutorial.php
+
+###############################
 
 # Kulcs-érték párokból áll. Üres szótár létrehozása:
 
@@ -19,6 +22,11 @@ print(type(dic)) # <class 'dict'>
 dic = {'A': 1, 22: 'twentytwo', 3.5: [20, 20] }
 print(dic, len(dic)) # {'A': 1, 22: 'twentytwo', 3.5: [20, 20]} 3
 
+# A szótárban a kulcs szerinti keresés sokkal gyorsabb, mint egy listában való keresés;
+# a listában sorban elő kell venni az elemeket, tehát a lista hosszával arányosan nő a
+# keresési idő, míg a szótárak hash-táblákat használnak, amelyekben gyakorlatilag konstans
+# a keresési idő.
+
 # Látszik, hogy az int és a float típusok immutábilisak, mert lehetnek kulcsok. Nem így a lista:
 
 dic = {[2,3]: 'A'}
@@ -28,7 +36,7 @@ dic = {[2,3]: 'A'}
 #     dic = {[2,3]: 'A'}
 # TypeError: unhashable type: 'list'
 
-# vagy a dict maga:
+# vagy egy dict:
 
 dic = {{}: 'A'}
 
@@ -47,21 +55,50 @@ for key in dic:
 # A -> 1
 # B -> 2
 
-# Az elemek sorrendje NEM garantált!
-
 # Ugyanez lesz az eredmény a keys() metódussal is:
 
 for key in dic.keys():
     print(key, '->', dic[key])
 
-# Ha csak az értékeken akarunk végigmenni, akkor a values() metódust hívjuk:
+###############################
+
+# Az elemek sorrendje NEM garantált a Python 3.7 verzió előtt; tehát nem biztos,
+# hogy iterálásnál ugyanolyan sorrendben kapjuk meg a kulcsokat, mint ahogy azokat
+# beleírtuk a szótárba. A 3.7-es verziótól kezdve garantált a sorrend; mindenesetre
+# csak akkor építsünk erre a tulajdonságra, ha egészen biztosak vagyunk benne, hogy
+# nem fog a programunk régebbi verziókon futni. Ha ez nem biztos, akkor használjuk
+# inkább az OrderedDict típust.
+
+# Korábbi verzióknál ha végzünk egy kísérletet egy adott szótárral és azt látjuk, hogy
+# megmaradt a beviteli sorrend, az NEM jelenti azt, hogy egy másik, nagyobb szótárral
+# is ezt fogjuk kapni!
+
+###############################
+
+# Rendezett tuple-ok listájának előállítása:
+
+dic_1 = {'one': 1, 'two': 2, 'three': 3}
+print(sorted(dic_1.items())) # [('one', 1), ('three', 3), ('two', 2)]
+
+# Rendezett szótár előállítása:
+
+dic_2 = dict(sorted(dic_1.items()))
+print(dic_2) # {'one': 1, 'three': 3, 'two': 2}
+
+# TERMÉSZETESEN a 3.7 előtti verzióknál NEM lesz garantálva a rendezettség.
+
+###############################
+
+# Ha az értékeken akarunk végigmenni, akkor a values() metódust hívjuk:
 
 for value in dic.values():
     print(value)
 # 1
 # 2
 
-# Az items() metódussal tuple-ban a kulcsot és az értéket is visszakapjuk:
+###############################
+
+# Az items() metódussal egy tuple-ban a kulcsot és az értéket is visszakapjuk:
 
 dic = {'A': 1, 'B': 2}
 for item in dic.items():
@@ -94,11 +131,11 @@ for key, value in dic.items():
 dic = {'A': 1, 'B': 2}
 print('A' in dic, 2 in dic) # True False
 
-# Érték meglétének viszgálata:
+# Érték meglétének vizsgálata:
 
 print(2 in dic.values()) # True
 
-##################
+###############################
 
 # Elem megváltoztatása:
 
@@ -129,6 +166,8 @@ x = dic['xxx']
 #     x = dic['xxx']
 # KeyError: 'xxx'
 
+###############################
+
 # Elem törlése:
 
 dic = {'A': 1, 'B': 2}
@@ -145,7 +184,7 @@ for key, value in dic.items():
 
 if 'ABC' in dic: del(dic['ABC'])
 
-#################
+###############################
 
 # Listák, tuple-ok zippzárszerű összefésülése: zip() függvény.
 
@@ -154,10 +193,10 @@ val_lst = [1, 2]
 zip_obj = zip(key_lst, val_lst)
 print(zip_obj)  # <zip object at 0x021BC698>
 
-# Keletkezett egy zip objektum, ami egy generátor: egyszer szolgáltatja
+# Keletkezett egy zip objektum, ami egy generátor típusú iterátor: egyszer szolgáltatja
 # valamilyen elemek sorozatát; ha még egyszer szeretnénk megkapni a sorozatot,
-# akkor újból fel kell húzni a generátort, mint egy lendkerekes kisautót. Később
-# sok szó lesz a generátorokról, nagyon hasznos eszközök.
+# akkor újból fel kell húzni az iterátort, mint egy lendkerekes kisautót. Később
+# sok szó lesz az iterátorokról és azon belül a generátorokról, nagyon hasznos eszközök.
 
 # Először járjuk végig az elemeit for ciklussal:
 
@@ -183,7 +222,7 @@ zip_obj = zip(key_lst, val_lst)
 dic = dict(zip_obj)
 print(dic) # {'A': 1, 'B': 2}
 
-##################
+###############################
 
 # dict -> tuple-ok listája:
 
@@ -195,3 +234,5 @@ print(lst) # [('A',1), ('B',2)]
 lst = [('A',1), ('B',2)]
 dic = dict(lst)
 print(dic)  # {'A': 1, 'B': 2}
+
+###############################

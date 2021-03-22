@@ -6,18 +6,21 @@
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
   pre { color: blue; margin: 8px; }
-  .pre_2  { color: green; margin: 8px; }}
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .ul_5 { margin-top: 5px; margin-bottom: 5px; }
+  .pre_2  { color: green; margin: 8px; }
   .emph_1 { color: red; font-weight: bold; }
   .emph_2 { color: green; font-weight: bold; }
   .emph_3 { color: black; font-weight: bold; }
   .emph_4 { color: blue; font-weight: bold; }
   .emph_5 { color: green; font-weight: bold; font-size: 120%; }
+  .code_4 { background-color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; border: 1px dotted; }
   .blq_1  { border-left: 3px solid #FC4;padding-left: 16px; font-family: Georgia; font-style: italic; }
 </style>
 </head>
 <body>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; nemes.budapest@gmail.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2019.11.03 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2021.03.19 &mdash;</p>
 
 <ul>
 <li><a href="#cleanness_def">Milyen a tiszta adat?</a></li>
@@ -56,7 +59,7 @@
 <hr style="margin-right:70%;">
 <li><a href="#tech_details">Néhány technikai részlet, bemutatásként</a>
 <ul>
-<li><a href="#tech_det_pandas_preprocess">CSV fájl tisztításának néhány lépése Python + Pandas segítségével</a></li>
+<li><a href="#tech_det_pandas_preprocess">CSV fájl tisztításának néhány lépése Python + pandas segítségével</a></li>
 </ul>
 </li>
 </ul>
@@ -64,7 +67,7 @@
 <div id="cleanness_def"></div>
 <h2>Milyen a tiszta adat?</h2>
 <p>
-Egy jól megtervezett és karbantartott adatbázisban csak 'tiszta' adatok vannak, amelyek közötti összefüggések is megfelelően karban vannak tartva:
+Egy jól megtervezett és karbantartott adathalmazban csak 'tiszta' adatok vannak, amelyek közötti összefüggések is megfelelően karban vannak tartva:
 
 <blockquote>
 &#9679; aminek egyedinek kell lennie, az tényleg egyedi (PRIMARY KEY, UNIQUE megkötés)<br>
@@ -74,16 +77,16 @@ Egy jól megtervezett és karbantartott adatbázisban csak 'tiszta' adatok vanna
 &#9679; nincsenek formailag helyes, tartalmilag hibás hivatkozások (pl. egy személy rekordjában nem az ő TAJ száma vagy email címe található)<br>
 &#9679; nincsenek 'kilógó adatok' (pl. testmagasságnál tíz méter)<br>
 &#9679; a numerikus mérési, kerekítési és átviteli hibák ki vannak lehetőség szerint küszöbölve (pl. átlagolással)<br>
-&#9679; egy mezőnél a kitöltetlenség csak egyféleképpen van jelölve (mindig NULL-al vagy mindig üres sztringgel)<br>
+&#9679; egy mezőnél a kitöltetlenség csak egyféleképpen van jelölve (pl. mindig NULL-al vagy mindig üres sztringgel)<br>
 &#9679; a szöveges mezők nem tartalmaznak
-<blockquote>
+<blockquote class='ul_5'>
 &#x25B6; a szóköztől eltérő láthatatlan, 'fehér' karaktereket<br>
 &#x25B6; a mező elején és végén szóközt<br>
 &#x25B6; a mező belsejében egynél több szóközt (ott, ahol csak egyre számítunk)<br>
 </blockquote>
 &#9679; a nevek, lakcímek írásmódja egységes (pl. dr mindig szóközzel van elválasztva a névtől és nem ponttal)<br>
 &#9679; az alfanumerikus azonosítók írásmódja egységes<br>
-<blockquote>
+<blockquote class='ul_5'>
 &#x25B6; csak csupa kisbetű vagy nagybetű található bennük lehetőség szerint (ha a létező rendszer megengedi)<br>
 &#x25B6; a tagolásra mindig ugyanazt a karaktert használjuk, pl. kötőjelet
 </blockquote>
@@ -103,18 +106,20 @@ A vágyott tisztaság eléréséhez jól működő adatbetöltö és ellenőrző
 <li>átformázza az adattartalmat a fogadó oldal konvenciói szerint</li>
 <li>és végül betölti az adatokat a végleges helyükre.</li>
 </ul>
-
-Az első, élesen elkülönülő lépés az <b>előfeldolgozás</b>, amikor a betöltést megakadályozó hibákat eltávolítjuk; pl. INT típusú mezőbe nem lehet az 'egy' sztringet
-betölteni, aminek az a következménye, hogy az egész rekord nem kerül be az adattáblába, esetleg a teljes betöltés hibajelzéssel leáll. Az ilyen durva hibák megfelelő
-kezelése nyilván nagyon fontos, előfordulhat, hogy sok rekord eltűnik, ha ezt a lépést nem megfelelő gondossággal végezzük.
+&nbsp;<b> 1.</b>
+Az első, élesen elkülönülő lépés az <code>előfeldolgozás</code>, amikor a betöltést megakadályozó hibákat eltávolítjuk; adatbázis esetében pl. INT típusú mezőbe nem
+lehet az 'egy' sztringet betölteni, aminek az a következménye, hogy az egész rekord nem kerül be az adattáblába, esetleg a teljes betöltés hibajelzéssel leáll.
+Az ilyen durva hibák megfelelő kezelése nyilván nagyon fontos, előfordulhat, hogy sok mező/rekord eltűnik, ha ezt a lépést nem megfelelő gondossággal végezzük.
 </p>
-<p>
+<blockquote class="blq_1">
 Ez az előfeldolgozó művelet is két részre osztódik: Ha az adatbázison kívül van a bejövő adat (ahogy általában lenni szokott, pl. delimitált (CSV) szövegfájlban),
-akkor tartalmazhat olyan formai elemeket, amelyek megakadályozzák a betöltést &ndash; ezeket el kell távolítani vagy át kell konvertálni pl. Python+Pandas
+akkor tartalmazhat olyan formai elemeket, amelyek <u>megakadályozzák a betöltést</u> &ndash; ezeket el kell távolítani vagy át kell konvertálni pl.
+<span class='code_4'>Python+pandas</span>
 segítségével, aztán következhet a második előfeldolgozás, amelyet végezhetünk szintén még az adatbázison kívül és/vagy egy olyan zsilipelő táblában, amelyben
 minden mező VARCHAR vagy TEXT típusú.
-</p>
+</blockquote>
 <p>
+&nbsp;<b> 2.</b>
 A következő, 'finomabb' hibák és hiányosságok eltávolítása nemcsak adatbetöltéskor szükséges, időről időre szükség van az adattáblák ellenőrzésére, mert
 lehet, hogy a korábbi adatbeviteleknél nem volt eléggé következetes a vizsgálat, vagy éppen azóta újabb hibafajtákat és javítási módokat találtunk ki.
 </p>
@@ -188,8 +193,8 @@ Itt 'kiegészítés' alatt az értendő, amikor a már megtisztított adatot kie
 elérhetőségével, stb. Most elsősorban az adattisztításról lesz szó, de azért röviden kitérünk majd a másik két lépésre is.
 </p>
 <p>
-<b>Első adattisztító lépés:</b> Az előfeldolgozás. A szövegfájl vagy Excel tábla tartalmát célszerű először programmal (tipikusan Python+Pandas kombinációval)
-tisztítani, a betöltést megakadályozó hibákat legalább részben így eltávolítani. Ekkor rendelkezésünkre áll a Pandas (vagy más program) hatalmas eszközkészlete,
+<b>Első adattisztító lépés:</b> Az előfeldolgozás. A szövegfájl vagy Excel tábla tartalmát célszerű először programmal (tipikusan Python+pandas kombinációval)
+tisztítani, a betöltést megakadályozó hibákat legalább részben így eltávolítani. Ekkor rendelkezésünkre áll a pandas (vagy más program) hatalmas eszközkészlete,
 de az SQL fegyvertára és a már bentlévő adatok ismerete még nem. A felesleges oszlopokat nyilván már ezen a ponton jó eltávolítani.
 
 <blockquote class="blq_1">
@@ -239,7 +244,7 @@ ezeket, akkor szükségünk van az adatbázisban már meglévő adatokra is, nem
        +-----------------------------+     +------------------+     +------------------------+     +------------------+
        | Tisztítás nem SQL eszközzel |     | 1. zsilip-tábla  |     |      2. zsilip         |     |  Végleges tábla  |
        |      (előfeldolgozás)       | ==> |  minden sztring  | ==> |  végleges mezőtípusok  | ==> |                  |
-       |      <span class="emph_3">Python + Pandas</span>        |     |       <span class="emph_3">SQL</span>        |     | <span class="emph_3">SQL + DB-ben lévő infó</span> |     |                  |
+       |      <span class="emph_3">Python + pandas</span>        |     |       <span class="emph_3">SQL</span>        |     | <span class="emph_3">SQL + DB-ben lévő infó</span> |     |                  |
        +-----------------------------+     +------------------+     +------------------------+     +------------------+
                      <span class="emph_2">&#923;
                      |
@@ -661,7 +666,7 @@ Az itt következő kis kódrészletek csak a figyelem felkeltésére alkalmasak,
 </p>
 <div id="tech_det_pandas_preprocess"></div>
 <p>
-<div class="emph_5">&#x25B6; CSV fájl tisztításának néhány lépése Python + Pandas segítségével</div><br>
+<div class="emph_5">&#x25B6; CSV fájl tisztításának néhány lépése Python + pandas segítségével</div><br>
 
 A bemeneti fájlban <b>^</b> a meződelimiter, ezt azért szeretem, mert nem szokott szövegben előfordulni. A tabulátorral két gond van:
 
@@ -692,7 +697,7 @@ Dr.NoAge^--^7400            <span class="emph_3"><== itt egy harmadik, -- jellel
 
 </pre>
 
-A NA nevű ember azért került be a példába, mert a Pandas alapértelmezésként ezt a sztringet is "nincs adat" jelzésnek veszi. Ha nem vigyázunk, már
+A NA nevű ember azért került be a példába, mert a pandas alapértelmezésként ezt a sztringet is "nincs adat" jelzésnek veszi. Ha nem vigyázunk, már
 beolvasásnál eltűnik ez a név!
 </p>
 <p>
@@ -786,7 +791,7 @@ df = pd.read_csv("piszkos_1.csv",
                  sep = "^",
                  header = 0,                 <span class="emph_3"># a nulladik sor fejléc</span>
                  na_values = missing_values, <span class="emph_3"># csak az általunk megadott értékek jelezzenek adathiányt</span>
-                 keep_default_na = False)    <span class="emph_3"># a Pandas alapértelemezett értékei viszont ne</span>
+                 keep_default_na = False)    <span class="emph_3"># a pandas alapértelemezett értékei viszont ne</span>
 
 </pre>
 A df DataFrame tartalma most:
@@ -811,7 +816,7 @@ A df DataFrame tartalma most:
 
 </pre>
 
-A Pandas mindig NaN-nal jelöli az adathiányt, ami kicsit félrevezető, hiszen ez a "not a number" rövidítése, de sztringeknél is ezt használja. Szóval
+A pandas mindig NaN-nal jelöli az adathiányt, ami kicsit félrevezető, hiszen ez a "not a number" rövidítése, de sztringeknél is ezt használja. Szóval
 nála ez jelenti a NULL-t (régi barátunkat). Most távolítsuk el azon sorokat, ahol minden mező üres:
 
 <pre>
@@ -943,7 +948,7 @@ Ha csak egy kisebb részt olvasunk be először, akkor rögtön láthatjuk, ninc
 kellene beolvasódnia és láthatjuk, hogy tényleg annyi jött-e be.
 </p>
 <p>
-Van olyan, akit mindez nem győz meg arról, hogy a Python + Pandas egy nagyszerű szerszámosláda??? Pontosabban persze így hangzik a tanulság:
+Van olyan, akit mindez nem győz meg arról, hogy a Python + pandas egy nagyszerű szerszámosláda??? Pontosabban persze így hangzik a tanulság:
 </p>
 <p style="text-align:center;font-size:120%;font-weight: bold;">
 Python + SQL: menő.

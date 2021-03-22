@@ -1,26 +1,20 @@
-repeat_4.py
- * ismétlés
-
-Functions\func_params_3.py
- * változtatható paraméterek
-
-solutions_3.py
- * Lecture_3\exercises_3.py megoldásai
-
-Functions\func_params_4.py
- * státuszjelzés
-
-import_1.py, import_2.py
- * modulok importálása
-
-import_3.py
- * __name__ használata
-
 mix_4.py
  * * mint ismétlés-operátor
  * sztring-formázás 1. f-sztringek
  * isinstance
  * enumerate
+
+DataTransfer\json_1.py
+ * JSON adatformátum
+
+Functions\func_params_3.py
+ * változtatható paraméterek
+
+ImportsPackages\import_1.py, ImportsPackages\import_2.py
+ * modulok importálása
+
+ImportsPackages\import_3.py
+ * __name__ használata
 
 Classes\classes_2.py
  * metódusok
@@ -30,6 +24,40 @@ Classes\classes_2.py
 Ismétlés
  * Iterators_Generators\iterator_1.py
 
-Iterators_Generators\iterator_2.py
+Iterators_Generators\iterator_class_1.py
  * saját iterálható osztály készítése
- 
+
+Datastructures\dict_2.py
+ * Keresés úgy, hogy az illető kulcs esetleg nincs benne a szótárban
+ * get, setdefault metódus, kulcsok rendezése
+
+Datastructures\is_1.py
+ * is operátor kontra == operátor
+
+-------------------------------
+Fakultatív:
+
+SWTechnology\func_status.py
+ * státuszjelzés
+
+python_intro.html
+ * a nyelv előnyei és hátrányai
+
+--------------------------------
+tippmix_4.py
+ * ismétlés
+
+solutions_3.py
+ * Lecture_3\exercises_3.py megoldásai
+
+exercises_4.py
+ * gyakorló feladatok
+
+########################
+
+Installálni kellene a numpy modult.
+
+SET HTTPS_PROXY=http://10.196.68.20:3128
+[útvonal\]python -m pip install numpy
+
+########################

@@ -42,11 +42,13 @@ print(contains) # False
 
 # 4.
 
-# Írjunk egy függvényt, amely a paraméterként kapott sztringből kigyűjti aa számjegyeket,
-# mintegy egy telefonszámból eltávolít minden felesleges karaktert.
+# Írjunk egy függvényt, amely a paraméterként kapott sztringből kigyűjti a számjegyeket,
+# pl. egy telefonszámból eltávolít minden felesleges karaktert.
 
 in_str = '  + 36 1/555\t6677\n'
 print(myfunc(in_str))  # 3615556677
+
+# Listcomp-pal próbáljuk megoldani - ha nem megy, akkor anélkül.
 
 #############################
 
@@ -64,4 +66,15 @@ set_3 = {100, 200, 300}
 print(listofmax(lst_1, tup_2, set_3)) # [3, 30, 300]
 print(listofmax())  # []
 
+# Listcomp-pal és anélkül.
+
 #############################
+
+# 6. Adott az exercise_6.txt fájl. Tegyük bele egy listába mindazon sorok hosszát, amelyekben
+# előfordul kisbetű-nagybetű függetlenül az 'aaa' sztring. A hosszban ne legyen benne a sorvégjel.
+
+# Várt eredmény: [10, 22]
+
+# Listcomp-pal és anélkül.
+
+###########################

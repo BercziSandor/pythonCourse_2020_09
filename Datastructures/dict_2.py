@@ -1,7 +1,7 @@
 # Dictionary (szótár) 2.
 
 # Keresés úgy, hogy az illető kulcs esetleg nincs benne a szótárban
-# get, setdefault függvény
+# get, setdefault metódus, kulcsok rendezése
 
 dic = {'A': 1, 'B': 2}
 
@@ -58,3 +58,13 @@ print(x) # 999
 # Ez a legszebb (és leggyorsabb) megoldás.
 
 #######################################
+
+# Szótár kulcsainak rendezése:
+
+dic = { 20: 'b', 30: 'c', 10: 'a'}
+lst = sorted (dic)
+print(type(lst), lst) # <class 'list'> [10, 20, 30]
+
+#######################################
+
+

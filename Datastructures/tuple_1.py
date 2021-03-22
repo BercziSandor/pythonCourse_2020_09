@@ -1,4 +1,5 @@
-# Tuple 1.
+# tuple bemutatása
+# list <--> tuple
 
 # https://www.python-course.eu/python3_sequential_data_types.php
 
@@ -10,15 +11,24 @@ print(x, type(x), len(x))  # (10, 20, 30) <class 'tuple'> 3
 
 # A hosszat ugyanúgy a len() függvénnyel kérdezzük le, mint a sztringeknél és a listáknál.
 
+# Ha a környezet nem követeli meg, akkor a zárójelek elhagyhatók:
+
+x = 10, 20, 30
+print(x, type(x), len(x))  # (10, 20, 30) <class 'tuple'> 3
+
+################################
+
 # Különféle típusú elemeket tartalmazhat
 
 x = (10, 'John', 32.5)  # (10, 'John', 32.5)
 print(x)
 
-Nemcsak alaptípusokat tartalmazhat, hanem listát, tuple-t és egyéb összetett típusokat is .
+# Nemcsak alaptípusokat tartalmazhat, hanem listát, tuple-t és egyéb összetett típusokat is .
 
 x = (1, 'AA', (10, 'DD'), [20, 30, (9, 10)])
 print(x, len(x))  # (1, 'AA', (10,'DD'), [20, 30, (9, 10)]) 4
+
+################################
 
 # Egy elemű tuple:
 
@@ -28,6 +38,8 @@ x = (2,)  # a vessző fontos
 
 x = (2)
 print(x, type(x))  # 2 <class 'int'>
+
+################################
 
 # Indexelhető
 
@@ -39,6 +51,8 @@ print(x[0], x[len(x) - 1])  # 10 32.5
 for e in x:
     print(e, end=' ')  # 10 John 32.5
 print()
+
+################################
 
 # Nem módosítható
 
@@ -67,9 +81,11 @@ del(x[1])
 #     del(x[1])
 # TypeError: 'tuple' object doesn't support item deletion
 
+################################
+
 # Konkatenálás
 
-# Hiba:
+# Hiba, mert csak azonos típusú elemek adhatók össze:
 
 x = (1, 2, 3)
 y = x + 4
@@ -90,6 +106,8 @@ x = (1, 2, 3)
 x = x + (4, 5)
 print(x)  # (1, 2, 3, 4, 5)
 
+################################
+
 # += operátor (addition assignment, inkrementálás operátor, összeadás rekurzív operátor)
 
 x = (1, 2, 3)
@@ -107,14 +125,14 @@ print(id_1, id_2)  # 37013584 35223760
 # Az inkrementáló operátor hatására is más memóriacímre kerül a tuple. Miért?
 # A list-nél ez nem így volt (ld. list_2.py).
 
-#################
+################################
 
 # Tartalmazásvizsgálat: in operátor
 
 x = ('A', 'B', 'C')
 print('B' in x, 'D' in x)  # True False
 
-##################
+################################
 
 # Sztring átalakítása tuple-á:
 
@@ -141,3 +159,33 @@ y = list(x)
 
 # Az, hogy az összetett típusokat könnyen tudjuk egymásba alakítani: NAGYON nagy előny.
 # Az adatszerkezetek egymásba alakítását tudatosan érdemes tanulni.
+
+################################
+
+# Egy érdekesség a list-tuple párosítással kapcsolatban - ami szerintem nem logikus.
+
+# Ha listához akarunk tuple-t adni, hibajelzést kapunk:
+
+x = [1, 2, 3]
+y = x + (4, 5)
+
+# Traceback (most recent call last):
+#   File "test.py", line 2, in <module>
+#     y = x + (4, 5)
+# TypeError: can only concatenate list (not "tuple") to list
+
+# Ezt úgy tudjuk elkerülni, hogy a tuple-t listává alakítjuk:
+
+x = [1, 2, 3]
+y = x + list((4, 5))
+print(y) # [1, 2, 3, 4, 5]
+
+# Ha viszont helyben akarjuk elvégezni az összeadást, azaz inkrementálás
+# operátort használunk, akkor nincs szükség konverzióra, azt elvégzi a
+# háttérben a futtató rendszer:
+
+x = [1, 2, 3]
+x += (4, 5)
+print(x) # [1, 2, 3, 4, 5]
+
+#############################################

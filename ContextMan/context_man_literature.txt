@@ -1,0 +1,11 @@
+Olvasni/nézni való:
+
+https://docs.python.org/2.5/whatsnew/pep-343.html
+https://jeffknupp.com/blog/2016/03/07/python-with-context-managers/
+https://book.pythontips.com/en/latest/context_managers.html
+
+https://www.youtube.com/watch?v=iba-I4CrmyA Python Context Managers and the "with" Statement (__enter__ & __exit__) (Real Python)
+https://www.youtube.com/watch?v=-aKFBoZpiqA Python Tutorial: Context Managers - Efficiently Managing Resources (Corey Schaefer)
+https://stackoverflow.com/questions/13074847/catching-exception-in-context-manager-enter
+https://coady.github.io/posts/closing-files/
+https://rednafi.github.io/digressions/python/2020/03/26/python-contextmanager.html

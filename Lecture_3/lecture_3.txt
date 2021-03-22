@@ -1,19 +1,26 @@
+Datastructures\set_1.py
+ * set típus
+
+Datastructures\set_2.py
+ * halmazokon végzett beépített műveletek
+
+Datastructures\index_1.py
+  * negatív indexek
+  * slicing
+
+Environment\file_read_1.py
+  * szöveges fájl megnyitása és sorok olvasása iterátor interfésszel
+
 Comprehensions\listcomp_1.py, set_dict_comp_1.py
  * list comprehension
  * set comprehension
  * dict comprehension
 
-solutions_2.py
- * Lecture_2\exercises_2.py megoldásai
-
-Datastructures\set_2.py
- * halmazokon végzett beépített műveletek
-
 break_continue_1.py
  * break és continue utasítás
 
-Datastructures\is_1.py
- * is operátor
+Functions\func_mutable_params.html
+ * módosítható függvényparaméterek problémái
 
 ternary_1.py
  * feltételes kifejezések
@@ -32,3 +39,30 @@ Datastructures\delim_strings_1.py
 
 Datastructures\conversions_1.py
  * alap adatszerkezetek átalakítása egymásba
+
+----------------------------
+Fakultatív:
+
+Environment\file_read_2.py
+  * readline(), readlines(), read() metódusok
+
+Environment\input_1.py
+ * beolvasás konzolról, input() függvény
+ * standard bemenet átirányítása
+ * programok pipeline-ba kapcsolása
+
+Environment\input_2.py
+ * beolvasás a sys modul segítségével
+ * sys.stdin mint iterátor
+ * sys.stdin.readlines() és read() metódusok
+
+----------------------------
+
+solutions_2.py
+ * Lecture_2\exercises_2.py megoldásai
+
+exercises_3.py
+ * gyakorló feladatok
+
+tippmix_3.py
+ * gyakorlás

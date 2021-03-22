@@ -6,6 +6,8 @@
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
   pre { color: blue; margin: 8px 8px 8px 20px; }
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .code_3 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; font-family: Courier New; }
   .pale { color: gray; }
   .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
   .contents { margin-left:30%; color:red; font-size: 120%; }
@@ -20,7 +22,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.06 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2021.01.04 &mdash;</p>
 </div>
 <h1>Generátorok kaszkádba kötése</h1>
 <ul class='contents'>
@@ -52,15 +54,15 @@ az egyes függvények eredményeit közbülső tárolókban kell elhelyeznünk, 
 <h2 id='simple_example'>Egy értelmetlen, de cserébe egyszerű kis példa</h2>
 <p>
 <pre>
-def gen_1(numbers):  # numbers: an iterator producing numbers
+def gen_1(numbers):  # numbers: számokat produkáló iterátor
     for n in numbers:
         yield (2 * n)
 
-def gen_2(numbers):  # numbers: an iterator producing numbers
+def gen_2(numbers):  # numbers: számokat produkáló iterátor
     for i in numbers:
         yield (i + 100)
 
-nums_source = range(1,5) # source iterator producing numbers
+nums_source = range(1,5) # forrás iterátor (számokat produkál)
 g1 = gen_1(nums_source)
 g2 = gen_2(g1)
 
@@ -71,16 +73,28 @@ print()
 # 102 104 106 108
 </div>
 </pre>
-Figyeljük meg, hogy a végrehajtás a lánc végéről kezdődik! A g2 iterátor kap egy next() hívást a for ciklustól,
-erre ő kiad egy next() hívást a paraméterként kapott g1 iterátornak, mire az kiad egy next() hívást a paraméterként
-kapott range iterátornak.
+Figyeljük meg, hogy a végrehajtás a lánc végéről kezdődik! A <code>g2</code> iterátor kap egy next() hívást a for ciklustól, erre ő kiad egy next()
+hívást a paraméterként kapott <code>g1</code> iterátornak, mire az kiad egy next() hívást a paraméterként kapott <code>range</code> iterátornak.
+
+<pre>
+  for n in g2: &rarr; next(g2) &rarr; next(g1) &rarr; next(nums_source)
+               <span style='color:red;'>&larr; 102      &larr; 2        &larr; 1              &larrhk;</span>
+               &rarr; next(g2) &rarr; next(g1) &rarr; next(nums_source)
+               <span style='color:red;'>&larr; 104      &larr; 4        &larr; 2              &larrhk;</span>
+               &rarr; next(g2) &rarr; next(g1) &rarr; next(nums_source)
+               <span style='color:red;'>&larr; 106      &larr; 6        &larr; 3              &larrhk;</span>
+               &rarr; next(g2) &rarr; next(g1) &rarr; next(nums_source)
+               <span style='color:red;'>&larr; 108      &larr; 8        &larr; 4              &larrhk;</span>
+               &rarr; next(g2) &rarr; next(g1) &rarr; next(nums_source)
+               <span style='color:red;'>&larr; StopIteration &larr; StopIteration &larr; StopIteration  &larrhk;</span>
+</pre>
 </p>
 <p>
 Sehol nem állítunk elő közben listát, minden iterátor csak egyenként foglalkozik az elemekkel.
 </p>
 <p>
 Az egész nagyon hasonlít az eredetileg a UNIX-ban bevezetett pipeline elrendezéshez: amikor programok a standard bemenetről olvasnak és az eredményt a
-standard kimenetre írják, akkor könnyen kaszkádba köthetők.
+standard kimenetre írják, akkor könnyen kaszkádba köthetők. A generátorokat úgy kötjük kaszkádba, hogy az egyiket paraméterként átadjuk a másiknak.
 </p>
 <h2 id='real_example'>Egy valóságosabb példa</h2>
 <p>
@@ -92,8 +106,9 @@ numerikus érték. Vannak hibás sorok:
 <li>csak egy mező van</li>
 <li>a második mezőben nem szám van</li>
 </ul>
-és az azonosítók is lehetnek kisbetűvel vagy nagybetűvel írva - azt akarjuk, hogy írásmódtól függetlenül mindig ugyanazt azonosítson minden sztring. Vannak olyan
-sorok is, amelyekben kettőnél több mező van, itt a többlet-mezőket egyszerűen figyelmen kívül kell hagyni.
+és az azonosítók is lehetnek kisbetűvel vagy nagybetűvel írva - azt akarjuk, hogy írásmódtól függetlenül mindig ugyanazt azonosítson minden sztring. (Azaz
+<span class='code_3'>a978</span> jelentse ugyanazt, mint <span class='code_3'>A978</span>.) Vannak olyan sorok is, amelyekben kettőnél több mező van, itt a
+többlet-mezőket egyszerűen figyelmen kívül kell hagyni.
 </p>
 <p>
 Előfordulhatnak olyan sorok, ahol a szám nem tizedespontot, hanem tizedesvesszőt tartalmaz.
@@ -125,12 +140,12 @@ Először előállítunk egy olyan generátort, amely eltávolítja az üres és
 
 <pre>
 def nonempty_lines(inputLines):
-    '''Generator that removes lines that contain only whitespace and comment-lines, too'''
+    '''Generátor, amely eltávolítja a csak fehér karaktereket tartalmazó sorokat és a megjegyzés-sorokat'''
     for line in inputLines:
         line = line.strip()
         if len(line) == 0:
             continue
-        if line.startswith('#'):  # comment line
+        if line.startswith('#'):  # megjegyzés-sor
             continue
 
         yield(line)
@@ -172,10 +187,10 @@ Most megírjuk az a generátort, amely számmá alakítja a második mezőt (ha 
 ott kiadja az első két mezőt.
 <pre>
 def lines_with_number(inputLines):
-    '''Converts 2nd field to number, discards false lines, turns names to uppercase'''
+    '''A 2. mezőt számmá alakítja,kiszűri a hibás sorokat, a neveket nagybetűsre konvertálja'''
     for line in inputLines:
         lst = line.split(';')
-        if len(lst) < 2:   # only one field
+        if len(lst) < 2:   # csak egy mező
             continue
 
         lst = lst[:2]
@@ -186,18 +201,18 @@ def lines_with_number(inputLines):
         except ValueError:
             pass
         else:
-            lst[1] = num                    # could convert to number
+            lst[1] = num                    # számmá tudtuk alakítani
             yield (lst)
-            continue                        # important! without this the program
-                                            # will resume at the next line next time
+            continue                        # fontos! enélkül a program a következő
+                                            # sornál folytatja a következő next()-nél
 
-        num_fld = num_fld.replace(',','.')  # maybe comma instead of dot?
+        num_fld = num_fld.replace(',','.')  # esetleg vessző pont helyett?
         try:
             num = float(num_fld)
         except ValueError:
             continue
         else:
-            lst[1] = num                    # yes, it was
+            lst[1] = num                    # igen, tényleg az volt
             yield lst
 </pre>
 Az előbbi tesztprogramot csak egyetlen sorral kell kiegészítenünk.
@@ -217,8 +232,8 @@ with open('infile.txt','r') as f:
 # ['AAA', 9.0]
 </div>
 </pre>
-Vegyük észre azt is, hogy ha csak annyit teszünk, hogy a for ciklusba g_filtered helyett g_lines-t írunk, akkor ismét az első lépést tudjuk tesztelni.
-g_filtered ilyenkor csak készen áll, de nem működik.
+Vegyük észre azt is, hogy ha csak annyit teszünk, hogy a for ciklusba <code>g_filtered</code> helyett <code>g_lines</code>-t írunk, akkor ismét az első lépést
+tudjuk tesztelni. <code>g_filtered</code> ilyenkor csak készen áll, de nem működik.
 </p>
 <p>
 Most már van egy megtisztított és egységes formára hozott adatsorozatunk, amivel sokmindent tudunk kezdeni. Tegyük fel, hogy még mindig nem akarjuk az adatokat
@@ -600,7 +615,7 @@ Kétféle módon tudjuk megoldani a problémát.
 filepaths = ['infile.txt','other_file.txt','third_file.txt.gz']
 g_f_objs = (open_file(f) for f in filepaths)
 g_formatters = (format_file(f_obj) for f_obj in g_f_objs)
-g_lines = (line 
+g_lines = (line
            for fmt in g_formatters
                 for line in fmt)
 <span style='color:blue;'>second_column = <span style='color:red'>[</span>row[1] for row in g_lines<span style='color:red'>]</span>
@@ -634,7 +649,7 @@ def min_max(numbers):
 filepaths = ['infile.txt','other_file.txt','third_file.txt.gz']
 g_f_objs = (open_file(f) for f in filepaths)
 g_formatters = (format_file(f_obj) for f_obj in g_f_objs)
-g_lines = (line 
+g_lines = (line
            for fmt in g_formatters
                 for line in fmt)
 second_column = (row[1] for row in g_lines)

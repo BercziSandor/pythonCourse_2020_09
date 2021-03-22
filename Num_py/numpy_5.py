@@ -1,4 +1,6 @@
 # https://stackoverflow.com/questions/7370801/how-to-measure-elapsed-time-in-python
+# https://stackoverflow.com/questions/52222002/what-is-the-difference-between-time-perf-counter-and-time-process-time/52228375
+# https://github.com/scikit-learn/scikit-learn/issues/17316
 
 # Műveletek vektorizálásának gyorsító hatása
 
@@ -19,7 +21,7 @@ val_arr = np.array([2, 5, 10])
 rec_arr = compute_reciprocals(val_arr)
 print(rec_arr) # [0.5 0.2 0.1]
 
-# Második megoldás: mátrixművelettel.
+# Második megoldás: tömb (vektor) művelettel.
 
 rec_arr = 1 / val_arr
 print(rec_arr)
@@ -48,19 +50,21 @@ start = time.perf_counter()
 output = 1.0 / values
 finish = time.perf_counter()
 t_2 = finish - start
-print(f'finish - start: {t_2:.5f} (mátrixművelettel)')
+print(f'finish - start: {t_2:.5f} (tömbművelettel)')
 print(f't_1/t_2 = {t_1/t_2:.1f}')
 
 # finish - start: 0.28207 (egyenként)
-# finish - start: 0.00067 (mátrixművelettel)
+# finish - start: 0.00067 (tömbművelettel)
 # t_1/t_2 = 423.4
 
 # A konkrét számok persze környezet-függőek és futtatásról futtatásra is változnak.
 
-# A lényeg: a mátrixos megoldás több százszor gyorsabb is, nemcsak szebb.
+# A lényeg: a tömbös (vektorizált) megoldás több százszor gyorsabb is, nemcsak szebb.
 
 # Az eredeti megoldásnál a Python minden lépésnél megkeresi, hogy hol található az adott
-# objektumhoz tartozó függvény kódja; a mátrixos megoldásnál nincs szükség, az egész
-# művelet a Numpy belsejében, C-ben megírt optimalizált rutinokban zajlik le.
+# objektum és a hozzá tartozó függvény kódja; a tömbös megoldásnál erre nincs szükség, az
+# egész művelet a Numpy belsejében, C-ben megírt optimalizált rutinokban zajlik le. A tömbök
+# elemei egymás mellett folytonosan helyezkednek el a memóriában és a típusuk is azonos. Az
+# alkalmazandó függvény kódja mindig ugyanaz.
 
 #############################

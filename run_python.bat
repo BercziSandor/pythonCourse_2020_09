@@ -1,5 +1,7 @@
 echo off
 
-:"c:\python38\Portable Python-3.8.1 x64\App\Python\python.exe" test.py
+c:\Users\A107191088\AppData\Local\Programs\Python\Python38-32\python.exe test.py
+
+: > out.txt
 
 pause

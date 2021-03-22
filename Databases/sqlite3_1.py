@@ -6,11 +6,15 @@
 
 import sqlite3
 
-database = r"C:\Users\A107191088\Oktat\pythonsqlite.db"
+database = r"C:\Users\A107191088\PythonPro\pythonsqlite.db"
+
+# írhatunk relatív útvonalat is, csak ne felejtsük el: a Notepad++ a saját könyvtárában
+# indítja a programot!
+
 conn = sqlite3.connect(database)
 c = conn.cursor()
 
-cmd = "DROP TABLE IF EXISTS projects;"
+cmd = "DROP TABLE IF EXISTS projects"
 c.execute(cmd)
 
 cmd = """
@@ -96,7 +100,7 @@ print(rows)         # [(1, 'project 1'), (2, 'project 2')]
 #########################################
 
 # Ha a beolvasandó tábla nagyon nagy, akkor persze nem jó ötlet egyszerre az egészet
-# beolvasni egy listába. Ilyenkor használhatjuk a fechone() metódust, ami None
+# beolvasni egy listába. Ilyenkor használhatjuk a fetchone() metódust, ami None
 # visszatérő értékkel jelzi, hogy elfogytak az adatok.
 
 c.execute("SELECT * FROM projects")

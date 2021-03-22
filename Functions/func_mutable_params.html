@@ -1,0 +1,445 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Módosítható függvényparaméterek</title>
+<style>
+  body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
+  p { margin: 8px 0; }
+  h3 { color: green; padding-left: 20px; margin-bottom: 5px; }
+  pre { color: blue; margin: 8px 8px 8px 20px; }
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .code_4 { background-color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; border: 1px dotted; }
+  .pre_2  { color: blue; margin: 8px 8px 8px 20px; padding-left: 8px; background-color: #D4E6F1; }
+  .pre_3  { color: #BA4A00; margin: 8px 8px 8px 20px; padding-left: 8px; background-color: #F9E79F; }
+  .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
+  .result_2 { color: olivedrab;  margin-bottom: -10px; margin-top: 10px; margin-left: -8px; padding-left: 8px; padding-bottom: 8px;background-color:lightgray; }
+  .code_3 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; font-family: Courier New; }
+  .contents { margin-left:30%; color:red; font-size: 120%; }
+  .comment { color: lightslategray; font-style: italic;}
+  .emph_1 { color: red; font-weight: bold; }
+  .emph_2 { color: green; font-weight: bold; }
+</style>
+</head>
+<body>
+<div style='font-size: 90%; color: blueviolet'>
+<span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2021.03.09 &mdash;</p>
+</div>
+
+<h1>Módosítható függvényparaméterek</h1>
+<ul class='contents'>
+<li><a style='color: red' href='#the_problem'>A probléma</a></li>
+<li><a style='color: red' href='#lesson_1'>A tanulság</a></li>
+<li><a style='color: red' href='#explanation'>A magyarázat</a></li>
+<li><a style='color: red' href='#inverse_problem'>A fordított probléma</a></li>
+<li><a style='color: red' href='#lesson_2'>...és ebből a tanulság</a></li>
+<li><a style='color: red' href='#assignment_op_trap'>Az értékadó kifejezések csapdája</a></li>
+<li><a style='color: red' href='#other_languages'>Példák más nyelveken</a>
+<ul style='color: green'>
+<li><a style='color: green' href='#java_example'>Java példa</a></li>
+<li><a style='color: green' href='#c_example'>C példa</a></li>
+<li><a style='color: green' href='#javascript_example'>JavaScript példa</a></li>
+</ul>
+</li>
+<li><a style='color: red' href='#literature'>Irodalom</a></li>
+</ul>
+
+<h2 id='the_problem'>A probléma</h2>
+<p>
+Egy függvénynek módosítható objektumot (list, dictionary, set...) adunk át paraméterként és azt akarjuk, hogy a függvény belsejében az objektumon végrehajtott
+változások kívül, a függvény lefutása után is látszódjanak. Könnyen elkövethető hiba, hogy az illető paramétert a függvényen belül átállítjuk egy másik
+objektumra &ndash; innentől kezdve minden változtatást ezen az új objektumon fogunk végrehajtani, az eredeti nem fog módosulni. Íme egy példa:
+<pre>
+def <b style='color:black;'>myFuncWrong</b>(param):
+    arr_2 = [99, 100, 101, 102]
+
+    <span class='emph_1'>param = arr_2;</span>  <span class='comment'># itt rontjuk el</span>
+
+    print('param     : ', end=' ')
+    for e in param: print(e, end=' ')
+    print()
+
+arr = [10, 20, 30, 40]
+print('arr előtte: ', end=' ')
+for e in arr: print(e, end=' ')
+print()
+
+<b style='color:black;'>myFuncWrong</b>(arr);
+
+print('arr utána : ', end=' ');
+for e in arr: print(e, end=' ')
+print()
+<div class='result'>
+# arr előtte: 10 20 30 40
+# param     : 99 100 101 102
+# arr utána :<span class='emph_1'> 10 20 30 40</span>
+</div>
+</pre>
+Amikor a <span class='code_3'>param</span> változót az <span class='code_3'>arr_2</span>-re állítottuk át, onnantól kezdve a függvényen belül semmi nem mutat arra
+az objektumra, amelyre <span class='code_3'>param</span> eredetileg mutatott. Ez egy gonosz hiba, nem feltétlenül okoz azonnal látható problémát egy bonyolultabb
+programban.
+</p>
+<h2 id='lesson_1'>A tanulság</h2>
+<p>
+Változtatni kívánt objektumra mutató paramétert <b>soha</b> ne állítsunk át. A fenti függvény helyesen:
+
+<pre>
+def <b style='color:black;'>myFuncGood</b>(param):
+    arr_2 = [99, 100, 101, 102]
+
+    param[:] = arr_2 <span class='comment'># magát a <span class='code_4'>param</span> által mutatott tömböt változtatjuk</span>
+
+    print('param     : ', end=' ')
+    for e in param: print(e, end=' ')
+    print()
+
+arr = [10, 20, 30, 40]
+print('arr előtte: ', end=' ');
+for e in arr: print(e, end=' ')
+print()
+
+<b style='color:black;'>myFuncGood</b>(arr);
+
+print('arr utána : ', end=' ');
+for e in arr: print(e, end=' ')
+print()
+<div class='result'>
+# arr előtte: 10 20 30 40
+# param     : 99 100 101 102
+# arr utána :<span class='emph_2'> 99 100 101 102</span>
+</div>
+</pre>
+</p>
+<h2 id='explanation'>A magyarázat</h2>
+<p>
+Ha csak egyszerű változókat és nem függvényparamétereket használunk, azonnal nyilvánvalóvá válik a működés.
+<pre>
+arr = [10, 20, 30, 40]
+param = arr;
+
+arr_2 = [99, 100, 101, 102];
+<span class='emph_1'>param = arr_2</span>  <span class='comment'># <span class='code_4'>param</span> most már arr_2-re mutat</span>
+
+print('param: ', param)
+print('arr: ', arr)
+<div class='result'>
+# param: [99, 100, 101, 102]
+# arr: [10, 20, 30, 40]
+<div>
+</pre>
+Márpedig <code>a függvényparaméterek is csak változók,</code> a függvény olyan lokális változói, amelyek a függvény hívásakor inicializálódnak,
+automatikusan értéket kapnak. A fenti függvényt így is megvalósíthatnánk:
+
+<pre>
+def <b style='color:black;'>myFuncWrong</b>():
+    global arr
+
+    param = arr
+    for e in param: print(e, end=' ')
+    print()
+
+    arr_2 = [99, 100, 101, 102];
+
+    <span class='emph_1'>param = arr_2</span>
+
+arr = [10, 20, 30, 40]
+<b style='color:black;'>myFuncWrong</b>()
+<div class='result'>
+# 10 20 30 40
+</pre>
+</p>
+<h2 id='inverse_problem'>A fordított probléma</h2>
+<p>
+Módosítható objektumot (<i>list, dictionary, set...</i>) adunk át paraméterként egy függvénynek és nem számítunk rá, hogy a függvény ezt megváltoztatja.
+
+<pre>
+def func(param):
+    ret_val = sum(param)
+
+    <span class='emph_1'>param.clear()</span> <span class='comment'># ajjaj</span>
+    <span class='comment'># ...</span>
+
+    return ret_val
+
+lst = [20, 15, 10];
+x = func(lst)
+print(x,lst)
+<div class='result'>
+# 45 [] <span class='emph_1'>-- hova lett a listám???</span>
+</div>
+</pre>
+</p>
+<h2 id='lesson_2'>...és ebből a tanulság</h2>
+<p>
+Ha tudjuk, hogy egy paramétert nem arra szántak, hogy abban eredményt adjunk vissza a hívónak, akkor arról csináljunk a függvény elején másolatot.
+
+<pre>
+def func(param):
+    <span class='emph_2'>param = param.copy()</span>
+    ret_val = sum(param)
+
+    param.clear() <span class='comment'># ez most már nem okoz bajt</span>
+    <span class='comment'># ...</span>
+
+    return ret_val
+
+lst = [20, 15, 10];
+x = func(lst)
+print(x, lst)
+<div class='result'>
+# 45 [20, 15, 10]
+</div>
+</pre>
+Kínálja magát a megoldás, hogy másoláskor új nevet is adjunk a paraméternek, de ez szerintem nem jó ötlet, mert nyitva hagyja az ajtót a hibának.
+
+<pre>
+def func(param):
+    <span class='emph_2'>paramCopy = param.copy()</span>
+    ret_val = sum(<span class='emph_2'>paramCopy</span>)
+
+    <span class='emph_1'>param</span>.clear() <span class='comment'># még mindig bajt csinál</span>
+    <span class='comment'># ...</span>
+
+    return ret_val
+
+lst = [20, 15, 10];
+x = func(lst)
+print(x, lst)
+<div class='result'>
+# 45 [] <span class='emph_1'>-- nem látta valaki a listámat???</span>
+</div>
+</pre>
+
+</p>
+<h2 id='assignment_op_trap'>Az értékadó kifejezések csapdája</h2>
+<p>
+Az értékadó kifejezések, mint például a <code>+=</code> helyben végzik el a műveleteket a módosítható típusokon (list, dict, stb.).
+<pre>
+def func_1(param):
+    param <span class='emph_1'>=</span> param <span class='emph_1'>+</span> ['world']
+    <span class='comment'># param most már máshová mutat</span>
+
+    print('func_1:', param)
+
+def func_2(param):
+    param <span class='emph_1'>+=</span> ['world']
+    <span class='comment'># param még mindig ugyanoda mutat</span>
+
+    print('func_2:', param)
+
+arr = ['Hello']
+func_1(arr)
+print('func_1 után:', arr)
+
+func_2(arr)
+print('func_2 után:', arr)
+<div class='result'>
+# func_1: ['Hello', 'world']
+# func_1 után: ['Hello']
+# func_2: ['Hello', 'world']
+# func_2 után: ['Hello', 'world']
+</div>
+</pre>
+
+</p>
+<h2 id='other_languages'>Példák más nyelveken</h2>
+<p>
+A mutábilis paraméterek problémája változatlan formában más nyelvekben is fennáll.
+</p>
+<h3 id='java_example'>Java példa</h3>
+<p>
+<pre class='pre_2'>
+<b style='font-size: 150%'> Java (hibás)</b>
+
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    ArrayList<Integer> arr = new ArrayList<>();
+
+    arr.add(10); arr.add(20); arr.add(30); arr.add(40);
+
+    System.out.print("arr előtte: ");
+    for (int i = 0; i < arr.size(); i++) {
+      System.out.print(arr.get(i));
+      System.out.print(' ');
+    }
+    System.out.println();
+
+    <b style='color:black;'>myMethodWrong</b>(arr);
+
+    System.out.print("arr utána : ");
+    for (int i = 0; i < arr.size(); i++) {
+      System.out.print(arr.get(i));
+      System.out.print(' ');
+    }
+    System.out.println();
+  }
+
+  static void <b style='color:black;'>myMethodWrong</b>(ArrayList<Integer> param) {
+    ArrayList<Integer> arr_2 = new ArrayList<>();
+
+    arr_2.add(99); arr_2.add(100); arr_2.add(101); arr_2.add(102);
+
+    <span class='emph_1'>param = arr_2;</span>  <span class='comment'>// itt rontjuk el</span>
+
+    System.out.print("param     : ");
+    for (int i = 0; i < param.size(); i++) {
+      System.out.print(param.get(i));
+      System.out.print(' ');
+    }
+    System.out.println();
+  }
+}
+<div class='result_2'>
+// arr előtte: 10 20 30 40
+// param     : 99 100 101 102
+// arr utána :<span class='emph_1'> 10 20 30 40</span>
+</div>
+</pre>
+
+A metódus helyesen:
+
+<pre class='pre_2'>
+<b style='font-size: 150%'> Java (helyesen)</b>
+
+  static void <b style='color:black;'>myMethodGood</b>(ArrayList<Integer> param) {
+    <span class='comment'>// magát a param által mutatott listát változtatjuk:</span>
+
+    param.clear();
+    param.add(99); param.add(100); param.add(101); param.add(102);
+
+    System.out.print("param     : ");
+    for (int i = 0; i < param.size(); i++) {
+      System.out.print(param.get(i));
+      System.out.print(' ');
+    }
+    System.out.println();
+  }
+<div class='result_2'>
+// arr előtte: 10 20 30 40
+// param     : 99 100 101 102
+// arr utána :<span class='emph_2'> 99 100 101 102</span>
+</div>
+</pre>
+</p>
+<h3 id='c_example'>C példa</h3>
+<p>
+<pre class='pre_3'>
+<b style='font-size: 150%'> C (hibás)</b>
+
+#include &lt;stdio.h>
+#include &lt;malloc.h>
+
+void <b style='color:black;'>myFuncWrong</b>(int *param)
+{
+  int *arr_2 = malloc(4 * sizeof(int));
+
+  arr_2[0] = 99; arr_2[1] = 100; arr_2[2] = 101; arr_2[3] = 102;
+
+  <span class='emph_1'>param = arr_2;</span> <span class='comment'>// itt rontjuk el</span>
+
+  printf("param     : ");
+  for(int i = 0; i < 4; i++)  printf("%d ", param[i]);
+  printf("\n");
+}
+
+int main()
+{
+  int *arr = malloc(4 * sizeof(int));
+
+  arr[0] = 10; arr[1] = 20; arr[2] = 30; arr[3] = 40;
+
+  printf("arr előtte: ");
+  for(int i = 0; i < 4; i++) printf("%d ", arr[i]);
+  printf("\n");
+
+  <b style='color:black;'>myFuncWrong</b>(arr);
+
+  printf("arr utána : ");
+  for(int i = 0; i < 4; i++) printf("%d ", arr[i]);
+  printf("\n");
+
+  return 0;
+}
+<div class='result_2'>
+// arr előtte: 10 20 30 40
+// param     : 99 100 101 102
+// arr utána :<span class='emph_1'> 10 20 30 40</span>
+</div>
+</pre>
+
+A függvény helyesen:
+<pre class='pre_3'>
+<b style='font-size: 150%'> C (helyesen)</b>
+
+void <b style='color:black;'>myFuncGood</b>(int *param)
+{
+  <span class='comment'>// magát a param által mutatott tömböt változtatjuk:</span>
+
+  param[0] = 99; param[1] = 100; param[2] = 101; param[3] = 102;
+
+  printf("param     : ");
+  for(int i = 0; i < 4; i++)  printf("%d ", param[i]);
+  printf("\n");
+}
+<div class='result_2'>
+// arr előtte: 10 20 30 40
+// param     : 99 100 101 102
+// arr utána :<span class='emph_2'> 99 100 101 102</span>
+</div>
+</pre>
+</p>
+<h3 id='javascript_example'>JavaScript példa</h3>
+<p>
+<pre class='pre_2'>
+<b style='font-size: 150%'> JavaScript (hibás)</b>
+
+function <b style='color:black;'>myFuncWrong</b>(param){
+  arr_2 = [99, 100, 101, 102];
+
+  <span class='emph_1'>param = arr_2;</span>  <span class='comment'>// itt rontjuk el</span>
+
+  console.log('param     : ' + param)
+}
+
+arr = [10, 20, 30, 40];
+console.log('arr előtte: ' + arr);
+<b style='color:black;'>myFuncWrong</b>(arr);
+console.log('arr utána : ' + arr);
+<div class='result_2'>
+// arr előtte: 10,20,30,40
+// param     : 99,100,101,102
+// arr utána :<span class='emph_1'> 10,20,30,40</span>
+</div>
+</pre>
+A függvény helyesen:
+
+<pre class='pre_2'>
+<b style='font-size: 150%'> JavaScript (helyesen)</b>
+
+function myFuncGood(param){
+  <span class='comment'>// magát a param által mutatott tömböt változtatjuk:</span>
+
+  param[0] = 99; param[1] = 100; param[2] = 101; param[3] = 102;
+
+  console.log('param     : ' + param)
+}
+<div class='result_2'>
+// arr előtte: 10,20,30,40
+// param     : 99,100,101,102
+// arr utána :<span class='emph_2'> 99,100,101,102</span>
+</div>
+</pre>
+
+</p>
+<h2 id='literature'>Irodalom</h2>
+<p>
+<b>Cikkek</b>
+</p>
+<p>
+<a href='https://runestone.academy/runestone/books/published/fopp/Functions/PassingMutableObjects.html' target='_blank'>Passing Mutable Objects</a>
+runestone.academy
+</p>
+</body>
+</html>

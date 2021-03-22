@@ -17,6 +17,8 @@ print(x, y)  # ab"c ab'c
 x = 'McDonald\'s'
 print(x)  # McDonald's
 
+###################################
+
 # Főleg több soros sztringekhez; több sor megjegyzésbe tevéséhez is praktikus;
 # megőrzi a sorvégjeleket:
 
@@ -35,6 +37,8 @@ print(x)
 # 1. sor 'első'
 # 2. sor "második"
 
+###################################
+
 # Konkatenálás
 
 x = 'Py'
@@ -46,6 +50,18 @@ print(x + y + " rocks")  # Python rocks
 
 x = "AA" 'BB'
 print(x)  # AABB
+
+###################################
+
+# Ismételt összeadás helyett használhatunk szorzást:
+
+x = 'AB' + 'AB' + 'AB'
+print(x) # 'ABABAB'
+
+x = 'AB' * 3
+print(x) # 'ABABAB'
+
+###################################
 
 # Több sorba így írhatjuk:
 
@@ -65,6 +81,8 @@ print(x)  # AABB
 x = """AA
 BB"""
 
+###################################
+
 # Sorvég-jel ('\n')és tabulátor ('\t') - mint C-ben, PHP-ben...
 
 x = "a\t\tb\ncd"
@@ -73,15 +91,22 @@ print(x)
 # a		b
 # cd
 
+###################################
+
 # raw string, amikor a metakarakterek nincsenek kifejtve:
 
 x = r"a\t\tb\ncd"
 print(x)  # a\t\tb\ncd
 
-# \ a sztringben: duplázni kell (vagy raw stringet alkalmazni:
+# \ a sztringben: duplázni kell (vagy raw stringet alkalmazni):
 
-x = 'c:\\Users c:\Users'
+x = 'c:\\Users'
 print(x)  # c:\Users
+
+x = r'c:\Users'
+print(x)  # c:\Users
+
+###################################
 
 # Indexelés (az str típus indexelhető)
 
@@ -90,11 +115,13 @@ print(x[0], x[3], type(x[3]))  # A D <class 'str'>
 
 # Egyetlen karakter típusa is str, nincs char típus
 
+###################################
+
 # iterálható, for ciklussal bejárható
 
 x = "abc"
 for e in x:
-    print(e, end='')
+    print(e, end=' ')
 
 # a b c
 
@@ -108,7 +135,9 @@ x[0] = "A"
 #     x[0] = "A"
 # TypeError: 'str' object does not support item assignment
 
-# Hossz lekérdezése
+###################################
+
+# Hossz lekérdezése:
 
 x = "abc"
 print(len(x))  # 3
@@ -119,6 +148,8 @@ x = 'ABC'
 print('B' in x, 'BC' in x, 'D' in x)  # True True False
 
 # Nemcsak egyetlen karaktert, hanem egynél hosszabb sztringet is kereshetünk így.
+
+###################################
 
 # Néhány gyakran használt metódus
 # Kisbetű - nagybetű
@@ -137,6 +168,8 @@ w = x.strip()
 print(x, y, z, w, sep='|', end='|\n')  # A     |  A|A     |A|
 print(len(x), len(y), len(z), len(w))  # 8 3 6 1
 
+###################################
+
 # A metódusok láncba kapcsolhatók (mindig, nemcsak a sztringeknél)
 
 x = "     ABC    "
@@ -147,3 +180,5 @@ print(y, len(y))  # abc 3
 
 # print(1 + "A")    # hiba
 print(str(1) + "A")  # 1A
+
+###################################

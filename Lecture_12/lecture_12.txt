@@ -1,18 +1,39 @@
-Mix\context_man_1-4
- * a context manager fogalma, megvalósítása, használata
+Panda\dataframe_1.py
+ * DataFrame adattípus bemutatása:
+   + indexelés, slice, loc, iloc
+   + DataFrame mint oszlopok szótára és mint két dimenziós tömb
 
-Datastructures\dict_2-3.py
- * keresés szótárban, ha nincs benne az elem
- * keresés több szótárban
+Functions\decorator_params.html
+ * dekorátorok paraméterekkel
+
+Panda\dataframe_3.py
+ * DataFrame beolvasása csv fájlból, display.max_rows
+ * head(), notnull(), dropna(), dtypes, astype()
+ * map függvény alkalmazása oszlopokra
+
+ImportsPackages\import_5.py
+ * package
+ * __init__.py függvény 1.: package-globális változók kezelése
 
 Functions\func_params_5.py
  * mutábilis default paraméterek veszélye
 
 Classes\classes_6.py
  * class és static metódusok
+ * osztály- és objektum-adattagok (adattag = attribútum)
+ * __del__() metódus alkalmazása
+ * Fakultatív: gyár (factory) függvény vagy metódus
 
-Mix\repr_str.txt
- * __repr__ és __str__ dunder metódusok
+--------------------------------------------------
 
-repeat_12.py
+Fakultatív:
+
+Panda\dataframe_2.py
+ * DataFrame hiányzó értékek kiegészítése (index alignment)
+
+--------------------------------------------------
+solutions_11.py
+ * Lecture_11\exercises_11.py megoldásai
+
+tippmix_12.py
  * ismétlés

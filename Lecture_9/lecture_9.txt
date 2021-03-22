@@ -4,18 +4,45 @@ Iterators_Generators\gen_exp_intro.html
 Num_py\numpy_6.py
  * példa reshape alkalmazására
 
-Num_py\numpy_7.py
- * Excel táblából beolvasás, táblaforgatás (pivoting), csv fájl olvasás-írás
+Functions\closures.html
+ * closure összefoglaló
+
+Functions\decorators_intro.html
+ * dekorátorok bemutatása
 
 Databases\sqlite3_2.py
  * memória-adatbázisok
+   + az adatbázis, mint adatszerkezet
+   + egyediség-feltétel
+   + LIKE operátor
+   + indexek
 
-Functions\closures.html
- * closure részletesebb bemutatása
+Panda\series_2.py
+ * Series hiányzó értékek kiegészítése (index alignment)
 
-repeat_9.py
+--------------------------------
+Fakultatív:
+
+Num_py\numpy_7.py
+ * Excel táblából beolvasás, táblaforgatás (pivoting), csv fájl olvasás-írás
+
+Num_py\numpy_9.py
+ * numpy lineáris algebrai műveletek
+   + np.linalg.inv
+   + np.allclose
+   + np.linalg.solve
+
+Datastructures\collections_1.py</a>
+ * ismerkedés a collections modullal
+   + Counter
+
+--------------------------------
+tippmix_9.py
  * ismétlés
- 
-Functions\decorators_intro.html
- * dekorátorok
+
+solutions_8.py
+ * Lecture_8\exercises_8.py megoldásai
+
+exercises_9.py
+ * gyakorló feladatok
 

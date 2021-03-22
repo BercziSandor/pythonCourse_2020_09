@@ -1,36 +1,56 @@
 python_install_run.html
-* Python és modulok installálása, futtatás
+ * Python és modulok installálása, futtatás
 
 python_literature.html
-* irodalomjegyzék
+ * irodalomjegyzék
 
-mix.py
-* változók definiálása
-* feltételes utasítás
-* while cikus
-* range
-* for ciklus
+mix_1.py
+ * változók definiálása
+ * feltételes utasítás
+ * while cikus
+ * range objektum
+ * for ciklus
+ * print utasítás
 
 Datastructures\numeric_types_1.py
-* int típus
-* float típus
-* type()
+ * int típus
+ * float típus
+ * type()
 
 Datastructures\string_1.py
-* str típus
-* len(), rstrip(), lstrip()
+ * str típus
+ * len(), rstrip(), lstrip(), lower(), upper()
 
-Datastructures\list_1.py, list_2.py, list_3.py
-* list típus
-* id
-* del
+Datastructures\list_1.py
+ * list típus
+ * append() metódus, for ciklus
+ * elem törlése: del() és lista törlése
+ * memóriacím lekérdezése: id()
+
+Datastructures\list_2.py
+ * + (konkatenálás) kontra append()
+ * += operátor
+ * lst += [valami] kontra lst = lst + [valami]
+ * szorzás ismételt összeadás helyett
+ * inkrementáló operátor sztringeknél
+
+ Datastructures\list_3.py
+ * tartalmazásvizsgálat: in operátor
+ * str --> list
 
 Datastructures\tuple_1.py
-* tuple típus
+ * tuple bemutatása
+ * list <--> tuple
 
 Functions\func_params_1.py
-* függvények fix paraméterekkel
-* default paraméterek
+ * függvények fix paraméterekkel
+ * default paraméterek
 
 Functions\scope_1.py
-* lokális és globális változók
+ * lokális és globális változók
+
+tippmix_1.py
+ * gyakorlás
+
+execises_1.py
+ * gyakorló feladatok otthonra

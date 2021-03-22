@@ -17,6 +17,7 @@ def func():
         print('helló világ')
 
     print(inner)  # <function func.<locals>.inner at 0x0217B780>
+
     return inner
 
 f = func()

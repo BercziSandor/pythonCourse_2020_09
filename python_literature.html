@@ -5,32 +5,50 @@
 <style>
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
+  a { text-decoration-style:dotted; }
+  .contents a {text-decoration-style:solid; }
   pre { color: blue; margin: 8px 8px 8px 20px; }
   code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
   .code_2 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
-  h4 { color: green; padding-left: 20px; margin-bottom: 5px; }
+  h4 { color: green; xpadding-left: 10px; margin-bottom: 5px; }
   .contents { margin-left:30%; color:red; font-size: 120%; }
-  .book { font-family:Courier New; color:royalblue; font-weight:bold; }
+  .book { font-family:Courier New; color:#1569C7; font-weight:bold; }
   .ul_0 { margin-top: 0px; margin-bottom: 0px; }
   .ul_5 { margin-top: 5px; margin-bottom: 5px; }
   .emph_1 { color: red; font-weight: bold; }
+  .details { color: slategray; margin-left: 25px; margin-bottom: 3px; }
+  .sublst_1 { margin-top: 2px; }
 </style>
 </head>
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.12 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2021.03.22 &mdash;</p>
 </div>
 
-<ul class='contents'>
-<li><a style='color: red' href='#detailed_intro'>Módszeres bevezetők a nyelvbe</a></li>
+<ul class='contents' >
+<li><a style='color: red' href='#detailed_intro'>Módszeres bevezetők a nyelvbe</a>
+<ul>
+<li><a style='color: green' href='#hun'>Magyarul</a></li>
+</ul>
+</li>
 <li><a style='color: red' href='#mixed'>Vegyes résztémák</a></li>
 <li><a style='color: red' href='#tutorials'>Tutorial-gyűjtemények</a></li>
-<li><a style='color: red' href='#youtube'>Youtube</a></li>
-<li><a style='color: red' href='#youtube_datascience'>Youtube &ndash; adattudomány</a></li>
+<li><a style='color: red' href='#youtube'>Youtube</a>
+<ul>
+<li><a style='color: green' href='#youtube_datascience'>Youtube &ndash; adattudomány, adatmérnökség</a></li>
+</ul>
+</li>
 <li><a style='color: red' href='#quiz'>Feladatok, tesztek, interjú-kérdések</a></li>
+<li><a style='color: red' href='#general_quiz'>Általános (nem Python-specifikus) interjú-tippek</a></li>
 <li><a style='color: red' href='#download_books'>Programozási könyvek ingyenes letöltése</a></li>
-<li><a style='color: red' href='#books'>Néhány jó könyv</a></li>
+<li><a style='color: red' href='#books'>Néhány jó könyv</a>
+<ul>
+<li><a style='color: green' href='#beginner_books'>Kezdőknek is jók</a></li>
+<li><a style='color: green' href='#advanced_books'>Inkább haladóknak valók</a></li>
+<li><a style='color: green' href='#books_datascience'>Adattudomány, adatmérnökség</a></li>
+</ul>
+</li>
 <li><a style='color: red' href='#python_libs'>Python könyvtárak listája</a></li>
 <li><a style='color: red' href='#search_tips'>Keresési tippek</a></li>
 </ul>
@@ -41,40 +59,51 @@ pontatlanságokkal, de ismerkedéshez jó; más nyelvek is.<br>
 <a href='https://www.w3resource.com/python/python-tutorial.php' target='_blank'>w3resource.com</a> Minden téma sok apró mintapéldával, lexikonszerűen;
 más nyelvek is. Jó a keresője. Külön van
 
-<ul>
+<ul class='sublst_1'>
 <li><a href='https://www.w3resource.com/numpy/index.php' target='_blank'>NumPy</a> és</li>
 <li><a href='https://www.w3resource.com/pandas/index.php' target='_blank'>Pandas</a> is.</li>
 </ul>
 
 <a href='https://python-textbok.readthedocs.io/en/1.0/' target='_blank'>python-textbok.readthedocs</a> Kezdő, jó részletes.<br>
 <a href='https://developers.google.com/edu/python/' target='_blank'>developers.google.com</a> Kezdő.<br>
-<a href='https://pynative.com/' target='_blank'>pynative.com</a> Kezdő.
-
-<ul>
+<a href='https://runestone.academy/runestone/books/published/fopp/index.html' target='_blank'>runestone.academy</a> Kezdő, NAGYON részletes és alapos,
+ellenőrző kérdésekkel, interaktív futtatási lehetőséggel. Más nyelvek is.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&rarrhk;<a href='https://runestone.academy/runestone/books/published/fopp/index.html#table-of-contents' target='_blank'>Tartalomjegyzék</a><br><br>
+<a href='https://pynative.com/' target='_blank'>pynative.com</a> Kezdő-középhaladó.
+<ul class='sublst_1'>
 <li><a href='https://pynative.com/python-tutorials/' target='_blank'>tutorials</a></li>
 <li><a href='https://pynative.com/useful-python-tips-and-tricks-every-programmer-should-know/' target='_blank'>tips and tricks</a></li>
 </ul>
+<a href='https://www.pythonforbeginners.com/' target='_blank'>pythonforbeginners.com</a> Kezdő-középhaladó.
+<ul class='sublst_1'>
+<li><a href='https://www.pythonforbeginners.com/python-tutorial' target='_blank'>Python Tutorial</a></li>
+<li><a href='https://www.pythonforbeginners.com/code-snippets-source-code/python-code-examples' target='_blank'>Code Examples</a></li>
+</ul>
 
 <a href='https://book.pythontips.com/en/latest/' target='_blank'>pythontips.com</a> Középhaladó témák sok apró mintapéldával, lexikonszerűen.<br>
+<a href='https://www.geeksforgeeks.org/python-programming-language/' target='_blank'>geeksforgeeks.org</a> Kezdőtől középhaladóig sok apró mintapéldával.
+Nagyon jó a keresője. Más nyelvek is.<br>
+<a href='https://www.pythoncheatsheet.org/' target='_blank'>pythoncheatsheet.org</a> Kezdőtől haladóig rövid leírások, részletes mintapéldák.<br>
 <a href='https://www.python-course.eu/python3_course.php' target='_blank'>python-course.eu</a> Kezdőtől haladóig; részletes magyarázatok.<br>
+<a href='https://www.learnbyexample.org/python/' target='_blank'>learnbyexample.org</a> Kezdőtől középhaladóig; részletes magyarázatok; más nyelvek is.<br>
 <a href='https://www.programiz.com/' target='_blank'>programiz.com</a> Kezdőtől haladóig kis példákkal; más nyelvek is.<br>
 <a href='http://www.techbeamers.com/python-tutorial-step-by-step/' target='_blank'>techbeamers.com</a> Kezdőtől haladóig; más nyelvek is.<br>
 <a href='https://www.tutorialspoint.com/python3/' target='_blank'>tutorialspoint.com</a> Kezdőtől haladóig; más nyelvek is.<br>
 <a href='https://www.learnpython.org/' target='_blank'>learnpython.org</a> Kezdőtől haladóig; más nyelvek is.<br>
 <a href='https://intellipaat.com/blog/tutorial/python-tutorial/' target='_blank'>intellipaat.com</a> Kezdőtől haladóig; más nyelvek is.<br>
-<a href='https://www.journaldev.com/python-tutorial' target='_blank'>journaldev.com</a> Kezdőtől haladóig kis bemutató programok; Java is.<br>
+<a href='https://www.journaldev.com/python-tutorial' target='_blank'>journaldev.com</a> Kezdőtől haladóig kis bemutató programok; más nyelvek is.<br>
 <a href='https://anandology.com/python-practice-book/index.html' target='_blank'>anandology.com &ndash; Python practice book</a> Rövid definíciók, sok kis
 példa megoldással és anélkül.<br>
-<a href='https://www.pythoninformer.com/' target='_blank'>pythoninformer.com</a> Kezdő és haladó témák is.
-
-<ul>
+<a href='https://www.pythoninformer.com/' target='_blank'>pythoninformer.com</a> Kezdő és haladó témák is.<br>
+<a href='https://www.bogotobogo.com/python/pytut.php' target='_blank'>bogotobogo.com</a> Kezdő és haladó témák is; más nyelvek is.
+<ul class='sublst_1'>
 <li><a href='https://www.pythoninformer.com/python-language/' target='_blank'>kezdő és haladó bevezetők</a></li>
 <li><a href='https://www.pythoninformer.com/python-libraries/' target='_blank'>Python könyvtárak (numpy, matplotlib, pillow...)</a></li>
 </ul>
 <a href='https://data-flair.training/blogs/' target='_blank'>data-flair</a> Kezdő és haladó témák is, projektek, leírások, más nyelvek is, adattudomány is.
 Hatalmas anyag.
 
-<ul>
+<ul class='sublst_1'>
 <li><a href='https://data-flair.training/blogs/python-tutorials-home/' target='_blank'>Kezdő és haladó bevezetők</a></li>
 <li><a href='https://data-flair.training/blogs/python-project-ideas/' target='_blank'>Projektek</a></li>
 </ul>
@@ -83,15 +112,56 @@ Hatalmas anyag.
 <a href='https://developers.google.com/edu/python/' target='_blank'>developers.google.com</a> Kezdő.<br>
 <a href='https://www.kaggle.com/learn/overview' target='_blank'>kaggle.com</a> Kezdőtől haladóig; adattudományi fókusszal.<br>
 <a href='https://www.datacamp.com/onboarding' target='_blank'>datacamp.com</a> Kezdőtől haladóig; adattudományi fókusszal; R és SQL is.
-<h4>&bull; Magyarul:</h4>
 
-<a href='http://nyelvek.inf.elte.hu/leirasok/Python/index.php' target='_blank'>A Python programozási nyelv ((ELTE)</a> Bevezető, részletes, sajnos csak Python 2,
-kivéve egy ismertetőt a Python 3 újdonságairól. 2010-ben frissült utoljára.<br>
-<a href='https://pythonidomar.wordpress.com/' target='_blank'>Pythonidomár</a> Kezdőknek néhány téma, nagyon részletes és szórakoztató példákkal, magyarázatokkal<br>
-<a href='https://sulipython.fandom.com/hu/wiki/' target='_blank'>Python az iskolában</a> Kezdőknek, néhány téma mintapéldákkal.
+<ul class='sublst_1'>
+<li><a href='https://www.datacamp.com/community/tutorials' target='_blank'>Tutorial-gyűjtemény</a></li>
+<li><a href='https://www.datacamp.com/community/data-science-cheatsheets' target='_blank'>Adattudományi cheatsheet (puska) gyűjtemény</a></li>
+</ul>
+
+<h4 id='hun'>&#x25BA; Magyarul:</h4>
+
+<a href='http://nyelvek.inf.elte.hu/leirasok/Python/index.php' target='_blank'>A Python programozási nyelv (ELTE)</a>
+<div class='details'>Bevezető, részletes, sajnos csak Python 2, kivéve egy ismertetőt a Python 3 újdonságairól. 2010-ben frissült utoljára.</div>
+<a href='https://pythonidomar.wordpress.com/' target='_blank'>Pythonidomár</a>
+<div class='details'>Kezdőknek néhány téma, nagyon részletes és szórakoztató példákkal, magyarázatokkal</div>
+<a href='https://sulipython.fandom.com/hu/wiki/' target='_blank'>Python az iskolában</a>
+<div class='details'>Kezdőknek, néhány téma mintapéldákkal.</div>
+
+<hr style='border-color:blueviolet;'>
+
 <h3 id='mixed'>Vegyes résztémák</h3>
+<a href='https://pycoders.com/' target='_blank'>PYCODER'S WEEKLY</a> Leírások vegyes témákról (kezdő és haladó vegyesen).<br>
+<a href='https://therenegadecoder.com/' target='_blank'>The Renegade Coder</a> Leírások vegyes témákról, sok részletes példával &ndash; kezdő és középhaladó
+(Jeremy Grifsky).
+<ul class='sublst_1'>
+<li><a href='https://therenegadecoder.com/code/python-code-snippets-for-everyday-problems/' target='_blank'>Python code snippets for everyday problems</a></li>
+<li><a href='https://therenegadecoder.com/code/coolest-python-programming-language-features/' target='_blank'>Coolest Python Programming Language Features</a></li>
+<li><a href='https://therenegadecoder.com/series/how-to-python/' target='_blank'>How to Python</a></li>
+<li><a href='https://therenegadecoder.com/series/the-autodidacts-guide-to-python/' target='_blank'>The Autodidact's Guide to Python</a> (bevezető cikkek)</li>
+</ul>
+
+<a href='https://www.toptal.com/developers/blog' target='_blank'>toptal.com</a> Leírások vegyes témákról (kezdő és haladó vegyesen). A keresőbe be kell
+írni, hogy "Python". Vagy valami mást. :)<br>
+<div class='details'>Kisebb témák, pl. "Python time" kereséséhez nem túl jó, mert a szavakra egyenként keres és az eredményeket egyesíti.</div>
+<a href='https://opensource.com/tags/python' target='_blank'>opensource.com</a> Vegyes cikkek (középhaladó - haladó). Érdemes használni a keresőjét is.<br>
+<a href='https://dev.to/' target='_blank'>DEV Community</a> Vegyes témákról cikkek tömegét szolgáltatja a keresője, nem csak Pythonról.<br>
+
+<a href='https://www.codeitbro.com/category/programming/python/' target='_blank'>CODE IT BRO</a> Bevezetések, mintaprogramok vegyes témákról (kezdő és haladó).<br>
+<a href='https://www.journaldev.com/python' target='_blank'>journaldev.com</a> Leírások vegyes témákról (kezdő és haladó vegyesen).<br>
+<a href='https://pythonprogramming.net/' target='_blank'>pythonprogramming.net</a> Leírások vegyes témákról (kezdőtől középhaladóig).<br>
+<a href='https://blog.finxter.com/blog/' target='_blank'>finxter.com/blog</a> Leírások vegyes témákról kezdőtől haladóig; cheat sheet-ek (puskák)<br>
 <a href='https://academy.vertabelo.com/blog/' target='_blank'>vertabelo.com</a> Leírások vegyes témákról (kezdő).<br>
 <a href='https://www.pythoncentral.io/' target='_blank'>pythoncentral.io</a> Leírások vegyes témákról (haladó is).<br>
+<a href='https://stackabuse.com/tag/python/' target='_blank'>Stack Abuse</a> Leírások vegyes témákról, Python csomagokról (haladó is, más nyelvek is).<br>
+<div class='details'>Keresője nincs sajnos, a Google keresésbe kell beleírni, hogy stackabuse, pl.: matplotlib stackabuse.</div>
+<a href='https://www.quora.com/' target='_blank'>Quora</a>
+<ul class='sublst_1'>
+<li><a href='https://www.quora.com/q/python-programming' target='_blank'><b>Python Programming</b> space</a>. Okos válaszok gyakran buta kérdésekre
+(kezdő és haladó).</li>
+<li><a href='https://www.quora.com/q/python-beginners' target='_blank'><b>Python Beginners</b> space</a>. Ugyanez kifejezetten kezdőknek.</li>
+<li><a href='https://www.quora.com/q/pythonpundits' target='_blank'><b>Python Pundits</b> space</a>. Hasonló az előző kettőhöz, sok linkajánlóval.</li>
+</ul>
+<a href='https://www.kite.com/blog/' target='_blank'>kite.com/blog/</a> Leírások vegyes témákról (haladó is, adattudomány is).<br>
 <a href='https://docs.python-guide.org/' target='_blank'>The Hitchhiker’s Guide to Python</a> Haladó.<br>
 <a href='https://docs.python.org/3/' target='_blank'>docs.python.org</a> Tömör összefoglaló, példákkal; standard könyvtár leírása.<br>
 <a href='https://pymotw.com/3/' target='_blank'>Python 3 Module of the Week</a> A standard könyvtár használata.<br>
@@ -100,9 +170,10 @@ kivéve egy ismertetőt a Python 3 újdonságairól. 2010-ben frissült utoljár
 <a href='https://realpython.com/' target='_blank'>realpython.com</a> Leírások és videók vegyes témákról, kezdőtől haladóig.<br>
 <a href='https://stackabuse.com/tag/python/' target='_blank'>stackabuse.com</a> Bevezetők vegyes témákba, kezdőtől haladóig. Más nyelvek is.<br>
 <a href='http://code.activestate.com/recipes/langs/python/' target='_blank'>activestate.com/recipes</a> Vegyes témákról, középhaladó-haladó.<br>
+<a href='http://python-notes.curiousefficiency.org/en/latest/index.html' target='_blank'>Nick Coghlan’s Python Notes</a> Haladóknak.<br>
 <a href='https://www.python.org/dev/peps/' target='_blank'>Python Enhancement Proposals (PEPs)</a> Kifejezetten haladóknak.<br>
 
-<h4>&bull; PyCon előadások anyagai (főleg haladóknak, de vannak bevezető jellegű előadások is):</h4>
+<h4>&#x25BA; PyCon előadások anyagai (főleg haladóknak, de vannak bevezető jellegű előadások is):</h4>
 <a href='https://pyvideo.org/' target='_blank'>pyvideo.org</a> Videóanyagok
 <ul class='ul_5'>
 <li><a href='https://pyvideo.org/tags.html' target='_blank'>Címkék</a></li></li>
@@ -114,12 +185,16 @@ kivéve egy ismertetőt a Python 3 újdonságairól. 2010-ben frissült utoljár
 </ul>
 </li>
 </ul>
-<a href='https://speakerdeck.com/c/programming' target='_blank'>speakerdeck.com</a> Előadások letölthető formában<br>
-A kereső segítségével lehet eljutni az anyagokhoz &ndash; a Speaker Deck nemcsak a PyCon előadásokat, hanem rengeteg más anyagot is tartalmaz.
+<a href='https://speakerdeck.com/c/programming' target='_blank'>speakerdeck.com</a> Előadások letölthető formában.
+<div class='details'>A kereső segítségével lehet eljutni az anyagokhoz &ndash; a Speaker Deck nemcsak a PyCon előadásokat, hanem rengeteg más anyagot is
+tartalmaz.</div>
 <ul class='ul_5'>
 <li><a href='https://speakerdeck.com/dabeaz' target='_blank'>David Beazley előadásai</a></li>
 <li><a href='https://speakerdeck.com/jakevdp' target='_blank'>Jake VanderPlas előadásai</a> (Adattudományi, adatmegjelenítési fókusz)</li>
 </ul>
+
+<br>
+<hr style='border-color:blueviolet;'>
 
 <h3 id='tutorials'>Tutorial-gyűjtemények</h3>
 <a href='https://realpython.com/python-youtube-channels/' target='_blank'>The Ultimate List of Python YouTube Channels</a> <b>NEM</b> csak Youtube csatornák, hanem
@@ -137,32 +212,43 @@ Jake Vanderplas:
 <ul class='ul_5'>
 <li><a href='http://vanderplas.com/speaking.html' target='_blank'>Előadások gyűjteménye</a></li>
 </ul>
+<br>
+<hr style='border-color:blueviolet;'>
+
 <h3 id='youtube'>Youtube</h3>
 &bull; <a href='https://coreyms.com/category/development/python' target='_blank'>Corey Schaefer Python videói</a> &ndash; vagy Youtube-on rákeresünk arra, hogy
-<i>Corey Schaefer Python</i>, esetleg egy témát hozzáfűzve: <i>Corey Schaefer Python context managers</i>. Neki más témákban is nagyon jó ismertetői vannak
-(pl. Git).<br>
+<i>Corey Schaefer Python</i>, esetleg egy témát hozzáfűzve: <i>Corey Schaefer Python context managers</i>.
+<div class='details'>Neki más témákban is nagyon jó ismertetői vannak (pl. Git).</div>
 &bull; <a href='https://www.youtube.com/watch?v=bY6m6_IIN94&list=PLi01XoE8jYohWFPpC17Z-wWhPOSuh8Er-' target='_blank'>Socratica Python videók</a> &ndash; vagy
 Youtube-on rákeresünk arra, hogy <i>Socratica Python</i>. Rövid összefoglalók vegyes témákról, főleg kezdőknek.<br>
-&bull; Youtube-on rákeresünk arra, hogy <i>Real Python</i> és/vagy <i>Dan Bader</i>.<br>
+&bull; Youtube-on rákeresünk arra, hogy <i>Real Python</i> és/vagy <i>Dan Bader</i>.
+<div class='details'>Dan Bader neve alatt megtalálható elég sok, ami a Real Python-ban már fizetőssé vált.</div>
 &bull; <a href='https://www.youtube.com/playlist?list=PLR-r0edywujd8D-R2Kue1C_wYEK_4Ii71' target='_blank'>Sebastiaan Mathôt videók</a> &ndash; Kezdő és
 haladó témák is. Nagyon jók (noha ő egy kísérleti pszichológus).<br>
 &bull; <a href='https://www.youtube.com/watch?v=QXeEoD0pB3E&list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3' target='_blank'>Telusko Python videók</a> &ndash; vagy Youtube-on
-rákeresünk arra, hogy <i>Telusko Python</i>. Kicsit furcsa kiejtése van, de okosakat mond. Főleg kezdőknek, nagyon sok, részletes tárgyalás.<br>
-&bull; Youtube-on rákeresünk arra, hogy <i>James Powell Python</i>. Ha Google-ban keresünk rá ugyanerre, még jobb listát kapunk. Haladó, nagyon gyorsan és
-nagyon tömören mond nagyon okos dolgokat.
+rákeresünk arra, hogy <i>Telusko Python</i>.
+<div class='details'>Kicsit furcsa kiejtése van, de okosakat mond. Főleg kezdőknek, nagyon sok, részletes tárgyalás.</div>
+&bull; Youtube-on vagy Google-ban rákeresünk arra, hogy <i>James Powell Python</i>. Ha Google-ban keresünk rá ugyanerre, még jobb listát kapunk.
+<div class='details'>Haladó, nagyon gyorsan és nagyon tömören mond nagyon okos dolgokat.</div>
+&bull; <a href='https://www.youtube.com/reuvenlerner' target='_blank'>Reuven Lerner videói</a> Kezdőtől haladóig; jól magyaráz.
 
-<h3 id='youtube_datascience'>Youtube &ndash; adattudomány</h3>
+<h4 id='youtube_datascience'>&#x25BA; Youtube &ndash; adattudomány, adatmérnökség</h4>
 <a href='https://www.youtube.com/playlist?list=PL5-da3qGB5ICCsgW1MxlZ0Hq8LL5U3u9y' target='_blank'>Data analysis in Python with pandas</a> Kevin Markham videóinak
-lejátszási listája
+lejátszási listája<br>
+
+<br>
+<hr style='border-color:blueviolet;'>
 
 <h3 id='quiz'>Feladatok, tesztek, interjú-kérdések</h3>
 <a href='https://codingbat.com/python' target='_blank'>codingbat.com</a> Kezdő feladatok (Java is van)<br>
 <a href='http://www.mypythonquiz.com/' target='_blank'>mypythonquiz.com</a> Feleletválasztós feladatok megoldással<br>
 <a href='https://pynative.com/python-quizzes/' target='_blank'>pynative.com</a> Feleletválasztós feladatok megoldással (kezdő)<br>
 <a href='https://pynative.com/python-exercises-with-solutions/' target='_blank'>pynative.com</a> Programozási feladatok megoldással (kezdő)<br>
+<a href='https://runestone.academy/runestone/books/published/fopp/index.html' target='_blank'>runestone.academy</a> Programozási feladatok futtatási
+lehetőséggel (kezdő)<br>
 <a href='https://www.sanfoundry.com/' target='_blank'>sanfoundry.com</a> Más nyelvek is.
 
-<ul>
+<ul class='sublst_1'>
 <li><a href='https://www.sanfoundry.com/1000-python-questions-answers/' target='_blank'>Python Questions and Answers</a></li>
 <li><a href='https://www.sanfoundry.com/python-problems-solutions/' target='_blank'>Python Programming Examples</a></li>
 <li><a href='https://rank.sanfoundry.com/python-programming-tests/' target='_blank'>Python Programming Tests</a></li>
@@ -170,13 +256,27 @@ lejátszási listája
 
 <a href='https://realpython.com/quizzes/' target='_blank'>realpython.com/quizzes</a> Feleletválasztós feladatok megoldással<br>
 <a href='https://www.techbeamers.com/python-interview/' target='_blank'>techbeamers.com</a> Feleletválasztós interjú feladatok megoldással<br>
-tutorialspoint.com:
-<ul>
+<a href='https://www.tutorialspoint.com/index.htm' target='_blank'>tutorialspoint.com</a> Feleletválasztós interjú feladatok megoldással<br>
+
+<ul class='sublst_1'>
 <li><a href='https://www.tutorialspoint.com/python/python_interview_questions.htm' target='_blank'>Feleletválasztós interjúkérdések megoldással</a></li>
 <li><a href='https://www.tutorialspoint.com/python/python_online_quiz.htm' target='_blank'>Online feleletválasztós kvíz megoldással</a></li>
 </ul>
 <a href='https://www.w3resource.com/python-exercises/' target='_blank'>w3resource.com</a> Programozási feladatok megoldással<br>
+<a href='https://www.w3resource.com/quizzes/python/index.php' target='_blank'>w3resource.com</a> Online feleletválasztós kvíz megoldással<br>
+<a href='https://blog.finxter.com/python-interview-questions/' target='_blank'>finxter.com</a> Programozási feladatok megoldással<br>
+<a href='https://www.hackerrank.com/domains/python' target='_blank'>hackerrank.com</a> Programozási feladatok kezdőtől haladóig<br>
+bogotobogo.com programozási feladatok megoldással:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href='https://www.bogotobogo.com/python/python_interview_questions.php' target='_blank'>1.</a>
+&nbsp;&nbsp;<a href='https://www.bogotobogo.com/python/python_interview_questions_2.php' target='_blank'>2.</a>
+&nbsp;&nbsp;<a href='https://www.bogotobogo.com/python/python_interview_questions_3.php' target='_blank'>3.</a>
+&nbsp;&nbsp;<a href='https://www.bogotobogo.com/python/python_interview_questions_4.php' target='_blank'>4.</a>
+&nbsp;&nbsp;<a href='https://www.bogotobogo.com/python/python_interview_questions_5.php' target='_blank'>5.</a>
+&nbsp;&nbsp;<a href='https://www.bogotobogo.com/python/python_interview_questions_6.php' target='_blank'>6.</a>
+&nbsp;&nbsp;<a href='https://www.bogotobogo.com/python/python_interview_questions_7.php' target='_blank'>7.</a>
+<br>
 <a href='https://www.geeksforgeeks.org/top-40-python-interview-questions-answers/' target='_blank'>geeksforgeeks.org</a> Interjúkérdések megoldással<br>
+<a href='https://www.toptal.com/python/interview-questions' target='_blank'>toptal.com</a> Interjúkérdések megoldással<br>
 <a href='https://alexbers.com/python_quiz/' target='_blank'>alexbers.com</a> Feleletválasztós feladatok megoldás nélkül; vannak benne trükkösek<br>
 <a href='https://www.codementor.io/sheena/essential-python-interview-questions-du107ozr6' target='_blank'>codementor.com/quizzes</a> Interjú-kérdések megoldással<br>
 <a href='https://www.journaldev.com/15490/python-interview-questions' target='_blank'>journaldev.com</a> Interjú-kérdések megoldással<br>
@@ -185,65 +285,97 @@ tutorialspoint.com:
 <a href='http://www.ilian.io/python-interview-question-and-answers/' target='_blank'>ilian.io</a> Interjúkérdések megoldással<br>
 <a href='http://career.guru99.com/top-25-python-interview-questions/' target='_blank'>career.guru99.com</a> Interjúkérdések megoldással<br>
 <a href='https://tests4geeks.com/python-online-test' target='_blank'>tests4geeks.com</a> Online teszt; más nyelvek is.<br>
-<a href='https://open.kattis.com/' target='_blank'>kattis.com</a> Feladatok, versenyek megoldás nélkül.
+<a href='https://open.kattis.com/' target='_blank'>kattis.com</a> Feladatok, versenyek megoldás nélkül.<br>
 
+<br>
+<hr style='border-color:blueviolet;'>
+
+<h3 id='general_quiz'>Általános (nem Python-specifikus) interjú-tippek</h3>
+<a href='https://www.youtube.com/watch?v=qc1owf2-220' target='_blank'>Hangouts On Air</a> Google Recruiters Share Technical Interview Tips<br>
+<a href='https://learntocodewith.me/posts/technical-interview/' target='_blank'>learntocodewith.me</a> Technical Interviewing 101<br>
+<a href='https://simpleprogrammer.com/10-developer-job-interview-tips-to-land-the-best-job-you-can/' target='_blank'>Software Developer Job Interview Tips</a>
+Simple Programmer. Többek közt kicsit piszkos, ám nagyon hatásos trükkök is.<br>
+<br>
+<hr style='border-color:blueviolet;'>
 <h3 id='download_books'>Programozási könyvek ingyenes letöltése</h3>
+<a href='https://libgen.is/' target='_blank'>libgen.is</a><br>
 <a href='https://www.pdfdrive.com/programming-books.html' target='_blank'>pdfdrive.com</a><br>
 <a href='https://freepdf-books.com/' target='_blank'>Free Pdf Books</a><br>
-<a href='https://libgen.is/' target='_blank'>libgen.is</a><br>
-<a href='http://www.allitebooks.org/' target='_blank'>allitebooks.org</a><br>
+<a href='https://www.programmer-books.com/' target='_blank'>programmer-books.com</a><br>
+<a href='https://www.allitebooks.in/' target='_blank'>allitebooks.in</a> Vannak törött linkek is :(<br>
 <a href='http://freecomputerbooks.com/' target='_blank'>freecomputerbooks.com</a><br>
+<a href='https://www.theinsaneapp.com/' target='_blank'>theinsaneapp.com</a> (adattudomány)<br>
 <a href='https://goalkicker.com/' target='_blank'>goalkicker.com</a><br>
-<a href='https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md' target='_blank'>EbookFoundation</a><br>
+<a href='https://github.com/EbookFoundation/free-programming-books' target='_blank'>EbookFoundation</a><br>
 <a href='https://www.toptal.com/software/toptal-s-list-of-top-free-programming-books' target='_blank'>Toptal's List Of Top Free Programming Books</a> Programozási
-könyvek lelőhelyeinek listája is.
+könyvek lelőhelyeinek listája is.<br>
+<br>
+<hr style='border-color:blueviolet;'>
 
 <h3 id='books'>Néhány jó könyv</h3>
 <a href='https://realpython.com/best-python-books/' target='_blank'>Real Python könyvajánlója</a>
-<h4>&bull; Kezdőknek is jók:</h4>
+<h4 id='beginner_books'>&#x25BA; Kezdőknek is jók:</h4>
 <span class='book'>Mark Lutz: Learning Python</span><br>
-<span class='book'>Christian Mayer: Python one-liners</span> Nagyon jó, kis gyakorlati példák részletes magyarázattal.<br>
-<span class='book'>Al Sweigart: Automate the boring stuff with Python (2nd edition)</span>. Kezdőknek &ndash; de sok témát, sok modult érint,
-középhaladóknak is jó.<br>
-<span class='book'>Paul Barry: Head First Python</span>. Kezdőknek &ndash; a szokásos Head First stílus: nem fed le minden anyagot, de részletes és
-szórakoztató.<br>
-<a href='https://goalkicker.com/PythonBook/' target='_blank'>Python Notes for Professionals</a> A címével ellentétben kezdő anyag is van benne; nagyon sok téma,
-rengeteg kis példával.<br>
-<span class='book'>Mark Pilgrim:</span> <a href='https://diveintopython3.problemsolving.io/index.html' target='_blank'>Dive into Python 3</a> Kezdőtől haladóig;
-a nehezebb témák is nagyon jó, egyszerű példákkal.<br>
+<span class='book'>Jake VanderPlas: A Whirlwind Tour of Python</span>
+<div class='details'> Nagyon jó kezdőknek is, haladóknak pedig összefoglalásként.</div>
+<span class='book'>Christian Mayer: Python one-liners</span>
+<div class='details'>Nagyon jó, kis gyakorlati példák részletes magyarázattal.</div>
+<span class='book'>Al Sweigart: Automate the boring stuff with Python (2nd edition)</span>.
+<div class='details'>Kezdőknek &ndash; de sok témát, sok modult érint, középhaladóknak is jó.</div>
+<span class='book'>Paul Barry: Head First Python</span>
+<div class='details'>Kezdőknek &ndash; a szokásos Head First stílus: nem fed le minden anyagot, de részletes és szórakoztató.</div>
+<a class='book' href='https://goalkicker.com/PythonBook/' target='_blank'>Python Notes for Professionals</a>
+<div class='details'>A címével ellentétben kezdő anyag is van benne; nagyon sok téma, rengeteg kis példával.</div>
+<span class='book'>Mark Pilgrim:</span> <a class='book' href='https://diveintopython3.problemsolving.io/index.html' target='_blank'>Dive into Python 3</a>
+<div class='details'>Kezdőtől haladóig; a nehezebb témák is nagyon jó, egyszerű példákkal.</div>
+<span class='book'>David Beazley, Brian K. Jones: Python Cookbook</span>
+<div class='details'>A gyakorlatban előforduló sok probléma megoldásai, kezdőknek is jó az alapozás után.</div>
+<span class='book'>Bruce Eckel: Python 3 Patterns, Recipes and Idioms</span>
+<div class='details'>Hasonló a Cookbook-hoz; kevesebb és tipikusan haladóbb témákat érint &ndash; de azokat nagyon jól elmagyarázza.</div>
 
-<span class='book'>David Beazley, Brian K. Jones: Python Cookbook</span>. A gyakorlatban előforduló sok probléma megoldásai, kezdőknek is jó az alapozás után.<br>
-<span class='book'>Bruce Eckel: Python 3 Patterns, Recipes and Idioms</span>. Hasonló a Cookbook-hoz; kevesebb és tipikusan haladóbb témákat érint &ndash; de azokat
-nagyon jól elmagyarázza.<br>
-
-<h4>&bull; Inkább haladóknak valók:</h4>
+<h4 id='advanced_books'>&#x25BA; Inkább haladóknak valók:</h4>
 <span class='book'>Mark Lutz: Programming Python</span><br>
-<span class='book'>Brett Slatkin: Effective Python</span>. A címével ellentétben elsősorban nem optimalizálásról, hanem jó programozási
-módszerekről szól.<br>
-<span class='book'>Luciano Ramalho: Fluent Python</span>. A nyelv szerkezetének részletes tárgyalása, példákkal.<br>
-<span class='book'>Dan Bader: Python Tricks; A Buffet of Awesome Python Features</span>. Tipikus feladatok, problémák, megoldások; a nyelv felépítése, filozófiája;
-jó és rossz programozási módszerek; a leggyakrabban gondot okozó fogalmak részletes, érthető magyarázata.<br>
-<span class='book'>Alex Martelli, Anna Ravenscroft, Steve Holden,: Python in a Nutshell</span>. A nyelv és a standard library tulajdonságai; sok olyan is,
-amit máshol nem hangsúlyoznak eléggé.<br>
-<span class='book'>Doug Hellmann: The Python 3 Standard Library by Example</span>. Nagyon részletes, sok példával.<br>
+<span class='book'>Brett Slatkin: Effective Python</span>
+<div class='details'>A címével ellentétben elsősorban nem optimalizálásról, hanem jó programozási módszerekről szól.</div>
+<span class='book'>Luciano Ramalho: Fluent Python</span>
+<div class='details'>A nyelv szerkezetének részletes tárgyalása, példákkal.</div>
+<span class='book'>Dan Bader: Python Tricks; A Buffet of Awesome Python Features</span>
+<div class='details'>Tipikus feladatok, problémák, megoldások; a nyelv felépítése, filozófiája; jó és rossz programozási módszerek; a leggyakrabban gondot
+okozó fogalmak részletes, érthető magyarázata.</div>
+<span class='book'>Alex Martelli, Anna Ravenscroft, Steve Holden,: Python in a Nutshell</span>
+<div class='details'>A nyelv és a standard library tulajdonságai; sok olyan is, amit máshol nem hangsúlyoznak eléggé.</div>
+<span class='book'>Doug Hellmann: The Python 3 Standard Library by Example</span>
+<div class='details'>Nagyon részletes, sok példával.</div>
 <span class='book'>Mike Pirnat: How to Make Mistakes in Python</span><br>
 <span class='book'>[QuantifiedCode]: Python Anti-Patterns</span>
 
+<h4 id='books_datascience'>&#x25BA; Adattudomány, adatmérnökség:</h4>
+<span class='book'>Jake VanderPlas: Python Data Science Handbook</span><br>
+<span class='book'>Joel Grus: Data Science from Scratch</span> (haladó)<br>
+
+<br>
+<hr style='border-color:blueviolet;'>
 <h3 id='python_libs'>Python modulok, csomagok, könyvtárak listája</h3>
 <p>
-<li><a href='https://pythonawesome.com/' target='_blank'>Python Awesome</a> Kincsesbánya (haladóknak) a keresőjét is érdemes használni.</li>
-Sok hasonlót lehet találni, ha beírjuk a Google-ba, hogy <span class='code_2'>Python awesome</span>.
+<li><a href='https://pypi.org/' target='_blank'>PyPI</a> Python package index. 2020 november 29-én 274.874 projekt volt található itt,
+december 29-én már 280.379.</li>
+<li><a href='https://pythonawesome.com/' target='_blank'>Python Awesome</a> Kincsesbánya (haladóknak) &ndash; a keresőjét is érdemes használni.
+Sok hasonlót lehet találni, ha beírjuk a Google-ba, hogy <span class='code_2'>Python awesome</span>.</li>
 </p>
 
+<br>
+<hr style='border-color:blueviolet;'>
 <h3 id='search_tips'>Keresési tippek</h3>
 <p>
 &#9679; Érdemes egy témára külön rákeresni
-<ul style='list-style-type: square;'>
+<ul  class='ul_0' style='list-style-type: square;'>
 <li>a Google-ban</li>
 <li>a <a href='https://stackoverflow.com/' target='_blank'>Stackoverflow</a>-n, itt szűkebb témát is érdemes lehet beírni, mint pl. "Python iterator problem"</li>
 <li>a <a href='https://www.youtube.com/' target='_blank'>Youtube</a>-on</li>
 <li>a <a href='https://speakerdeck.com/c/programming' target='_blank'>Speaker Deck</a>-en, beírva persze a keresőjébe, hogy Python, vagy valami más, nagyobb
 témát, pl. azt, hogy "Python sets"</li>
+<li>a <a href='https://www.reddit.com/' target='_blank'>reddit</a>-en</li>
+<li>a <a href='https://hu.pinterest.com/' target='_blank'>Pinterest</a>-en</li>
 <li>érdemes Google-ban rákeresni az egyes évek Python-konferenciáira, pl.: PyCon 2016 &ndash; aztán lehet mazsolázni az előadások között.</li>
 </ul>
 </p>
@@ -260,7 +392,7 @@ majd a kívánt nyelv beállítása után legörgetünk az oldal aljára a <span
 <p>
 &#9679; Ha a Google-ban egy keresőszó után beírjuk, hogy <b>vs</b>, akkor sokszor hasznos párosításokat kínál fel. Pl. beírjuk, hogy "Python list vs " és ezek
 jönnek fel:
-<ul>
+<ul  class='ul_0'>
 <li>Python list vs tuple</li>
 <li>Python list vs array</li>
 <li>Python list vs tuple speed</li>
@@ -269,17 +401,19 @@ jönnek fel:
 </p>
 <p>
 &#9679; Amikor általában tájékozódunk, érdemes a témához (a fő kereső kifejezéshez) hozzáfűzni ilyen kiegészítéseket:
-<ul>
+<ul class='ul_0'>
 <li>best, worst practices</li>
 <li>patterns, antipatterns</li>
 <li>tutorials, [practical] examples, explaining</li>
+<li>cheat sheet</li>
 <li>speed, performance, effective</li>
-<li>tips, tricks, recipes, pitfalls</li>
+<li>tips, tricks, recipes, pitfalls, gotchas</li>
 <li>how to</li>
 <li>problems, sucks</li>
 <li><b style='color:red'>...</b></li>
 </ul>
-pl.: Python list comprehension tricks.
+<br>
+pl.: Python list comprehension <b>tricks</b>.
 </p>
 <p>
 &#9679; A keresésbe érdemes lehet beleírni, melyik fő Python verzió édekel, pl.: "Python <span class='emph_1'>3</span> list comprehension".
@@ -287,5 +421,16 @@ pl.: Python list comprehension tricks.
 <p>
 &#9679; Ha valakinek tetszett egy könyve/cikke/videója, érdemes a nevére rákeresni a fentebb felsorolt fórumokon.
 </p>
+<p>
+&#9679; Érdemes a kereső kifejezés után odaírni a kedvenc szerzőnk/webhelyünk nevét, pl.
+<ul class='ul_0'>
+<li>numpy arrays w3resource</li>
+<li>numpy arrays Real Python</li>
+<li>numpy arrays Kevin Markham</li>
+<li>numpy arrays stackabuse</li>
+<li><b style='color:red'>...</b></li>
+</ul>
+</p>
+<p style='text-align: center; font-size: 250%; color:blueviolet; font-weight: bold;'>&#9884;</p>
 </body>
 </html>

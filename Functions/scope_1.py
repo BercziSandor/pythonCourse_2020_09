@@ -45,7 +45,7 @@ func()   # hibajelzés
 
 # A fordító-futtató rendszer látja, hogy a függvény belsejében definiálva van
 # x, ezért lokálisnak veszi, a függvényen kívül nem fogja keresni. Itt viszont
-# az előtt akarjuk kiíratni, mielőtt értéket kapott volna.
+# az ELŐTT akarjuk kiíratni, mielőtt értéket kapott volna.
 
 # Jó módszer: az összes lokális változónak a függvény ELEJÉN adjunk értéket, mímeljük
 # a deklarációt. Adhatunk None (definiálatlan) értéket is.
@@ -81,3 +81,5 @@ print(x)  # local x
 # Ekkor persze a függvényen belüli módosítások kívül is látszani fognak!
 # Pont ez a baj a globális változókkal: nehéz megtalálni, hogy utoljára
 # ki és hol módosította őket.
+
+##################

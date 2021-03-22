@@ -10,7 +10,7 @@
 x = 1  # itt definiálódik x
 
 # Típusellenőrzés sincs (ez is elég baj), ugyanazon változónevet ezután
-# hozzárendelhetünk egy másik típusú változóhoz
+# hozzárendelhetünk egy másik típusú változóhoz:
 
 x = 'A'
 
@@ -31,28 +31,68 @@ elif x < 2:
 else:
     print('közepes')
 
+# Blokkot kezdő sor (for, while, if, def class...) végén kettőspontnak kell lenni.
 # Egy blokkon belül egyformának kell lennie az indentálásnak:
 
 x = 5
 if x < 4:
     print('kisebb')
-    print('négynél')
+   print('négynél')
 
 #   File "test.py", line 4
 #     print('négynél')
 #                     ^
 # IndentationError: unindent does not match any outer indentation level
 
+##########################
+
+# Egy sorba lehet több utasítást is írni pontosvesszővel elválasztva:
+
+print(1); print(2)
+
+# de általában ezt az olvashatóság érdekében kerülni szoktuk.
+
+# A kettőspont után is írhatunk utasítást (ezt is ritkán tesszük):
+
+x = 10
+if x < 20: print(1);
+
+##########################
+
+# Ha egy utasítás nagyon hosszú, akkor folytathatjuk a következő sorban; ilyenkor
+# a sor végére \-t kell tenni:
+
+x = 1
+y = 1
+if x == 1 and \
+y == 1:
+  print(x)
+
+# A \ után már ne legyen semmi, egy szóköz sem!
+
+# Adatszerkezet belsejében nem kell \:
+
+x = [1,
+2]
+print(x) # [1, 2]
+
+# Ez a sztringek belsejére nem vonatkozik:
+
+x = 'A
+B' # szintaktinai hiba
+
+##########################
+
 # Szintaktikai hibák rejtve tudnak maradni, amíg nem megy rájuk a vezérlés;
-# ez még nagyobb baj.
+# ez talán a legnagyobb baj.
 
 x = 5
 if x < 4:
     xxxprint('kisebb')   # hoppá
 else:
-    print('nagyobb', end=' ')
+    print('nagyobb')
 
-# nagyobb
+# --> gondos tesztelés szükséges.
 
 ##########################
 
@@ -90,6 +130,12 @@ print(x, y, sep=';')  # 1;10
 
 # Ha a print zárójelek nélkül áll: Python 2 kód.
 
+# A print utasítás a standard kimenetre ír. A standard hibakimenetre így tudunk írni:
+
+import sys
+
+print('Hiba történt', file=sys.stderr)
+
 ##########################
 
 # Számsorozat előállítására szolgáló objektum: range; és for ciklus
@@ -98,7 +144,7 @@ for i in range(4):
     print(i, end=' ')
 print()              # 0 1 2 3
 
-# Az alapértelmezett range kezdőérték nulla; a paraméterként megadott számnál
+# Az alapértelmezett range kezdőérték nulla; a paraméterként megadott végértéknél
 # eggyel kisebb lesz az utolsó kiadott érték.
 
 # Kezdőértéket is megadhatunk:
@@ -121,7 +167,7 @@ print()              # 5 4 3
 
 # Ilyenkor is a lezáró érték ELŐTTI elem az utolsó.
 
-# A range tényleg egy objektum:
+# A range tényleg egy objektum (mint a Pythonban MINDEN):
 
 x = range(4)
 print(x)  # range(0,4)
@@ -131,6 +177,6 @@ print(x)  # range(0,4)
 # Ha egy kifejezést leírunk és nem rendeljük hozzá egy változóhoz, akkor nem történik semmi.
 
 x = 3
-x + 7
+x + 7 # nem hiba
 
 ##########################

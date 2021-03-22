@@ -6,6 +6,8 @@
   body { text-align:justify; margin: 15px 25px 30px 15px; background-color: #F5F5DC; font-family: Arial; font-size: 14; }
   p { margin: 8px 0; }
   pre { color: blue; margin: 8px 8px 8px 20px; }
+  code { background-color: black; color: white; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
+  .code_2 { background-color: lightgray; padding-left: 3px; padding-right: 3px;  border-radius: 3px; }
   .pale { color: gray; }
   .result { color: olivedrab;  margin-top: -10px;  margin-bottom: -10px; }
   .contents { margin-left:30%; color:red; font-size: 120%; }
@@ -22,7 +24,7 @@
 <body>
 <div style='font-size: 90%; color: blueviolet'>
 <span style='float:right;font-style:italic;'>Nemes Mihály &bull; Mihaly.Nemes@t-systems.com</span>
-<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.14 &mdash;</p>
+<p style="text-align:center;">&mdash; Utolsó módosítás: 2020.11.17 &mdash;</p>
 </div>
 <h1>Generátor  függvények 2.rész<br>
 <span style='font-size:70%; color:gray;'>&bull; GeneratorExit, close, send, raise, throw &bull;</span></h1>
@@ -39,10 +41,10 @@
 
 <h2 id='gen_exit'>GeneratorExit kivétel</h2>
 <p>
-Amikor egy generátor nem tud több elemet szolgáltatni, akkor a hívó StopIteration kivételt kap. Az ellentétes irányú kommunikáció is létezik: a
-generátor is értesül arról, amikor már nincs rá mutató változó, tehát befeződik az életciklusa &ndash; mégpedig úgy, hogy egy GeneratorExit kivételt kap.
-Ha ezt nem próbálja meg elkapni, akkor a futtató rendszer kapja el és nem csinál vele semmit. Könnyen be lehet mutatni, hogy ezt a kivételt valóban megkapja
-a generátor:
+Amikor egy generátor nem tud több elemet szolgáltatni, akkor a hívó <code>StopIteration</code> kivételt kap. Az ellentétes irányú kommunikáció is létezik: a
+generátor is értesül arról, amikor már nincs rá mutató változó, tehát befeződik az életciklusa &ndash; mégpedig úgy, hogy egy <span class='code_2'>GeneratorExit</span>
+kivételt kap. Ha ezt nem próbálja meg elkapni, akkor a futtató rendszer kapja el és nem csinál vele semmit. Könnyen be lehet mutatni, hogy ezt a kivételt valóban
+megkapja a generátor:
 <pre>
 def gen_1():
   try:
@@ -50,7 +52,7 @@ def gen_1():
       yield(20)
       yield(30)
   except GeneratorExit:
-      print('Generator: Received GeneratorExit')
+      print('generátor: GeneratorExit-et kaptam')
 
 def my_func():
     it = gen_1()
@@ -59,12 +61,12 @@ def my_func():
     print('my_func: Good-bye!')
 
 my_func()
-print('after my_func')
+print('my_func után')
 <div class='result'>
 # x: 10
 # my_func: Good-bye!
-# Generator: Received GeneratorExit
-# after my_func
+# generátor: GeneratorExit-et kaptam
+# my_func után
 </div>
 </pre>
 Amikor a my_func() függvény befejeződik, minden lokális változója, így it is megszűnik, ekkor kapja meg gen_1 a kivételt. Ha már a függvény vége előtt
@@ -75,16 +77,16 @@ def my_func():
     it = gen_1()
     x = next(it)
     print('x:',x)
-    <span style='color: blue;'>it = 999  # or: del it</span>
+    <span style='color: blue;'>it = 999  # vagy: del it</span>
     print('my_func: Good-bye!')
 
 my_func()
 print('after my_func')
 <div class='result'>
 # x: 10
-<span style='color: red;'># Generator: Received GeneratorExit
+<span style='color: red;'># generátor: GeneratorExit-et kaptam
 # my_func: Good-bye!</span>
-# after my_func
+# my_func után
 </div>
 </pre>
 A kivételt már akkor megkapja a generátor, mielőtt kilépnénk a függvényből.
@@ -104,17 +106,17 @@ def gen_1():
       yield(20)
       yield(30)
   except GeneratorExit:
-      print('Generator: Received GeneratorExit')
+      print('generátor: GeneratorExit-et kaptam')
 
 it = gen_1()
 x = next(it)
 print('x:',x)
 <span style='color: red;'>it.close()    # ==> GeneratorExit</span>
-print('after close')
+print('close után')
 <div class='result'>
 # x: 10
-# Generator: Received GeneratorExit
-# after close
+# generátor: GeneratorExit-et kaptam
+# close után
 </div>
 </pre>
 Természetesen most is igaz, hogy ha a generátor nem kapja el ezt a kivételt, akkor elkapja a futtató rendszer és nem csinál vele semmit. A close() metódus
@@ -132,30 +134,30 @@ mint a next().
 
 <pre>
 def gen_1():
-    print('GENERATOR: STARTED')
+    print('GENERÁTOR: ELINDULTAM')
     received = yield(<b style='color:red;'>10</b>)
-    print(f'-- 1 -- generator: received {received}')  # None
+    print(f'-- 1 -- generátor: ezt kaptam: {received}')  # None
     received = yield(20)
-    print(f'-- 2 -- generator: received {received}')  # <b style='color:green;'>999</b>
+    print(f'-- 2 -- generátor: ezt kaptam: {received}')  # <b style='color:green;'>999</b>
     yield(30)
 
 it = gen_1()
-print('** GENERATOR CREATED')
+print('** GENERÁTOR ELKÉSZÜLT')
 received = next(it)
-print(f'* 1 * caller: received {received}')  # <b style='color:red;'>10</b>
+print(f'* 1 * hívó: received {received}')  # <b style='color:red;'>10</b>
 received = next(it)
-print(f'* 2 * caller: received {received}')  # 20
+print(f'* 2 * hívó: received {received}')  # 20
 received = it.send(<b style='color:green;'>999</b>)
-print(f'* 3 * caller: received {received}')  # 30
+print(f'* 3 * hívó: received {received}')  # 30
 
 <div class='result'>
-# ** GENERATOR CREATED
-# GENERATOR: STARTED
-# * 1 * caller: received <b style='color:red;'>10</b>
-# -- 1 -- generator: received None
-# * 2 * caller: received 20
-# -- 2 -- generator: received <b style='color:green;'>999</b>
-# * 3 * caller: received 30
+# ** GENERÁTOR ELKÉSZÜLT
+# GENERÁTOR: ELINDULTAM
+# * 1 * hívó: received <b style='color:red;'>10</b>
+# -- 1 -- generátor: ezt kaptam: None
+# * 2 * hívó: received 20
+# -- 2 -- generátor: ezt kaptam: <b style='color:green;'>999</b>
+# * 3 * hívó: received 30
 </div>
 </pre>
 A next() hívás megfelel egy send(None)-nak. Megpróbáltam sematikusan ábrázolni az adatforgalmat:
@@ -180,7 +182,7 @@ kezd el működni. Az alábbi kis szemléltető példában a generátor egyesév
 paraméter kezdeti értékét a generátor-függvény argumentuma szolgáltatja.
 <pre>
 def gen_1(startValue, direction):
-    print('GENERATOR: STARTED')
+    print('GENERÁTOR: ELINDULTAM')
     value = startValue
     if direction.lower() == 'up':
         delta = 1
@@ -198,24 +200,24 @@ def gen_1(startValue, direction):
         value += delta
 
 x = 10
-print('CALLER STARTED, x = ', x)
+print('HÍVÓ ELINDULT, x = ', x)
 it = gen_1(x, 'UP')
 while x < 12:
     x = next(it)
     print('x =',x)
 
 x = it.send('down')
-print('after send x =',x)
+print('send után x =',x)
 while x > 8:
     x = next(it)
     print('x =',x)
 <div class='result'>
-# CALLER STARTED, x =  10
-# GENERATOR: STARTED
+# HÍVÓ ELINDULT, x =  10
+# GENERÁTOR: ELINDULTAM
 # x = 10
 # x = 11
 # x = 12
-# after send x = 11
+# send után x = 11
 # x = 10
 # x = 9
 # x = 8
@@ -245,16 +247,16 @@ import os
 def g_file_writer(path):
     with open(path,'w') as file_obj:
         while True:
-            msg = yield    # waits for next msg
+            msg = yield    # várja a következő msg-t
             file_obj.write(msg + '\n')
-            file_obj.flush()   # not always needed (opsys dependent)
+            file_obj.flush()   # nem mindig kell (oprendszer függő)
             os.fsync(file_obj)
 </pre>
 
 A hívó oldal az egyszerűség kedvéért most csak számokat küld neki:
 <pre>
 writer = g_file_writer('logfile.txt')
-next(writer)  # start the generator
+next(writer)             # elindítjuk a generátort
 for i in range(3):
     writer.send(str(i))
 <div class='result'>
@@ -276,7 +278,7 @@ Ha egy generátor kivételt dob, ezt a hívó persze elkaphatja, ha akarja &ndas
 <pre>
 def g_func():
     yield(10)
-    raise ValueError('Exception message from g_func')
+    raise ValueError('Exception üzenet g_func-ból')
     yield(20)    # never reach this
 
 g = g_func()
@@ -288,7 +290,7 @@ except ValueError as e:
     print(e)
 <div class='result'>
 # 10
-# Exception message from g_func
+# Exception üzenet g_func-ból
 </div>
 </pre>
 Tehát a generátor által dobott kivételt csak egy utolsó jelzésre tudjuk használni.
@@ -306,7 +308,7 @@ for x in g:
        print(e)
        break
 
-print('after for loop')  # never reach this
+print('for loop után')  # sosem érünk el ide
 <div class='result'>
 # 10
 # [hibajelzés]
@@ -325,18 +327,18 @@ def g_func():
         try:
             yield(i)
         except MyException as e:
-            print('caller says:', e)
+            print('a hívó mondja:', e)
 
 g = g_func()
 
 for x in g:
     print(x)
     if x == 20:
-        g.throw(MyException('I hate 30'))
+        g.throw(MyException('utálom a 30-at'))
 <div class='result'>
 # 10
 # 20
-# caller says: I hate 30
+# a hívó mondja: utálom a 30-at
 # 40
 </div>
 </pre>
@@ -354,54 +356,54 @@ class CommitException(Exception): pass
 class RollbackException(Exception): pass
 
 def g_db_writer():
-    print('   generator: I am connecting to the database\n------------')
+    print('   generátor: csatlakozom az adatbázishoz\n------------')
     while True:
         try:
             row = yield
-            print(f'   generator: I write into the db: {row}')
+            print(f'   generátor: ezt írom a db-be: {row}')
         except CommitException:
-            print('\n   generator: I commit the changes\n------------')
+            print('\n   generátor: commit-tal véglegesítem a módosításokat\n------------')
         except RollbackException:
-            print('\n   generator: I roll back the changes\n------------')
+            print('\n   generátor: visszacsinálom a módosításokat\n------------')
         except GeneratorExit:
-            print('\n   generator: I roll back and close down the db')
+            print('\n   generátor: visszacsinálom a módosításokat és lezárom az adatbázist')
             return
 
 g_db = g_db_writer()
-print('** caller: I start the db writer')
+print('** hívó: elindítom a db writer-t')
 next(g_db)
 
-row = 'first row'
-print(f'** caller: send to the db writer: {row}')
+row = 'első sor'
+print(f'** hívó: küldöm a db writer-nek: {row}')
 g_db.send(row)
 
 g_db.throw(CommitException)
 
-row = 'second row'
-print(f'** caller: send to the db writer: {row}')
+row = 'második sor'
+print(f'** hívó: küldöm a db writer-nek: {row}')
 g_db.send(row)
 
 g_db.throw(RollbackException)
 g_db.close()
-print('** caller: I closed down the db writer')
+print('** hívó: lezárom a db writer-t')
 
 <div class='result'>
-** caller: I start the db writer
-   generator: I am connecting to the database
+** hívó: elindítom a db writer-t
+   generátor: csatlakozom az adatbázishoz
 ------------
-** caller: send to the db writer: first row
-   generator: I write into the db: first row
+** hívó: küldöm a db writer-nek: első sor
+   generátor: ezt írom a db-be: első sor
 
-   generator: I commit the changes
+   generátor: commit-tal véglegesítem a módosításokat
 ------------
-** caller: send to the db writer: second row
-   generator: I write into the db: second row
+** hívó: küldöm a db writer-nek: második sor
+   generátor: ezt írom a db-be: második sor
 
-   generator: I roll back the changes
+   generátor: visszacsinálom a módosításokat
 ------------
 
-   generator: I roll back and close down the db
-** caller: I closed down the db writer
+   generátor: visszacsinálom a módosításokat és lezárom az adatbázist
+** hívó: lezárom a db writer-t
 </div>
 </pre>
 A nyelő típusú generátoroknál problémamentesen tudjuk használni a throw() metódust, nem vész el üzenet, hiszen a yield nem is tartalmaz üzenetet, hanem csak

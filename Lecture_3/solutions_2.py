@@ -66,23 +66,3 @@ tup_2 = tuple( e * e for e in lst if e not in tup )
 print(tup_2)
 
 #################################
-
-# 6.
-
-f = open('exercise_6.txt')
-
-lst = [len(line.rstrip('\n')) for line in f if 'aaa' in line.lower()]
-f.close()
-
-print(lst)
-
-# Listcomp nélkül:
-f = open('exercise_6.txt')
-lst = []
-for line in f:
-    if 'aaa' in line.lower():
-        lst.append(len(line.rstrip('\n')))
-f.close()
-print(lst)
-
-#################################

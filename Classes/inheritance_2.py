@@ -2,6 +2,9 @@
 
 # Absztrakt osztályok
 
+# Azt akarjuk, hogy egy osztály leszármazottainak kötelező legyen definiálniuk
+# bizonyos metódusokat.
+
 from abc import ABC, abstractmethod
 
 class AbstractBase(ABC):
@@ -42,9 +45,12 @@ z = Concrete_3()
 #     z = Concrete_3()
 # TypeError: Can't instantiate abstract class Concrete_3 with abstract methods must_implement
 
+# Ez azért jó, mert az objektum létrehozásakor már hibajelzést kapunk, nem csak akkor,
+# amikor felhívnánk a hiányzó metódust.
+
 ############################
 
- Alkalmazás: Pl. többféle adatbázishoz készítünk interfész-osztályt. Azt akarjuk,
+# Alkalmazás: Pl. többféle adatbázishoz készítünk interfész-osztályt. Azt akarjuk,
 # hogy bizonyos műveletek mindegyiknél definiálva legyenek.
 
 class AbstractDB(ABC):

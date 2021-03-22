@@ -1,5 +1,6 @@
 # https://www.python-course.eu/python3_variables.php
 # https://www.python-course.eu/python3_operators.php
+# https://docs.python.org/3/tutorial/floatingpoint.html
 
 # *** Egész számok (int)
 
@@ -8,14 +9,19 @@ print(x, type(x))  # 100 <class 'int'>
 
 # Tetszőlegesen nagy lehet
 
-x = 10000000000000000000000000000000000000000000000000
+x = 99999999999999999999999999999999999999999999999999
 y = x + 1
-print(y)   # 10000000000000000000000000000000000000000000000001
+
+print(y)
+y = x + 1
+print(y)   # 100000000000000000000000000000000000000000000000000
 
 # Alulvonásokkal tagolhatjuk a jobb olvashatóság érdekében
 
 x = 100_000
 print(type(x), 2 * x)  # <class 'int'> 200000
+
+###############################################
 
 # Osztás, egész-osztás, maradékképzés
 
@@ -42,9 +48,12 @@ x = 10
 x -= 1
 print(x)  # 9
 
+###############################################
+
 # *** Valós számok (float)
 
 x = 10.0
+print(type(x), x)  # <class 'float'> 10.0
 y = x / 2
 print(type(y), y)  # <class 'float'> 5.0
 
@@ -58,4 +67,15 @@ y = round(x)
 print(y, type(y))      # 6 <class 'int'> kerekít és int-re alakít
 
 # int és float fix, immutábilis típusok; ha megváltoztatunk egy ilyent,
-# akkor új memóriacímen jön létre a megváltozott érték.
+# akkor új memóriacímen jön létre a megváltozott érték. Erre még visszatérünk.
+
+###############################################
+
+# Egészek osztása float-ot eredményez.
+
+x = 10
+print(type(x), x)  # <class 'int'> 10
+y = x / 1
+print(type(y), y)  # <class 'float'> 10.0
+
+###############################################

@@ -1,6 +1,7 @@
 # Listák 3.
 
-# Tartalmazásvizsgálat: in operátor
+# tartalmazásvizsgálat: in operátor
+# str --> list
 
 x = ['A', 'B', 'C']
 print('B' in x, 'D' in x)  # True False
@@ -9,7 +10,7 @@ print('B' in x, 'D' in x)  # True False
 
 print(['B', 'C'] in x)  # False
 
-# Akkor lenne True a kimenet, ha a lista ilyen lenne:
+# Akkor lenne True a kimenet, ha a lista pl. ilyen lenne:
 
 x = ['A', ['B', 'C'], 'D']
 
@@ -40,3 +41,5 @@ print(found)  # True
 x = 'ABC'
 y = list(x)
 print(y)  # ['A', 'B', 'C']
+
+##################

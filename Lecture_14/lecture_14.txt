@@ -1,0 +1,30 @@
+ImportsPackages\import_7.py
+ * modulok felbontása több fájlra
+
+ContextMan\context_man_4.py
+ * saját context manager generátorral és dekorátorral megvalósítva
+ * contextlib.contextmanager
+
+A Python program kapcsolata a környezetével: Environment\argparse_1.py
+ * argparse modul
+
+Visual\sns_1.py
+ * seaborn
+
+Visual\altair_1.py
+ * altair
+
+Visual\visual_literature.txt
+ * szakirodalom
+ 
+Mix\any_all_1.py
+ * any() és all() függvények
+
+Mix\data_cleaning.html
+ * adattisztítás
+
+solutions_13.py
+ * Lecture_13\exercises_13.py megoldásai
+
+tippmix_14.py
+ * ismétlés

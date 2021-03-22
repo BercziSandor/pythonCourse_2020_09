@@ -1,14 +1,52 @@
-Classes\file_reader.py spec_reader_1.py spec_reader_2.py
- * örököltetés kontra kompozíció
+Örököltetés kontra kompozíció
+ * SWTechnology\file_reader.py
+   + egy fájl-olvasó osztály
 
-Iterators_Generators\gen_cascade.html generator_advantages.html
- * generátorok kaszkádba kötése; előnyei
+ * SWTechnology\spec_reader_1.py
+   + specializált olvasó örököltetéssel
+
+ * SWTechnology\spec_reader_2.py
+   + specializált olvasó kompozícióval
+
+Iterators_Generators\gen_cascade.html
+ * generátorok kaszkádba kötése
 
 Visual\matplot_1.py
  * matplotlib bemutatása
 
-Jupyter_NB\jupyter_intro.txt, jupy_demo_1.ipynb, jupy_demo_2.ipynb
- * Jupyter Notebook bemutatása
+Num_py\numpy_10.py
+ * hiányzó érték: np.NaN (not a number)
+ * np.isnan() függvény
+ * np.NaN és None összehasonlítása - gondolkodás a semmiről I.
+ * végtelen nagy érték:
+   + np.inf
+   + math.inf
+   + float('inf')
 
-repeat_10.py
+Functions\map_1.py
+ * map objektum (map függvény)
+   + map kontra generátor kifejezés
+   + map egynél több sorozattal
+   + map lambda függvénnyel
+   + map beépített függvénnyel
+
+-----------------------------
+Fakultatív:
+
+Iterators_Generators\generator_advantages.html
+ * generátorok előnyei
+
+Functions\decorators_2.html
+ * Függvény helyett hívható osztály
+ * Név és docstring megőrzése
+ * Előre definiált dekorátorok
+
+-----------------------------
+solutions_9.py
+ * Lecture_9\exercises_9.py megoldásai
+
+tippmix_10.py
  * ismétlés
+
+exercises_10.py
+ * gyakorló feladatok

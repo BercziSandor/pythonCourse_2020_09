@@ -4,13 +4,14 @@ Datastructures\index_2.py
 Iterators_Generators\generator_1.py
  * ismerkedés a generátor függvényekkel
 
-Classes\inheritance_1
+Classes\inheritance_1.py
  * öröklés, leszármaztatás
+ * issubclass() függvény
 
-repeat_6.py
- * ismétlés
+Num_py\numpy_2.py
+ * tömb alapműveletek, broadcasting, astype, tömbforgatás, elemek törlése
 
-exceptions_1.py
+Exceptions\exceptions_1.py
  * kivételkezelés
 
 Functions\closures_1.py
@@ -18,3 +19,23 @@ Functions\closures_1.py
 
 Functions\func_objects.html
  * a függvény-objektumról tanultak összefoglalása
+
+--------------------------------
+
+Fakultatív:
+
+Mix\datetime_1.py
+ * datetime modul
+ * datetime, timedelta
+ * strftime() metódus
+
+--------------------------------
+
+solutions_5.py
+ * Lecture_5\exercises_5.py megoldásai
+
+tippmix_6.py
+ * ismétlés
+
+exercises_6.py
+ * gyakorló feladatok

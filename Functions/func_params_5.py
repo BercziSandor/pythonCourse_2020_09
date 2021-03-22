@@ -13,7 +13,7 @@ print(lst_2)  # [10, 20] !!!!!!
 
 # A default paraméter akkor keletkezik, amikor a függvény-objektum keletkezik, NEM
 # akkor, amikor felhívódik. Tehát abból 1 darab példány van. Amikor második paraméter
-# nélkül hívjuk a függvényt, akkor mindig ugyanazt a default listát használja a futtaó
+# nélkül hívjuk a függvényt, akkor mindig ugyanazt a default listát használja a futtató
 # rendszer, nem mindig egy újat.
 
 ############################################

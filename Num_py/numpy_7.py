@@ -3,7 +3,7 @@
 import openpyxl
 import numpy as np
 
-workbook = openpyxl.load_workbook(filename="test_1.xlsx")
+workbook = openpyxl.load_workbook(filename="numpy_7_test_1.xlsx")
 ws = workbook.active
 arr = np.empty((ws.max_row, ws.max_column), dtype=object)
 
@@ -50,7 +50,7 @@ for r, row in enumerate(arr_2):
 
 # és elmentjük:
 
-wb.save("test_2.xlsx")
+wb.save("numpy_7_test_2.xlsx")
 
 #############################
 
@@ -63,7 +63,7 @@ import numpy as np
 import csv
 
 in_arr = []
-csvfile = open('test_1.csv', newline='')
+csvfile = open('numpy_7_test_1.csv', newline='')
 reader = csv.reader(csvfile, delimiter=';')
 for row in reader:
     in_arr.append(row)
@@ -86,7 +86,7 @@ print(arr_2)
 #  ['New York' '65' '80' '150' '170']
 #  ['Hongkong' '102' '120' '190' '210']]
 
-csvfile = open('test_2.csv', 'w', newline='')
+csvfile = open('numpy_7_test_2.csv', 'w', newline='')
 writer = csv.writer(csvfile, delimiter='|')
 for row in arr_2:
     writer.writerow(row)
